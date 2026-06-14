@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reportability Menu</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: Arial, sans-serif;
+  min-height: 100dvh;
+  color: #ffffff;
+  position: relative;
+  background:
+    radial-gradient(ellipse at top left,    #0f2a4a 0%, transparent 55%),
+    radial-gradient(ellipse at bottom right, #081830 0%, transparent 55%),
+    linear-gradient(160deg, #060f1e 0%, #0a1a2e 45%, #060d1a 100%);
+  background-attachment: fixed;
+}
+
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url('img/imagen1.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+  z-index: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.pg {
+  position: relative; z-index: 1;
+  min-height: 100dvh;
+  padding: 0 0 32px 0;
+  display: flex; flex-direction: column;
+}
+
+/* ── HEADER ──────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px 48px 0 48px;
+  margin-bottom: 36px;
+}
+.header-left { display: flex; align-items: center; gap: 14px; }
+.hdr-line { width: 4px; height: 80px; background: #e87722; border-radius: 2px; flex-shrink: 0; }
+.ttl { font-size: 52px; font-weight: 700; color: #ffffff; letter-spacing: 2px; text-transform: uppercase; }
+.sub { font-size: 24px; color: rgba(232,119,34,0.7); margin-top: 3px; letter-spacing: 1px; }
+.logo { width: 80px; opacity: 0.95; flex-shrink: 0; }
+
+.menu-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(232,119,34,0.1);
+  border: 1px solid rgba(232,119,34,0.3);
+  border-radius: 6px; padding: 6px 16px;
+  font-size: 30px; font-weight: 700;
+  color: #e87722; letter-spacing: 1.5px;
+  cursor: pointer; flex-shrink: 0;
+  transition: background .2s;
+  white-space: nowrap;
+}
+.menu-btn:hover { background: rgba(232,119,34,0.2); }
+
+/* ── MODULE HEADER ───────────────────────── */
+.mod-hdr {
+  display: flex; align-items: center; gap: 14px;
+  padding: 0 48px; margin-bottom: 6px;
+}
+.mod-ibox {
+  width: 56px; height: 56px;
+  background: rgba(232,119,34,0.12);
+  border: 1px solid rgba(232,119,34,0.35);
+  border-radius: 11px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; overflow: hidden;
+}
+.mod-ibox img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
+.mod-ibox i { font-size: 28px; color: #e87722; }
+.mod-hdr h2 { font-size: 40px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 1px; }
+.mod-desc { font-size: 22px; color: rgba(200,220,240,0.45); padding: 0 48px; margin-bottom: 28px; letter-spacing: 0.5px; }
+
+.content { flex: 1; padding: 0 48px; }
+
+/* ══════════════════════════════════════════
+   MENU GRID
+══════════════════════════════════════════ */
+.menu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.menu-card {
+  background: rgba(10,26,50,0.75);
+  border-left: 4px solid #e87722;
+  border-top: 0.5px solid rgba(255,255,255,0.08);
+  border-right: 0.5px solid rgba(255,255,255,0.08);
+  border-bottom: 0.5px solid rgba(255,255,255,0.08);
+  border-radius: 0 14px 14px 0;
+  padding: 0; cursor: pointer;
+  display: flex; align-items: stretch;
+  min-height: 120px; overflow: hidden;
+  position: relative;
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+  backdrop-filter: blur(6px);
+}
+
+@keyframes shimmer-sweep {
+  0%   { left: -100%; }
+  100% { left: 160%; }
+}
+
+.menu-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255,255,255,0.06) 40%,
+    rgba(255,255,255,0.16) 50%,
+    rgba(255,255,255,0.06) 60%,
+    transparent 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.menu-card:hover::before {
+  opacity: 1;
+  animation: shimmer-sweep 1.2s ease-in-out infinite;
+}
+
+.menu-card:hover {
+  transform: translateX(5px);
+  background: rgba(16,38,70,0.9);
+  box-shadow: 0 8px 28px rgba(0,0,0,.5), -4px 0 0 0 #f5a855;
+}
+.menu-card:active { transform: scale(0.97) translateX(2px); }
+
+.card-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; opacity: 0.22; z-index: 0;
+  transition: opacity .2s;
+}
+.menu-card:hover .card-bg { opacity: 0.35; }
+
+.menu-card-body {
+  flex: 1; padding: 20px 22px;
+  display: flex; flex-direction: column; justify-content: center; gap: 8px;
+  position: relative; z-index: 1;
+}
+.menu-card-top { display: flex; align-items: center; gap: 12px; }
+.menu-card-top i { font-size: 48px; color: #e87722; }
+.menu-card-title {
+  font-size: 30px; font-weight: 700; color: #ffffff;
+  text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.3;
+}
+.menu-card-sub { font-size: 25px; color: rgba(200,220,240,0.4); letter-spacing: 1px; }
+.menu-card-cta {
+  font-size: 20px; font-weight: 700;
+  color: rgba(232,119,34,0.7); letter-spacing: 1.5px;
+  transition: color .2s;
+}
+.menu-card:hover .menu-card-cta { color: #e87722; }
+
+.diag {
+  width: 70px; flex-shrink: 0;
+  position: relative; z-index: 1; overflow: hidden;
+}
+.diag::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, #e87722 0%, #c55a10 100%);
+  opacity: 0.18;
+  clip-path: polygon(45% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+.diag::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, #ffffff 0%, #8899aa 100%);
+  opacity: 0.07;
+  clip-path: polygon(70% 0%, 100% 0%, 100% 100%, 25% 100%);
+}
+
+/* ══════════════════════════════════════════
+   SUBSECTION GRID
+══════════════════════════════════════════ */
+.sub-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+.sub-card {
+  background: rgba(10,26,50,0.8);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-top: 3px solid #e87722;
+  border-radius: 0 0 12px 12px;
+  padding: 24px 18px 20px;
+  cursor: pointer; text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  min-height: 500px;
+  transition: transform .2s, background .2s, box-shadow .2s, border-top-color .2s;
+  backdrop-filter: blur(6px);
+  position: relative; overflow: hidden;
+}
+.sub-card:hover {
+  transform: translateY(-5px);
+  background: rgba(16,38,70,0.9);
+  box-shadow: 0 12px 32px rgba(0,0,0,.5);
+  border-top-color: #f5a855;
+}
+.sub-card:active { transform: scale(0.97); }
+
+.sub-card-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; opacity: 0.18; z-index: 0;
+  transition: opacity .2s;
+}
+.sub-card:hover .sub-card-bg { opacity: 0.28; }
+.sub-ibox, .sub-card-title, .sub-card-desc, .sub-card-cta {
+  position: relative; z-index: 1;
+}
+
+.sub-ibox {
+  width: 70px; height: 70px;
+  background: rgba(232,119,34,0.1);
+  border: 1px solid rgba(232,119,34,0.3);
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s, border-color .2s;
+  overflow: hidden; flex-shrink: 0;
+}
+.sub-card:hover .sub-ibox {
+  background: rgba(232,119,34,0.22);
+  border-color: rgba(232,119,34,0.6);
+}
+.sub-ibox img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; display: block; }
+.sub-ibox i { font-size: 32px; color: #e87722; }
+
+.sub-card-title {
+  font-size: 16px; font-weight: 700; color: #ffffff;
+  text-transform: uppercase; letter-spacing: 1px; line-height: 1.3;
+}
+.sub-card-desc { font-size: 22px; color: rgba(200,220,240,0.4); line-height: 1.5; }
+.sub-card-cta {
+  font-size: 20px; font-weight: 700;
+  color: rgba(232,119,34,0.65); letter-spacing: 1.5px;
+  margin-top: auto; transition: color .2s;
+}
+.sub-card:hover .sub-card-cta { color: #e87722; }
+
+/* ══════════════════════════════════════════
+   EMBED FRAME (PBI + Forms)
+══════════════════════════════════════════ */
+.embed-frame {
+  width: 100%; flex: 1;
+  border: none; border-radius: 12px;
+  min-height: 75vh;
+  background: rgba(10,26,50,0.5);
+}
+
+.footer {
+  text-align: center; font-size: 22px;
+  color: rgba(232,119,34,0.35); letter-spacing: 1.5px;
+  padding: 24px 48px 0;
+}
+
+.hidden { display: none !important; }
+
+/* ── RESPONSIVE MÓVIL ─────────────────────── */
+@media (max-width: 768px) {
+
+  /* Header más compacto */
+  .header {
+    padding: 20px 20px 0 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .ttl { font-size: 26px; letter-spacing: 1px; }
+  .sub { font-size: 13px; }
+  .hdr-line { height: 50px; }
+  .logo { width: 52px; }
+  .menu-btn { font-size: 16px; padding: 5px 10px; }
+
+  /* Padding general */
+  .content { padding: 0 16px; }
+  .mod-hdr { padding: 0 16px; }
+  .mod-desc { font-size: 13px; padding: 0 16px; margin-bottom: 16px; }
+  .footer { font-size: 11px; padding: 16px 16px 0; }
+
+  /* Grid menú: 1 columna en móvil */
+  .menu-grid { grid-template-columns: 1fr; gap: 10px; }
+  .menu-card { min-height: 90px; }
+  .menu-card-top i { font-size: 28px; }
+  .menu-card-title { font-size: 16px; }
+  .menu-card-sub { font-size: 13px; }
+  .menu-card-cta { font-size: 12px; }
+
+  /* Grid subsecciones: 1 columna en móvil */
+  .sub-grid { grid-template-columns: 1fr; gap: 10px; }
+  .sub-card { min-height: 160px; flex-direction: row; text-align: left;
+               padding: 16px; gap: 16px; align-items: center; }
+  .sub-card-bg { opacity: 0.12; }
+  .sub-ibox { width: 52px; height: 52px; flex-shrink: 0; }
+  .sub-ibox i { font-size: 22px; }
+  .sub-card-title { font-size: 13px; }
+  .sub-card-desc { font-size: 12px; }
+  .sub-card-cta { font-size: 11px; margin-top: 4px; }
+
+  /* Módulo header */
+  .mod-hdr h2 { font-size: 20px; }
+  .mod-ibox { width: 42px; height: 42px; }
+  .mod-ibox i { font-size: 20px; }
+
+  /* iframes */
+  .embed-frame { min-height: 60vh; }
+}
+
+/* Tablet: 2 columnas para subsecciones */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .menu-grid { grid-template-columns: 1fr 1fr; }
+  .sub-grid { grid-template-columns: 1fr 1fr 1fr; }
+  .ttl { font-size: 32px; }
+  .sub { font-size: 16px; }
+  .menu-card-title { font-size: 18px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     MENU PAGE
+══════════════════════════════════════════ -->
+<div id="pg-menu" class="pg">
+  <div class="header">
+    <div class="header-left">
+      <div class="hdr-line"></div>
+      <div>
+        <div class="ttl">Reportability Menu</div>
+        <div class="sub">Hanseatic Global Terminals · BEST Program</div>
+      </div>
+    </div>
+    <img class="logo" src="img/best-logo.png" alt="BEST" onerror="this.style.display='none'">
+  </div>
+
+  <div class="content">
+    <div class="menu-grid">
+
+      <div class="menu-card" onclick="openSub('6s')">
+        <img class="card-bg" src="img/bg-6s.jpg" alt="" onerror="this.style.display='none'">
+        <div class="menu-card-body">
+          <div class="menu-card-top">
+            <i class="ti ti-layout-grid" aria-hidden="true"></i>
+            <div class="menu-card-title">6S System</div>
+          </div>
+          <div class="menu-card-sub">6S Deployment & Results</div>
+          <div class="menu-card-cta">VIEW SECTION →</div>
+        </div>
+        <div class="diag"></div>
+      </div>
+
+      <div class="menu-card" onclick="openSub('sw')">
+        <img class="card-bg" src="img/bg-sw.jpg" alt="" onerror="this.style.display='none'">
+        <div class="menu-card-body">
+          <div class="menu-card-top">
+            <i class="ti ti-chart-bar" aria-hidden="true"></i>
+            <div class="menu-card-title">Standard Work & Performance Management</div>
+          </div>
+          <div class="menu-card-sub">Meeting Evaluations</div>
+          <div class="menu-card-cta">VIEW SECTION →</div>
+        </div>
+        <div class="diag"></div>
+      </div>
+
+      <div class="menu-card" onclick="openSub('maturity')">
+        <img class="card-bg" src="img/bg-maturity.jpg" alt="" onerror="this.style.display='none'">
+        <div class="menu-card-body">
+          <div class="menu-card-top">
+            <i class="ti ti-certificate" aria-hidden="true"></i>
+            <div class="menu-card-title">Maturity Assessment</div>
+          </div>
+          <div class="menu-card-sub">BEST Maturity Results</div>
+          <div class="menu-card-cta">VIEW SECTION →</div>
+        </div>
+        <div class="diag"></div>
+      </div>
+
+      <div class="menu-card" onclick="window.open('https://eu.shibumi.com/shibumi/d4c65c40-88fe-4aba-9621-d8de425d28b9/topDashboard-summary?id=53eee6d9-533c-4696-858f-166dd35c4bb9&context=977a1308-fca7-49c2-aead-aff9d731a765&tab=1186a924-4ff6-4e45-b989-8f3aa2c2698a', '_blank')">
+        <img class="card-bg" src="img/bg-initiatives.jpg" alt="" onerror="this.style.display='none'">
+        <div class="menu-card-body">
+          <div class="menu-card-top">
+            <i class="ti ti-rocket" aria-hidden="true"></i>
+            <div class="menu-card-title">BEST Initiatives</div>
+          </div>
+          <div class="menu-card-sub">Strategic Projects</div>
+          <div class="menu-card-cta">VIEW REPORT →</div>
+        </div>
+        <div class="diag"></div>
+      </div>
+
+	<!-- NUEVO BOTÓN — reemplaza los valores según necesites -->
+      <div class="menu-card" onclick="window.open('https://bestleadershiprogram.netlify.app/', '_blank')">
+        <img class="card-bg" src="img/bg-nuevo.jpg" alt="" onerror="this.style.display='none'">
+        <div class="menu-card-body">
+          <div class="menu-card-top">
+            <i class="ti ti-external-link" aria-hidden="true"></i>
+            <div class="menu-card-title">LEADERSHIP PROGRAM</div>
+          </div>
+          <div class="menu-card-sub">Content to Improve your Leadership YOUR </div>
+          <div class="menu-card-cta">VIEW REPORT →</div>
+        </div>
+        <div class="diag"></div>
+      </div>
+
+    </div>
+  </div>
+  <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     6S — SUBSECCIÓN
+══════════════════════════════════════════ -->
+<div id="pg-6s" class="pg hidden">
+  <div class="header">
+    <div class="header-left">
+      <button class="menu-btn" onclick="goMenu()">◄ MENU</button>
+      <div class="hdr-line"></div>
+      <div>
+        <div class="ttl">Reportability Menu</div>
+        <div class="sub">Hanseatic Global Terminals · BEST Program</div>
+      </div>
+    </div>
+    <img class="logo" src="img/best-logo.png" alt="BEST" onerror="this.style.display='none'">
+  </div>
+  <div class="mod-hdr">
+    <div class="mod-ibox">
+      <img src="img/icon-6s.png" alt=""
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        onload="this.nextElementSibling.style.display='none';">
+      <i class="ti ti-layout-grid" aria-hidden="true"></i>
+    </div>
+    <h2>6S SYSTEM</h2>
+  </div>
+  <p class="mod-desc">6S Deployment & Results · Leading Change & Improvement</p>
+  <div class="content">
+    <div class="sub-grid">
+
+      <!-- CONTENT → descarga PPTX -->
+      <div class="sub-card" onclick="downloadFile('contents/6S System.pptx','6S System.pptx')">
+        <img class="sub-card-bg" src="gifs/gif content.gif" alt="" onerror="this.style.display='none'">
+        <div class="sub-ibox">
+          <img src="img/icon-content.png" alt=""
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            onload="this.nextElementSibling.style.display='none';">
+          <i class="ti ti-file-description" aria-hidden="true"></i>
+        </div>
+        <div class="sub-card-title">Content</div>
+        <div class="sub-card-desc">6S Guidelines and Implementation Material</div>
+        <div class="sub-card-cta">⬇ DOWNLOAD →</div>
+      </div>
+
+      <!-- FORM → embed en página interna -->
+      <div class="sub-card" onclick="showPage('pg-form-6s')">
+        <img class="sub-card-bg" src="gifs/form 6s.gif" alt="" onerror="this.style.display='none'">
+        <div class="sub-ibox">
+          <img src="img/icon-form.png" alt=""
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            onload="this.nextElementSibling.style.display='none';">
+          <i class="ti ti-clipboard-list" aria-hidden="true"></i>
+        </div>
+        <div class="sub-card-title">Form</div>
+        <div class="sub-card-desc">6S Evaluation Survey</div>
+        <div class="sub-card-cta">OPEN →</div>
+      </div>
+
+      <!-- DASHBOARD → URL directa -->
+      <div class="sub-card" onclick="window.open('https://app.powerbi.com/groups/me/reports/175b3ea5-4e12-421d-becd-4d7247ccea9d?experience=power-bi', '_blank')">
+        <img class="sub-card-bg" src="gifs/gif 6s pbi.gif" alt="" onerror="this.style.display='none'">
+        <div class="sub-ibox">
+          <img src="img/icon-dashboard.png" alt=""
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            onload="this.nextElementSibling.style.display='none';">
+          <i class="ti ti-chart-bar" aria-hidden="true"></i>
+        </div>
+        <div class="sub-card-title">Dashboard</div>
+        <div class="sub-card-desc">6S Results · External Report</div>
+        <div class="sub-card-cta">OPEN →</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     6S — FORM EMBED
+══════════════════════════════════════════ -->
+<div id="pg-form-6s" class="pg hidden">
+  <div class="header">
+    <div class="header-left">
+      <button class="menu-btn" onclick="showPage('pg-6s')">◄ MENU</button>
+      <div class="hdr-line"></div>
+      <div>
+        <div class="ttl">Reportability Menu</div>
+        <div class="sub">Hanseatic Global Terminals · BEST Program</div>
+      </div>
+    </div>
+    <img class="logo" src="img/best-logo.png" alt="BEST" onerror="this.style.display='none'">
+  </div>
+  <div class="mod-hdr">
+    <div class="mod-ibox"><i class="ti ti-clipboard-list" aria-hidden="true"></i></div>
+    <h2>6S Evaluation Survey</h2>
+  </div>
+  <p class="mod-desc">Complete the 6S evaluation form below</p>
+  <div class="content" style="display:flex; flex-direction:column;">
+    <!-- Reemplaza TU-LINK-6S-FORM con la URL de tu formulario -->
+    <iframe class="embed-frame" src="https://forms.office.com/Pages/ResponsePage.aspx?id=0dMQwt6XIUmUVn7rrIW0tpV5gZNq1vxBlP4c7iQQHuhUNFM3WTNZNkdYSERBTTMxMDcwODBaTllCWS4u" allowfullscreen></iframe>
+  </div>
+  <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     STANDARD WORK — SUBSECCIÓN
+══════════════════════════════════════════ -->
+<div id="pg-sw" class="pg hidden">
+  <div class="header">
+    <div class="header-left">
+      <button class="menu-btn" onclick="goMenu()">◄ MENU</button>
+      <div class="hdr-line"></div>
+      <div>
+        <div class="ttl">Reportability Menu</div>
+        <div class="sub">Hanseatic Global Terminals · BEST Program</div>
+      </div>
+    </div>
+    <img class="logo" src="img/best-logo.png" alt="BEST" onerror="this.style.display='none'">
+  </div>
+  <div class="mod-hdr">
+    <div class="mod-ibox">
+      <img src="img/icon-sw.png" alt=""
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        onload="this.nextElementSibling.style.display='none';">
+      <i class="ti ti-chart-bar" aria-hidden="true"></i>
+    </div>
+    <h2>Standard Work & Performance Mgmt</h2>
+  </div>
+  <p class="mod-desc">Meeting Evaluations · Leading Change & Improvement</p>
+  <div class="content">
+    <div class="sub-grid">
+
+      <!-- CONTENT → descarga PPTX -->
+      <div class="sub-card" onclick="downloadFile('contents/Standard Work.pptx','Standard Work.pptx')">
+        <img class="sub-card-bg" src="gifs/gif content.gif" alt="" onerror="this.style.display='none'">
+        <div class="sub-ibox">
+          <img src="img/icon-content.png" alt=""
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            onload="this.nextElementSibling.style.display='none';">
+          <i class="ti ti-file-description" aria-hidden="true"></i>
+        </div>
+        <div class="sub-card-title">Content</div>
+        <div class="sub-card-desc">Standard Work Guidelines and Implementation Material</div>
+        <div class="sub-card-cta">⬇ DOWNLOAD →</div>
+      </div>
+
+      <!-- FORM → embed en página interna -->
+      <div class="sub-card" onclick="showPage('pg-form-sw')">
+        <img class="sub-card-bg" src="gifs/form standard work.gif" alt="" onerror="this.style.display='none'">
+        <div class="sub-ibox">
+          <img src="img/icon-form.png" alt=""
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            onload="this.nextElementSibling.style.display='none';">
+          <i class="ti ti-clipboard-list" aria-hidden="true"></i>
+        </div>
+        <div class="sub-card-title">Form</div>
+        <div class="sub-card-desc">Standard Work Evaluation Survey</div>
+        <div class="sub-card-cta">OPEN →</div>
+      </div>
+
+      <!-- DASHBOARD → Power BI embed -->
+      <div class="sub-card" onclick="showPage('pg-pbi-sw')">
+        <img class="sub-card-bg" src="gifs/standard pbi.gif" alt="" onerror="this.style.display='none'">
+        <div class="sub-ibox">
+          <img src="img/icon-dashboard.png" alt=""
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            onload="this.nextElementSibling.style.display='none';">
+          <i class="ti ti-chart-bar" aria-hidden="true"></i>
+        </div>
+        <div class="sub-card-title">Dashboard</div>
+        <div class="sub-card-desc">Power BI · Results in Real Time</div>
+        <div class="sub-card-cta">OPEN →</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     STANDARD WORK — FORM EMBED
+══════════════════════════════════════════ -->
+<div id="pg-form-sw" class="pg hidden">
+  <div class="header">
+    <div class="header-left">
+      <button class="menu-btn" onclick="showPage('pg-sw')">◄ MENU</button>
+      <div class="hdr-line"></div>
+      <div>
+        <div class="ttl">Reportability Menu</div>
+        <div class="sub">Hanseatic Global Terminals · BEST Program</div>
+      </div>
+    </div>
+    <img class="logo" src="img/best-logo.png" alt="BEST" onerror="this.style.display='none'">
+  </div>
+  <div class="mod-hdr">
+    <div class="mod-ibox"><i class="ti ti-clipboard-list" aria-hidden="true"></i></div>
+    <h2>Standard Work Survey</h2>
+  </div>
+  <p class="mod-desc">Complete the Standard Work evaluation form below</p>
+  <div class="content" style="display:flex; flex-direction:column;">
+    <!-- Reemplaza TU-LINK-SW-FORM con la URL de tu formulario -->
+    <iframe class="embed-frame" src="https://forms.office.com/Pages/ResponsePage.aspx?id=0dMQwt6XIUmUVn7rrIW0tpV5gZNq1vxBlP4c7iQQHuhUOEZXTTJQVlFPVUk5UVBXV1lBV0xPMEM3Ty4u" allowfullscreen></iframe>
+  </div>
+  <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     STANDARD WORK — POWER BI EMBED
+══════════════════════════════════════════ -->
+<div id="pg-pbi-sw" class="pg hidden">
+  <div class="header">
+    <div class="header-left">
+      <button class="menu-btn" onclick="showPage('pg-sw')">◄ MENU</button>
+      <div class="hdr-line"></div>
+      <div>
+        <div class="ttl">Reportability Menu</div>
+        <div class="sub">Hanseatic Global Terminals · BEST Program</div>
+      </div>
+    </div>
+    <img class="logo" src="img/best-logo.png" alt="BEST" onerror="this.style.display='none'">
+  </div>
+  <div class="mod-hdr">
+    <div class="mod-ibox"><i class="ti ti-chart-bar" aria-hidden="true"></i></div>
+    <h2>Standard Work Dashboard</h2>
+  </div>
+  <p class="mod-desc">Power BI · Results in Real Time</p>
+  <div class="content" style="display:flex; flex-direction:column;">
+    <iframe class="embed-frame"
+      src="https://app.powerbi.com/view?r=eyJrIjoiMDNlZDVjOGYtYmVjZC00YTE4LWE5OTItNDAxMDVmM2FmOTNhIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"
+      allowfullscreen>
+    </iframe>
+  </div>
+  <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     MATURITY — SUBSECCIÓN
+══════════════════════════════════════════ -->
+<div id="pg-maturity" class="pg hidden">
+  <div class="header">
+    <div class="header-left">
+      <button class="menu-btn" onclick="goMenu()">◄ MENU</button>
+      <div class="hdr-line"></div>
+      <div>
+        <div class="ttl">Reportability Menu</div>
+        <div class="sub">Hanseatic Global Terminals · BEST Program</div>
+      </div>
+    </div>
+    <img class="logo" src="img/best-logo.png" alt="BEST" onerror="this.style.display='none'">
+  </div>
+  <div class="mod-hdr">
+    <div class="mod-ibox">
+      <img src="img/icon-maturity.png" alt=""
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        onload="this.nextElementSibling.style.display='none';">
+      <i class="ti ti-certificate" aria-hidden="true"></i>
+    </div>
+    <h2>Maturity Assessment</h2>
+  </div>
+  <p class="mod-desc">BEST Maturity Results · Leading Change & Improvement</p>
+  <div class="content">
+    <div class="sub-grid">
+
+      <!-- CONTENT → descarga PPTX -->
+      <div class="sub-card" onclick="downloadFile('contents/Maturity Assessment.pptx','Maturity Assessment.pptx')">
+        <img class="sub-card-bg" src="gifs/gif content.gif" alt="" onerror="this.style.display='none'">
+        <div class="sub-ibox">
+          <img src="img/icon-content.png" alt=""
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            onload="this.nextElementSibling.style.display='none';">
+          <i class="ti ti-file-description" aria-hidden="true"></i>
+        </div>
+        <div class="sub-card-title">Content</div>
+        <div class="sub-card-desc">Maturity Assessment Guidelines & Material</div>
+        <div class="sub-card-cta">⬇ DOWNLOAD →</div>
+      </div>
+
+      <!-- FORM → embed en página interna -->
+      <div class="sub-card" onclick="showPage('pg-form-maturity')">
+        <img class="sub-card-bg" src="gifs/form maturity.gif" alt="" onerror="this.style.display='none'">
+        <div class="sub-ibox">
+          <img src="img/icon-form.png" alt=""
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            onload="this.nextElementSibling.style.display='none';">
+          <i class="ti ti-clipboard-list" aria-hidden="true"></i>
+        </div>
+        <div class="sub-card-title">Form</div>
+        <div class="sub-card-desc">Maturity Assessment Survey</div>
+        <div class="sub-card-cta">OPEN →</div>
+      </div>
+
+      <!-- DASHBOARD → Power BI embed -->
+      <div class="sub-card" onclick="showPage('pg-pbi-maturity')">
+        <img class="sub-card-bg" src="gifs/maturity pbi.gif" alt="" onerror="this.style.display='none'">
+        <div class="sub-ibox">
+          <img src="img/icon-dashboard.png" alt=""
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            onload="this.nextElementSibling.style.display='none';">
+          <i class="ti ti-chart-bar" aria-hidden="true"></i>
+        </div>
+        <div class="sub-card-title">Dashboard</div>
+        <div class="sub-card-desc">Power BI · Results in Real Time</div>
+        <div class="sub-card-cta">OPEN →</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     MATURITY — FORM EMBED
+══════════════════════════════════════════ -->
+<div id="pg-form-maturity" class="pg hidden">
+  <div class="header">
+    <div class="header-left">
+      <button class="menu-btn" onclick="showPage('pg-maturity')">◄ MENU</button>
+      <div class="hdr-line"></div>
+      <div>
+        <div class="ttl">Reportability Menu</div>
+        <div class="sub">Hanseatic Global Terminals · BEST Program</div>
+      </div>
+    </div>
+    <img class="logo" src="img/best-logo.png" alt="BEST" onerror="this.style.display='none'">
+  </div>
+  <div class="mod-hdr">
+    <div class="mod-ibox"><i class="ti ti-clipboard-list" aria-hidden="true"></i></div>
+    <h2>Maturity Assessment Survey</h2>
+  </div>
+  <p class="mod-desc">Complete the Maturity Assessment evaluation form below</p>
+  <div class="content" style="display:flex; flex-direction:column;">
+    <!-- Reemplaza TU-LINK-MAT-FORM con la URL de tu formulario -->
+    <iframe class="embed-frame" src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=0dMQwt6XIUmUVn7rrIW0tpV5gZNq1vxBlP4c7iQQHuhUN0I2UlRQMVI3N0Q5MjZUOVBWMjI3WlkyMy4u" allowfullscreen></iframe>
+  </div>
+  <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     MATURITY — POWER BI EMBED
+══════════════════════════════════════════ -->
+<div id="pg-pbi-maturity" class="pg hidden">
+  <div class="header">
+    <div class="header-left">
+      <button class="menu-btn" onclick="showPage('pg-maturity')">◄ MENU</button>
+      <div class="hdr-line"></div>
+      <div>
+        <div class="ttl">Reportability Menu</div>
+        <div class="sub">Hanseatic Global Terminals · BEST Program</div>
+      </div>
+    </div>
+    <img class="logo" src="img/best-logo.png" alt="BEST" onerror="this.style.display='none'">
+  </div>
+  <div class="mod-hdr">
+    <div class="mod-ibox"><i class="ti ti-certificate" aria-hidden="true"></i></div>
+    <h2>Maturity Dashboard</h2>
+  </div>
+  <p class="mod-desc">Power BI · Results in Real Time</p>
+  <div class="content" style="display:flex; flex-direction:column;">
+    <iframe class="embed-frame"
+      src="https://app.powerbi.com/view?r=eyJrIjoiNjZiYjQ3ODEtODEyNS00YjA5LThmZDctNWY5ZjRjM2QzZGM2IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"
+      allowfullscreen>
+    </iframe>
+  </div>
+  <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
+</div>
+
+
+<script>
+const pages = [
+  'pg-menu',
+  'pg-6s',      'pg-form-6s',
+  'pg-sw',      'pg-form-sw',      'pg-pbi-sw',
+  'pg-maturity','pg-form-maturity', 'pg-pbi-maturity'
+];
+
+function showPage(id) {
+  pages.forEach(p => document.getElementById(p).classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+  window.scrollTo(0, 0);
+}
+
+function openSub(key) {
+  const map = { '6s':'pg-6s', 'sw':'pg-sw', 'maturity':'pg-maturity' };
+  if (map[key]) showPage(map[key]);
+}
+
+function goMenu() { showPage('pg-menu'); }
+
+/* Descarga directa de archivos PPTX desde la carpeta contents/ */
+function downloadFile(path, filename) {
+  const a = document.createElement('a');
+  a.href = path;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+</script>
+
+</body>
+</html>
