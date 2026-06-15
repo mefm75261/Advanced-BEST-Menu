@@ -64,8 +64,37 @@ body::after {
   cursor: pointer; flex-shrink: 0;
   transition: background .2s;
   white-space: nowrap;
+  position: relative;   /* ← necesario para el ::before */
+  overflow: hidden;     /* ← recorta el shimmer dentro del botón */
 }
-.menu-btn:hover { background: rgba(232,119,34,0.2); }
+
+.menu-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255,255,255,0.08) 40%,
+    rgba(255,255,255,0.20) 50%,
+    rgba(255,255,255,0.08) 60%,
+    transparent 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.menu-btn:hover::before {
+  opacity: 1;
+  animation: shimmer-sweep 1.2s ease-in-out infinite;
+}
+
+.menu-btn:hover {
+  background: rgba(232,119,34,0.2);
+}
 
 /* ── MODULE HEADER ───────────────────────── */
 .mod-hdr {
@@ -406,22 +435,21 @@ body::after {
             <div class="menu-card-title">BEST Initiatives</div>
           </div>
           <div class="menu-card-sub">Strategic Projects</div>
-          <div class="menu-card-cta">VIEW REPORT →</div>
+          <div class="menu-card-cta">VIEW PAGE →</div>
         </div>
         <div class="diag"></div>
       </div>
 
 	<!-- NUEVO BOTÓN — reemplaza los valores según necesites -->
-<!-- NUEVO BOTÓN — reemplaza los valores según necesites -->
       <div class="menu-card" onclick="window.open('https://mefm75261.github.io/BEST_Leadership_Program/', '_blank')">
         <img class="card-bg" src="img/bg-nuevo.jpg" alt="" onerror="this.style.display='none'">
         <div class="menu-card-body">
           <div class="menu-card-top">
             <i class="ti ti-external-link" aria-hidden="true"></i>
-            <div class="menu-card-title">LEADERSHIP PROGRAM</div>
+            <div class="menu-card-title">EXCELLENCE ACADEMY</div>
           </div>
-          <div class="menu-card-sub">Content to Improve your Leadership YOUR </div>
-          <div class="menu-card-cta">VIEW REPORT →</div>
+          <div class="menu-card-sub">Content to Improve your Skills to Excellence</div>
+          <div class="menu-card-cta">VIEW CONTENT →</div>
         </div>
         <div class="diag"></div>
       </div>
