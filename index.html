@@ -45,6 +45,19 @@ body::after {
 .qr-title { font-size:18px; font-weight:700; color:#fff; letter-spacing:1px; }
 .qr-img { width:240px; height:240px; object-fit:contain; border-radius:8px; background:#fff; padding:8px; }
 
+.qr-download-btn {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(232,119,34,0.12); border:1px solid rgba(232,119,34,0.4);
+  border-radius:8px; padding:10px 22px;
+  font-size:14px; font-weight:700; color:#e87722;
+  letter-spacing:0.8px; cursor:pointer;
+  transition:background .2s, transform .15s;
+  font-family:Arial, sans-serif;
+}
+.qr-download-btn:hover { background:rgba(232,119,34,0.25); transform:translateY(-1px); }
+.qr-download-btn:active { transform:scale(0.97); }
+.qr-download-btn i { font-size:16px; }
+
 /* ── LANG MODAL ── */
 .lang-box {
   background: #0a1a2e;
@@ -507,6 +520,9 @@ body::after {
     <div class="modal-close" onclick="closeQRBtn()">✕</div>
     <div class="qr-title" id="qr-title">QR Code</div>
     <img class="qr-img" id="qr-img" src="" alt="QR Code">
+    <button class="qr-download-btn" onclick="downloadQR()">
+      <i class="ti ti-download"></i> Download QR
+    </button>
   </div>
 </div>
 
@@ -919,6 +935,22 @@ body::after {
         <div class="diag"></div>
       </div>
 
+      <div class="menu-card" onclick="window.open('https://mefm75261.github.io/BEST_HOSHIN_KANRI/','_blank')">
+        <img class="card-bg" src="img/HOSHIN KANRI Card.png" alt="" onerror="this.style.display='none'">
+        <div class="menu-card-body">
+          <div class="menu-card-top">
+            <div class="card-icon-wrap">
+              <img src="img/bes_lead_logo.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" onload="this.nextElementSibling.style.display='none';">
+              <i class="ti ti-external-link"></i>
+            </div>
+            <div class="menu-card-title">HOSHIN KANRI MAKER</div>
+          </div>
+          <div class="menu-card-sub">Site to develop or impove your HOSHIN KANRI</div>
+          <div class="menu-card-cta">GO TO PAGE →</div>
+        </div>
+        <div class="diag"></div>
+      </div>
+
     </div>
   </div>
   <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
@@ -1307,6 +1339,27 @@ function showQR(imgSrc, title) {
 }
 function closeQRBtn() { document.getElementById('qr-overlay').classList.remove('active'); }
 function closeQR(e) { if (e.target === document.getElementById('qr-overlay')) closeQRBtn(); }
+function downloadQR() {
+  const img   = document.getElementById('qr-img');
+  const title = document.getElementById('qr-title').textContent;
+  const fname = title.replace(/[^\w\s·-]/g, '').trim().replace(/\s+/g, '_') + '.png';
+
+  // Canvas convierte la imagen a data URI → el navegador siempre descarga
+  const canvas  = document.createElement('canvas');
+  canvas.width  = img.naturalWidth  || 240;
+  canvas.height = img.naturalHeight || 240;
+  canvas.getContext('2d').drawImage(img, 0, 0);
+
+  try {
+    const a  = document.createElement('a');
+    a.href     = canvas.toDataURL('image/png');
+    a.download = fname;
+    a.click();
+  } catch (e) {
+    // Solo si el canvas falla por CORS real (imágenes externas)
+    window.open(img.src, '_blank');
+  }
+}
 
 /* ══ LANG MODAL ══ */
 let _langLinks = {};
