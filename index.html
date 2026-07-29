@@ -21,12 +21,35 @@ body::after {
   opacity:0.15; z-index:0; pointer-events:none; will-change:transform;
 }
 .pg { position:relative; z-index:1; min-height:100dvh; padding:0 0 32px 0; display:flex; flex-direction:column; }
-
 /* ── MODALS BASE ── */
 .modal-overlay {
   display:none; position:fixed; inset:0; z-index:100;
   background:rgba(0,0,0,0.78); align-items:center; justify-content:center;
 }
+
+.cselect-box {
+  background:#0a1a2e; border:1px solid rgba(232,119,34,0.4); border-radius:20px;
+  padding:36px 34px; display:flex; flex-direction:column; align-items:center; gap:24px;
+  max-width:420px; width:92%; position:relative;
+}
+.cselect-title { font-size:20px; font-weight:700; color:#fff; letter-spacing:1px; text-align:center; }
+.cselect-list { display:flex; flex-direction:column; gap:14px; width:100%; }
+.cselect-item {
+  display:flex; align-items:center; gap:16px;
+  background:rgba(232,119,34,0.08); border:1px solid rgba(232,119,34,0.28);
+  border-radius:12px; padding:16px 18px; cursor:pointer;
+  transition:background .2s, border-color .2s, transform .15s;
+}
+.cselect-item:hover { background:rgba(232,119,34,0.18); border-color:rgba(232,119,34,0.55); transform:translateX(4px); }
+.cselect-item:active { transform:scale(0.98); }
+.cselect-icon { width:44px; height:44px; border-radius:10px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:22px; color:#fff; }
+.cselect-icon.word { background:#2b579a; }
+.cselect-icon.ppt  { background:#d24726; }
+.cselect-icon.xlsx { background:#217346; }
+.cselect-text { display:flex; flex-direction:column; gap:2px; }
+.cselect-label { font-size:15px; font-weight:700; color:#fff; }
+.cselect-sub { font-size:11px; color:rgba(200,220,240,0.4); }
+
 .modal-overlay.active { display:flex; }
 .modal-close {
   position:absolute; top:12px; right:12px; width:32px; height:32px; border-radius:50%;
@@ -35,7 +58,6 @@ body::after {
   cursor:pointer; font-size:16px; color:#e87722; transition:background .2s;
 }
 .modal-close:hover { background:rgba(232,119,34,0.30); }
-
 /* ── QR MODAL ── */
 .qr-box {
   background:#0a1a2e; border:1px solid rgba(232,119,34,0.4); border-radius:16px;
@@ -44,7 +66,6 @@ body::after {
 }
 .qr-title { font-size:18px; font-weight:700; color:#fff; letter-spacing:1px; }
 .qr-img { width:240px; height:240px; object-fit:contain; border-radius:8px; background:#fff; padding:8px; }
-
 .qr-download-btn {
   display:inline-flex; align-items:center; gap:8px;
   background:rgba(232,119,34,0.12); border:1px solid rgba(232,119,34,0.4);
@@ -57,7 +78,6 @@ body::after {
 .qr-download-btn:hover { background:rgba(232,119,34,0.25); transform:translateY(-1px); }
 .qr-download-btn:active { transform:scale(0.97); }
 .qr-download-btn i { font-size:16px; }
-
 /* ── LANG MODAL ── */
 .lang-box {
   background: #0a1a2e;
@@ -85,7 +105,6 @@ body::after {
 .lang-btn:active { transform: scale(0.97); }
 .lang-btn img { width: 100%; max-height: 160px; object-fit: contain; border-radius: 10px; }
 .lang-btn-label { font-size: 26px; font-weight: 700; color: #e87722; letter-spacing: 2px; text-transform: uppercase; }
-
 /* ── GUIDE MODAL ── */
 .guide-box {
   background:#0a1a2e; border:1px solid rgba(232,119,34,0.4); border-radius:16px;
@@ -158,7 +177,6 @@ body::after {
   transition:background .15s;
 }
 .guide-close-btn:hover { background:rgba(232,119,34,0.2); }
-
 /* ── GUIDE ROW EXPAND BUTTON ── */
 .guide-row { position:relative; }
 .guide-expand-btn {
@@ -171,7 +189,6 @@ body::after {
 }
 .guide-row:hover .guide-expand-btn { opacity:1; }
 .guide-expand-btn:hover { background:rgba(232,119,34,0.25); border-color:rgba(232,119,34,0.5); }
-
 /* ── FOCUS MODE OVERLAY ── */
 .focus-overlay {
   display:none; position:fixed; inset:0; z-index:200;
@@ -244,7 +261,6 @@ body::after {
 .focus-nav-btn:hover { background:rgba(232,119,34,0.2); }
 .focus-nav-btn:disabled, .focus-nav-btn[disabled] { opacity:0.3; cursor:default; pointer-events:none; }
 .focus-nav-counter { font-size:16px; color:rgba(255,255,255,0.3); }
-
 /* ── HEADER ── */
 .header { display:flex; align-items:center; justify-content:space-between; padding:32px 48px 0 48px; margin-bottom:36px; }
 .header-left { display:flex; align-items:center; gap:14px; }
@@ -252,9 +268,7 @@ body::after {
 .ttl { font-size:52px; font-weight:700; color:#fff; letter-spacing:2px; text-transform:uppercase; }
 .sub { font-size:24px; color:rgba(232,119,34,0.7); margin-top:3px; letter-spacing:1px; }
 .logo { width:80px; opacity:0.95; flex-shrink:0; }
-
 @keyframes shimmer-sweep { 0%{left:-100%} 100%{left:160%} }
-
 /* ── MENU BTN ── */
 .menu-btn {
   display:inline-flex; align-items:center; gap:8px;
@@ -270,19 +284,19 @@ body::after {
 }
 .menu-btn:hover::before { opacity:1; animation:shimmer-sweep 1.2s ease-in-out infinite; }
 .menu-btn:hover { background:rgba(232,119,34,0.2); }
-
 /* ── MOD HEADER ── */
 .mod-hdr { display:flex; align-items:center; gap:14px; padding:0 48px; margin-bottom:6px; }
 .mod-ibox {
   width:56px; height:56px; background:rgba(232,119,34,0.12); border:1px solid rgba(232,119,34,0.35);
   border-radius:11px; display:flex; align-items:center; justify-content:center; flex-shrink:0; overflow:hidden;
 }
-.mod-ibox img { width:100%; height:100%; object-fit:cover; border-radius:10px; }
+.mod-ibox img { width:100%; height:100%; object-fit:contain; border-radius:10px; padding:4px; }
+/* Ícono de respaldo (llave) en blanco */
+#mod-ibox-maintenance i { color:#ffffff; }
 .mod-ibox i { font-size:28px; color:#e87722; }
 .mod-hdr h2 { font-size:40px; font-weight:700; color:#fff; text-transform:uppercase; letter-spacing:1px; }
 .mod-desc { font-size:22px; color:rgba(200,220,240,0.45); padding:0 48px; margin-bottom:28px; letter-spacing:0.5px; }
 .content { flex:1; padding:0 48px; }
-
 /* ── MENU GRID ── */
 .menu-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
 .menu-card {
@@ -315,7 +329,6 @@ body::after {
 .diag { width:70px; flex-shrink:0; position:relative; z-index:1; overflow:hidden; }
 .diag::before { content:''; position:absolute; inset:0; background:linear-gradient(180deg,#e87722 0%,#c55a10 100%); opacity:0.18; clip-path:polygon(45% 0%,100% 0%,100% 100%,0% 100%); }
 .diag::after  { content:''; position:absolute; inset:0; background:linear-gradient(180deg,#ffffff 0%,#8899aa 100%); opacity:0.07; clip-path:polygon(70% 0%,100% 0%,100% 100%,25% 100%); }
-
 /* ── SUB GRID ── */
 .sub-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
 .sub-card {
@@ -341,7 +354,94 @@ body::after {
 .sub-card-desc { font-size:22px; color:rgba(200,220,240,0.4); line-height:1.5; }
 .sub-card-cta { font-size:20px; font-weight:700; color:rgba(232,119,34,0.65); letter-spacing:1.5px; margin-top:auto; transition:color .2s; }
 .sub-card:hover .sub-card-cta { color:#e87722; }
-
+/* ══ MAINTENANCE — big panel + side option selector ══ */
+.maint-panel-row { display:flex; gap:18px; flex:1; min-height:0; }
+.maint-bigbox {
+  flex: 1; position: relative; display: flex; flex-direction: column;
+  border-radius: 12px; overflow: hidden;
+  background: rgba(8,20,38,0.94);
+  border: 1px solid rgba(232,119,34,0.25);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+  min-height: 50vh;
+}
+.maint-bigbox .embed-frame { flex:1; border-radius:12px; }
+.maint-forms-view {
+  flex:1; padding:28px; overflow-y:auto;
+  display:flex; flex-direction:column;
+  scrollbar-width:thin; scrollbar-color:rgba(232,119,34,0.3) transparent;
+}
+.maint-dim-grid { flex:1; display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:1fr; gap:16px; }
+.maint-dim-tile {
+  position:relative; overflow:hidden;
+  background:rgba(232,119,34,0.12); border:1px solid rgba(232,119,34,0.35);
+  border-radius:14px; padding:14px; cursor:pointer; text-align:center;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
+  transition:background .2s, border-color .2s, transform .15s;
+}
+.maint-dim-tile:hover { background:rgba(232,119,34,0.18); border-color:rgba(232,119,34,0.55); transform:translateY(-3px); }
+.maint-dim-tile:active { transform:scale(0.97); }
+.maint-dim-ibox {
+  width:64px; height:64px; border-radius:14px;
+  background:rgba(232,119,34,0.1); border:1px solid rgba(232,119,34,0.3);
+  display:flex; align-items:center; justify-content:center; overflow:hidden;
+}
+.maint-dim-ibox img { width:100%; height:100%; object-fit:cover; }
+.maint-dim-ibox i { font-size:28px; color:#e87722; }
+.maint-dim-name { font-size:14px; font-weight:700; color:#fff; text-transform:uppercase; letter-spacing:1px; }
+.maint-opt-col { width:260px; flex-shrink:0; display:flex; flex-direction:column; gap:16px; }
+.maint-opt-btn {
+  background:rgba(10,26,50,0.8); border:1px solid rgba(255,255,255,0.08);
+  border-left:4px solid transparent; border-radius:10px; padding:22px 20px;
+  cursor:pointer; transition:background .2s, border-color .2s;
+  display:flex; flex-direction:column; gap:6px;
+  position:relative; overflow:hidden;
+}
+.maint-opt-btn:hover { background:rgba(232,119,34,0.08); }
+.maint-opt-btn.active { border-left-color:#e87722; background:rgba(232,119,34,0.12); }
+.maint-opt-btn i { font-size:26px; color:#e87722; }
+.maint-opt-title { font-size:15px; font-weight:700; color:#fff; letter-spacing:1px; text-transform:uppercase; }
+.maint-opt-sub { font-size:12px; color:rgba(200,220,240,0.45); }
+/* gif de fondo dentro de los botones laterales (Dashboard/Forms/Content) */
+.maint-opt-bg {
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  opacity:0.16; transition:opacity .2s; z-index:0; pointer-events:none;
+}
+.maint-opt-btn:hover .maint-opt-bg { opacity:0.30; }
+.maint-opt-btn i, .maint-opt-btn .maint-opt-title, .maint-opt-btn .maint-opt-sub {
+  position:relative; z-index:1;
+}
+@media (max-width:900px) {
+  .maint-panel-row { flex-direction:column; }
+  .maint-opt-col { width:100%; flex-direction:row; flex-wrap:wrap; }
+  .maint-opt-btn { flex:1; min-width:140px; }
+  .maint-dim-grid { grid-template-columns:repeat(2,1fr); }
+}
+/* ══ CARD VISUALS — PNG background + GIF that fades in on hover, used by dimension tiles and hub-half cards ══ */
+.card-visual-bg {
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  opacity:0.7; transition:opacity .3s ease; z-index:0; pointer-events:none;
+}
+.card-visual-gif {
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  opacity:0; transition:opacity .35s ease; z-index:0; pointer-events:none;
+}
+.card-visual-tint {
+  position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:linear-gradient(180deg, rgba(6,15,30,0.10) 0%, rgba(6,15,30,0.78) 100%);
+}
+.maint-dim-tile:hover .card-visual-bg,
+.hub-half:hover .card-visual-gif { }
+.maint-dim-tile:hover .card-visual-bg { opacity:0.5; }
+.maint-dim-tile:hover .card-visual-gif { opacity:1; }
+.hub-half:hover .card-visual-gif { opacity:1; }
+.maint-dim-ibox, .maint-dim-name { position:relative; z-index:2; }
+/* dims the rest of the screen a bit while hovering a card that has its own in-card gif (forms tiles) */
+.screen-dim-overlay {
+  position:fixed; inset:0; z-index:50; background:rgba(0,0,0,0);
+  transition:background .4s ease; pointer-events:none;
+}
+.screen-dim-overlay.active { background:rgba(30, 212, 148,0.05); }
 /* ── PBI VERSION SWITCHER ── */
 .pbi-top-row {
   display:flex; align-items:center; justify-content:space-between;
@@ -365,7 +465,6 @@ body::after {
 .pbi-ver-btn:hover { background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.2); color:rgba(255,255,255,0.7); }
 .pbi-ver-btn.active { background:rgba(232,119,34,0.13); border-color:rgba(232,119,34,0.45); color:#e87722; }
 .pbi-ver-btn.active i { color:#e87722; }
-
 /* ── PBI ── */
 .pbi-wrap { flex:1; display:flex; flex-direction:column; position:relative; }
 .pbi-help-btn {
@@ -377,11 +476,9 @@ body::after {
 .pbi-help-btn:hover { background:rgba(232,119,34,0.30); transform:scale(1.1); }
 .pbi-help-btn i { font-size:22px; color:#e87722; }
 .embed-frame { width:100%; flex:1; border:none; border-radius:12px; min-height:75vh; background:rgba(10,26,50,0.5); }
-
 /* ══════════════════════════════════════════
    SW FORMS — HERO CARD (Idea B)
 ══════════════════════════════════════════ */
-
 /* Terminal rail */
 .sw-term-rail {
   display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;
@@ -405,7 +502,6 @@ body::after {
 .sw-tp-old.active i { color:#e87722; }
 .sw-tp-old-label { font-size:11px; font-weight:700; color:rgba(232,119,34,0.65); letter-spacing:0.5px; text-transform:uppercase; }
 .sw-tp-old.active .sw-tp-old-label { color:#e87722; }
-
 /* HERO CARD */
 .sw-hero {
   background:rgba(10,26,50,0.8);
@@ -414,7 +510,6 @@ body::after {
   overflow:hidden;
   backdrop-filter:blur(6px);
 }
-
 /* Hero top — logo grande + nombre */
 .sw-hero-top {
   display:flex; align-items:center; gap:24px;
@@ -433,7 +528,6 @@ body::after {
 .sw-hero-logo-txt { font-size:18px; font-weight:800; color:#e87722; }
 .sw-hero-name { font-size:28px; font-weight:700; color:#fff; letter-spacing:0.5px; line-height:1.2; }
 .sw-hero-sub { font-size:15px; color:rgba(255,255,255,0.35); margin-top:6px; }
-
 /* Hero buttons — 3 col grid, same height */
 .sw-hero-btns {
   display:grid;
@@ -462,11 +556,136 @@ body::after {
 .sw-hbtn-label { font-size:16px; font-weight:700; color:#e87722; letter-spacing:1.2px; }
 .sw-hbtn-sub { font-size:12px; color:rgba(232,119,34,0.45); }
 .sw-hbtn { border-bottom: 3px solid #e87722; }
-
+/* ══════════════════════════════════════════
+   MATURITY HUB — TERMINALS / MAINTENANCE
+══════════════════════════════════════════ */
+.hub-stage { position:relative; display:flex; align-items:center; justify-content:center; padding:40px 0 20px; }
+.hub-ring {
+  position:absolute; width:min(680px,92%); aspect-ratio:1/1;
+  border:1px solid rgba(232,119,34,0.14); border-radius:50%;
+  pointer-events:none;
+}
+.hub-ring::before {
+  content:''; position:absolute; inset:22px; border:1px solid rgba(232,119,34,0.07); border-radius:50%;
+}
+.hub-pair {
+  position:relative; z-index:1; width:100%; max-width:920px; height:380px;
+  display:flex; border-radius:26px; overflow:hidden;
+  border:1px solid rgba(255,255,255,0.08); box-shadow:0 20px 60px rgba(0,0,0,0.45);
+}
+.hub-half {
+  position:relative; flex:1; cursor:pointer; overflow:hidden;
+  display:flex; align-items:flex-end; justify-content:center; padding-bottom:40px;
+  background:rgba(10,26,50,0.85);
+}
+.hub-bg {
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  opacity:0.5; transition:opacity .35s ease, transform .5s ease; transform:scale(1.02);
+}
+.hub-screen-gif {
+  position:fixed; inset:0; z-index:0;
+  background-size:contain; background-position:center;
+  opacity:0; transition:opacity .6s ease;
+  pointer-events:none;
+}
+.hub-screen-gif.active { opacity:0.6; }
+.hub-half::after {
+  content:''; position:absolute; inset:0; z-index:1;
+  background:linear-gradient(180deg,rgba(6,15,30,0.05) 0%,rgba(6,15,30,0.85) 88%);
+  pointer-events:none;
+}
+.hub-content { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; gap:10px; }
+.hub-icon-wrap {
+  width:64px; height:64px; border-radius:16px;
+  background:rgba(232,119,34,0.15); border:1px solid rgba(232,119,34,0.4);
+  display:flex; align-items:center; justify-content:center; overflow:hidden;
+}
+.hub-icon-wrap img { width:100%; height:100%; object-fit:contain; border-radius:0; padding:6px; }
+.hub-icon-wrap i { font-size:30px; color:#e87722; }
+#hub-icon-maintenance i { color:#ffffff; }
+.hub-label { font-size:30px; font-weight:700; color:#fff; text-transform:uppercase; letter-spacing:2px; }
+.hub-sub { font-size:16px; color:rgba(232,119,34,0.75); letter-spacing:1px; }
+.hub-divider { width:1px; background:rgba(255,255,255,0.1); position:relative; z-index:2; }
+@media (max-width:768px) {
+  .hub-pair { flex-direction:column; height:auto; max-width:100%; }
+  .hub-half { height:220px; padding-bottom:24px; }
+  .hub-divider { width:100%; height:1px; }
+  .hub-label { font-size:20px; }
+  .hub-icon-wrap { width:48px; height:48px; }
+  .hub-icon-wrap i { font-size:22px; }
+}
+/* ══════════════════════════════════════════
+   FORM SELECT MODAL (image + QR side by side)
+══════════════════════════════════════════ */
+.formsel-box {
+  background:#0a1a2e; border:1px solid rgba(232,119,34,0.4); border-radius:20px;
+  padding:44px 40px 40px; display:flex; flex-direction:column; align-items:center; gap:28px;
+  max-width:1040px; width:94%; position:relative;
+}
+.formsel-title { font-size:24px; font-weight:700; color:#fff; letter-spacing:1px; text-align:center; }
+.formsel-grid { display:grid; gap:24px; width:100%; }
+.formsel-item {
+  background: rgba(232,119,34,0.08);
+  border: 1px solid rgba(232,119,34,0.28);
+  border-radius: 16px;
+  padding: 28px 20px 24px;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+  transition: background .2s, border-color .2s;
+}
+.formsel-item-title { font-size:16px; font-weight:700; color:#e87722; letter-spacing:1px; text-transform:uppercase; }
+.formsel-row { display:flex; gap:12px; align-items:center; justify-content:center; width:100%; }
+.formsel-thumb-img {
+  flex:1; width:100%; height:auto; max-height:200px;
+  object-fit:cover; border-radius:10px; cursor:pointer; transition:transform .15s;
+}
+.formsel-thumb-img:hover { transform:scale(1.04); }
+.formsel-qr-img {
+  width:80px; height:80px; object-fit:contain; background:#fff; border-radius:10px;
+  padding:6px; cursor:pointer; transition:transform .15s; flex-shrink:0;
+}
+.formsel-qr-img:hover { transform:scale(1.04); }
+.formsel-hint { font-size:11px; color:rgba(255,255,255,0.3); text-align:center; letter-spacing:0.3px; }
+@media (max-width:768px) {
+  .formsel-box { padding:28px 20px; }
+  .formsel-thumb-img { width:110px; height:110px; }
+  .formsel-qr-img { width:80px; height:80px; }
+}
+/* ══════════════════════════════════════════
+   MAINTENANCE / TERMINALS FIXED BACKGROUND
+══════════════════════════════════════════ */
+.pg-maint-bg,{
+  background-size: contain;
+  background-position: center center;
+  background-attachment: fixed;
+}
+.pg-maint-bg {
+  background-image:
+    linear-gradient(180deg, rgba(3,12,26,1) 0%, rgba(3,12,26,1) 55%, rgba(3,12,26,1) 100%);
+  background-repeat: no-repeat;
+}
+.maint-mini-visual, .terminals-mini-visual {
+  position: absolute;
+  top: 20px;
+  right: 200px;
+  width: 480px;
+  height: 245px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  pointer-events: none;
+}
+.maint-mini-visual {
+  background-image: url('gifs/hub-maintenance.svg');
+}
+.terminals-mini-visual {
+  background-image: url('gifs/hub-terminals.svg');
+}
 /* ── FOOTER ── */
 .footer { text-align:center; font-size:22px; color:rgba(232,119,34,0.35); letter-spacing:1.5px; padding:24px 48px 0; }
 .hidden { display:none !important; }
-
 /* ── RESPONSIVE ── */
 @media (max-width:768px) {
   .header { padding:20px 20px 0 20px; margin-bottom:20px; flex-wrap:wrap; gap:12px; }
@@ -513,7 +732,6 @@ body::after {
 </style>
 </head>
 <body>
-
 <!-- QR MODAL -->
 <div class="modal-overlay" id="qr-overlay" onclick="closeQR(event)">
   <div class="qr-box">
@@ -525,7 +743,6 @@ body::after {
     </button>
   </div>
 </div>
-
 <!-- LANG MODAL -->
 <div class="modal-overlay" id="lang-overlay" onclick="closeLang(event)">
   <div class="lang-box">
@@ -543,12 +760,27 @@ body::after {
     </div>
   </div>
 </div>
-
+<!-- Descargar EXCEL WORD o PPT MODAL -->
+<div class="modal-overlay" id="cselect-overlay" onclick="closeContentSelect(event)">
+  <div class="cselect-box">
+    <div class="modal-close" onclick="closeContentSelectBtn()">✕</div>
+    <div class="cselect-title" id="cselect-title">Select a file format</div>
+    <div class="cselect-list" id="cselect-list"></div>
+  </div>
+</div>
+<!-- FORM SELECT MODAL (image + QR side by side, used by Maturity / Maintenance forms) -->
+<div class="modal-overlay" id="formsel-overlay" onclick="closeFormSelect(event)">
+  <div class="formsel-box">
+    <div class="modal-close" onclick="closeFormSelectBtn()">✕</div>
+    <div class="formsel-title" id="formsel-title">Select a Form</div>
+    <div class="formsel-grid" id="formsel-grid"></div>
+    <div class="formsel-hint">Click the form image to open the form · Click the QR to download it</div>
+  </div>
+</div>
 <!-- GUIDE MODAL -->
 <div class="modal-overlay" id="guide-overlay" onclick="closeGuide(event)">
   <div class="guide-box">
     <div class="modal-close" onclick="closeGuideBtn()">✕</div>
-
     <div class="guide-header">
       <div class="guide-header-left">
         <i class="ti ti-help-circle"></i>
@@ -558,10 +790,8 @@ body::after {
         </div>
       </div>
     </div>
-
     <!-- ── ACTUAL VERSION BODY ── -->
     <div class="guide-body" id="guide-body-actual">
-
       <!-- SECTION 1 -->
       <div class="guide-row">
         <div class="guide-gif-wrap">
@@ -581,12 +811,11 @@ body::after {
             The report includes both an overview and a breakdown by terminal [ITI, ATI, TMAZ, TPG, SPC, STI, SVTI, FIT, and BEST], showing the <b>three KPIs</b>.
             <b>Maturity Index</b> = Avg(Score obtained / Maximum Score), indicating the progress made toward standardization.
             <b>Deployment Index</b> = Cum(Deployed Areas / Total Areas), current status of the committed deployment.
-            <b>System Index</b> = Cum(Maturity Index * Deployment Index), actual indicator of the terminal’s progress.
+            <b>System Index</b> = Cum(Maturity Index * Deployment Index), actual indicator of the terminal's progress.
           </div>
         </div>
         <div class="guide-expand-btn" onclick="openFocus(this)" title="Expand"><i class="ti ti-arrows-diagonal"></i></div>
       </div>
-
       <!-- SECTION 2 -->
       <div class="guide-row">
         <div class="guide-gif-wrap">
@@ -610,7 +839,6 @@ body::after {
         </div>
         <div class="guide-expand-btn" onclick="openFocus(this)" title="Expand"><i class="ti ti-arrows-diagonal"></i></div>
       </div>
-
       <!-- SECTION 3 -->
       <div class="guide-row">
         <div class="guide-gif-wrap">
@@ -632,7 +860,6 @@ body::after {
         </div>
         <div class="guide-expand-btn" onclick="openFocus(this)" title="Expand"><i class="ti ti-arrows-diagonal"></i></div>
       </div>
-
       <!-- SECTION 4 -->
       <div class="guide-row">
         <div class="guide-gif-wrap">
@@ -654,7 +881,6 @@ body::after {
         </div>
         <div class="guide-expand-btn" onclick="openFocus(this)" title="Expand"><i class="ti ti-arrows-diagonal"></i></div>
       </div>
-
       <!-- SECTION 5 -->
       <div class="guide-row">
         <div class="guide-gif-wrap">
@@ -676,12 +902,9 @@ body::after {
         </div>
         <div class="guide-expand-btn" onclick="openFocus(this)" title="Expand"><i class="ti ti-arrows-diagonal"></i></div>
       </div>
-
     </div>
-
     <!-- ── OLD VERSION BODY ── -->
     <div class="guide-body" id="guide-body-old" style="display:none">
-
       <!-- SECTION 1 -->
       <div class="guide-row">
         <div class="guide-gif-wrap">
@@ -697,17 +920,15 @@ body::after {
             <div class="guide-step-num">1</div>
             <div class="guide-step-title">Welcome to the first version of the Standard Work System</div>
           </div>
-          <div class="guide-step-desc" style="text-align:justify;">>
+          <div class="guide-step-desc" style="text-align:justify;">
             The report includes both an overview and a breakdown by terminal [ITI, ATI, TMAZ, TPG, SPC, STI, SVTI, FIT, and BEST], showing the <b>three KPIs</b>.
             <b>Maturity Index</b> = Avg(Score obtained / Maximum Score), indicating the progress made toward standardization.
             <b>Deployment Index</b> = (Deployed Areas / Total Areas, current status of the committed deployment.
-            <b>System Index</b> = (Maturity Index * Deployment Index), actual indicator of the terminal’s progress.
-
+            <b>System Index</b> = (Maturity Index * Deployment Index), actual indicator of the terminal's progress.
           </div>
         </div>
         <div class="guide-expand-btn" onclick="openFocus(this)" title="Expand"><i class="ti ti-arrows-diagonal"></i></div>
       </div>
-
       <!-- SECTION 2 -->
       <div class="guide-row">
         <div class="guide-gif-wrap">
@@ -731,7 +952,6 @@ body::after {
         </div>
         <div class="guide-expand-btn" onclick="openFocus(this)" title="Expand"><i class="ti ti-arrows-diagonal"></i></div>
       </div>
-
       <!-- SECTION 3 -->
       <div class="guide-row">
         <div class="guide-gif-wrap">
@@ -753,7 +973,6 @@ body::after {
         </div>
         <div class="guide-expand-btn" onclick="openFocus(this)" title="Expand"><i class="ti ti-arrows-diagonal"></i></div>
       </div>
-
       <!-- SECTION 4 -->
       <div class="guide-row">
         <div class="guide-gif-wrap">
@@ -775,7 +994,6 @@ body::after {
         </div>
         <div class="guide-expand-btn" onclick="openFocus(this)" title="Expand"><i class="ti ti-arrows-diagonal"></i></div>
       </div>
-
       <!-- SECTION 5 -->
       <div class="guide-row">
         <div class="guide-gif-wrap">
@@ -797,19 +1015,15 @@ body::after {
         </div>
         <div class="guide-expand-btn" onclick="openFocus(this)" title="Expand"><i class="ti ti-arrows-diagonal"></i></div>
       </div>
-
     </div>
-
     <div class="guide-footer">
       <div class="guide-footer-note" id="guide-footer-note">Scroll to see all the indications, 5 in total</div>
       <div class="guide-close-btn" onclick="closeGuideBtn()">
         <i class="ti ti-x" style="font-size:13px"></i> CERRAR
       </div>
     </div>
-
   </div>
 </div>
-
 <!-- FOCUS MODE OVERLAY -->
 <div class="focus-overlay" id="focus-overlay" onclick="closeFocusOverlay(event)">
   <div class="focus-box">
@@ -842,7 +1056,6 @@ body::after {
     </div>
   </div>
 </div>
-
 <!-- ══════════════════ MENU PAGE ══════════════════ -->
 <div id="pg-menu" class="pg">
   <div class="header">
@@ -854,7 +1067,6 @@ body::after {
   </div>
   <div class="content">
     <div class="menu-grid">
-
       <div class="menu-card" onclick="openSub('6s')">
         <img class="card-bg" src="img/6S Card.png" alt="" onerror="this.style.display='none'">
         <div class="menu-card-body">
@@ -870,7 +1082,6 @@ body::after {
         </div>
         <div class="diag"></div>
       </div>
-
       <div class="menu-card" onclick="openSub('sw')">
         <img class="card-bg" src="img/Standard Work Card.png" alt="" onerror="this.style.display='none'">
         <div class="menu-card-body">
@@ -886,7 +1097,6 @@ body::after {
         </div>
         <div class="diag"></div>
       </div>
-
       <div class="menu-card" onclick="openSub('maturity')">
         <img class="card-bg" src="img/Maturity Card.png" alt="" onerror="this.style.display='none'">
         <div class="menu-card-body">
@@ -902,7 +1112,6 @@ body::after {
         </div>
         <div class="diag"></div>
       </div>
-
       <div class="menu-card" onclick="window.open('https://eu.shibumi.com/shibumi/d4c65c40-88fe-4aba-9621-d8de425d28b9/topDashboard-summary?id=53eee6d9-533c-4696-858f-166dd35c4bb9&context=977a1308-fca7-49c2-aead-aff9d731a765&tab=1186a924-4ff6-4e45-b989-8f3aa2c2698a','_blank')">
         <img class="card-bg" src="img/Initiatives Card.png" alt="" onerror="this.style.display='none'">
         <div class="menu-card-body">
@@ -918,7 +1127,6 @@ body::after {
         </div>
         <div class="diag"></div>
       </div>
-
       <div class="menu-card" onclick="window.open('https://mefm75261.github.io/BEST_Leadership_Program/','_blank')">
         <img class="card-bg" src="img/Leadership Program Card.png" alt="" onerror="this.style.display='none'">
         <div class="menu-card-body">
@@ -934,7 +1142,6 @@ body::after {
         </div>
         <div class="diag"></div>
       </div>
-
       <div class="menu-card" onclick="window.open('https://mefm75261.github.io/BEST_HOSHIN_KANRI/','_blank')">
         <img class="card-bg" src="img/HOSHIN KANRI Card.png" alt="" onerror="this.style.display='none'">
         <div class="menu-card-body">
@@ -950,12 +1157,10 @@ body::after {
         </div>
         <div class="diag"></div>
       </div>
-
     </div>
   </div>
   <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
 </div>
-
 <!-- ══════════════════ 6S ══════════════════ -->
 <div id="pg-6s" class="pg hidden">
   <div class="header">
@@ -974,52 +1179,45 @@ body::after {
     <h2>6S SYSTEM</h2>
   </div>
   <p class="mod-desc">6S Deployment & Results · Leading Change & Improvement</p>
-  <div class="content">
-    <div class="sub-grid">
-      <div class="sub-card" onclick="downloadFile('contents/6S System.pptx','6S System.pptx')">
-        <img class="sub-card-bg" src="gifs/gif content.gif" alt="" onerror="this.style.display='none'">
-        <div class="sub-ibox"><img src="img/icon-content.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" onload="this.nextElementSibling.style.display='none';"><i class="ti ti-file-description"></i></div>
-        <div class="sub-card-title">Content</div>
-        <div class="sub-card-desc">6S Guidelines and Implementation Material</div>
-        <div class="sub-card-cta">⬇ DOWNLOAD →</div>
-      </div>
-      <div class="sub-card" onclick="showPage('pg-form-6s')">
-        <img class="sub-card-bg" src="gifs/form 6s.gif" alt="" onerror="this.style.display='none'">
-        <div class="sub-ibox"><img src="img/icon-form.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" onload="this.nextElementSibling.style.display='none';"><i class="ti ti-clipboard-list"></i></div>
-        <div class="sub-card-title">Form</div>
-        <div class="sub-card-desc">6S Evaluation Survey</div>
-        <div class="sub-card-cta">OPEN →</div>
-      </div>
-      <div class="sub-card" onclick="window.open('https://app.powerbi.com/groups/me/reports/175b3ea5-4e12-421d-becd-4d7247ccea9d?experience=power-bi','_blank')">
-        <img class="sub-card-bg" src="gifs/gif 6s pbi.gif" alt="" onerror="this.style.display='none'">
-        <div class="sub-ibox"><img src="img/icon-dashboard.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" onload="this.nextElementSibling.style.display='none';"><i class="ti ti-chart-bar"></i></div>
-        <div class="sub-card-title">Dashboard</div>
-        <div class="sub-card-desc">6S Results · External Report</div>
-        <div class="sub-card-cta">OPEN →</div>
-      </div>
-    </div>
-  </div>
-  <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
-</div>
-
-<!-- 6S FORM -->
-<div id="pg-form-6s" class="pg hidden">
-  <div class="header">
-    <div class="header-left">
-      <button class="menu-btn" onclick="showPage('pg-6s')">◄ BACK</button>
-      <div class="hdr-line"></div>
-      <div><div class="ttl">Reportability Menu</div><div class="sub">Hanseatic Global Terminals · BEST Program</div></div>
-    </div>
-    <img class="logo" src="img/best-logo.png" alt="BEST" onerror="this.style.display='none'">
-  </div>
-  <div class="mod-hdr"><div class="mod-ibox"><i class="ti ti-clipboard-list"></i></div><h2>6S Evaluation Survey</h2></div>
-  <p class="mod-desc">Complete the 6S evaluation form below</p>
   <div class="content" style="display:flex;flex-direction:column;">
-    <iframe class="embed-frame" src="https://forms.office.com/Pages/ResponsePage.aspx?id=0dMQwt6XIUmUVn7rrIW0tpV5gZNq1vxBlP4c7iQQHuhUNFM3WTNZNkdYSERBTTMxMDcwODBaTllCWS4u" allowfullscreen></iframe>
+    <div class="maint-panel-row">
+      <!-- BIG BOX: toggles between Dashboard (PBI) and Mapas 6S (Power BI Fabric) -->
+      <div class="maint-bigbox">
+        <iframe class="embed-frame" id="six-frame-pbi"
+          src="https://app.powerbi.com/view?r=eyJrIjoiNTljOGU2YzQtN2E4MS00YTM3LTg5ZDgtOTY0MjZkMTE1MzdiIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"
+          allowfullscreen></iframe>
+      </div>
+      <!-- SIDE OPTIONS -->
+      <div class="maint-opt-col">
+        <div class="maint-opt-btn active" id="six-opt-pbi" onclick="sixSwitchView('pbi')">
+          <img class="maint-opt-bg" src="gifs/gif 6s general pbi.gif" alt="" onerror="this.style.display='none'">
+          <i class="ti ti-chart-bar"></i>
+          <div class="maint-opt-title">Dashboard</div>
+          <div class="maint-opt-sub">6S Results · External Report</div>
+        </div>
+        <div class="maint-opt-btn" onclick="showFormSelect('6S · Form', SIXS_FORMS)">
+          <img class="maint-opt-bg" src="gifs/form 6s.gif" alt="" onerror="this.style.display='none'">
+          <i class="ti ti-clipboard-list"></i>
+          <div class="maint-opt-title">Forms</div>
+          <div class="maint-opt-sub">6S Evaluation Survey</div>
+        </div>
+        <div class="maint-opt-btn" onclick="window.open('https://app.powerbi.com/groups/me/reports/175b3ea5-4e12-421d-becd-4d7247ccea9d/c3182cb9e49a380fe159?experience=power-bi','_blank')">
+          <img class="maint-opt-bg" src="gifs/gif 6s pbi.gif" alt="" onerror="this.style.display='none'">
+          <i class="ti ti-map"></i>
+          <div class="maint-opt-title">Mapas 6S</div>
+          <div class="maint-opt-sub">Power BI Fabric · Mapas 6S</div>
+        </div>
+        <div class="maint-opt-btn" onclick="downloadFile('contents/6S System.pptx','6S System.pptx')">
+          <img class="maint-opt-bg" src="gifs/gif content.gif" alt="" onerror="this.style.display='none'">
+          <i class="ti ti-file-description"></i>
+          <div class="maint-opt-title">Download Content</div>
+          <div class="maint-opt-sub">6S Guidelines &amp; Implementation Material</div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
 </div>
-
 <!-- ══════════════════ STANDARD WORK ══════════════════ -->
 <div id="pg-sw" class="pg hidden">
   <div class="header">
@@ -1035,201 +1233,138 @@ body::after {
     <h2>Standard Work & Performance Mgmt</h2>
   </div>
   <p class="mod-desc">Meeting Evaluations · Leading Change & Improvement</p>
-  <div class="content">
-    <div class="sub-grid">
-      <div class="sub-card" onclick="downloadFile('contents/Standard Work.pptx','Standard Work.pptx')">
-        <img class="sub-card-bg" src="gifs/gif content.gif" alt="" onerror="this.style.display='none'">
-        <div class="sub-ibox"><img src="img/icon-content.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" onload="this.nextElementSibling.style.display='none';"><i class="ti ti-file-description"></i></div>
-        <div class="sub-card-title">Content</div>
-        <div class="sub-card-desc">Standard Work Guidelines and Implementation Material</div>
-        <div class="sub-card-cta">⬇ DOWNLOAD →</div>
-      </div>
-      <div class="sub-card" onclick="showPage('pg-sw-forms')">
-        <img class="sub-card-bg" src="gifs/form standard work.gif" alt="" onerror="this.style.display='none'">
-        <div class="sub-ibox"><img src="img/icon-form.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" onload="this.nextElementSibling.style.display='none';"><i class="ti ti-clipboard-list"></i></div>
-        <div class="sub-card-title">Form</div>
-        <div class="sub-card-desc">Standard Work Evaluation Survey</div>
-        <div class="sub-card-cta">OPEN →</div>
-      </div>
-      <div class="sub-card" onclick="showPage('pg-pbi-sw')">
-        <img class="sub-card-bg" src="gifs/standard pbi.gif" alt="" onerror="this.style.display='none'">
-        <div class="sub-ibox"><img src="img/icon-dashboard.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" onload="this.nextElementSibling.style.display='none';"><i class="ti ti-chart-bar"></i></div>
-        <div class="sub-card-title">Dashboard</div>
-        <div class="sub-card-desc">Power BI · Results in Real Time</div>
-        <div class="sub-card-cta">OPEN →</div>
-      </div>
-    </div>
-  </div>
-  <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
-</div>
-
-<!-- ══════════════════ SW FORMS — REDESIGNED ══════════════════ -->
-<div id="pg-sw-forms" class="pg hidden">
-  <div class="header">
-    <div class="header-left">
-      <button class="menu-btn" onclick="showPage('pg-sw')">◄ BACK</button>
-      <div class="hdr-line"></div>
-      <div><div class="ttl">Reportability Menu</div><div class="sub">Hanseatic Global Terminals · BEST Program</div></div>
-    </div>
-    <img class="logo" src="img/best-logo.png" alt="BEST" onerror="this.style.display='none'">
-  </div>
-  <div class="mod-hdr"><div class="mod-ibox"><i class="ti ti-clipboard-list"></i></div><h2>Standard Work Survey</h2></div>
-  <p class="mod-desc">Select your terminal to open the evaluation form</p>
-  <div class="content">
-
-    <!-- TERMINAL RAIL -->
-    <div class="sw-term-rail">
-
-      <!-- OLD FORMAT — icono + texto -->
-      <div class="sw-tp sw-tp-old" id="sw-tp-old" onclick="swSelect('old')" title="Old Format">
-        <i class="ti ti-history"></i>
-        <span class="sw-tp-old-label">Old Format</span>
-      </div>
-
-      <!-- ITI -->
-      <div class="sw-tp active" id="sw-tp-iti" onclick="swSelect('iti')" title="ITI">
-        <img src="img/iti logo.png" alt="ITI"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-        <span class="sw-tp-text" style="display:none">ITI</span>
-      </div>
-
-      <!-- ATI -->
-      <div class="sw-tp" id="sw-tp-ati" onclick="swSelect('ati')" title="ATI">
-        <img src="img/ati logo.png" alt="ATI"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-        <span class="sw-tp-text" style="display:none">ATI</span>
-      </div>
-
-      <!-- SVTI -->
-      <div class="sw-tp" id="sw-tp-svti" onclick="swSelect('svti')" title="SVTI">
-        <img src="img/svti logo.png" alt="SVTI"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-        <span class="sw-tp-text" style="display:none">SVTI</span>
-      </div>
-
-      <!-- STI -->
-      <div class="sw-tp" id="sw-tp-sti" onclick="swSelect('sti')" title="STI">
-        <img src="img/sti logo.png" alt="STI"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-        <span class="sw-tp-text" style="display:none">STI</span>
-      </div>
-
-      <!-- TMAZ -->
-      <div class="sw-tp" id="sw-tp-tmaz" onclick="swSelect('tmaz')" title="TMAZ">
-        <img src="img/tmaz logo.png" alt="TMAZ"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-        <span class="sw-tp-text" style="display:none">TMAZ</span>
-      </div>
-
-      <!-- SPC -->
-      <div class="sw-tp" id="sw-tp-spc" onclick="swSelect('spc')" title="SPC">
-        <img src="img/spc logo.png" alt="SPC"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-        <span class="sw-tp-text" style="display:none">SPC</span>
-      </div>
-
-      <!-- FIT -->
-      <div class="sw-tp" id="sw-tp-fit" onclick="swSelect('fit')" title="FIT">
-        <img src="img/fit logo.png" alt="FIT"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-        <span class="sw-tp-text" style="display:none">FIT</span>
-      </div>
-
-      <!-- TPG -->
-      <div class="sw-tp" id="sw-tp-tpg" onclick="swSelect('tpg')" title="TPG">
-        <img src="img/tpg logo.png" alt="TPG"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-        <span class="sw-tp-text" style="display:none">TPG</span>
-      </div>
-
-      <!-- BEST -->
-      <div class="sw-tp" id="sw-tp-best" onclick="swSelect('best')" title="BEST">
-        <img src="img/best-logo.png" alt="BEST"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-        <span class="sw-tp-text" style="display:none">BEST</span>
-      </div>
-
-    </div><!-- /rail -->
-
-    <!-- HERO CARD -->
-    <div class="sw-hero">
-      <!-- Top: logo + name -->
-      <div class="sw-hero-top">
-        <div class="sw-hero-logo" id="sw-hero-logo">
-          <img src="img/iti logo.png" alt=""
-            onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-          <span class="sw-hero-logo-txt" style="display:none">ITI</span>
+  <div class="content" style="display:flex;flex-direction:column;">
+    <div class="maint-panel-row">
+      <!-- BIG BOX: toggles between Dashboard (PBI, old/actual) and Forms (terminal selector + hero card) -->
+      <div class="maint-bigbox">
+        <!-- DASHBOARD VIEW -->
+        <div id="sw-pbi-view" style="flex:1;display:flex;flex-direction:column;min-height:0;">
+          <div style="display:flex;justify-content:flex-end;padding:10px 14px 0;flex-shrink:0;">
+            <div class="pbi-ver-group">
+              <div class="pbi-ver-btn" id="btn-old" onclick="switchPBI('old')">
+                <i class="ti ti-clock"></i> OLD VERSION
+              </div>
+              <div class="pbi-ver-btn active" id="btn-actual" onclick="switchPBI('actual')">
+                <i class="ti ti-chart-line"></i> ACTUAL VERSION
+              </div>
+            </div>
+          </div>
+          <div class="pbi-wrap">
+            <div class="pbi-help-btn" id="pbi-help" title="How to read indicators"
+                 onclick="showGuide('How to Read Your Dashboard — Actual Version')">
+              <i class="ti ti-help"></i>
+            </div>
+            <iframe class="embed-frame" id="pbi-frame-actual"
+              src="https://app.powerbi.com/view?r=eyJrIjoiMThjZDEwMDctZTUyNS00ZjhiLWIwZmQtNjVlZWY0ZjdjMWI0IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"
+              allowfullscreen></iframe>
+            <iframe class="embed-frame hidden" id="pbi-frame-old"
+              src=""
+              data-src="https://app.powerbi.com/view?r=eyJrIjoiMDNlZDVjOGYtYmVjZC00YTE4LWE5OTItNDAxMDVmM2FmOTNhIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"
+              allowfullscreen></iframe>
+          </div>
         </div>
-        <div>
-          <div class="sw-hero-name" id="sw-hero-name">ITI</div>
-          <div class="sw-hero-sub" id="sw-hero-sub">Iquique Terminal Internacional</div>
+        <!-- FORMS VIEW -->
+        <div class="maint-forms-view hidden" id="sw-forms-view">
+          <!-- TERMINAL RAIL -->
+          <div class="sw-term-rail">
+            <div class="sw-tp sw-tp-old" id="sw-tp-old" onclick="swSelect('old')" title="Old Format">
+              <i class="ti ti-history"></i>
+              <span class="sw-tp-old-label">Old Format</span>
+            </div>
+            <div class="sw-tp active" id="sw-tp-iti" onclick="swSelect('iti')" title="ITI">
+              <img src="img/iti logo.png" alt="ITI"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+              <span class="sw-tp-text" style="display:none">ITI</span>
+            </div>
+            <div class="sw-tp" id="sw-tp-ati" onclick="swSelect('ati')" title="ATI">
+              <img src="img/ati logo.png" alt="ATI"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+              <span class="sw-tp-text" style="display:none">ATI</span>
+            </div>
+            <div class="sw-tp" id="sw-tp-svti" onclick="swSelect('svti')" title="SVTI">
+              <img src="img/svti logo.png" alt="SVTI"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+              <span class="sw-tp-text" style="display:none">SVTI</span>
+            </div>
+            <div class="sw-tp" id="sw-tp-sti" onclick="swSelect('sti')" title="STI">
+              <img src="img/sti logo.png" alt="STI"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+              <span class="sw-tp-text" style="display:none">STI</span>
+            </div>
+            <div class="sw-tp" id="sw-tp-tmaz" onclick="swSelect('tmaz')" title="TMAZ">
+              <img src="img/tmaz logo.png" alt="TMAZ"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+              <span class="sw-tp-text" style="display:none">TMAZ</span>
+            </div>
+            <div class="sw-tp" id="sw-tp-spc" onclick="swSelect('spc')" title="SPC">
+              <img src="img/spc logo.png" alt="SPC"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+              <span class="sw-tp-text" style="display:none">SPC</span>
+            </div>
+            <div class="sw-tp" id="sw-tp-fit" onclick="swSelect('fit')" title="FIT">
+              <img src="img/fit logo.png" alt="FIT"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+              <span class="sw-tp-text" style="display:none">FIT</span>
+            </div>
+            <div class="sw-tp" id="sw-tp-tpg" onclick="swSelect('tpg')" title="TPG">
+              <img src="img/tpg logo.png" alt="TPG"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+              <span class="sw-tp-text" style="display:none">TPG</span>
+            </div>
+            <div class="sw-tp" id="sw-tp-best" onclick="swSelect('best')" title="BEST">
+              <img src="img/best-logo.png" alt="BEST"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+              <span class="sw-tp-text" style="display:none">BEST</span>
+            </div>
+          </div><!-- /rail -->
+          <!-- HERO CARD -->
+          <div class="sw-hero">
+            <div class="sw-hero-top">
+              <div class="sw-hero-logo" id="sw-hero-logo">
+                <img src="img/iti logo.png" alt=""
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                <span class="sw-hero-logo-txt" style="display:none">ITI</span>
+              </div>
+              <div>
+                <div class="sw-hero-name" id="sw-hero-name">ITI</div>
+                <div class="sw-hero-sub" id="sw-hero-sub">Iquique Terminal Internacional</div>
+              </div>
+            </div>
+            <div class="sw-hero-btns" id="sw-hero-btns"><!-- rendered by swSelect() --></div>
+          </div>
         </div>
       </div>
-      <!-- Buttons grid -->
-      <div class="sw-hero-btns" id="sw-hero-btns">
-        <!-- rendered by swSelect() -->
+      <!-- SIDE OPTIONS -->
+      <div class="maint-opt-col">
+        <div class="maint-opt-btn active" id="sw-opt-pbi" onclick="swBigSwitch('pbi')">
+          <img class="maint-opt-bg" src="gifs/standard pbi.gif" alt="" onerror="this.style.display='none'">
+          <i class="ti ti-chart-bar"></i>
+          <div class="maint-opt-title">Dashboard</div>
+          <div class="maint-opt-sub">Power BI · Results in Real Time</div>
+        </div>
+        <div class="maint-opt-btn" id="sw-opt-forms" onclick="swBigSwitch('forms')">
+          <img class="maint-opt-bg" src="gifs/form standard work.gif" alt="" onerror="this.style.display='none'">
+          <i class="ti ti-clipboard-list"></i>
+          <div class="maint-opt-title">Forms</div>
+          <div class="maint-opt-sub">Standard Work Evaluation Survey</div>
+        </div>
+        <div class="maint-opt-btn" onclick="downloadFile('contents/Standard Work.pptx','Standard Work.pptx')">
+          <img class="maint-opt-bg" src="gifs/gif content.gif" alt="" onerror="this.style.display='none'">
+          <i class="ti ti-file-description"></i>
+          <div class="maint-opt-title">Download Content</div>
+          <div class="maint-opt-sub">Standard Work Guidelines &amp; Material</div>
+        </div>
       </div>
-    </div>
-
-  </div>
-  <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
-</div>
-
-<!-- SW PBI -->
-<div id="pg-pbi-sw" class="pg hidden">
-  <div class="header">
-    <div class="header-left">
-      <button class="menu-btn" onclick="showPage('pg-sw')">◄ BACK</button>
-      <div class="hdr-line"></div>
-      <div><div class="ttl">Reportability Menu</div><div class="sub">Hanseatic Global Terminals · BEST Program</div></div>
-    </div>
-    <img class="logo" src="img/best-logo.png" alt="BEST" onerror="this.style.display='none'">
-  </div>
-
-  <!-- Title row + version switcher on same line -->
-  <div class="pbi-top-row" style="padding:0 48px; margin-bottom:6px;">
-    <div class="pbi-top-left">
-      <div class="mod-ibox" style="width:56px;height:56px;background:rgba(232,119,34,0.12);border:1px solid rgba(232,119,34,0.35);border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-        <i class="ti ti-chart-bar" style="font-size:28px;color:#e87722;"></i>
-      </div>
-      <div>
-        <div class="pbi-top-title">Standard Work Dashboard</div>
-        <div class="pbi-top-sub">Power BI · Results in Real Time</div>
-      </div>
-    </div>
-    <div class="pbi-ver-group">
-      <div class="pbi-ver-btn" id="btn-old" onclick="switchPBI('old')">
-        <i class="ti ti-clock"></i> OLD VERSION
-      </div>
-      <div class="pbi-ver-btn active" id="btn-actual" onclick="switchPBI('actual')">
-        <i class="ti ti-chart-line"></i> ACTUAL VERSION
-      </div>
-    </div>
-  </div>
-
-<div class="content" style="display:flex;flex-direction:column;">
-    <div class="pbi-wrap">
-      <!-- Help button — changes per version -->
-      <div class="pbi-help-btn" id="pbi-help" title="How to read indicators"
-           onclick="showGuide('How to Read Your Dashboard — Actual Version')">
-        <i class="ti ti-help"></i>
-      </div>
-      <!-- Actual version iframe (default visible) -->
-      <iframe class="embed-frame" id="pbi-frame-actual"
-        src="https://app.powerbi.com/view?r=eyJrIjoiMThjZDEwMDctZTUyNS00ZjhiLWIwZmQtNjVlZWY0ZjdjMWI0IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"
-        allowfullscreen></iframe>
-      <!-- Old version iframe (hidden until selected) -->
-      <iframe class="embed-frame hidden" id="pbi-frame-old"
-        src=""
-        data-src="https://app.powerbi.com/view?r=eyJrIjoiMDNlZDVjOGYtYmVjZC00YTE4LWE5OTItNDAxMDVmM2FmOTNhIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"
-        allowfullscreen></iframe>
     </div>
   </div>
   <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
 </div>
-
-<!-- ══════════════════ MATURITY ══════════════════ -->
-<div id="pg-maturity" class="pg hidden">
+<!-- FULLSCREEN HOVER GIF BACKDROP -->
+<div class="hub-screen-gif" id="hub-screen-gif"></div>
+<!-- SCREEN DIM OVERLAY (used while hovering the 7 dimension form cards) -->
+<div class="screen-dim-overlay" id="screen-dim"></div>
+<!-- ══════════════════ MATURITY HUB (Terminals / Maintenance) ══════════════════ -->
+<div id="pg-maturity-hub" class="pg hidden">
   <div class="header">
     <div class="header-left">
       <button class="menu-btn" onclick="goMenu()">◄ BACK</button>
@@ -1242,36 +1377,95 @@ body::after {
     <div class="mod-ibox"><img src="img/icon-maturity.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" onload="this.nextElementSibling.style.display='none';"><i class="ti ti-certificate"></i></div>
     <h2>Maturity Assessment</h2>
   </div>
-  <p class="mod-desc">BEST Maturity Results · Leading Change & Improvement</p>
+  <p class="mod-desc">Choose a scope to continue · BEST or Maintenance</p>
   <div class="content">
-    <div class="sub-grid">
-      <div class="sub-card" onclick="downloadFile('contents/Maturity Assessment.pptx','Maturity Assessment.pptx')">
-        <img class="sub-card-bg" src="gifs/gif content.gif" alt="" onerror="this.style.display='none'">
-        <div class="sub-ibox"><img src="img/icon-content.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" onload="this.nextElementSibling.style.display='none';"><i class="ti ti-file-description"></i></div>
-        <div class="sub-card-title">Content</div>
-        <div class="sub-card-desc">Maturity Assessment Guidelines & Material</div>
-        <div class="sub-card-cta">⬇ DOWNLOAD →</div>
-      </div>
-      <div class="sub-card" onclick="showPage('pg-form-maturity')">
-        <img class="sub-card-bg" src="gifs/form maturity.gif" alt="" onerror="this.style.display='none'">
-        <div class="sub-ibox"><img src="img/icon-form.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" onload="this.nextElementSibling.style.display='none';"><i class="ti ti-clipboard-list"></i></div>
-        <div class="sub-card-title">Form</div>
-        <div class="sub-card-desc">Maturity Assessment Survey</div>
-        <div class="sub-card-cta">OPEN →</div>
-      </div>
-      <div class="sub-card" onclick="showPage('pg-pbi-maturity')">
-        <img class="sub-card-bg" src="gifs/maturity pbi.gif" alt="" onerror="this.style.display='none'">
-        <div class="sub-ibox"><img src="img/icon-dashboard.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" onload="this.nextElementSibling.style.display='none';"><i class="ti ti-chart-bar"></i></div>
-        <div class="sub-card-title">Dashboard</div>
-        <div class="sub-card-desc">Power BI · Results in Real Time</div>
-        <div class="sub-card-cta">OPEN →</div>
+    <div class="hub-stage">
+      <div class="hub-ring"></div>
+      <div class="hub-pair">
+        <!-- TERMINALS -->
+    <div class="hub-half" onclick="showPage('pg-maturity')"
+     onmouseenter="hubScreenGif('gifs/hub-terminals.svg')" onmouseleave="hubScreenGif(null)">
+        <img class="hub-bg" src="img/Maturity Terminals BG.png" alt="" onerror="this.style.display='none'">
+        <img class="card-visual-gif" src="gifs/hub-terminals-card.gif" alt="" onerror="this.style.display='none'">
+        <div class="hub-content">
+            <div class="hub-icon-wrap">
+              <img src="img/best-logo.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" onload="this.nextElementSibling.style.display='none';">
+              <i class="ti ti-anchor"></i>
+            </div>
+            <div class="hub-label">BEST</div>
+            <div class="hub-sub">Maturity Assesment</div>
+          </div>
+        </div>
+        <div class="hub-divider"></div>
+        <!-- MAINTENANCE -->
+        <div class="hub-half" onclick="showPage('pg-maintenance')"
+     onmouseenter="hubScreenGif('gifs/hub-maintenance.svg')" onmouseleave="hubScreenGif(null)">
+          <img class="hub-bg" src="img/Maturity Maintenance BG.png" alt="" onerror="this.style.display='none'">
+          <img class="card-visual-gif" src="gifs/hub-maintenance-card.gif" alt="" onerror="this.style.display='none'">
+          <div class="hub-content">
+            <div class="hub-icon-wrap" id="hub-icon-maintenance">
+              <img src="img/icon-card-maintenance.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" onload="this.nextElementSibling.style.display='none';">
+              <i class="ti ti-tool"></i>
+            </div>
+            <div class="hub-label">Maintenance</div>
+            <div class="hub-sub">Maturity Assesment</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
   <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
 </div>
-
-<!-- MATURITY FORM -->
+<!-- ══════════════════ MATURITY · TERMINALS ══════════════════ -->
+<div id="pg-maturity" class="pg pg-maint-bg hidden">
+  <div class="header">
+    <div class="header-left">
+      <button class="menu-btn" onclick="showPage('pg-maturity-hub')">◄ BACK</button>
+      <div class="hdr-line"></div>
+      <div><div class="ttl">Reportability Menu</div><div class="sub">Hanseatic Global Terminals · BEST Program</div></div>
+    </div>
+    <div class="terminals-mini-visual"></div>
+    <img class="logo" src="img/best-logo.png" alt="BEST" onerror="this.style.display='none'">
+  </div>
+  <div class="mod-hdr">
+    <div class="mod-ibox"><img src="img/best-logo.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" onload="this.nextElementSibling.style.display='none';"><i class="ti ti-certificate"></i></div>
+    <h2>BEST Maturity Assessment</h2>
+  </div>
+  <p class="mod-desc">BEST Maturity Results · Leading Change & Improvement</p>
+  <div class="content" style="display:flex;flex-direction:column;">
+    <div class="maint-panel-row">
+      <!-- BIG BOX: Dashboard (PBI) — Forms opens as a popup modal -->
+      <div class="maint-bigbox">
+        <iframe class="embed-frame" id="maturity-frame-pbi"
+          src="https://app.powerbi.com/view?r=eyJrIjoiNDgyNGQ0OWQtNDU4Zi00ZTQ4LWJiMzktODliMzIyYzRiM2YyIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"
+          allowfullscreen></iframe>
+      </div>
+      <!-- SIDE OPTIONS -->
+      <div class="maint-opt-col">
+        <div class="maint-opt-btn active" id="maturity-opt-pbi">
+          <img class="maint-opt-bg" src="gifs/maturity pbi.gif" alt="" onerror="this.style.display='none'">
+          <i class="ti ti-chart-bar"></i>
+          <div class="maint-opt-title">Dashboard</div>
+          <div class="maint-opt-sub">Power BI · Results in Real Time</div>
+        </div>
+        <div class="maint-opt-btn" onclick="showFormSelect('Maturity Assessment · Terminals', MATURITY_TERMINALS_FORMS)">
+          <img class="maint-opt-bg" src="gifs/form maturity.gif" alt="" onerror="this.style.display='none'">
+          <i class="ti ti-clipboard-list"></i>
+          <div class="maint-opt-title">Forms</div>
+          <div class="maint-opt-sub">Maturity Assessment Survey</div>
+        </div>
+        <div class="maint-opt-btn" onclick="showContentSelect('BEST Maturity Assessment · Download', MATURITY_CONTENT_FILES)">
+          <img class="maint-opt-bg" src="gifs/gif content.gif" alt="" onerror="this.style.display='none'">
+          <i class="ti ti-file-description"></i>
+          <div class="maint-opt-title">Download Content</div>
+          <div class="maint-opt-sub">Maturity Assessment Guidelines &amp; Material</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
+</div>
+<!-- MATURITY FORM (legacy standalone MS Forms embed — kept, currently unused by any button) -->
 <div id="pg-form-maturity" class="pg hidden">
   <div class="header">
     <div class="header-left">
@@ -1288,32 +1482,63 @@ body::after {
   </div>
   <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
 </div>
-
-<!-- MATURITY PBI -->
-<div id="pg-pbi-maturity" class="pg hidden">
+<!-- ══════════════════ MATURITY · MAINTENANCE ══════════════════ -->
+<div id="pg-maintenance" class="pg pg-maint-bg hidden">
   <div class="header">
-    <div class="header-left">
-      <button class="menu-btn" onclick="showPage('pg-maturity')">◄ BACK</button>
-      <div class="hdr-line"></div>
-      <div><div class="ttl">Reportability Menu</div><div class="sub">Hanseatic Global Terminals · BEST Program</div></div>
-    </div>
-    <img class="logo" src="img/best-logo.png" alt="BEST" onerror="this.style.display='none'">
+  <div class="header-left">
+    <button class="menu-btn" onclick="showPage('pg-maturity-hub')">◄ BACK</button>
+    <div class="hdr-line"></div>
+    <div><div class="ttl">Reportability Menu</div><div class="sub">Hanseatic Global Terminals · BEST Program</div></div>
   </div>
-  <div class="mod-hdr"><div class="mod-ibox"><i class="ti ti-certificate"></i></div><h2>Maturity Dashboard</h2></div>
-  <p class="mod-desc">Power BI · Results in Real Time</p>
+  <div class="maint-mini-visual"></div>
+  <img class="logo" src="img/best-logo.png" alt="BEST" onerror="this.style.display='none'">
+</div>
+  <div class="mod-hdr">
+    <div class="mod-ibox" id="mod-ibox-maintenance"><img src="img/icon-card-maintenance.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" onload="this.nextElementSibling.style.display='none';"><i class="ti ti-tool"></i></div>
+    <h2>Maintenance Maturity Assessment</h2>
+  </div>
+  <p class="mod-desc">Maturity Results · Maintenance Dimensions</p>
   <div class="content" style="display:flex;flex-direction:column;">
-    <iframe class="embed-frame" src="https://app.powerbi.com/view?r=eyJrIjoiNjZiYjQ3ODEtODEyNS00YjA5LThmZDctNWY5ZjRjM2QzZGM2IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9" allowfullscreen></iframe>
+    <div class="maint-panel-row">
+      <!-- BIG BOX: toggles between PBI and the 7-dimension Forms grid -->
+      <div class="maint-bigbox">
+        <iframe class="embed-frame" id="maint-frame-pbi"
+          src="https://app.powerbi.com/view?r=REPLACE_WITH_MAINTENANCE_PBI_EMBED_LINK" allowfullscreen></iframe>
+        <div class="maint-forms-view hidden" id="maint-forms-view">
+          <div class="maint-dim-grid" id="maint-dim-grid"><!-- rendered by JS --></div>
+        </div>
+      </div>
+      <!-- SIDE OPTIONS -->
+      <div class="maint-opt-col">
+        <div class="maint-opt-btn active" id="maint-opt-pbi" onclick="maintSwitchView('pbi')">
+          <i class="ti ti-chart-bar"></i>
+          <div class="maint-opt-title">Dashboard</div>
+          <div class="maint-opt-sub">Power BI · Results in Real Time</div>
+        </div>
+        <div class="maint-opt-btn" id="maint-opt-forms" onclick="maintSwitchView('forms')">
+          <i class="ti ti-clipboard-list"></i>
+          <div class="maint-opt-title">Forms</div>
+          <div class="maint-opt-sub">7 Dimensions · EN/ES + QR</div>
+        </div>
+        <div class="maint-opt-btn" onclick="downloadFile('contents/Maturity Assessment - Maintenance.pptx','Maturity Assessment - Maintenance.pptx')">
+          <i class="ti ti-file-description"></i>
+          <div class="maint-opt-title">Download Content</div>
+          <div class="maint-opt-sub">Guidelines &amp; Material</div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
 </div>
-
 <script>
 /* ══ PAGE NAVIGATION ══ */
 const pages = [
   'pg-menu',
-  'pg-6s','pg-form-6s',
-  'pg-sw','pg-sw-forms','pg-pbi-sw',
-  'pg-maturity','pg-form-maturity','pg-pbi-maturity'
+  'pg-6s',
+  'pg-sw',
+  'pg-maturity-hub',
+  'pg-maturity','pg-form-maturity',
+  'pg-maintenance'
 ];
 function showPage(id) {
   pages.forEach(p => document.getElementById(p).classList.add('hidden'));
@@ -1321,7 +1546,7 @@ function showPage(id) {
   window.scrollTo(0,0);
 }
 function openSub(key) {
-  const map = {'6s':'pg-6s','sw':'pg-sw','maturity':'pg-maturity'};
+  const map = {'6s':'pg-6s','sw':'pg-sw','maturity':'pg-maturity-hub'};
   if (map[key]) showPage(map[key]);
 }
 function goMenu() { showPage('pg-menu'); }
@@ -1330,7 +1555,6 @@ function downloadFile(path, filename) {
   a.href = path; a.download = filename;
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
 }
-
 /* ══ QR MODAL ══ */
 function showQR(imgSrc, title) {
   document.getElementById('qr-img').src = imgSrc;
@@ -1343,24 +1567,19 @@ function downloadQR() {
   const img   = document.getElementById('qr-img');
   const title = document.getElementById('qr-title').textContent;
   const fname = title.replace(/[^\w\s·-]/g, '').trim().replace(/\s+/g, '_') + '.png';
-
-  // Canvas convierte la imagen a data URI → el navegador siempre descarga
   const canvas  = document.createElement('canvas');
   canvas.width  = img.naturalWidth  || 240;
   canvas.height = img.naturalHeight || 240;
   canvas.getContext('2d').drawImage(img, 0, 0);
-
   try {
     const a  = document.createElement('a');
     a.href     = canvas.toDataURL('image/png');
     a.download = fname;
     a.click();
   } catch (e) {
-    // Solo si el canvas falla por CORS real (imágenes externas)
     window.open(img.src, '_blank');
   }
 }
-
 /* ══ LANG MODAL ══ */
 let _langLinks = {};
 function showLang(title, enUrl, esUrl, enImg, esImg) {
@@ -1373,23 +1592,18 @@ function showLang(title, enUrl, esUrl, enImg, esImg) {
 function openLangLink(lang) { closeLangBtn(); window.open(_langLinks[lang], '_blank'); }
 function closeLangBtn() { document.getElementById('lang-overlay').classList.remove('active'); }
 function closeLang(e) { if (e.target === document.getElementById('lang-overlay')) closeLangBtn(); }
-
 /* ══ FOCUS MODE ══ */
 let _focusRows   = [];
 let _focusIndex  = 0;
-
 function openFocus(btn) {
-  // Find which guide-body is visible
   const bodyActual = document.getElementById('guide-body-actual');
   const bodyOld    = document.getElementById('guide-body-old');
   const activeBody = (bodyOld.style.display === 'none' || bodyOld.style.display === '') ? bodyActual : bodyOld;
-
   _focusRows  = Array.from(activeBody.querySelectorAll('.guide-row'));
   _focusIndex = _focusRows.indexOf(btn.closest('.guide-row'));
   renderFocus();
   document.getElementById('focus-overlay').classList.add('active');
 }
-
 function renderFocus() {
   const row    = _focusRows[_focusIndex];
   const num    = row.querySelector('.guide-step-num').textContent.trim();
@@ -1398,16 +1612,13 @@ function renderFocus() {
   const imgEl  = row.querySelector('.guide-gif-wrap img');
   const gifSrc = imgEl ? imgEl.src : '';
   const gifAlt = imgEl ? imgEl.alt : '';
-
   document.getElementById('focus-num').textContent        = num;
   document.getElementById('focus-title-text').textContent = title;
   document.getElementById('focus-desc').innerHTML         = desc;
   document.getElementById('focus-counter').textContent    = `${_focusIndex + 1} / ${_focusRows.length}`;
-
   const fImg  = document.getElementById('focus-img');
   const fPH   = document.getElementById('focus-placeholder');
   const fPHtx = document.getElementById('focus-placeholder-text');
-
   fImg.style.display = 'block';
   fPH.style.display  = 'none';
   fImg.src = gifSrc;
@@ -1417,11 +1628,9 @@ function renderFocus() {
     fPH.style.display  = 'flex';
     fPHtx.textContent  = gifSrc.split('/').pop() || 'GIF not found';
   };
-
   document.getElementById('focus-prev').disabled = (_focusIndex === 0);
   document.getElementById('focus-next').disabled = (_focusIndex === _focusRows.length - 1);
 }
-
 function focusNav(dir) {
   const next = _focusIndex + dir;
   if (next >= 0 && next < _focusRows.length) {
@@ -1429,19 +1638,29 @@ function focusNav(dir) {
     renderFocus();
   }
 }
-
 function closeFocus() {
   document.getElementById('focus-overlay').classList.remove('active');
 }
 function closeFocusOverlay(e) {
   if (e.target === document.getElementById('focus-overlay')) closeFocus();
 }
+function hubScreenGif(src) {
+  const el = document.getElementById('hub-screen-gif');
+  if (src) {
+    el.style.backgroundImage = `url('${src}')`;
+    el.classList.add('active');
+  } else {
+    el.classList.remove('active');
+  }
+}
+function dimScreen(on) {
+  document.getElementById('screen-dim').classList.toggle('active', !!on);
+}
 function showGuide(title) {
   const isOld = title && title.toLowerCase().includes('old');
   const bodyActual = document.getElementById('guide-body-actual');
   const bodyOld    = document.getElementById('guide-body-old');
   const footerNote = document.getElementById('guide-footer-note');
-
   if (isOld) {
     bodyActual.style.display = 'none';
     bodyOld.style.display    = 'block';
@@ -1458,12 +1677,125 @@ function showGuide(title) {
 }
 function closeGuideBtn() { document.getElementById('guide-overlay').classList.remove('active'); }
 function closeGuide(e) { if (e.target === document.getElementById('guide-overlay')) closeGuideBtn(); }
+/* ══ GENERIC IMAGE DOWNLOAD (used for QR codes inside the Form Select modal) ══ */
+function downloadImage(src, filename) {
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.onload = function () {
+    try {
+      const canvas = document.createElement('canvas');
+      canvas.width  = img.naturalWidth  || 240;
+      canvas.height = img.naturalHeight || 240;
+      canvas.getContext('2d').drawImage(img, 0, 0);
+      const a = document.createElement('a');
+      a.href = canvas.toDataURL('image/png');
+      a.download = filename;
+      a.click();
+    } catch (e) {
+      window.open(src, '_blank');
+    }
+  };
+  img.onerror = function () { window.open(src, '_blank'); };
+  img.src = src;
+}
 
+/* ══ Funtion descargar formato maturity excel word ppt ══ */
+const MATURITY_CONTENT_FILES = [
+  { label:'Word',       sub:'.docx · Document',       type:'word', icon:'ti-file-type-docx', path:'contents/BEST_Maturity_Assessment.docx', filename:'Maturity Assessment.docx' },
+  { label:'PowerPoint',  sub:'.pptx · Presentation',    type:'ppt',  icon:'ti-file-type-ppt',  path:'contents/BEST_Maturity_Assessment.pptx', filename:'Maturity Assessment.pptx' },
+  { label:'Excel',       sub:'.xlsx · Worksheet', type:'xlsx', icon:'ti-file-type-xls',  path:'contents/BEST_Maturity_Assessment.xlsx', filename:'Maturity Assessment.xlsx' },
+];
+function showContentSelect(title, items) {
+  document.getElementById('cselect-title').textContent = title;
+  document.getElementById('cselect-list').innerHTML = items.map(it => `
+    <div class="cselect-item" onclick="downloadFile('${it.path}','${it.filename}')">
+      <div class="cselect-icon ${it.type}"><i class="ti ${it.icon}"></i></div>
+      <div class="cselect-text">
+        <div class="cselect-label">${it.label}</div>
+        <div class="cselect-sub">${it.sub}</div>
+      </div>
+    </div>`).join('');
+  document.getElementById('cselect-overlay').classList.add('active');
+}
+function closeContentSelectBtn(){ document.getElementById('cselect-overlay').classList.remove('active'); }
+function closeContentSelect(e){ if(e.target===document.getElementById('cselect-overlay')) closeContentSelectBtn(); }
+
+/* ══ FORM SELECT MODAL (image + QR side by side, N Forms) ══ */
+function showFormSelect(title, items) {
+  document.getElementById('formsel-title').textContent = title;
+  const grid = document.getElementById('formsel-grid');
+  grid.style.gridTemplateColumns = items.map(() => '1fr').join(' ');
+  grid.innerHTML = items.map(it => {
+    const dlName = (it.qrLabel || it.label || 'QR').replace(/[^\w\s-]/g,'').trim().replace(/\s+/g,'_') + '.png';
+    return `
+    <div class="formsel-item">
+      <div class="formsel-item-title">${it.label}</div>
+      <div class="formsel-row">
+        <img class="formsel-thumb-img" src="${it.formImg}" alt="${it.label}"
+          onerror="this.src='img/icon-form.png'"
+          onclick="window.open('${it.formUrl}','_blank')" title="Open Form">
+        <img class="formsel-qr-img" src="${it.qrSrc}" alt="QR ${it.label}"
+          onclick="downloadImage('${it.qrSrc}','${dlName}')" title="Download QR">
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('formsel-overlay').classList.add('active');
+}
+function closeFormSelectBtn() { document.getElementById('formsel-overlay').classList.remove('active'); }
+function closeFormSelect(e) { if (e.target === document.getElementById('formsel-overlay')) closeFormSelectBtn(); }
+/* ══ 6S — questionnaire(s), used both by the embedded Forms view AND (if reused) the modal ══ */
+const SIXS_FORMS = [
+  {
+    label: 'Form [English - FIT]',
+    formImg: 'img/Form EN 6S.png',
+    formUrl: 'https://forms.office.com/Pages/ResponsePage.aspx?id=0dMQwt6XIUmUVn7rrIW0tpV5gZNq1vxBlP4c7iQQHuhUNFM3WTNZNkdYSERBTTMxMDcwODBaTllCWS4u',
+    qrSrc: 'img/QR EN 6S.png',
+    qrLabel: '6S Form EN',
+  },
+  {
+    label: 'Form [Español]',
+    formImg: 'img/Form ES 6S.png',
+    formUrl: 'https://forms.office.com/Pages/ResponsePage.aspx?id=0dMQwt6XIUmUVn7rrIW0tpV5gZNq1vxBlP4c7iQQHuhURVU2R0NGSjhJSEVFNkJONTBSUUFJN04wQS4u',
+    qrSrc: 'img/QR ES 6S.png',
+    qrLabel: '6S Form ES',
+  },
+];
+/* ══ MATURITY · TERMINALS — the 2 Forms shown in the Form Select modal ══
+   TODO: replace formUrl / formImg / qrSrc with your real files & links.        */
+const MATURITY_TERMINALS_FORMS = [
+  {
+    label: 'Form [English]',
+    formImg: 'img/Maturity Assest En.png',
+    formUrl: 'https://forms.office.com/Pages/ResponsePage.aspx?id=0dMQwt6XIUmUVn7rrIW0tpV5gZNq1vxBlP4c7iQQHuhUN0I2UlRQMVI3N0Q5MjZUOVBWMjI3WlkyMy4u',
+    qrSrc: 'img/QR EN Maturity Terminals.png',
+    qrLabel: 'Maturity Terminals Q1',
+  },
+  {
+    label: 'Form [Español]',
+    formImg: 'img/Maturity Assest Es.png',
+    formUrl: 'https://forms.cloud.microsoft/REPLACE_WITH_FORM_2_URL',
+    qrSrc: 'img/QR ES Maturity Terminals.png',
+    qrLabel: 'Maturity Terminals Q2',
+  },
+];
 /* Escape closes any modal */
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { closeQRBtn(); closeLangBtn(); closeGuideBtn(); closeFocus(); }
 });
-
+/* ══ 6S — big box view switcher (Dashboard / Forms) ══ */
+function sixSwitchView(view) {
+  document.getElementById('six-frame-pbi').classList.toggle('hidden', view !== 'pbi');
+  document.getElementById('six-frame-mapas').classList.toggle('hidden', view !== 'mapas');
+  document.getElementById('six-opt-pbi').classList.toggle('active', view === 'pbi');
+  document.getElementById('six-opt-mapas').classList.toggle('active', view === 'mapas');
+}
+/* ══ SW — big box view switcher (Dashboard / Forms) ══ */
+function swBigSwitch(view) {
+  document.getElementById('sw-pbi-view').classList.toggle('hidden', view !== 'pbi');
+  document.getElementById('sw-forms-view').classList.toggle('hidden', view !== 'forms');
+  document.getElementById('sw-opt-pbi').classList.toggle('active', view === 'pbi');
+  document.getElementById('sw-opt-forms').classList.toggle('active', view === 'forms');
+}
 /* ══ SW FORMS — terminal data ══ */
 const SW_TERMINALS = {
   old: {
@@ -1579,18 +1911,12 @@ const SW_TERMINALS = {
     qrES:{src:'img/QR ES BEST.png',label:'BEST · ES'},
   },
 };
-
 let _currentTerm = 'iti';
-
 function swSelect(key) {
   _currentTerm = key;
   const t = SW_TERMINALS[key];
-
-  /* highlight pill */
   document.querySelectorAll('.sw-tp').forEach(el => el.classList.remove('active'));
   document.getElementById('sw-tp-' + key).classList.add('active');
-
-  /* update hero top */
   const logoEl = document.getElementById('sw-hero-logo');
   if (t.logoHtml) {
     logoEl.innerHTML = t.logoHtml;
@@ -1602,11 +1928,8 @@ function swSelect(key) {
   }
   document.getElementById('sw-hero-name').textContent = t.name;
   document.getElementById('sw-hero-sub').textContent  = t.sub;
-
-  /* build hero buttons */
   const btns = document.getElementById('sw-hero-btns');
   const formSubText = t.fit ? 'English only' : 'EN / ES';
-
   let qrHtml = '';
   if (t.qrEN) {
     qrHtml += `<div class="sw-hbtn" onclick="showQR('${t.qrEN.src}','${t.qrEN.label}')">
@@ -1622,10 +1945,7 @@ function swSelect(key) {
       <div class="sw-hbtn-sub">Escanear para ES</div>
     </div>`;
   }
-
-  /* if FIT (only 2 cols), adjust grid */
   btns.style.gridTemplateColumns = (t.qrES) ? '1fr 1fr 1fr' : '1fr 1fr';
-
   btns.innerHTML = `
     <div class="sw-hbtn primary" onclick="SW_TERMINALS['${key}'].formAction()">
       <i class="ti ti-clipboard-list"></i>
@@ -1635,15 +1955,105 @@ function swSelect(key) {
     ${qrHtml}
   `;
 }
-
-/* ══ PBI VERSION SWITCHER ══ */
+/* ══ MAINTENANCE — 7 dimensions, each with its own 2 Forms (image + QR) ══
+   TODO: rename dims, swap logos, and set the real form/QR files & links. */
+const MAINT_DIMENSIONS = {
+  d1: {
+    name:'1. SAFETY', sub:'1. SAFETY',
+    logoImg:'img/maint d1 logo.svg', logoFallback:'D1',
+    cardBg:'img/SAFETY card bg.png', cardGif:'gifs/SAFETY card bg.gif',
+    forms: [
+      { label:'[English]', formImg:'img/Form EN SAFETY.png', formUrl:'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=0dMQwt6XIUmUVn7rrIW0tpV5gZNq1vxBlP4c7iQQHuhUOFNUNDIyUEdIS05IS0hYWVFLWVRZVjVCNi4u', qrSrc:'img/QR EN SAFETY.png', qrLabel:'Maintenance D1 Q1' },
+      { label:'[Español]', formImg:'img/Form ES SAFETY.png', formUrl:'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=0dMQwt6XIUmUVn7rrIW0tpV5gZNq1vxBlP4c7iQQHuhUOEo3SzMxNFFKSzBZVjg5OVYyOTM4QzdUVy4u', qrSrc:'img/QR ES SAFETY.png', qrLabel:'Maintenance D1 Q2' },
+    ],
+  },
+  d2: {
+    name:'2. ASSET MAINTENANCE', sub:'2. ASSET MAINTENANCE',
+    logoImg:'img/maint d2 logo.svg', logoFallback:'D2',
+    cardBg:'img/ASSET MAINTENANCE card bg.png', cardGif:'gifs/ASSET MAINTENANCE card bg.gif',
+    forms: [
+      { label:'[English]', formImg:'img/Form EN ASSET MAINTENANCE.png', formUrl:'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=0dMQwt6XIUmUVn7rrIW0tpV5gZNq1vxBlP4c7iQQHuhURU5YM0pPSFJXSDU3U1JPNDFVU0lER1c1OS4u', qrSrc:'img/QR EN ASSET MAINTENANCE.png', qrLabel:'Maintenance D2 Q1' },
+      { label:'[Español]', formImg:'img/Form ES ASSET MAINTENANCE.png', formUrl:'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=0dMQwt6XIUmUVn7rrIW0tpV5gZNq1vxBlP4c7iQQHuhUMFhNOVZCME5MNDhQNzNETVFaNzJCVkFSWC4u', qrSrc:'img/QR ES ASSET MAINTENANCE.png', qrLabel:'Maintenance D2 Q2' },
+    ],
+  },
+  d3: {
+    name:'3. TERMINAL PERFORMANCE', sub:'3. TERMINAL PERFORMANCE',
+    logoImg:'img/maint d3 logo.svg', logoFallback:'D3',
+    cardBg:'img/TERMINAL PERFORMANCE card bg.png', cardGif:'gifs/TERMINAL PERFORMANCE card bg.gif',
+    forms: [
+      { label:'[English]', formImg:'img/Form EN TERMINAL PERFORMANCE.png', formUrl:'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=0dMQwt6XIUmUVn7rrIW0tpV5gZNq1vxBlP4c7iQQHuhUQ0gwNDJJVklBWTM2UkxCTk5EME9ONzdaQy4u', qrSrc:'img/QR EN TERMINAL PERFORMANCE.png', qrLabel:'Maintenance D3 Q1' },
+      { label:'[Español]', formImg:'img/Form ES TERMINAL PERFORMANCE.png', formUrl:'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=0dMQwt6XIUmUVn7rrIW0tpV5gZNq1vxBlP4c7iQQHuhUQlpWM0RZRjdOMkNGRzMyMzRCMU5KODVVNy4u', qrSrc:'img/QR ES TERMINAL PERFORMANCE.png', qrLabel:'Maintenance D3 Q2' },
+    ],
+  },
+  d4: {
+    name:'4. PEOPLE DEVELOPMENT', sub:'4. PEOPLE DEVELOPMENT',
+    logoImg:'img/maint d4 logo.svg', logoFallback:'D4',
+    cardBg:'img/PEOPLE DEVELOPMENT card bg.png', cardGif:'gifs/PEOPLE DEVELOPMENT card bg.gif',
+    forms: [
+      { label:'[English]', formImg:'img/Form EN PEOPLE DEVELOPMENT.png', formUrl:'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=0dMQwt6XIUmUVn7rrIW0tpV5gZNq1vxBlP4c7iQQHuhUM1A5R1U3MjBMNEtBWFpLOFNYUEFMVTBONy4u', qrSrc:'img/QR EN PEOPLE DEVELOPMENT.png', qrLabel:'Maintenance D4 Q1' },
+      { label:'[Español]', formImg:'img/Form ES PEOPLE DEVELOPMENT.png', formUrl:'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=0dMQwt6XIUmUVn7rrIW0tpV5gZNq1vxBlP4c7iQQHuhURTg4UFVSUE42VFBCUEk5VjI3VEI4WTlaOS4u', qrSrc:'img/QR ES PEOPLE DEVELOPMENT.png', qrLabel:'Maintenance D4 Q2' },
+    ],
+  },
+  d5: {
+    name:'5. EAM SYSTEM', sub:'5. EAM SYSTEM',
+    logoImg:'img/maint d5 logo.svg', logoFallback:'D5',
+    cardBg:'img/EAM SYSTEM card bg.png', cardGif:'gifs/EAM SYSTEM card bg.gif',
+    forms: [
+      { label:'[English]', formImg:'img/Form EN EAM SYSTEM.png', formUrl:'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=0dMQwt6XIUmUVn7rrIW0tpV5gZNq1vxBlP4c7iQQHuhURDRFNUpZQ0lBQlpWNTRLSU1SODA4OEFNQS4u', qrSrc:'img/QR EN EAM SYSTEM.png', qrLabel:'Maintenance D5 Q1' },
+      { label:'[Español]', formImg:'img/Form ES EAM SYSTEM.png', formUrl:'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=0dMQwt6XIUmUVn7rrIW0tpV5gZNq1vxBlP4c7iQQHuhUMURYMURIRk9aNk1KRjJCTEZCMTk3T1BVWi4u', qrSrc:'img/QR ES EAM SYSTEM.png', qrLabel:'Maintenance D5 Q2' },
+    ],
+  },
+  d6: {
+    name:'6. PROCUREMENT', sub:'6. PROCUREMENT',
+    logoImg:'img/maint d6 logo.svg', logoFallback:'D6',
+    cardBg:'img/PROCUREMENT card bg.png', cardGif:'gifs/PROCUREMENT card bg.gif',
+    forms: [
+      { label:'[English]', formImg:'img/Form EN PROCUREMENT.png', formUrl:'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=0dMQwt6XIUmUVn7rrIW0tpV5gZNq1vxBlP4c7iQQHuhUNVlTNFdFSVpMNE9JVDlFUzNFSzdOVFVFSS4u', qrSrc:'img/QR EN PROCUREMENT.png', qrLabel:'Maintenance D6 Q1' },
+      { label:'[Español]', formImg:'img/Form ES PROCUREMENT.png', formUrl:'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=0dMQwt6XIUmUVn7rrIW0tpV5gZNq1vxBlP4c7iQQHuhUQUU3RkxCOTQzOVFKUFozTktSWVlLWFNNMC4u', qrSrc:'img/QR ES PROCUREMENT.png', qrLabel:'Maintenance D6 Q2' },
+    ],
+  },
+  d7: {
+    name:'7. ENGINEERING', sub:'7. ENGINEERING',
+    logoImg:'img/maint d7 logo.svg', logoFallback:'D7',
+    cardBg:'img/ENGINEERING card bg.png', cardGif:'gifs/ENGINEERING card bg.gif',
+    forms: [
+      { label:'[English]', formImg:'img/Form EN ENGINEERING.png', formUrl:'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=0dMQwt6XIUmUVn7rrIW0tpV5gZNq1vxBlP4c7iQQHuhUQ0VRNlJGVU4ySk1VMlY3NktNWVRFSjJMVy4u', qrSrc:'img/QR EN ENGINEERING.png', qrLabel:'Maintenance D7 Q1' },
+      { label:'[Español]', formImg:'img/Form ES ENGINEERING.png', formUrl:'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=0dMQwt6XIUmUVn7rrIW0tpV5gZNq1vxBlP4c7iQQHuhUQkVVN1AzMlY2TVZEQzRSTTVaMlRERTdQMS4u', qrSrc:'img/QR ES ENGINEERING.png', qrLabel:'Maintenance D7 Q2' },
+    ],
+  },
+};
+/* ══ MAINTENANCE big-panel switcher (Dashboard / Forms) ══ */
+function maintSwitchView(view) {
+  document.getElementById('maint-frame-pbi').classList.toggle('hidden', view !== 'pbi');
+  document.getElementById('maint-forms-view').classList.toggle('hidden', view !== 'forms');
+  document.getElementById('maint-opt-pbi').classList.toggle('active', view === 'pbi');
+  document.getElementById('maint-opt-forms').classList.toggle('active', view === 'forms');
+  if (view === 'forms') renderMaintDimGrid();
+}
+function renderMaintDimGrid() {
+  const grid = document.getElementById('maint-dim-grid');
+  if (grid.dataset.rendered) return;
+  grid.innerHTML = Object.entries(MAINT_DIMENSIONS).map(([key, d]) => `
+    <div class="maint-dim-tile" onclick='showFormSelect("${d.name}", MAINT_DIMENSIONS["${key}"].forms)'
+         onmouseenter="dimScreen(true)" onmouseleave="dimScreen(false)">
+      <img class="card-visual-bg" src="${d.cardBg}" alt="" onerror="this.style.display='none'">
+      <img class="card-visual-gif" src="${d.cardGif}" alt="" onerror="this.style.display='none'">
+      <div class="card-visual-tint"></div>
+      <div class="maint-dim-ibox">
+        <img src="${d.logoImg}" alt="${d.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <i class="ti ti-tool" style="display:none"></i>
+      </div>
+      <div class="maint-dim-name">${d.name}</div>
+    </div>`).join('');
+  grid.dataset.rendered = '1';
+}
+/* ══ PBI VERSION SWITCHER (Standard Work) ══ */
 function switchPBI(ver) {
   const frameActual = document.getElementById('pbi-frame-actual');
   const frameOld    = document.getElementById('pbi-frame-old');
   const btnActual   = document.getElementById('btn-actual');
   const btnOld      = document.getElementById('btn-old');
   const helpBtn     = document.getElementById('pbi-help');
-
   if (ver === 'actual') {
     frameActual.classList.remove('hidden');
     frameOld.classList.add('hidden');
@@ -1656,7 +2066,6 @@ function switchPBI(ver) {
     frameActual.classList.add('hidden');
     btnOld.classList.add('active');
     btnActual.classList.remove('active');
-    /* lazy-load old PBI src on first switch */
     if (!frameOld.src || frameOld.src === window.location.href) {
       frameOld.src = frameOld.dataset.src;
     }
@@ -1664,9 +2073,8 @@ function switchPBI(ver) {
     helpBtn.title = 'How to read indicators — Old Version';
   }
 }
-
-/* init SW PBI to actual on page show */
-document.addEventListener('DOMContentLoaded', () => swSelect('iti'));
+/* init SW hero to ITI on page show */
+document.addEventListener('DOMContentLoaded', () => { swSelect('iti'); });
 </script>
 </body>
 </html>
