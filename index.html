@@ -1183,9 +1183,27 @@ body::after {
     <div class="maint-panel-row">
       <!-- BIG BOX: toggles between Dashboard (PBI) and Mapas 6S (Power BI Fabric) -->
       <div class="maint-bigbox">
-        <iframe class="embed-frame" id="six-frame-pbi"
-          src="https://app.powerbi.com/view?r=eyJrIjoiNTljOGU2YzQtN2E4MS00YTM3LTg5ZDgtOTY0MjZkMTE1MzdiIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"
-          allowfullscreen></iframe>
+        <div id="six-pbi-view" style="flex:1;display:flex;flex-direction:column;min-height:0;">
+          <div style="display:flex;justify-content:flex-end;padding:10px 14px 0;flex-shrink:0;">
+            <div class="pbi-ver-group">
+              <div class="pbi-ver-btn active" id="six-btn-overview" onclick="sixSwitchPBI('overview')">
+                <i class="ti ti-chart-pie"></i> OVERVIEW
+              </div>
+              <div class="pbi-ver-btn" id="six-btn-byport" onclick="sixSwitchPBI('byport')">
+                <i class="ti ti-building-lighthouse"></i> BY PORT
+              </div>
+            </div>
+          </div>
+          <div class="pbi-wrap">
+            <iframe class="embed-frame" id="six-frame-overview"
+              src="https://app.powerbi.com/view?r=eyJrIjoiM2Y4ZTliMTItZThmNy00ZmIwLWE4ODMtOTNmNTczZTQ2OGE0IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"
+              allowfullscreen></iframe>
+            <iframe class="embed-frame hidden" id="six-frame-byport"
+              src=""
+              data-src="https://app.powerbi.com/view?r=eyJrIjoiNTljOGU2YzQtN2E4MS00YTM3LTg5ZDgtOTY0MjZkMTE1MzdiIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"
+              allowfullscreen></iframe>
+          </div>
+        </div>
       </div>
       <!-- SIDE OPTIONS -->
       <div class="maint-opt-col">
@@ -2046,6 +2064,27 @@ function renderMaintDimGrid() {
       <div class="maint-dim-name">${d.name}</div>
     </div>`).join('');
   grid.dataset.rendered = '1';
+}
+/* ══ PBI VERSION SWITCHER (6S) ══ */
+function sixSwitchPBI(ver) {
+  const frameOverview = document.getElementById('six-frame-overview');
+  const frameByPort   = document.getElementById('six-frame-byport');
+  const btnOverview   = document.getElementById('six-btn-overview');
+  const btnByPort     = document.getElementById('six-btn-byport');
+  if (ver === 'overview') {
+    frameOverview.classList.remove('hidden');
+    frameByPort.classList.add('hidden');
+    btnOverview.classList.add('active');
+    btnByPort.classList.remove('active');
+  } else {
+    frameByPort.classList.remove('hidden');
+    frameOverview.classList.add('hidden');
+    btnByPort.classList.add('active');
+    btnOverview.classList.remove('active');
+    if (!frameByPort.src || frameByPort.src === window.location.href) {
+      frameByPort.src = frameByPort.dataset.src;
+    }
+  }
 }
 /* ══ PBI VERSION SWITCHER (Standard Work) ══ */
 function switchPBI(ver) {
