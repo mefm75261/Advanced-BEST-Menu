@@ -21,6 +21,105 @@ body::after {
   opacity:0.15; z-index:0; pointer-events:none; will-change:transform;
 }
 .pg { position:relative; z-index:1; min-height:100dvh; padding:0 0 32px 0; display:flex; flex-direction:column; }
+
+/* ══════════════════ INTRO ANIMATION ══════════════════ */
+.intro-curtain{
+  position:fixed; inset:0; z-index:1000; pointer-events:auto; cursor:pointer;
+  background:
+    radial-gradient(ellipse at top left,#0f2a4a 0%,transparent 55%),
+    radial-gradient(ellipse at bottom right,#081830 0%,transparent 55%),
+    linear-gradient(160deg,#060f1e 0%,#0a1a2e 45%,#060d1a 100%);
+  transform:translateX(0);
+  transition:transform 2.6s cubic-bezier(.65,0,.35,1);
+  will-change:transform;
+}
+.intro-curtain.sweep{
+  transform:translateX(-100%);
+  pointer-events:none;
+}
+.intro-stage{
+  position:fixed; inset:0; z-index:1001; pointer-events:none;
+  display:flex; align-items:center; justify-content:center;
+}
+.intro-orbit{
+  position:relative; width:min(60vw,480px); aspect-ratio:1/1;
+  opacity:0; transform:scale(.82);
+  transition:opacity 1.4s ease, transform 1.4s cubic-bezier(.22,1,.36,1);
+}
+.intro-orbit.show{ opacity:1; transform:scale(1); }
+.intro-orbit.exit{
+  transition:transform 1.05s cubic-bezier(.6,0,.85,.15), opacity .85s ease .1s;
+  transform:translateX(-145vw) scale(.88);
+  opacity:0;
+}
+.intro-logo-box{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:38%; display:flex; align-items:center; justify-content:center;
+}
+.intro-logo-box img{
+  width:100%; height:auto; object-fit:contain;
+  animation:introLogoGlow 2.4s ease-in-out infinite;
+}
+@keyframes introLogoGlow{
+  0%,100%{ filter:drop-shadow(0 0 10px rgba(232,119,34,.25)); }
+  50%{ filter:drop-shadow(0 0 28px rgba(232,119,34,.6)); }
+}
+.intro-icon{
+  position:absolute; top:50%; left:50%; width:58px; height:58px;
+  opacity:0;
+  transform:translate(-50%,-50%) rotate(var(--ang)) translate(clamp(120px,18vw,210px)) rotate(calc(-1 * var(--ang))) scale(.3);
+  transition:opacity .55s ease, transform .6s cubic-bezier(.34,1.56,.64,1);
+  transition-delay:var(--delay);
+}
+.intro-icon.show{
+  opacity:1;
+  transform:translate(-50%,-50%) rotate(var(--ang)) translate(clamp(120px,18vw,210px)) rotate(calc(-1 * var(--ang))) scale(1);
+}
+.intro-icon-inner{
+  width:100%; height:100%; border-radius:50%;
+  background:rgba(232,119,34,.12); border:1px solid rgba(232,119,34,.45);
+  display:flex; align-items:center; justify-content:center;
+  color:#e87722; font-size:24px;
+  box-shadow:0 8px 22px rgba(0,0,0,.35);
+  animation:introIconFloat 2.6s ease-in-out infinite;
+  animation-delay:var(--delay);
+}
+@keyframes introIconFloat{
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(-9px); }
+}
+.intro-flash{
+  position:fixed; top:0; left:0; height:100vh;
+  width:clamp(60px,6vw,140px);
+  transform:translateX(calc(100vw - 50%));
+  background:linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,255,255,.7) 40%,
+    #ffffff 50%,
+    rgba(255,255,255,.7) 60%,
+    transparent 100%);
+  opacity:0;
+  transition:transform 2.6s cubic-bezier(.65,0,.35,1), opacity .35s ease;
+  will-change:transform;
+  pointer-events:none; z-index:1002;
+}
+.intro-flash.sweep{
+  transform:translateX(-50%);
+  opacity:1;
+}
+.intro-flash.sweep.fade{
+  opacity:0;
+}
+.intro-skip-hint{
+  position:fixed; bottom:26px; left:0; right:0; z-index:1003; text-align:center;
+  font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  color:rgba(255,255,255,.4); opacity:0; pointer-events:none; transition:opacity .5s ease;
+}
+.intro-skip-hint.show{ opacity:1; }
+@media (prefers-reduced-motion: reduce){
+  .intro-curtain,.intro-stage,.intro-flash,.intro-skip-hint{ display:none !important; }
+}
+
 /* ── MODALS BASE ── */
 .modal-overlay {
   display:none; position:fixed; inset:0; z-index:100;
@@ -56,6 +155,7 @@ body::after {
   cursor:pointer; font-size:16px; color:#e87722; transition:background .2s;
 }
 .modal-close:hover { background:rgba(232,119,34,0.30); }
+
 /* ── QR MODAL ── */
 .qr-box {
   background:#0a1a2e; border:1px solid rgba(232,119,34,0.4); border-radius:16px;
@@ -739,6 +839,37 @@ body::after {
 </style>
 </head>
 <body>
+
+<!-- ══════════════════ INTRO ANIMATION ══════════════════ -->
+<div class="intro-curtain" id="introCurtain"></div>
+<div class="intro-stage" id="introStage">
+  <div class="intro-orbit" id="introOrbit">
+    <div class="intro-icon" style="--ang:0deg;--delay:.05s">
+      <div class="intro-icon-inner"><i class="ti ti-refresh"></i></div>
+    </div>
+    <div class="intro-icon" style="--ang:60deg;--delay:.2s">
+      <div class="intro-icon-inner"><i class="ti ti-trending-up"></i></div>
+    </div>
+    <div class="intro-icon" style="--ang:120deg;--delay:.35s">
+      <div class="intro-icon-inner"><i class="ti ti-bulb"></i></div>
+    </div>
+    <div class="intro-icon" style="--ang:180deg;--delay:.5s">
+      <div class="intro-icon-inner"><i class="ti ti-target"></i></div>
+    </div>
+    <div class="intro-icon" style="--ang:240deg;--delay:.65s">
+      <div class="intro-icon-inner"><i class="ti ti-settings"></i></div>
+    </div>
+    <div class="intro-icon" style="--ang:300deg;--delay:.8s">
+      <div class="intro-icon-inner"><i class="ti ti-gauge"></i></div>
+    </div>
+    <div class="intro-logo-box">
+      <img src="img/best-logo.png" alt="BEST" onerror="this.style.display='none'">
+    </div>
+  </div>
+</div>
+<div class="intro-flash" id="introFlash"></div>
+<div class="intro-skip-hint" id="introSkipHint">Click para omitir</div>
+
 <!-- QR MODAL -->
 <div class="modal-overlay" id="qr-overlay" onclick="closeQR(event)">
   <div class="qr-box">
@@ -1528,7 +1659,7 @@ body::after {
       <!-- BIG BOX: toggles between PBI and the 7-dimension Forms grid -->
       <div class="maint-bigbox">
         <iframe class="embed-frame" id="maint-frame-pbi"
-          src="https://app.powerbi.com/view?r=REPLACE_WITH_MAINTENANCE_PBI_EMBED_LINK" allowfullscreen></iframe>
+          src="https://app.powerbi.com/view?r=eyJrIjoiMjRiY2RhNjktYmJmZS00OGM0LTk3OTMtNTRkYjU3MjIwNTBkIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9" allowfullscreen></iframe>
         <div class="maint-forms-view hidden" id="maint-forms-view">
           <div class="maint-dim-grid" id="maint-dim-grid"><!-- rendered by JS --></div>
         </div>
@@ -2119,6 +2250,72 @@ function switchPBI(ver) {
 }
 /* init SW hero to ITI on page show */
 document.addEventListener('DOMContentLoaded', () => { swSelect('iti'); });
+
+(function(){
+  const curtain = document.getElementById('introCurtain');
+  const orbit   = document.getElementById('introOrbit');
+  const icons   = document.querySelectorAll('.intro-icon');
+  const flash   = document.getElementById('introFlash');
+  const stage   = document.getElementById('introStage');
+  const skipHint= document.getElementById('introSkipHint');
+  if (!curtain) return;
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced){ curtain.remove(); stage.remove(); flash.remove(); skipHint.remove(); return; }
+
+  let done = false;
+  const timers = [];
+  function t(fn, ms){ timers.push(setTimeout(fn, ms)); }
+
+  function cleanup(){
+    curtain.style.display = 'none';
+    stage.style.display = 'none';
+    flash.style.display = 'none';
+    skipHint.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  function playWipe(fast){
+    const dur = fast ? '0.8s' : '2.6s';
+    curtain.style.transition = 'transform ' + dur + ' cubic-bezier(.65,0,.35,1)';
+    flash.style.transition = 'transform ' + dur + ' cubic-bezier(.65,0,.35,1), opacity .35s ease';
+    orbit.classList.add('exit');
+    skipHint.classList.remove('show');
+    // doble rAF: garantiza que el navegador "vea" el estado inicial
+    // antes de disparar la transición (evita saltos/teletransporte)
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        curtain.classList.add('sweep');
+        flash.classList.add('sweep');
+      });
+    });
+    const fadeAt  = fast ? 550 : 2300;
+    const totalMs = fast ? 950 : 2750;
+    t(function(){ flash.classList.add('fade'); }, fadeAt);
+    t(cleanup, totalMs);
+  }
+
+  function finish(){
+    if (done) return;
+    done = true;
+    timers.forEach(clearTimeout);
+    playWipe(true);
+  }
+
+  curtain.addEventListener('click', finish);
+  document.body.style.overflow = 'hidden';
+
+  t(function(){ orbit.classList.add('show'); }, 100);
+  icons.forEach(function(icon){ t(function(){ icon.classList.add('show'); }, 550); });
+  t(function(){ skipHint.classList.add('show'); }, 1400);
+
+  t(function(){
+    if (done) return;
+    done = true;
+    playWipe(false);
+  }, 5200);
+})();
+
 </script>
 
 </body>
