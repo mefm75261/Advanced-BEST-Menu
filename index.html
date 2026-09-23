@@ -1419,6 +1419,15 @@ body::after {
               allowfullscreen></iframe>
           </div>
         </div>
+        <!-- FREQUENCY DEPLOYMENT CONTROL VIEW -->
+        <div id="sw-freq-view" class="hidden" style="flex:1;display:flex;flex-direction:column;min-height:0;">
+          <div class="pbi-wrap">
+            <iframe class="embed-frame" id="sw-frame-freq"
+              src=""
+              data-src="https://app.powerbi.com/view?r=eyJrIjoiZTFkMTUzNzEtMDhlZS00Y2RjLThiODMtYzhhNTAxYzdlYWE3IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"
+              allowfullscreen></iframe>
+          </div>
+        </div>
         <!-- FORMS VIEW -->
         <div class="maint-forms-view hidden" id="sw-forms-view">
           <!-- TERMINAL RAIL -->
@@ -1497,6 +1506,12 @@ body::after {
           <i class="ti ti-chart-bar"></i>
           <div class="maint-opt-title">Dashboard</div>
           <div class="maint-opt-sub">Power BI · Results in Real Time</div>
+        </div>
+        <div class="maint-opt-btn" id="sw-opt-freq" onclick="swBigSwitch('freq')">
+          <img class="maint-opt-bg" src="gifs/standard freq.gif" alt="" onerror="this.style.display='none'">
+          <i class="ti ti-calendar-stats"></i>
+          <div class="maint-opt-title">Frequency Deployment Control</div>
+          <div class="maint-opt-sub">Power BI · Deployment Frequency</div>
         </div>
         <div class="maint-opt-btn" id="sw-opt-forms" onclick="swBigSwitch('forms')">
           <img class="maint-opt-bg" src="gifs/form standard work.gif" alt="" onerror="this.style.display='none'">
@@ -1946,9 +1961,16 @@ function sixSwitchView(view) {
 /* ══ SW — big box view switcher (Dashboard / Forms) ══ */
 function swBigSwitch(view) {
   document.getElementById('sw-pbi-view').classList.toggle('hidden', view !== 'pbi');
+  document.getElementById('sw-freq-view').classList.toggle('hidden', view !== 'freq');
   document.getElementById('sw-forms-view').classList.toggle('hidden', view !== 'forms');
   document.getElementById('sw-opt-pbi').classList.toggle('active', view === 'pbi');
+  document.getElementById('sw-opt-freq').classList.toggle('active', view === 'freq');
   document.getElementById('sw-opt-forms').classList.toggle('active', view === 'forms');
+  // Carga el Power BI de Frequency solo la primera vez que se abre
+  if (view === 'freq') {
+    const f = document.getElementById('sw-frame-freq');
+    if (!f.src || f.src === window.location.href) f.src = f.dataset.src;
+  }
 }
 /* ══ SW FORMS — terminal data ══ */
 const SW_TERMINALS = {
