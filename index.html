@@ -1476,6 +1476,18 @@ body::after {
                 onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
               <span class="sw-tp-text" style="display:none">TPG</span>
             </div>
+
+            <div class="sw-tp" id="sw-tp-KICT" onclick="swSelect('KICT')" title="KICT">
+              <img src="img/kict logo.png" alt="KICT"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+              <span class="sw-tp-text" style="display:none">KICT</span>
+            </div>
+            <div class="sw-tp" id="sw-tp-VCTPL" onclick="swSelect('VCTPL')" title="VCTPL">
+              <img src="img/vctpl logo.png" alt="VCTPL"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+              <span class="sw-tp-text" style="display:none">VCTPL</span>
+            </div>
+
             <div class="sw-tp" id="sw-tp-best" onclick="swSelect('best')" title="BEST">
               <img src="img/best-logo.png" alt="BEST"
                 onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
@@ -2075,6 +2087,24 @@ const SW_TERMINALS = {
     qrEN:{src:'img/QR EN TPG.png',label:'TPG · EN'},
     qrES:{src:'img/QR ES TPG.png',label:'TPG · ES'},
   },
+
+  KICT: {
+    name:'KICT', sub:'Kandla International Container Terminal',
+    logoImg:'img/kict logo.png', logoFallback:'KICT',
+    fit:true,
+    formAction: () => window.open('https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=0dMQwt6XIUmUVn7rrIW0tpV5gZNq1vxBlP4c7iQQHuhUNEoxMUNTSkFHMlRHVktWRFBLUVhGM1I0OS4u','_blank'),
+    qrEN:{src:'img/QR EN KICT.png',label:'KICT · EN'},
+    qrES: null,
+  },
+  VCTPL: {
+    name:'VCTPL', sub:' Visakha Container Terminal Pvt. Ltd.',
+    logoImg:'img/vctpl logo.png', logoFallback:'VCTPL',
+    fit:true,
+    formAction: () => window.open('https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=0dMQwt6XIUmUVn7rrIW0tpV5gZNq1vxBlP4c7iQQHuhUNzlRRzFDREw3VFZQMVZGQ0IyUDZMTFFURy4u','_blank'),
+    qrEN:{src:'img/QR EN VCTPL.png',label:'VCTPL · EN'},
+    qrES: null,
+  },
+
   best: {
     name:'BEST', sub:'Hanseatic Global Terminals',
     logoImg:'img/best-logo.png', logoFallback:'BEST',
