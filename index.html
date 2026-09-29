@@ -836,6 +836,46 @@ body::after {
   .sw-tp-old { min-width:86px; }
 }
 
+/* ══ MACRO VIEW — tarjeta ejecutiva a todo el ancho ══ */
+.menu-card.macro-card { grid-column: 1 / -1; min-height: 140px; border-left-width: 6px;
+  background: linear-gradient(90deg, rgba(232,119,34,0.16) 0%, rgba(10,26,50,0.85) 55%); }
+.macro-card .card-bg { opacity:0.6; object-position:right center; }
+.macro-card:hover .card-bg { opacity:0.85; }
+@media (max-width:900px){ .macro-card .card-bg { opacity:0.25; } }
+
+.macro-badge { display:inline-block; font-size:clamp(10px,0.9vw,14px); font-weight:700; letter-spacing:1.5px;
+  color:#060f1e; background:#e87722; border-radius:4px; padding:3px 10px; margin-left:12px; vertical-align:middle; }
+
+/* ══ BOTÓN FLOTANTE + MENÚ EMERGENTE (More resources) ══ */
+.fab-wrap { position:fixed; right:24px; bottom:24px; z-index:90; display:flex; flex-direction:column; align-items:flex-end; gap:12px; }
+.fab-btn {
+  width:60px; height:60px; border-radius:50%; cursor:pointer; border:1px solid rgba(232,119,34,0.6);
+  background:#0a1a2e; color:#e87722; font-size:28px; display:flex; align-items:center; justify-content:center;
+  box-shadow:0 8px 24px rgba(0,0,0,0.5); transition:transform .25s, background .2s;
+}
+.fab-btn:hover { background:rgba(232,119,34,0.18); }
+.fab-wrap.open .fab-btn { transform:rotate(45deg); background:#e87722; color:#060f1e; }
+.fab-panel {
+  width:min(340px, calc(100vw - 48px)); background:#0a1a2e; border:1px solid rgba(232,119,34,0.4);
+  border-radius:16px; padding:14px; display:flex; flex-direction:column; gap:10px;
+  box-shadow:0 16px 40px rgba(0,0,0,0.55);
+  opacity:0; transform:translateY(12px) scale(.96); pointer-events:none; transition:opacity .2s, transform .2s;
+}
+.fab-wrap.open .fab-panel { opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+.fab-panel-title { font-size:11px; font-weight:700; letter-spacing:1.5px; color:rgba(232,119,34,0.8); text-transform:uppercase; padding:2px 4px; }
+.fab-item {
+  display:flex; align-items:center; gap:12px; padding:12px; border-radius:10px; cursor:pointer;
+  background:rgba(232,119,34,0.06); border:1px solid rgba(232,119,34,0.2); transition:background .2s, transform .15s;
+}
+.fab-item:hover { background:rgba(232,119,34,0.16); transform:translateX(-3px); }
+.fab-item-icon { width:40px; height:40px; border-radius:10px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+  background:rgba(232,119,34,0.12); overflow:hidden; }
+.fab-item-icon img { width:100%; height:100%; object-fit:contain; padding:4px; }
+.fab-item-icon i { font-size:20px; color:#e87722; }
+.fab-item-title { font-size:14px; font-weight:700; color:#fff; text-transform:uppercase; letter-spacing:0.3px; }
+.fab-item-sub { font-size:11px; color:rgba(200,220,240,0.5); margin-top:2px; }
+@media (max-width:768px){ .fab-wrap{ right:16px; bottom:16px; } .fab-btn{ width:52px; height:52px; font-size:24px; } }
+
 </style>
 </head>
 <body>
@@ -1205,6 +1245,23 @@ body::after {
   </div>
   <div class="content">
     <div class="menu-grid">
+      
+      <div class="menu-card macro-card" onclick="openSub('macro')">
+        <img class="card-bg" src="img/Macro View Card.svg" alt="" onerror="this.style.display='none'">
+        <div class="menu-card-body">
+          <div class="menu-card-top">
+            <div class="card-icon-wrap">
+              <img src="img/best-logo.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" onload="this.nextElementSibling.style.display='none';">
+              <i class="ti ti-chart-dots-3"></i>
+            </div>
+            <div class="menu-card-title">Macro View Report <span class="macro-badge">EXECUTIVE</span></div>
+          </div>
+          <div class="menu-card-sub">6S · Standard Work · Maturity Assessment — Global Index BEST by Terminal</div>
+          <div class="menu-card-cta">VIEW REPORT →</div>
+        </div>
+        <div class="diag"></div>
+      </div>
+
       <div class="menu-card" onclick="openSub('6s')">
         <img class="card-bg" src="img/6S Card.png" alt="" onerror="this.style.display='none'">
         <div class="menu-card-body">
@@ -1265,40 +1322,52 @@ body::after {
         </div>
         <div class="diag"></div>
       </div>
-      <div class="menu-card" onclick="window.open('https://mefm75261.github.io/BEST_Leadership_Program/','_blank')">
-        <img class="card-bg" src="img/Leadership Program Card.png" alt="" onerror="this.style.display='none'">
-        <div class="menu-card-body">
-          <div class="menu-card-top">
-            <div class="card-icon-wrap">
-              <img src="img/bes_lead_logo.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" onload="this.nextElementSibling.style.display='none';">
-              <i class="ti ti-external-link"></i>
-            </div>
-            <div class="menu-card-title">EXCELLENCE ACADEMY</div>
-          </div>
-          <div class="menu-card-sub">Content to Improve your Skills to Excellence</div>
-          <div class="menu-card-cta">VIEW CONTENT →</div>
-        </div>
-        <div class="diag"></div>
-      </div>
-      <div class="menu-card" onclick="window.open('https://mefm75261.github.io/BEST_HOSHIN_KANRI/','_blank')">
-        <img class="card-bg" src="img/HOSHIN KANRI Card.png" alt="" onerror="this.style.display='none'">
-        <div class="menu-card-body">
-          <div class="menu-card-top">
-            <div class="card-icon-wrap">
-              <img src="img/bes_lead_logo.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" onload="this.nextElementSibling.style.display='none';">
-              <i class="ti ti-external-link"></i>
-            </div>
-            <div class="menu-card-title">HOSHIN KANRI MAKER</div>
-          </div>
-          <div class="menu-card-sub">Site to develop or impove your HOSHIN KANRI</div>
-          <div class="menu-card-cta">GO TO PAGE →</div>
-        </div>
-        <div class="diag"></div>
-      </div>
     </div>
   </div>
   <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
 </div>
+
+<!-- ══════════════════ MACRO VIEW REPORT ══════════════════ -->
+<div id="pg-macro" class="pg hidden">
+  <div class="header">
+    <div class="header-left">
+      <button class="menu-btn" onclick="goMenu()">◄ BACK</button>
+      <div class="hdr-line"></div>
+      <div><div class="ttl">Reportability Menu</div><div class="sub">Hanseatic Global Terminals · BEST Program</div></div>
+    </div>
+    <img class="logo" src="img/best-logo.png" alt="BEST" onerror="this.style.display='none'">
+  </div>
+  <div class="mod-hdr">
+    <div class="mod-ibox"><i class="ti ti-chart-dots-3"></i></div>
+    <h2>Macro View Report</h2>
+  </div>
+  <p class="mod-desc">Executive view · 6S · Standard Work · Maturity Assessment · Global Index BEST</p>
+  <div class="content" style="display:flex;flex-direction:column;">
+    <div class="maint-bigbox">
+      <iframe class="embed-frame" id="macro-frame"
+        src="" data-src="https://app.powerbi.com/view?r=eyJrIjoiZjhiNjI4NzctMTJjMy00ZThiLWIxMDQtMTRhNjk2OWQ5NDc3IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"
+        allowfullscreen></iframe>
+    </div>
+  </div>
+  <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
+</div>
+
+<!-- ══════════════════ BOTÓN FLOTANTE: MORE RESOURCES ══════════════════ -->
+<div class="fab-wrap" id="fab-wrap">
+  <div class="fab-panel" id="fab-panel">
+    <div class="fab-panel-title">More resources</div>
+    <div class="fab-item" onclick="window.open('https://mefm75261.github.io/BEST_Leadership_Program/','_blank')">
+      <div class="fab-item-icon"><img src="img/bes_lead_logo.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><i class="ti ti-school" style="display:none"></i></div>
+      <div><div class="fab-item-title">Excellence Academy</div><div class="fab-item-sub">Content to improve your skills</div></div>
+    </div>
+    <div class="fab-item" onclick="window.open('https://mefm75261.github.io/BEST_HOSHIN_KANRI/','_blank')">
+      <div class="fab-item-icon"><img src="img/bes_lead_logo.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><i class="ti ti-target-arrow" style="display:none"></i></div>
+      <div><div class="fab-item-title">Hoshin Kanri Maker</div><div class="fab-item-sub">Develop or improve your Hoshin Kanri</div></div>
+    </div>
+  </div>
+  <button class="fab-btn" onclick="toggleFab()" title="More resources" aria-label="More resources"><i class="ti ti-plus"></i></button>
+</div>
+
 <!-- ══════════════════ 6S ══════════════════ -->
 <div id="pg-6s" class="pg hidden">
   <div class="header">
@@ -1717,6 +1786,7 @@ body::after {
 /* ══ PAGE NAVIGATION ══ */
 const pages = [
   'pg-menu',
+  'pg-macro',
   'pg-6s',
   'pg-sw',
   'pg-maturity-hub',
@@ -1727,12 +1797,30 @@ function showPage(id) {
   pages.forEach(p => document.getElementById(p).classList.add('hidden'));
   document.getElementById(id).classList.remove('hidden');
   window.scrollTo(0,0);
+  // El botón flotante solo aparece en el menú principal
+  const fab = document.getElementById('fab-wrap');
+  fab.style.display = (id === 'pg-menu') ? 'flex' : 'none';
+  fab.classList.remove('open');
 }
 function openSub(key) {
-  const map = {'6s':'pg-6s','sw':'pg-sw','maturity':'pg-maturity-hub'};
-  if (map[key]) showPage(map[key]);
+  const map = {'macro':'pg-macro','6s':'pg-6s','sw':'pg-sw','maturity':'pg-maturity-hub'};
+  if (!map[key]) return;
+  showPage(map[key]);
+  // Carga el Power BI del Macro View solo la primera vez que se abre
+  if (key === 'macro') {
+    const f = document.getElementById('macro-frame');
+    if (!f.src || f.src === window.location.href) f.src = f.dataset.src;
+  }
 }
 function goMenu() { showPage('pg-menu'); }
+
+/* ══ BOTÓN FLOTANTE ══ */
+function toggleFab() { document.getElementById('fab-wrap').classList.toggle('open'); }
+document.addEventListener('click', e => {
+  const fab = document.getElementById('fab-wrap');
+  if (fab && fab.classList.contains('open') && !fab.contains(e.target)) fab.classList.remove('open');
+});
+
 function downloadFile(path, filename) {
   const a = document.createElement('a');
   a.href = path; a.download = filename;
@@ -1961,7 +2049,11 @@ const MATURITY_TERMINALS_FORMS = [
 ];
 /* Escape closes any modal */
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { closeQRBtn(); closeLangBtn(); closeGuideBtn(); closeFocus(); }
+  if (e.key === 'Escape') {
+    closeQRBtn(); closeLangBtn(); closeGuideBtn(); closeFocus();
+    closeFormSelectBtn(); closeContentSelectBtn();
+    document.getElementById('fab-wrap').classList.remove('open');
+  }
 });
 /* ══ 6S — big box view switcher (Dashboard / Forms) ══ */
 function sixSwitchView(view) {
