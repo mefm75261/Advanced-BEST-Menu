@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Meeting Calendar Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  /* Layout concept: one navy panel; a toolbar switches between the full
+     Total board and a single focused instance (Daily/Weekly/Monthly), each
+     instance laid out as an auto-fit card grid so everything stays visible
+     without a nested scrollbar. All text stays white; only orange marks status. */
+  :root{
+    --bg:#E9F1FB;
+    --panel:#FFFFFF;
+    --tile:#F2F7FD;
+    --tile-hover:#E3EDFA;
+    --border:#C5D8EF;
+    --ink:#0B2545;
+    --accent:#1F6FD1;
+    --accent-dim:rgba(31,111,209,.5);
+    --accent-ink:#FFFFFF;
+    --warn:#E8821C;
+    --warn-dim:rgba(232,130,28,.55);
+    color-scheme:light;
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A1626;
+    --panel:#0F2038;
+    --tile:#14294A;
+    --tile-hover:#1A3358;
+    --border:#1E3B5E;
+    --ink:#FFFFFF;
+    --accent:#4D9BEE;
+    --accent-dim:rgba(77,155,238,.5);
+    --accent-ink:#06182E;
+    --warn:#F2A15C;
+    --warn-dim:rgba(242,161,92,.55);
+    color-scheme:dark;
+  }
+  :root[data-theme="classic"]{
+    --bg:#0A1626;
+    --panel:#0F2038;
+    --tile:#14294A;
+    --tile-hover:#1A3358;
+    --border:#1E3B5E;
+    --ink:#FFFFFF;
+    --accent:#E8821C;
+    --accent-dim:rgba(232,130,28,.5);
+    --accent-ink:#1A0F02;
+    --warn:#FFB066;
+    --warn-dim:rgba(255,176,102,.55);
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',system-ui,sans-serif;
+    padding-inline:18px;
+    padding-block:18px;
+  }
+  .app{max-width:1280px;margin:0 auto;width:100%;display:flex;flex-direction:column;gap:14px;min-height:0}
+
+  h1,h2,h3{font-family:'Archivo',system-ui,sans-serif;text-wrap:balance;margin:0;color:var(--ink)}
+  p{color:var(--ink)}
+
+  /* header */
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:14px;min-width:0}
+  .rule-v{width:3px;align-self:stretch;background:var(--accent);border-radius:2px}
+  .brand-text h1{font-size:1.4rem;font-weight:800;letter-spacing:-.01em}
+  .brand-text p{margin:3px 0 0;font-size:.78rem}
+  .brand-text p b{color:var(--accent);font-weight:600}
+  .mark{width:44px;height:44px;flex:none;border-radius:10px;background:var(--tile);border:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+  .mark svg{width:24px;height:24px}
+
+  /* panel */
+  .panel{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:14px}
+
+  .picker-head{display:flex;align-items:center;gap:10px}
+  .picker-head .ico{width:30px;height:30px;border-radius:8px;background:var(--tile);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--accent);flex:none;font-size:.95rem}
+  .picker-head h2{font-size:1rem;font-weight:700}
+  .picker-head span{display:block;font-size:.72rem;margin-top:1px}
+
+  .tiles{display:flex;gap:8px;flex-wrap:wrap}
+  .tile{
+    position:relative;appearance:none;border:1px solid var(--border);background:var(--tile);color:var(--ink);
+    border-radius:10px;width:58px;height:50px;display:flex;align-items:center;justify-content:center;
+    font:700 .72rem 'Archivo',sans-serif;letter-spacing:.01em;cursor:pointer;
+  }
+  .tile:hover{background:var(--tile-hover)}
+  .tile:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .tile[aria-selected="true"]{border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+  .tile .dot{position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:var(--accent);display:none}
+  .tile[aria-selected="true"] .dot{display:block}
+
+  /* toolbar: edit switch + focus segmented control */
+  .toolbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-top:2px}
+  .switch{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;cursor:pointer;user-select:none}
+  .switch .track{width:34px;height:19px;border-radius:999px;background:var(--tile);border:1px solid var(--border);position:relative;flex:none}
+  .switch .knob{position:absolute;top:1px;left:1px;width:15px;height:15px;border-radius:50%;background:var(--ink);transition:transform .15s}
+  .switch input{position:absolute;opacity:0;width:0;height:0}
+  .switch input:checked + .track{background:var(--accent);border-color:var(--accent)}
+  .switch input:checked + .track .knob{transform:translateX(15px);background:var(--accent-ink)}
+
+  .seg{display:flex;gap:4px;background:var(--tile);border:1px solid var(--border);border-radius:9px;padding:3px;margin-left:auto}
+  .seg button{appearance:none;border:0;background:transparent;color:var(--ink);font:600 .72rem 'IBM Plex Sans',sans-serif;padding:6px 11px;border-radius:7px;cursor:pointer}
+  .seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.72rem}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot-leg{width:8px;height:8px;border-radius:50%;flex:none}
+  .dot-leg.ok{background:var(--accent)}
+  .dot-leg.pending{background:transparent;border:1.5px solid var(--accent)}
+  .dot-leg.undef{background:transparent;border:1.5px dashed var(--accent-dim)}
+
+  /* board */
+  .board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start}
+  .board.single{grid-template-columns:1fr}
+  @media (max-width:860px){.board{grid-template-columns:1fr}}
+
+  .col{display:flex;flex-direction:column;gap:8px;min-width:0;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:10px}
+  .col-head{display:flex;align-items:center;gap:10px}
+  .col-head .num{width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font:700 .82rem 'Archivo',sans-serif;flex:none}
+  .col-head strong{display:block;font:700 .78rem 'Archivo',sans-serif;letter-spacing:.06em;text-transform:uppercase}
+  .col-head span{display:block;font-size:.68rem;margin-top:1px}
+
+  /* autofit grid: as many columns of cards as fit, so nothing hides behind a scrollbar */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:7px;align-content:start}
+  .board.single .cards{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .board.single .card{padding:12px 13px}
+  .board.single .card-top h3{font-size:.98rem}
+  .board.single .card p.desc{font-size:.82rem}
+  .board.single .chip{font-size:.74rem;padding:4px 8px}
+
+  .card{position:relative;border:1px solid var(--border);border-radius:9px;background:var(--tile);padding:8px 9px 9px}
+  .card.ok{border-left:3px solid var(--accent)}
+  .card.pending{border:1px dashed var(--accent)}
+  .card.undef{border:1px dashed var(--accent-dim)}
+  .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:6px}
+  .card-top h3{font-size:.8rem;font-weight:600;min-width:0}
+  .card-actions{display:flex;gap:3px;flex:none}
+  .icon-btn{appearance:none;border:1px solid var(--border);background:var(--bg);color:var(--ink);width:20px;height:20px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.6rem;cursor:pointer;flex:none}
+  .icon-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .multi-badge{width:16px;height:16px;border-radius:50%;background:var(--bg);border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;flex:none;font-size:.6rem}
+  .card p.desc{margin:3px 0 0;font-size:.71rem;line-height:1.35}
+  .chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+  .chip{font:600 .64rem/1 'IBM Plex Mono',monospace;border-radius:5px;padding:3px 6px;color:var(--ink)}
+  .chip.time{background:var(--accent);color:var(--accent-ink)}
+  .chip.day{border:1px solid var(--border)}
+  .chip.flag{border:1px dashed var(--accent);color:var(--accent)}
+  .chip.flag.undef{border:1px dashed var(--accent-dim);color:var(--accent-dim)}
+
+  /* edit-mode fields */
+  .ef{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--ink);font:500 .72rem 'IBM Plex Sans',sans-serif;padding:5px 7px;margin-top:5px}
+  .ef:focus-visible{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+  textarea.ef{resize:vertical;min-height:40px}
+  .ef-row{display:flex;gap:5px;margin-top:5px}
+  .ef-row .ef{flex:1;min-width:0}
+  .ef-label{font:600 .6rem 'IBM Plex Mono',monospace;letter-spacing:.03em;opacity:.85;display:block;margin-top:6px}
+
+  .empty{border:1px dashed var(--border);border-radius:9px;padding:16px 10px;text-align:center;font-size:.74rem;grid-column:1/-1}
+
+  /* ground rules */
+  .rules{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--tile);border:1px solid var(--border);border-radius:12px;padding:10px 14px}
+  .rules strong{font:700 .7rem 'Archivo',sans-serif;letter-spacing:.07em;color:var(--accent);flex:none}
+  .rule-chip{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;border-left:1px solid var(--border);padding-left:10px}
+  .rule-chip .n{width:16px;height:16px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font:700 .62rem 'Archivo',sans-serif;flex:none}
+
+  footer{text-align:center;color:var(--ink);opacity:.6;font-size:.68rem;letter-spacing:.04em}
+
+  /* focus modal */
+  .modal-backdrop{position:fixed;inset:0;background:rgba(6,13,24,.78);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
+  .modal-backdrop.open{display:flex}
+  .modal{background:var(--panel);border:1px solid var(--accent);border-radius:14px;padding:20px;max-width:420px;width:100%;position:relative}
+  .modal h3{font-size:1.05rem;margin-bottom:6px}
+  .modal p{font-size:.84rem;line-height:1.5;margin-top:8px}
+  .modal .chips{margin-top:12px}
+  .modal .chip{font-size:.72rem;padding:4px 8px}
+  .modal .link-line{margin-top:14px;font-size:.78rem}
+  .modal .link-line a{color:var(--accent);font-weight:600;text-decoration:none}
+  .modal .link-line a:hover{text-decoration:underline}
+  .modal-close{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:7px;border:1px solid var(--border);background:var(--tile);color:var(--ink);cursor:pointer}
+  .modal-close:hover{border-color:var(--accent);color:var(--accent)}
+  .owner-only{display:none}
+  body.is-owner .owner-only{display:flex}
+
+  .mark{color:var(--accent)}
+  .add-card{appearance:none;width:100%;margin-top:8px;border:1px dashed var(--accent);background:transparent;color:var(--ink);font:600 .74rem 'IBM Plex Sans',sans-serif;padding:9px;border-radius:9px;cursor:pointer}
+  .add-card:hover{background:var(--tile-hover)}
+  .del-card{color:var(--ink)}
+  #themeSeg{margin:0}
+  .dot-leg.pending{border-color:var(--warn)}
+  .dot-leg.undef{border-color:var(--warn-dim)}
+  .card.pending{border-color:var(--warn)}
+  .card.undef{border-color:var(--warn-dim)}
+  .chip.flag{border-color:var(--warn);color:var(--ink)}
+  .chip.flag.undef{border-color:var(--warn-dim);color:var(--ink)}
+
+  .rm-time{appearance:none;border:0;cursor:pointer;font-family:'IBM Plex Mono',monospace}
+  .seg3{display:flex;gap:3px;background:var(--tile);border:1px solid var(--border);border-radius:8px;padding:2px;margin-top:6px}
+  .seg3 button{flex:1 1 auto;min-width:0;appearance:none;border:0;background:transparent;color:var(--ink);font:600 .6rem 'IBM Plex Sans',sans-serif;padding:5px 2px;border-radius:6px;cursor:pointer;white-space:nowrap}
+  .seg3 button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+  .seg3 button[data-status="pending"][aria-pressed="true"]{background:var(--warn);color:#1A0F02}
+  .seg3 button[data-status="undef"][aria-pressed="true"]{background:var(--ink);color:var(--panel)}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="topbar">
+    <div class="brand">
+      <span class="mark">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M6 30h28M10 30v-11l4-3h12l4 3v11M18 16v-6h4v6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <div class="rule-v"></div>
+      <div class="brand-text">
+        <h1>MEETING CALENDAR MAP</h1>
+        <p><b>Hanseatic Global Terminals</b> · BEST Program</p>
+      </div>
+    </div>
+    <div class="seg" id="themeSeg" role="group" aria-label="Theme">
+      <button type="button" data-theme="light" aria-pressed="false">Light</button>
+      <button type="button" data-theme="dark" aria-pressed="false">Dark</button>
+      <button type="button" data-theme="classic" aria-pressed="false">Classic</button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="picker-head">
+      <span class="ico">◧</span>
+      <div>
+        <h2>Standard Work Cadence</h2>
+        <span>Pick a terminal to see its Daily / Weekly / Monthly meetings</span>
+      </div>
+    </div>
+
+    <div class="tiles" role="tablist" aria-label="Terminal" id="tiles"></div>
+
+    <div class="toolbar">
+      <div class="owner-only" style="gap:10px;align-items:center">
+        <label class="switch">
+          <input type="checkbox" id="editToggle">
+          <span class="track"><span class="knob"></span></span>
+          Edit mode
+        </label>
+        <button type="button" class="icon-btn" id="copyJson" style="width:auto;padding:0 9px;font-size:.68rem">Copy JSON</button>
+        <button type="button" class="icon-btn" id="resetDraft" style="width:auto;padding:0 9px;font-size:.68rem">Discard draft</button>
+      </div>
+      <div class="legend">
+        <span><i class="dot-leg ok"></i>Scheduled</span>
+        <span><i class="dot-leg pending"></i>Needs day/time</span>
+        <span><i class="dot-leg undef"></i>Not defined</span>
+        <span>👥 Multidisciplinary</span>
+      </div>
+      <div class="seg" id="focusSeg">
+        <button type="button" data-focus="total" aria-pressed="true">Total</button>
+        <button type="button" data-focus="daily" aria-pressed="false">Daily</button>
+        <button type="button" data-focus="weekly" aria-pressed="false">Weekly</button>
+        <button type="button" data-focus="monthly" aria-pressed="false">Monthly</button>
+      </div>
+    </div>
+
+    <div class="board" id="board"></div>
+
+    <div class="rules">
+      <strong>GROUND RULES</strong>
+      <span class="rule-chip"><span class="n">1</span>On time</span>
+      <span class="rule-chip" title="Boards, KPIs & slides updated beforehand"><span class="n">2</span>Come prepared</span>
+      <span class="rule-chip" title="Can't attend? Delegate, never skip"><span class="n">3</span>Send a backup</span>
+      <span class="rule-chip" title="Every action, reviewed next session"><span class="n">4</span>Owner + date</span>
+      <span class="rule-chip" title="What you can't solve, up a level"><span class="n">5</span>Escalate</span>
+    </div>
+  </div>
+
+  <footer>HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</footer>
+</div>
+
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal" id="modalBody" role="dialog" aria-modal="true">
+    <button type="button" class="modal-close" id="modalClose" aria-label="Close">✕</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  // ---- DATA (default seed; a browser's own edits are saved over this in localStorage) --
+  var DEFAULT_DATA = {
+    ITI: {
+      daily: [
+        {name:"Cross Functional", desc:"Safety, last 24h results and today's priorities", multi:true, day:"", times:["09:30"], status:"ok", link:""},
+        {name:"Operations", desc:"Productivity, vessel & yard plan for the day", multi:false, day:"", times:["10:30"], status:"ok", link:""},
+        {name:"Shift Change", desc:"Handover: pending tasks, equipment and events", multi:false, day:"", times:["08:15","15:45","23:15"], status:"ok", link:""},
+        {name:"Safety", desc:"Incidents, near misses and today's critical risks", multi:false, day:"", times:["10:55"], status:"ok", link:""},
+        {name:"Maintenance", desc:"", multi:false, day:"", times:[], status:"undef", link:""},
+        {name:"Security", desc:"Access control, events and perimeter status", multi:false, day:"", times:["09:00"], status:"ok", link:""}
+      ],
+      weekly: [
+        {name:"Senior Management", desc:"KPIs vs target, priorities, escalations and decisions", multi:true, day:"Mon", times:["16:30"], status:"ok", link:""},
+        {name:"Operations", desc:"Productivity KPIs, deviations and next-week line-up", multi:false, day:"Mon", times:["15:30"], status:"ok", link:""},
+        {name:"Maintenance", desc:"Schedule compliance, backlog and critical assets", multi:false, day:"Mon", times:["16:00"], status:"ok", link:""},
+        {name:"Safety", desc:"Leading indicators, inspections and open actions", multi:false, day:"Mon", times:["17:30","18:30"], status:"ok", link:""},
+        {name:"Commercial", desc:"Volumes vs forecast, customers and service issues", multi:false, day:"", times:[], status:"pending", link:""},
+        {name:"Adm & Finance", desc:"Cash flow, payables, receivables and approvals", multi:false, day:"", times:[], status:"pending", link:""},
+        {name:"Human Resources", desc:"", multi:false, day:"", times:[], status:"undef", link:""},
+        {name:"Control Management", desc:"General services, contracts and suppliers", multi:false, day:"", times:[], status:"pending", link:""}
+      ],
+      monthly: [
+        {name:"Terminal Performance", desc:"KPI tree review, results, trends and long-term initiatives", multi:true, day:"Last Fri", times:["12:00"], status:"ok", link:""},
+        {name:"Control Management", desc:"Prior-month results, budget & quarter forecast deltas", multi:false, day:"", times:[], status:"pending", link:""},
+        {name:"Operations", desc:"", multi:false, day:"", times:[], status:"undef", link:""},
+        {name:"Maintenance", desc:"", multi:false, day:"", times:[], status:"undef", link:""},
+        {name:"Safety", desc:"", multi:false, day:"", times:[], status:"undef", link:""},
+        {name:"Security", desc:"", multi:false, day:"", times:[], status:"undef", link:""},
+        {name:"Commercial", desc:"", multi:false, day:"", times:[], status:"undef", link:""},
+        {name:"Adm & Finance", desc:"", multi:false, day:"", times:[], status:"undef", link:""},
+        {name:"Human Resources", desc:"", multi:false, day:"", times:[], status:"undef", link:""}
+      ]
+    },
+    ATI:{daily:[],weekly:[],monthly:[]},
+    TMAZ:{daily:[],weekly:[],monthly:[]},
+    TPG:{daily:[],weekly:[],monthly:[]},
+    SPC:{daily:[],weekly:[],monthly:[]},
+    STI:{daily:[],weekly:[],monthly:[]},
+    SVTI:{daily:[],weekly:[],monthly:[]},
+    FIT:{daily:[],weekly:[],monthly:[]},
+    KICT:{daily:[],weekly:[],monthly:[]},
+    VCTPL:{daily:[],weekly:[],monthly:[]},
+    BEST:{daily:[],weekly:[],monthly:[]}
+  };
+
+  var IS_OWNER = location.hash === "#edit";
+  if(IS_OWNER) document.body.classList.add("is-owner");
+
+  var STORE_KEY = "mcm_draft_v1";
+  var TERMINALS = JSON.parse(JSON.stringify(DEFAULT_DATA));
+
+  function readDraft(){
+    try{ var r = localStorage.getItem(STORE_KEY); return r ? JSON.parse(r) : null; }catch(e){ return null; }
+  }
+  function saveData(){
+    if(!IS_OWNER) return;
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(TERMINALS)); }catch(e){}
+  }
+
+  var COLS = [
+    {key:"daily",   num:6, title:"Daily",   sub:"Execute & react · 15 min"},
+    {key:"weekly",  num:8, title:"Weekly",  sub:"Control & decide · 45–60 min"},
+    {key:"monthly", num:9, title:"Monthly", sub:"Review & plan · 90–120 min"}
+  ];
+
+  var tilesEl = document.getElementById("tiles");
+  var boardEl = document.getElementById("board");
+  var editToggle = document.getElementById("editToggle");
+  var focusSeg = document.getElementById("focusSeg");
+  var modalBackdrop = document.getElementById("modalBackdrop");
+  var modalBody = document.getElementById("modalBody");
+  var modalClose = document.getElementById("modalClose");
+
+  var order = Object.keys(TERMINALS);
+  var current = order[0];
+  var editMode = false;
+  var focusKey = "total";
+
+  function esc(s){
+    return (s||"").replace(/[&<>"]/g, function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});
+  }
+
+  var WD = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+  var ORD = ["1st","2nd","3rd","4th","Last"];
+  function dayOptions(colKey, val){
+    var list = [];
+    if(colKey==="weekly") list = WD;
+    if(colKey==="monthly") ORD.forEach(function(o){ WD.slice(0,5).forEach(function(d){ list.push(o+" "+d); }); });
+    return '<option value="">— day —</option>' + list.map(function(v){
+      return '<option value="'+v+'"'+(v===val?" selected":"")+'>'+v+'</option>';
+    }).join("");
+  }
+
+  function readCard(colKey, idx){
+    return cardHtml(TERMINALS[current][colKey][idx], colKey, idx);
+  }
+
+  function cardHtml(m, colKey, idx){
+    var cls = m.status==="ok" ? "ok" : (m.status==="pending" ? "pending" : "undef");
+
+    if(editMode){
+      var timeChips = (m.times||[]).map(function(t){
+        return '<button type="button" class="chip time rm-time" data-col="'+colKey+'" data-idx="'+idx+'" data-t="'+esc(t)+'" title="Remove">'+esc(t)+' ✕</button>';
+      }).join("");
+      var a = 'data-col="'+colKey+'" data-idx="'+idx+'"';
+      return (
+        '<div class="card '+cls+'" '+a+'>'+
+          '<div class="card-top">'+
+            '<input class="ef" data-field="name" '+a+' value="'+esc(m.name)+'" placeholder="Meeting name">'+
+            '<div class="card-actions"><button type="button" class="icon-btn focus-btn" '+a+' title="Focus">⤢</button><button type="button" class="icon-btn del-card" '+a+' title="Delete">🗑</button></div>'+
+          '</div>'+
+          '<label class="ef-label">Description</label>'+
+          '<textarea class="ef" data-field="desc" '+a+' placeholder="What this meeting covers">'+esc(m.desc)+'</textarea>'+
+          '<div class="seg3">'+
+            '<button type="button" class="st-btn" data-status="ok" '+a+' aria-pressed="'+(m.status==="ok")+'" title="Scheduled">Scheduled</button>'+
+            '<button type="button" class="st-btn" data-status="pending" '+a+' aria-pressed="'+(m.status==="pending")+'" title="Needs day/time">Pending</button>'+
+            '<button type="button" class="st-btn" data-status="undef" '+a+' aria-pressed="'+(m.status==="undef")+'" title="Not defined">Undefined</button>'+
+          '</div>'+
+          '<div class="ef-row">'+
+            '<label class="switch" style="font-size:.68rem"><input type="checkbox" class="multi-cb" '+a+' '+(m.multi?"checked":"")+'><span class="track"><span class="knob"></span></span>Multi</label>'+
+            (colKey==="daily" ? '' : '<select class="ef" data-field="day" '+a+'>'+dayOptions(colKey, m.day)+'</select>')+
+          '</div>'+
+          '<div class="ef-row">'+
+            '<input type="time" class="ef time-new" step="300">'+
+            '<button type="button" class="icon-btn add-time" '+a+' style="width:auto;padding:0 9px;font-size:.68rem">+ Add</button>'+
+          '</div>'+
+          '<div class="chips">'+timeChips+'</div>'+
+          '<input class="ef" data-field="link" '+a+' value="'+esc(m.link)+'" placeholder="https:// folder or minute link">'+
+        '</div>'
+      );
+    }
+
+    var chips = "";
+    if(m.day) chips += '<span class="chip day">'+esc(m.day)+'</span>';
+    (m.times||[]).forEach(function(t){ chips += '<span class="chip time">'+esc(t)+'</span>'; });
+    if(m.status==="pending") chips += '<span class="chip flag">Day &amp; time pending</span>';
+    if(m.status==="undef") chips += '<span class="chip flag undef">Not defined</span>';
+
+    var desc = m.desc ? esc(m.desc) : (m.status==="undef" ? "No specification yet." : "");
+    var multi = m.multi ? '<span class="multi-badge" title="Multidisciplinary meeting">👥</span>' : "";
+
+    return (
+      '<div class="card '+cls+'">'+
+        '<div class="card-top"><h3>'+esc(m.name)+'</h3>'+
+          '<div class="card-actions">'+multi+'<button type="button" class="icon-btn focus-btn" data-col="'+colKey+'" data-idx="'+idx+'" title="Focus">⤢</button></div>'+
+        '</div>'+
+        (desc ? '<p class="desc">'+desc+'</p>' : '')+
+        '<div class="chips">'+chips+'</div>'+
+      '</div>'
+    );
+  }
+
+  function render(){
+    tilesEl.innerHTML = order.map(function(key){
+      var sel = key===current;
+      return '<button type="button" class="tile" role="tab" aria-selected="'+sel+'" data-key="'+key+'">'+key+'<span class="dot"></span></button>';
+    }).join("");
+
+    var t = TERMINALS[current];
+    var visibleCols = focusKey==="total" ? COLS : COLS.filter(function(c){return c.key===focusKey;});
+    boardEl.className = "board" + (focusKey==="total" ? "" : " single");
+
+    boardEl.innerHTML = visibleCols.map(function(col){
+      var list = t[col.key] || [];
+      var body = list.length
+        ? '<div class="cards">'+list.map(function(m,i){return readCard(col.key,i);}).join("")+'</div>'
+        : '<div class="cards"><div class="empty">No '+col.title.toLowerCase()+' meetings defined for '+current+' yet.</div></div>';
+      return (
+        '<div class="col">'+
+          '<div class="col-head"><span class="num">'+(list.length||col.num)+'</span>'+
+            '<div><strong>'+col.title+'</strong><span>'+col.sub+'</span></div>'+
+            '<button type="button" class="icon-btn col-focus" style="margin-left:auto;width:auto;padding:0 8px;font-size:.68rem" data-focus="'+(focusKey==="total"?col.key:"total")+'">'+(focusKey==="total"?"⤢ Focus":"↩ Total")+'</button>'+
+          '</div>'+
+          body+
+          (editMode ? '<button type="button" class="add-card" data-col="'+col.key+'">+ Add meeting / area</button>' : '')+
+        '</div>'
+      );
+    }).join("");
+  }
+
+  // ---- interactions ------------------------------------------------------
+  tilesEl.addEventListener("click", function(e){
+    var btn = e.target.closest(".tile");
+    if(!btn) return;
+    current = btn.dataset.key;
+    render();
+  });
+
+  editToggle.addEventListener("change", function(){
+    editMode = editToggle.checked;
+    render();
+  });
+
+  function setFocus(key){
+    focusKey = key;
+    focusSeg.querySelectorAll("button").forEach(function(b){
+      b.setAttribute("aria-pressed", String(b.dataset.focus===key));
+    });
+    render();
+  }
+  focusSeg.addEventListener("click", function(e){
+    var btn = e.target.closest("button[data-focus]");
+    if(btn) setFocus(btn.dataset.focus);
+  });
+
+  // live edits: update the model + persist, without a full re-render (keeps focus/caret)
+  boardEl.addEventListener("input", function(e){
+    var el = e.target;
+    if(!el.dataset || !el.dataset.field) return;
+    var col = el.dataset.col, idx = +el.dataset.idx, field = el.dataset.field;
+    var m = TERMINALS[current][col][idx];
+    if(field==="times"){
+      m.times = el.value.split(",").map(function(s){return s.trim();}).filter(Boolean);
+    } else {
+      m[field] = el.value;
+    }
+    saveData();
+  });
+  boardEl.addEventListener("change", function(e){
+    var el = e.target;
+    if(el.dataset && el.dataset.field==="status"){
+      TERMINALS[current][el.dataset.col][+el.dataset.idx].status = el.value;
+      saveData();
+      render();
+    }
+    if(el.classList && el.classList.contains("multi-cb")){
+      TERMINALS[current][el.dataset.col][+el.dataset.idx].multi = el.checked;
+      saveData();
+    }
+  });
+
+  // focus modal
+  function openFocus(col, idx){
+    var m = TERMINALS[current][col][idx];
+    var chips = "";
+    if(m.day) chips += '<span class="chip day">'+esc(m.day)+'</span>';
+    (m.times||[]).forEach(function(t){ chips += '<span class="chip time">'+esc(t)+'</span>'; });
+    if(m.status==="pending") chips += '<span class="chip flag">Day &amp; time pending</span>';
+    if(m.status==="undef") chips += '<span class="chip flag undef">Not defined</span>';
+    var linkLine = m.link
+      ? '<div class="link-line">📁 <a href="'+esc(m.link)+'" target="_blank" rel="noopener">Open meeting folder ↗</a></div>'
+      : '<div class="link-line">📁 No folder linked yet</div>';
+    modalBody.innerHTML =
+      '<button type="button" class="modal-close" id="modalClose2" aria-label="Close">✕</button>'+
+      '<h3>'+esc(m.name)+(m.multi?' · 👥 Multidisciplinary':'')+'</h3>'+
+      '<p>'+(m.desc?esc(m.desc):'No specification yet.')+'</p>'+
+      '<div class="chips">'+chips+'</div>'+
+      linkLine;
+    modalBackdrop.classList.add("open");
+    document.getElementById("modalClose2").addEventListener("click", closeFocus);
+  }
+  function closeFocus(){ modalBackdrop.classList.remove("open"); }
+
+  boardEl.addEventListener("click", function(e){
+    var cf = e.target.closest(".col-focus");
+    if(cf){ setFocus(cf.dataset.focus); return; }
+
+    var ac = e.target.closest(".add-card");
+    if(ac){
+      var L = TERMINALS[current][ac.dataset.col] = TERMINALS[current][ac.dataset.col] || [];
+      L.push({name:"New meeting", desc:"", status:"undef", multi:false, day:"", times:[], link:""});
+      saveData(); render();
+      var nm = boardEl.querySelector('.col .card:last-of-type [data-field="name"]');
+      var cols = boardEl.querySelectorAll('.col');
+      for(var i=0;i<cols.length;i++){ if(cols[i].querySelector('.add-card') === ac){ var cs = cols[i].querySelectorAll('.card'); var f = cs[cs.length-1].querySelector('[data-field="name"]'); if(f){ f.focus(); f.select(); } } }
+      return;
+    }
+    var dc = e.target.closest(".del-card");
+    if(dc){
+      var mm0 = TERMINALS[current][dc.dataset.col][+dc.dataset.idx];
+      if(confirm('Delete "'+(mm0.name||"this meeting")+'"?')){
+        TERMINALS[current][dc.dataset.col].splice(+dc.dataset.idx,1);
+        saveData(); render();
+      }
+      return;
+    }
+
+    var st = e.target.closest(".st-btn");
+    if(st){
+      TERMINALS[current][st.dataset.col][+st.dataset.idx].status = st.dataset.status;
+      saveData(); render(); return;
+    }
+    var add = e.target.closest(".add-time");
+    if(add){
+      var inp = add.closest(".card").querySelector(".time-new");
+      var m = TERMINALS[current][add.dataset.col][+add.dataset.idx];
+      m.times = m.times || [];
+      if(inp.value && m.times.indexOf(inp.value) < 0){
+        m.times.push(inp.value);
+        m.times.sort();
+        saveData(); render();
+      }
+      return;
+    }
+    var rm = e.target.closest(".rm-time");
+    if(rm){
+      var mm = TERMINALS[current][rm.dataset.col][+rm.dataset.idx];
+      mm.times = (mm.times||[]).filter(function(t){ return t !== rm.dataset.t; });
+      saveData(); render(); return;
+    }
+
+    var btn = e.target.closest(".focus-btn");
+    if(!btn) return;
+    openFocus(btn.dataset.col, +btn.dataset.idx);
+  });
+  modalClose.addEventListener("click", closeFocus);
+  modalBackdrop.addEventListener("click", function(e){ if(e.target===modalBackdrop) closeFocus(); });
+  document.addEventListener("keydown", function(e){ if(e.key==="Escape") closeFocus(); });
+
+  fetch("meeting-data.json",{cache:"no-store"})
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .catch(function(){ return null; })
+    .then(function(published){
+      if(published) TERMINALS = published;
+      var draft = IS_OWNER ? readDraft() : null;
+      if(draft) TERMINALS = draft;
+      order = Object.keys(TERMINALS);
+      current = order[0];
+      render();
+    });
+
+  document.getElementById("copyJson").addEventListener("click", function(){
+    var txt = JSON.stringify(TERMINALS, null, 2), b = this;
+    function done(){ b.textContent = "Copied ✓"; setTimeout(function(){ b.textContent = "Copy JSON"; }, 1600); }
+    navigator.clipboard.writeText(txt).then(done).catch(function(){
+      var ta = document.createElement("textarea"); ta.value = txt; document.body.appendChild(ta); ta.select();
+      try{ document.execCommand("copy"); done(); }catch(e){} ta.remove();
+    });
+  });
+  document.getElementById("resetDraft").addEventListener("click", function(){
+    try{ localStorage.removeItem(STORE_KEY); }catch(e){}
+    location.reload();
+  });
+
+  var THEME_KEY = "mcm_theme";
+  var themeSeg = document.getElementById("themeSeg");
+  function applyTheme(t){
+    document.documentElement.setAttribute("data-theme", t);
+    Array.prototype.forEach.call(themeSeg.querySelectorAll("button"), function(b){
+      b.setAttribute("aria-pressed", String(b.dataset.theme === t));
+    });
+  }
+  var savedTheme = "light";
+  try{ savedTheme = localStorage.getItem(THEME_KEY) || "light"; }catch(e){}
+  if(["light","dark","classic"].indexOf(savedTheme) < 0) savedTheme = "light";
+  applyTheme(savedTheme);
+  themeSeg.addEventListener("click", function(e){
+    var b = e.target.closest("button");
+    if(!b) return;
+    applyTheme(b.dataset.theme);
+    try{ localStorage.setItem(THEME_KEY, b.dataset.theme); }catch(e2){}
+  });
+
+  render();
+})();
+</script>
+
+</body>
+</html>
