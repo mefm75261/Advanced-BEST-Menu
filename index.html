@@ -2414,7 +2414,10 @@ function switchPBI(ver) {
   }
 }
 /* init SW hero to ITI on page show */
-document.addEventListener('DOMContentLoaded', () => { swSelect('iti'); });
+document.addEventListener('DOMContentLoaded', () => {
+  swSelect('iti');
+  if (location.hash === '#calendar') { showPage('pg-sw'); swBigSwitch('cal'); }
+});
 
 (function(){
   const curtain = document.getElementById('introCurtain');

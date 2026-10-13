@@ -201,6 +201,10 @@
   .chip.flag{border-color:var(--warn);color:var(--ink)}
   .chip.flag.undef{border-color:var(--warn-dim);color:var(--ink)}
 
+  #fsBtn{appearance:none;border:1px solid var(--border);background:var(--tile);color:var(--ink);font:600 .72rem 'IBM Plex Sans',sans-serif;padding:7px 11px;border-radius:9px;cursor:pointer;margin-left:10px;white-space:nowrap}
+  #fsBtn:hover{background:var(--tile-hover)}
+  .topbar-right{display:flex;align-items:center;margin-left:auto}
+  body.embedded{padding-block:8px;padding-inline:10px}
   .rm-time{appearance:none;border:0;cursor:pointer;font-family:'IBM Plex Mono',monospace}
   .seg3{display:flex;gap:3px;background:var(--tile);border:1px solid var(--border);border-radius:8px;padding:2px;margin-top:6px}
   .seg3 button{flex:1 1 auto;min-width:0;appearance:none;border:0;background:transparent;color:var(--ink);font:600 .6rem 'IBM Plex Sans',sans-serif;padding:5px 2px;border-radius:6px;cursor:pointer;white-space:nowrap}
@@ -225,10 +229,13 @@
         <p><b>Hanseatic Global Terminals</b> · BEST Program</p>
       </div>
     </div>
-    <div class="seg" id="themeSeg" role="group" aria-label="Theme">
-      <button type="button" data-theme="light" aria-pressed="false">Light</button>
-      <button type="button" data-theme="dark" aria-pressed="false">Dark</button>
-      <button type="button" data-theme="classic" aria-pressed="false">Classic</button>
+    <div class="topbar-right">
+      <div class="seg" id="themeSeg" role="group" aria-label="Theme">
+        <button type="button" data-theme="light" aria-pressed="false">Light</button>
+        <button type="button" data-theme="dark" aria-pressed="false">Dark</button>
+        <button type="button" data-theme="classic" aria-pressed="false">Classic</button>
+      </div>
+      <button type="button" id="fsBtn" title="Full screen">⛶ Full screen</button>
     </div>
   </div>
 
@@ -335,7 +342,13 @@
     BEST:{daily:[],weekly:[],monthly:[]}
   };
 
+  var EMBEDDED = (window.self !== window.top);
   var IS_OWNER = location.hash === "#edit";
+  // Opened on its own (not inside the menu, not owner mode) -> go to the menu section.
+  if(!EMBEDDED && !IS_OWNER && location.hash !== "#standalone"){
+    location.replace("index.html#calendar");
+  }
+  if(EMBEDDED) document.body.classList.add("embedded");
   if(IS_OWNER) document.body.classList.add("is-owner");
 
   var STORE_KEY = "mcm_draft_v1";
@@ -642,6 +655,37 @@
     applyTheme(b.dataset.theme);
     try{ localStorage.setItem(THEME_KEY, b.dataset.theme); }catch(e2){}
   });
+
+  // ---- autofit (embedded / full screen) + full screen button -------------
+  var fsBtn = document.getElementById("fsBtn");
+  var rootEl = document.documentElement;
+  function isFs(){ return !!(document.fullscreenElement || document.webkitFullscreenElement); }
+  function fit(){
+    var b = document.body;
+    if(!(EMBEDDED || isFs())){ b.style.zoom = ""; return; }
+    b.style.zoom = 1;
+    var h = rootEl.scrollHeight, w = rootEl.scrollWidth;
+    var maxZ = isFs() ? 1.6 : 1;
+    var z = Math.min(maxZ, window.innerHeight / h, window.innerWidth / Math.max(w, 1) * 1.0);
+    if(isFs()) z = Math.min(maxZ, window.innerHeight / h);
+    b.style.zoom = Math.max(.5, z);
+  }
+  var fitT;
+  function fitSoon(){ clearTimeout(fitT); fitT = setTimeout(fit, 60); }
+  window.addEventListener("resize", fitSoon);
+  document.addEventListener("fullscreenchange", function(){
+    fsBtn.textContent = isFs() ? "✕ Exit full screen" : "⛶ Full screen";
+    fitSoon();
+  });
+  if(!rootEl.requestFullscreen) fsBtn.style.display = "none";
+  fsBtn.addEventListener("click", function(){
+    if(isFs()) document.exitFullscreen(); else rootEl.requestFullscreen().catch(function(){});
+  });
+  if(window.MutationObserver){
+    new MutationObserver(fitSoon).observe(document.getElementById("board"), {childList:true, subtree:true});
+  }
+  var _render = render;
+  render = function(){ _render(); fitSoon(); };
 
   render();
 })();
