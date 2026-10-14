@@ -1,0 +1,2550 @@
+{
+  "ITI": {
+    "daily": [
+      {
+        "name": "Cross Functional",
+        "desc": "Safety, last 24h results and today's priorities",
+        "multi": true,
+        "day": "",
+        "times": [
+          "09:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "Productivity, vessel & yard plan for the day",
+        "multi": false,
+        "day": "",
+        "times": [
+          "10:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Shift Change",
+        "desc": "Handover: pending tasks, equipment and events",
+        "multi": false,
+        "day": "",
+        "times": [
+          "08:15",
+          "15:45",
+          "23:15"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Safety",
+        "desc": "Incidents, near misses and today's critical risks",
+        "multi": false,
+        "day": "",
+        "times": [
+          "10:55"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Security",
+        "desc": "Access control, events and perimeter status",
+        "multi": false,
+        "day": "",
+        "times": [
+          "09:00"
+        ],
+        "status": "ok",
+        "link": ""
+      }
+    ],
+    "weekly": [
+      {
+        "name": "Senior Management",
+        "desc": "KPIs vs target, priorities, escalations and decisions",
+        "multi": true,
+        "day": "Mon",
+        "times": [
+          "16:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "Productivity KPIs, deviations and next-week line-up",
+        "multi": false,
+        "day": "Mon",
+        "times": [
+          "06:10"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "Schedule compliance, backlog and critical assets",
+        "multi": false,
+        "day": "Mon",
+        "times": [
+          "16:00"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Safety",
+        "desc": "Leading indicators, inspections and open actions",
+        "multi": false,
+        "day": "Mon",
+        "times": [
+          "17:30",
+          "18:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Commercial",
+        "desc": "Volumes vs forecast, customers and service issues",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "pending",
+        "link": ""
+      },
+      {
+        "name": "Adm & Finance",
+        "desc": "Cash flow, payables, receivables and approvals",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "pending",
+        "link": ""
+      },
+      {
+        "name": "Human Resources",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Control Management",
+        "desc": "General services, contracts and suppliers",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "pending",
+        "link": ""
+      }
+    ],
+    "monthly": [
+      {
+        "name": "Terminal Performance",
+        "desc": "KPI tree review, results, trends and long-term initiatives",
+        "multi": true,
+        "day": "Last Fri",
+        "times": [
+          "12:00"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Control Management",
+        "desc": "Prior-month results, budget & quarter forecast deltas",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "pending",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Safety",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Security",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Commercial",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Adm & Finance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Human Resources",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ]
+  },
+  "ATI": {
+    "daily": [
+      {
+        "name": "Cross Functional",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [
+          "09:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "SSO and Excellence Division / Environment Division",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [
+          "16:00"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Equipment Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "RAEC Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ],
+    "weekly": [
+      {
+        "name": "Senior Management Meeting",
+        "desc": "",
+        "multi": true,
+        "day": "Mon",
+        "times": [
+          "15:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "Mon",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "SSO and Excellence Division",
+        "desc": "",
+        "multi": false,
+        "day": "Tue",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Equipment Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "Mon",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Infrastructure Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "Fri",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Human Resources",
+        "desc": "",
+        "multi": false,
+        "day": "Tue",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Commercial",
+        "desc": "",
+        "multi": false,
+        "day": "Mon",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Sustainability and Communications",
+        "desc": "",
+        "multi": false,
+        "day": "Tue",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Environment Division",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ],
+    "monthly": [
+      {
+        "name": "Senior Management Meeting",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "SSO and Excellence Division",
+        "desc": "",
+        "multi": false,
+        "day": "2nd Mon",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Equipment Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Infrastructure Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Human Resources",
+        "desc": "",
+        "multi": false,
+        "day": "1st Tue",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Commercial",
+        "desc": "",
+        "multi": false,
+        "day": "2nd Mon",
+        "times": [
+          "11:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Sustainability and Communications",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Environment Division",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ]
+  },
+  "TMAZ": {
+    "daily": [
+      {
+        "name": "Cross Functional",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [
+          "09:30",
+          "14:00"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [
+          "12:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Vessel Service Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Yard Service Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [
+          "14:00"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "SSO",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Shift Change Vessel",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "IT",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [
+          "13:00"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Procurement",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Security",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Accounting",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Invoicing",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Management control",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ],
+    "weekly": [
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "Mon",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Senior Management Meeting",
+        "desc": "",
+        "multi": true,
+        "day": "Wed",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Sustainability and Environment",
+        "desc": "",
+        "multi": false,
+        "day": "Tue",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "Wed",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Finance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ],
+    "monthly": [
+      {
+        "name": "Senior Management Meeting",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "Last Mon",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      }
+    ]
+  },
+  "TPG": {
+    "daily": [
+      {
+        "name": "Cross Functional",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [
+          "09:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [
+          "11:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "HSE",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [
+          "11:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Commercial",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [
+          "12:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "IT",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [
+          "11:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Infrastructure and Construction",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [
+          "10:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Security",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [
+          "10:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Shift Change Yard/Vessel",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [
+          "09:30",
+          "16:30",
+          "23:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Inspections TPG 1",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [
+          "01:00",
+          "09:00",
+          "15:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Shift Change TPG 2",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [
+          "08:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Inspections Area TPG 2",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [
+          "13:30",
+          "21:00"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "CFS",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [
+          "14:00"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Reefer Area",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [
+          "04:00",
+          "10:00",
+          "18:30"
+        ],
+        "status": "ok",
+        "link": ""
+      }
+    ],
+    "weekly": [
+      {
+        "name": "Senior Management Meeting",
+        "desc": "",
+        "multi": true,
+        "day": "Tue",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "Thu",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "Mon",
+        "times": [
+          "19:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "HSE",
+        "desc": "",
+        "multi": false,
+        "day": "Thu",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Commercial",
+        "desc": "",
+        "multi": false,
+        "day": "Mon",
+        "times": [
+          "18:00"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "IT",
+        "desc": "",
+        "multi": false,
+        "day": "Fri",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Infrastructure and Construction",
+        "desc": "",
+        "multi": false,
+        "day": "Tue",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Finance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [
+          "17:00"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Human Resources",
+        "desc": "",
+        "multi": false,
+        "day": "Tue",
+        "times": [
+          "13:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Security",
+        "desc": "",
+        "multi": false,
+        "day": "Fri",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Projects",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ],
+    "monthly": [
+      {
+        "name": "Senior Management Meeting",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "2nd Tue",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "HSE",
+        "desc": "",
+        "multi": false,
+        "day": "1st Mon",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Commercial",
+        "desc": "",
+        "multi": false,
+        "day": "3rd Thu",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "IT",
+        "desc": "",
+        "multi": false,
+        "day": "Last Wed",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Infrastructure and Construction",
+        "desc": "",
+        "multi": false,
+        "day": "2nd Wed",
+        "times": [
+          "11:00"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Finance",
+        "desc": "",
+        "multi": false,
+        "day": "Last Thu",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Projects",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Human Resources",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Security",
+        "desc": "",
+        "multi": false,
+        "day": "1st Mon",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      }
+    ]
+  },
+  "SPC": {
+    "daily": [
+      {
+        "name": "Cross Functional",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [
+          "09:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [
+          "10:00"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Shift Change",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [
+          "12:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Safety",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [
+          "10:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Bonded Warehouse",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ],
+    "weekly": [
+      {
+        "name": "Senior Management Meeting",
+        "desc": "",
+        "multi": true,
+        "day": "Mon",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "Mon",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "Wed",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Safety",
+        "desc": "",
+        "multi": false,
+        "day": "Thu",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Human resources and security",
+        "desc": "",
+        "multi": false,
+        "day": "Mon",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Administration & management",
+        "desc": "",
+        "multi": false,
+        "day": "Thu",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Finance",
+        "desc": "",
+        "multi": false,
+        "day": "Tue",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Commercial",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Bonded Warehouse",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ],
+    "monthly": [
+      {
+        "name": "Senior Management Meeting",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Safety",
+        "desc": "",
+        "multi": false,
+        "day": "Last Tue",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Human Resources and Security",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Procurement",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Commercial",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Bonded Warehouse",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ]
+  },
+  "STI": {
+    "daily": [
+      {
+        "name": "Cross Functional",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [
+          "09:30"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "OPS Vessel",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Terminals",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "HSSE",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Infrastructure",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Admin-Finance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Shift Change",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ],
+    "weekly": [
+      {
+        "name": "Senior Management Meeting",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance & CCWW",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "HSSE",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "People",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Finance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Commercial",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ],
+    "monthly": [
+      {
+        "name": "Senior Management Meeting",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance & CCWW",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "PRYMA",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "People",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Finance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Commercial",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ]
+  },
+  "SVTI": {
+    "daily": [
+      {
+        "name": "Cross Functional",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [
+          "09:45"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Operations: CFS",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Operations: Depot/Yard/Vessel/Gate/Reefer",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Safety",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance & Civil Works",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Shift Change",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Security",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ],
+    "weekly": [
+      {
+        "name": "Senior Management Meeting",
+        "desc": "",
+        "multi": true,
+        "day": "Wed",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Commercial",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Adm. & Finance",
+        "desc": "",
+        "multi": false,
+        "day": "Tue",
+        "times": [],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Human Resources",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Safety",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance & Civil Works",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Security",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ],
+    "monthly": [
+      {
+        "name": "Senior Management Meeting",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Commercial",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Adm. & Finance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Human Resources",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Safety",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance & Civil Works",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Security",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ]
+  },
+  "FIT": {
+    "daily": [
+      {
+        "name": "Cross Functional",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [
+          "11:00"
+        ],
+        "status": "ok",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ],
+    "weekly": [
+      {
+        "name": "Senior Management Meeting",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Finance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Customer Service",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "HSSE",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ],
+    "monthly": [
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "HSSE",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Senior Management Meeting",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "TPM",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ]
+  },
+  "KICT": {
+    "daily": [
+      {
+        "name": "Cross Functional",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Commercial",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Finance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "HR & Admin",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Safety",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Security",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Shift Change",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ],
+    "weekly": [
+      {
+        "name": "Senior Management Meeting",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Commercial",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Finance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "HR & Admin",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Safety",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Security",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ],
+    "monthly": [
+      {
+        "name": "Senior Management Meeting",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Commercial",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Finance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "HR & Admin",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Safety",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Security",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ]
+  },
+  "VCTPL": {
+    "daily": [
+      {
+        "name": "Cross Functional",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Commercial",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Finance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "HR & Admin",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Safety",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Security",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Shift Change",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ],
+    "weekly": [
+      {
+        "name": "Senior Management Meeting",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Commercial",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Finance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "HR & Admin",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Safety",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Security",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ],
+    "monthly": [
+      {
+        "name": "Senior Management Meeting",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Commercial",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Finance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "HR & Admin",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Safety",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Security",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ]
+  },
+  "BEST": {
+    "daily": [],
+    "weekly": [],
+    "monthly": []
+  },
+  "TUTI": {
+    "daily": [
+      {
+        "name": "Cross Functional",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Commercial",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Finance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "HR & Admin",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Safety",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Security",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Shift Change",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ],
+    "weekly": [
+      {
+        "name": "Senior Management Meeting",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Commercial",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Finance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "HR & Admin",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Safety",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Security",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ],
+    "monthly": [
+      {
+        "name": "Senior Management Meeting",
+        "desc": "",
+        "multi": true,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Operations",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Commercial",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Finance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "HR & Admin",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Safety",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Maintenance",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      },
+      {
+        "name": "Security",
+        "desc": "",
+        "multi": false,
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": ""
+      }
+    ]
+  }
+}

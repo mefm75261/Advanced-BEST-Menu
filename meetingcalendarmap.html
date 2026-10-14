@@ -24,6 +24,8 @@
     --accent-ink:#FFFFFF;
     --warn:#E8821C;
     --warn-dim:rgba(232,130,28,.55);
+    --spark:#2DA8FF;
+    --wave:rgba(31,111,209,.13);
     color-scheme:light;
   }
   :root[data-theme="dark"]{
@@ -38,6 +40,8 @@
     --accent-ink:#06182E;
     --warn:#F2A15C;
     --warn-dim:rgba(242,161,92,.55);
+    --spark:#CFE8FF;
+    --wave:rgba(77,155,238,.16);
     color-scheme:dark;
   }
   :root[data-theme="classic"]{
@@ -52,6 +56,8 @@
     --accent-ink:#1A0F02;
     --warn:#FFB066;
     --warn-dim:rgba(255,176,102,.55);
+    --spark:#FFD79A;
+    --wave:rgba(232,130,28,.16);
     color-scheme:dark;
   }
   *{box-sizing:border-box}
@@ -92,10 +98,26 @@
     border-radius:10px;width:58px;height:50px;display:flex;align-items:center;justify-content:center;
     font:700 .72rem 'Archivo',sans-serif;letter-spacing:.01em;cursor:pointer;
   }
+  .tile{overflow:hidden}
+  .tile .tn{position:relative;z-index:1}
+  .tile .dot{z-index:1}
+  .tile .wave{position:absolute;left:0;right:0;bottom:0;height:var(--p,0%);background:var(--wave);transition:height 1.1s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+  .tile .wave[style*="--p:0%"]::before,.tile .wave[data-p="0"]::before{display:none}
+  .tile .wave::before{content:"";position:absolute;left:0;right:0;top:-4px;height:5px;background:var(--wave);
+    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 8'%3E%3Cpath d='M0 8V4C5 0 15 0 20 4S35 8 40 4V8Z'/%3E%3C/svg%3E") repeat-x 0 0/60px 5px;
+            mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 8'%3E%3Cpath d='M0 8V4C5 0 15 0 20 4S35 8 40 4V8Z'/%3E%3C/svg%3E") repeat-x 0 0/60px 5px;
+    animation:waveX 7s linear infinite;animation-delay:calc(var(--n,0) * -.4s)}
+  @keyframes waveX{to{-webkit-mask-position:60px 0;mask-position:60px 0}}
+  .navrow{display:flex;align-items:center;gap:8px}
+  .navrow .tiles{flex:1}
+  .nav-arrow{appearance:none;flex:none;width:34px;height:50px;border-radius:10px;border:1px solid var(--border);background:var(--tile);color:var(--ink);font:600 1.2rem/1 'IBM Plex Sans',sans-serif;cursor:pointer;transition:background .18s,transform .18s,border-color .18s}
+  .nav-arrow:hover{background:var(--tile-hover);border-color:var(--accent);color:var(--accent)}
+  .nav-arrow:active{transform:scale(.94)}
+  .nav-arrow:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   .tile:hover{background:var(--tile-hover)}
   .tile:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   .tile[aria-selected="true"]{border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
-  .tile .dot{position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:var(--accent);display:none}
+  .tile .dot{position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:var(--accent);display:none}
   .tile[aria-selected="true"] .dot{display:block}
 
   /* toolbar: edit switch + focus segmented control */
@@ -205,12 +227,167 @@
   #fsBtn:hover{background:var(--tile-hover)}
   .topbar-right{display:flex;align-items:center;margin-left:auto}
   body.embedded{padding-block:8px;padding-inline:10px}
+  /* full-width layouts: edit mode, embedded in the menu, full screen */
+  body.editing .app, body.fill .app{max-width:none}
+  body.editing{padding-inline:12px}
+  body.editing .cards{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+  body.fill{padding:8px 12px}
+  body.fill .app{min-height:calc(var(--fh,100vh) - 16px)}
+  body.fill .panel{flex:1;min-height:0}
+  body.fill .board{flex:1;align-items:stretch}
+  /* ===== read-only view: clean lanes (3 layouts) + subtle motion ===== */
+  .lane{padding:14px 16px;gap:10px}
+  .lane-top{display:flex;align-items:flex-start;gap:10px}
+  .lane-top .ttl{min-width:0;flex:1}
+  .lane-top .ttl strong{display:block;font:800 .82rem 'Archivo',sans-serif;letter-spacing:.12em;text-transform:uppercase}
+  .lane-top .ttl span{display:block;font-size:.7rem;margin-top:2px;opacity:.8}
+  .lane-top .cnt-wrap{text-align:right;line-height:1}
+  .lane-top .cnt-wrap b{font:800 1.55rem 'Archivo',sans-serif;color:var(--accent)}
+  .lane-top .cnt-wrap small{display:block;font-size:.6rem;margin-top:3px;opacity:.8}
+  .bar{height:6px;border-radius:3px;background:var(--tile);overflow:hidden}
+  .bar i{display:block;height:100%;border-radius:3px;background:var(--accent);transform-origin:left;animation:grow .9s cubic-bezier(.2,.7,.2,1) both .15s}
+  .lane-body{display:flex;flex-direction:column;flex:1;min-height:0;gap:8px}
+  .sched{display:flex;flex-direction:column;flex:1 1 auto}
+  .board.single .sched{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));column-gap:30px;align-content:start;flex:0 0 auto}
+  .row{display:flex;align-items:center;gap:10px;flex:1 1 38px;min-height:38px;max-height:72px;padding:0 8px;border-bottom:1px solid var(--tile-hover);border-radius:8px;cursor:pointer;transition:background .18s,transform .18s}
+  .row:hover,.row:focus-visible{background:var(--tile-hover);transform:translateX(3px);outline:none}
+  .row .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);flex:none}
+  .row .nm{font-weight:600;font-size:.9rem;min-width:0}
+  .row .when{margin-left:auto;font:700 .8rem 'IBM Plex Mono',monospace;color:var(--accent);white-space:nowrap}
+  .todo{margin-top:auto;padding-top:6px}
+  .todo h5{margin:0 0 4px;font:700 .6rem 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--warn)}
+  .board.single .todo{display:block}
+  .todo-r{display:flex;align-items:center;gap:10px;padding:5px 8px;border-radius:7px;cursor:pointer;transition:background .18s}
+  .todo-r:hover,.todo-r:focus-visible{background:var(--tile-hover);outline:none}
+  .todo-r .nm{font-size:.8rem;font-weight:500;min-width:0}
+  .todo-r .lbl{margin-left:auto;font:600 .64rem 'IBM Plex Sans',sans-serif;white-space:nowrap}
+  .todo-r .lbl.pend{color:var(--warn)} .todo-r .lbl.undef{color:var(--accent)}
+  .ring{width:9px;height:9px;border-radius:50%;flex:none;border:2px solid var(--warn)}
+  .ring.undef{border:2px dashed var(--accent-dim)}
+  .ring.pend{animation:ringPulse 2.8s ease-out infinite}
+  /* v2: schedule board (time first) */
+  .row2{display:flex;align-items:center;gap:14px;flex:1 1 46px;min-height:46px;max-height:84px;padding:4px 8px;border-bottom:1px solid var(--tile-hover);border-radius:8px;cursor:pointer;transition:background .18s,transform .18s}
+  .row2:hover,.row2:focus-visible{background:var(--tile-hover);transform:translateX(3px);outline:none}
+  .row2 .tt{display:flex;flex-direction:column;align-items:flex-start;min-width:62px;font:700 .95rem/1.15 'IBM Plex Mono',monospace;color:var(--accent)}
+  .row2 .tt b{font-weight:700}
+  .row2 .tt.many{font-size:.74rem}
+  .row2 .meta{display:flex;flex-direction:column;min-width:0}
+  .row2 .meta strong{font-size:.9rem;font-weight:600}
+  .row2 .meta em{font:500 .66rem 'IBM Plex Mono',monospace;font-style:normal;opacity:.85}
+  .row2 .multi-badge{margin-left:auto}
+  /* v3: tiles */
+  .tiles3{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));grid-auto-rows:minmax(84px,150px);gap:8px;align-content:stretch;flex:1 1 auto}
+  .board.single .tiles3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+  .tile3{display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:84px;padding:10px 12px;background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:10px;cursor:pointer;transition:transform .18s,box-shadow .18s}
+  .tile3:hover,.tile3:focus-visible{transform:translateY(-3px);box-shadow:0 6px 16px rgba(11,37,69,.14);outline:none}
+  .tile3 .t3top{display:flex;align-items:flex-start;gap:6px}
+  .tile3 .t3top strong{font-size:.86rem;font-weight:600;flex:1;min-width:0}
+  .tile3 .t3when{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+  .tile3 .t3when .d{font:600 .64rem 'IBM Plex Mono',monospace;border:1px solid var(--border);border-radius:5px;padding:3px 6px}
+  .tile3 .t3when .tm{font:700 .8rem 'IBM Plex Mono',monospace;background:var(--accent);color:var(--accent-ink);border-radius:6px;padding:3px 7px}
+  .tchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+  .tchip{display:inline-flex;align-items:center;gap:6px;font:600 .68rem 'IBM Plex Sans',sans-serif;padding:4px 9px;border-radius:999px;border:1px dashed var(--warn);cursor:pointer;transition:background .18s}
+  .tchip.undef{border-color:var(--warn-dim);opacity:.9}
+  .tchip:hover{background:var(--tile-hover)}
+  .tchips .th{width:100%;margin:0;font:700 .6rem 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--warn)}
+  /* motion */
+  .row,.row2,.tile3,.todo-r,.tchip{animation:rise .5s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0) * 40ms + 60ms)}
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  @keyframes ringPulse{0%{box-shadow:0 0 0 0 var(--warn-dim)}70%,100%{box-shadow:0 0 0 7px transparent}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  /* orbiting comet line around each lane: tail + flash, themed by --accent / --spark */
+  @property --ang{syntax:'<angle>';inherits:false;initial-value:0deg}
+  .panel{position:relative}
+  .panel::before,.panel::after{content:"";position:absolute;inset:-1px;border-radius:17px;padding:2px;pointer-events:none;z-index:2;
+    background:conic-gradient(from var(--ang),transparent 0deg 250deg,var(--accent-dim) 310deg,var(--accent) 348deg,var(--spark) 360deg);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+    mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;
+    animation:orbit 9s linear infinite}
+  .panel::before{padding:4px;filter:blur(7px);opacity:.5;animation:orbit 9s linear infinite,flashGlow 9s ease-in-out infinite}
+  @keyframes orbit{to{--ang:360deg}}
+  @keyframes flashGlow{0%,72%,100%{opacity:.4}86%{opacity:1}}
+  @media (prefers-reduced-motion:reduce){.panel::before,.panel::after{display:none}}
+  .modal.wide{max-width:560px}
+  .help{margin:10px 0 0;padding-left:18px;font-size:.8rem;line-height:1.55}
+  .help li{margin-bottom:5px}
+  .help-h{margin:14px 0 4px;font:700 .64rem 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+  .help-p{margin:0;font-size:.78rem;line-height:1.5}
+  #viewSeg{margin-left:auto}
+  #viewSeg + #focusSeg{margin-left:0}
+  .pool{display:none;flex-direction:column;gap:8px;background:var(--tile);border:1px dashed var(--accent);border-radius:12px;padding:10px 12px}
+  body.is-owner .pool.show{display:flex}
+  .pool-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .pool-head strong{font:700 .72rem 'Archivo',sans-serif;letter-spacing:.06em;text-transform:uppercase}
+  .pool-head .hint{font-size:.68rem;opacity:.85}
+  .pool-head .seg{margin-left:0}
+  .pool-q{background:var(--bg);border:1px solid var(--border);border-radius:7px;color:var(--ink);font:500 .72rem 'IBM Plex Sans',sans-serif;padding:5px 8px;width:150px}
+  .pool-q:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .pool-btn{appearance:none;border:1px solid var(--accent);background:transparent;color:var(--ink);font:600 .68rem 'IBM Plex Sans',sans-serif;padding:5px 9px;border-radius:7px;cursor:pointer;margin-left:auto}
+  .pool-btn:hover{background:var(--tile-hover)}
+  .pool-body{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:flex-start}
+  .pool-grp{display:flex;flex-direction:column;gap:4px;min-width:0}
+  .pool-grp h4{margin:2px 0 0;font:600 .58rem 'IBM Plex Mono',monospace;letter-spacing:.05em;text-transform:uppercase;opacity:.75}
+  .pool-chips{display:flex;flex-wrap:wrap;gap:5px}
+  .pchip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);background:var(--panel);border-radius:999px;padding:3px 4px 3px 10px;font:600 .68rem 'IBM Plex Sans',sans-serif;cursor:grab;user-select:none}
+  .pchip:hover{border-color:var(--accent)}
+  .pchip:active{cursor:grabbing}
+  .pchip .dwm{display:inline-flex;gap:2px}
+  .pchip .dwm button{appearance:none;border:1px solid var(--border);background:transparent;color:var(--ink);opacity:.5;width:17px;height:17px;border-radius:50%;font:700 .55rem 'IBM Plex Mono',monospace;cursor:pointer;padding:0}
+  .pchip .dwm button.miss{border-color:var(--warn);opacity:1}
+  .pchip .dwm button.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);opacity:1}
+  .pool-empty{font-size:.72rem;opacity:.8}
+  .col.drop-over{outline:2px dashed var(--accent);outline-offset:2px;background:var(--tile-hover)}
+  .card.flash{animation:flashCard .9s}
+  @keyframes flashCard{0%,100%{box-shadow:none}30%{box-shadow:0 0 0 3px var(--warn)}}
   .rm-time{appearance:none;border:0;cursor:pointer;font-family:'IBM Plex Mono',monospace}
   .seg3{display:flex;gap:3px;background:var(--tile);border:1px solid var(--border);border-radius:8px;padding:2px;margin-top:6px}
   .seg3 button{flex:1 1 auto;min-width:0;appearance:none;border:0;background:transparent;color:var(--ink);font:600 .6rem 'IBM Plex Sans',sans-serif;padding:5px 2px;border-radius:6px;cursor:pointer;white-space:nowrap}
   .seg3 button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
   .seg3 button[data-status="pending"][aria-pressed="true"]{background:var(--warn);color:#1A0F02}
   .seg3 button[data-status="undef"][aria-pressed="true"]{background:var(--ink);color:var(--panel)}
+
+  /* ---- fluid fit: text & icons shrink/wrap instead of overflowing ---- */
+  .tiles{flex-wrap:nowrap;gap:clamp(3px,.6vw,8px);min-width:0}
+  .tile{flex:1 1 0;min-width:0;width:auto;max-width:64px;height:clamp(38px,5.2vw,50px);font-size:clamp(.54rem,.9vw,.72rem);padding:0 2px}
+  .tile .tn{overflow:hidden;text-overflow:clip;max-width:100%}
+  .nav-arrow{width:clamp(26px,3vw,34px);height:clamp(38px,5.2vw,50px)}
+  .panel{padding:clamp(10px,1.6vw,16px)}
+  .lane{container-type:inline-size;min-width:0}
+  .row .nm,.todo-r .nm{flex:1 1 auto;min-width:0;line-height:1.15;overflow-wrap:anywhere}
+  .row .when{flex:none;white-space:normal;text-align:right;max-width:46%;line-height:1.2}
+  .row .multi-badge{flex:none}
+  .todo-r .lbl{flex:none;max-width:46%;text-align:right;white-space:normal;line-height:1.15}
+  .lane-top .ttl span{overflow-wrap:anywhere}
+  @container (max-width:380px){
+    .lane-top .ttl strong{font-size:.72rem;letter-spacing:.08em}
+    .lane-top .ttl span{font-size:.62rem}
+    .lane-top .cnt-wrap b{font-size:1.25rem}
+    .lane-top .cnt-wrap small{font-size:.54rem}
+    .lane-top .focus-btn,.lane-top button{font-size:.6rem;padding:2px 6px}
+    .row{gap:6px;padding:0 4px}
+    .row .nm{font-size:.8rem}
+    .row .when{font-size:.68rem}
+    .row .dot{width:7px;height:7px}
+    .multi-badge{width:13px;height:13px;font-size:.5rem}
+    .todo-r .nm{font-size:.74rem}
+    .todo-r .lbl{font-size:.6rem}
+  }
+  @container (max-width:290px){
+    .lane-top{flex-wrap:wrap}
+    .row{flex-wrap:wrap;row-gap:0;align-content:center}
+    .row .when{margin-left:15px;max-width:none;flex-basis:100%;text-align:left}
+    .row .nm{font-size:.76rem}
+    .lane-top .cnt-wrap b{font-size:1.1rem}
+  }
+  @media (max-width:700px){
+    .toolbar{gap:6px}
+    .seg button{padding:5px 8px;font-size:.66rem}
+  }
+  @media (max-width:560px){
+    .tiles{flex-wrap:wrap;justify-content:center}
+    .tile{flex:0 0 calc(16.66% - 6px);max-width:none;height:38px;font-size:.62rem}
+  }
 </style>
 </head>
 <body>
@@ -226,7 +403,6 @@
       <div class="rule-v"></div>
       <div class="brand-text">
         <h1>MEETING CALENDAR MAP</h1>
-        <p><b>Hanseatic Global Terminals</b> · BEST Program</p>
       </div>
     </div>
     <div class="topbar-right">
@@ -240,15 +416,11 @@
   </div>
 
   <div class="panel">
-    <div class="picker-head">
-      <span class="ico">◧</span>
-      <div>
-        <h2>Standard Work Cadence</h2>
-        <span>Pick a terminal to see its Daily / Weekly / Monthly meetings</span>
-      </div>
+    <div class="navrow">
+      <button type="button" class="nav-arrow" id="prevT" aria-label="Previous terminal" title="Previous (←)">‹</button>
+      <div class="tiles" role="tablist" aria-label="Terminal" id="tiles"></div>
+      <button type="button" class="nav-arrow" id="nextT" aria-label="Next terminal" title="Next (→)">›</button>
     </div>
-
-    <div class="tiles" role="tablist" aria-label="Terminal" id="tiles"></div>
 
     <div class="toolbar">
       <div class="owner-only" style="gap:10px;align-items:center">
@@ -259,12 +431,12 @@
         </label>
         <button type="button" class="icon-btn" id="copyJson" style="width:auto;padding:0 9px;font-size:.68rem">Copy JSON</button>
         <button type="button" class="icon-btn" id="resetDraft" style="width:auto;padding:0 9px;font-size:.68rem">Discard draft</button>
+        <button type="button" class="icon-btn help-open" style="width:auto;padding:0 9px;font-size:.68rem" title="How editing works">? Help</button>
       </div>
-      <div class="legend">
-        <span><i class="dot-leg ok"></i>Scheduled</span>
-        <span><i class="dot-leg pending"></i>Needs day/time</span>
-        <span><i class="dot-leg undef"></i>Not defined</span>
-        <span>👥 Multidisciplinary</span>
+      <div class="seg" id="viewSeg" role="group" aria-label="Layout">
+        <button type="button" data-view="lanes" aria-pressed="true" title="Lanes">Lanes</button>
+        <button type="button" data-view="board" aria-pressed="false" title="Schedule board">Board</button>
+        <button type="button" data-view="tiles" aria-pressed="false" title="Tiles">Tiles</button>
       </div>
       <div class="seg" id="focusSeg">
         <button type="button" data-focus="total" aria-pressed="true">Total</button>
@@ -274,16 +446,24 @@
       </div>
     </div>
 
+    <div class="pool" id="pool">
+      <div class="pool-head">
+        <strong>Areas universe</strong>
+        <button type="button" class="icon-btn help-open" title="How editing works" aria-label="Help">?</button>
+      </div>
+      <div class="pool-head">
+        <div class="seg" id="poolScope">
+          <button type="button" data-scope="terminal" aria-pressed="true">This terminal</button>
+          <button type="button" data-scope="all" aria-pressed="false">All areas</button>
+        </div>
+        <input class="pool-q" id="poolQ" type="search" placeholder="Search area…" aria-label="Search area">
+        <button type="button" class="pool-btn" id="poolAll" title="Add every missing area of this terminal's official list">+ Add all missing for this terminal</button>
+      </div>
+      <div class="pool-body" id="poolBody"></div>
+    </div>
+
     <div class="board" id="board"></div>
 
-    <div class="rules">
-      <strong>GROUND RULES</strong>
-      <span class="rule-chip"><span class="n">1</span>On time</span>
-      <span class="rule-chip" title="Boards, KPIs & slides updated beforehand"><span class="n">2</span>Come prepared</span>
-      <span class="rule-chip" title="Can't attend? Delegate, never skip"><span class="n">3</span>Send a backup</span>
-      <span class="rule-chip" title="Every action, reviewed next session"><span class="n">4</span>Owner + date</span>
-      <span class="rule-chip" title="What you can't solve, up a level"><span class="n">5</span>Escalate</span>
-    </div>
   </div>
 
   <footer>HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</footer>
@@ -298,48 +478,243 @@
 <script>
 (function(){
   // ---- DATA (default seed; a browser's own edits are saved over this in localStorage) --
+  // ---- AREAS UNIVERSE (from the official area lists per terminal) -----------
+  var UNIVERSE = [{"g": "Core", "n": ["Cross Functional", "Senior Management Meeting", "Control Management"]}, {"g": "Operations", "n": ["Operations", "Operations: CFS", "Operations: Depot/Yard/Vessel/Gate/Reefer", "OPS Vessel", "Vessel Service Operations", "Yard Service Operations", "Terminals: Reefer / IMPO / Gate / CFS", "CFS", "Reefer Area", "Inspections TPG 1", "Inspections Area TPG 2"]}, {"g": "Shift change", "n": ["Shift Change", "Shift Change Vessel", "Shift Change Yard/Vessel", "Shift Change TPG 2"]}, {"g": "Maintenance & infrastructure", "n": ["Maintenance", "Maintenance & Civil Works", "Maintenance & CCWW", "Equipment Maintenance", "RAEC Maintenance", "Infrastructure Maintenance", "Infrastructure", "Infrastructure and Construction", "TPM", "Projects"]}, {"g": "Safety, security & environment", "n": ["Safety", "HSE", "HSSE", "SSO", "SSO and Excellence Division", "SSO and Excellence Division / Environment Division", "Environment Division", "Sustainability and Environment", "Sustainability and Communications", "Security"]}, {"g": "Commercial & support", "n": ["Commercial", "Customer Service", "Procurement", "IT", "PRYMA", "Bonded Warehouse"]}, {"g": "Finance & people", "n": ["Finance", "Adm. & Finance", "Administration & Management", "Accounting", "Invoicing", "Human Resources", "HR & Admin", "Human Resources and Security", "People"]}];
+  var OFFICIAL = {"ITI": {"daily": ["Cross Functional", "Operations", "Safety", "Maintenance", "Shift Change", "Security"], "weekly": ["Operations", "Senior Management Meeting", "Commercial", "Adm. & Finance", "Human Resources", "Safety", "Maintenance"], "monthly": ["Control Management", "Senior Management Meeting", "Operations", "Commercial", "Adm. & Finance", "Human Resources", "Safety", "Maintenance", "Security"]}, "ATI": {"daily": ["Cross Functional", "Operations", "SSO and Excellence Division / Environment Division", "Equipment Maintenance", "RAEC Maintenance"], "weekly": ["Senior Management Meeting", "Operations", "SSO and Excellence Division", "Equipment Maintenance", "Infrastructure Maintenance", "Human Resources", "Commercial", "Sustainability and Communications", "Environment Division"], "monthly": ["Senior Management Meeting", "Operations", "SSO and Excellence Division", "Equipment Maintenance", "Infrastructure Maintenance", "Human Resources", "Commercial", "Sustainability and Communications", "Environment Division"]}, "TMAZ": {"daily": ["Cross Functional", "Operations", "Vessel Service Operations", "Yard Service Operations", "Maintenance", "SSO", "Shift Change Vessel", "IT", "Procurement", "Security", "Accounting", "Invoicing", "Control Management"], "weekly": ["Senior Management Meeting", "Sustainability and Environment", "Operations", "Maintenance", "Finance"], "monthly": ["Senior Management Meeting", "Operations", "Maintenance"]}, "TPG": {"daily": ["Cross Functional", "Operations", "Maintenance", "HSE", "Commercial", "IT", "Infrastructure and Construction", "Security", "Shift Change Yard/Vessel", "Inspections TPG 1", "Shift Change TPG 2", "Inspections Area TPG 2", "CFS", "Reefer Area"], "weekly": ["Senior Management Meeting", "Operations", "Maintenance", "HSE", "Commercial", "IT", "Infrastructure and Construction", "Finance", "Human Resources", "Security", "Projects"], "monthly": ["Senior Management Meeting", "Operations", "Maintenance", "HSE", "Commercial", "IT", "Infrastructure and Construction", "Finance", "Projects", "Human Resources", "Security"]}, "SPC": {"daily": ["Cross Functional", "Operations", "Shift Change", "Maintenance", "Safety", "Bonded Warehouse"], "weekly": ["Senior Management Meeting", "Operations", "Maintenance", "Safety", "Human Resources and Security", "Administration & Management", "Finance", "Commercial", "Bonded Warehouse"], "monthly": ["Senior Management Meeting", "Operations", "Maintenance", "Safety", "Human Resources and Security", "Procurement", "Commercial", "Bonded Warehouse"]}, "STI": {"daily": ["Cross Functional", "Operations", "OPS Vessel", "Terminals: Reefer / IMPO / Gate / CFS", "Maintenance", "HSSE", "Infrastructure", "Adm. & Finance", "Shift Change"], "weekly": ["Senior Management Meeting", "Operations", "Maintenance & CCWW", "HSSE", "People", "Finance", "Commercial"], "monthly": ["Senior Management Meeting", "Operations", "Maintenance & CCWW", "PRYMA", "People", "Finance", "Commercial"]}, "SVTI": {"daily": ["Cross Functional", "Operations", "Operations: CFS", "Operations: Depot/Yard/Vessel/Gate/Reefer", "Safety", "Maintenance & Civil Works", "Shift Change", "Security"], "weekly": ["Senior Management Meeting", "Operations", "Commercial", "Adm. & Finance", "Human Resources", "Safety", "Maintenance & Civil Works", "Security"], "monthly": ["Senior Management Meeting", "Operations", "Commercial", "Adm. & Finance", "Human Resources", "Safety", "Maintenance & Civil Works", "Security"]}, "FIT": {"daily": ["Cross Functional", "Operations", "Maintenance"], "weekly": ["Senior Management Meeting", "Operations", "Finance", "Customer Service", "Maintenance", "HSSE"], "monthly": ["Operations", "Maintenance", "HSSE", "Senior Management Meeting", "TPM"]}, "KICT": {"daily": ["Cross Functional", "Operations", "Commercial", "Finance", "HR & Admin", "Safety", "Maintenance", "Security", "Shift Change"], "weekly": ["Senior Management Meeting", "Operations", "Commercial", "Finance", "HR & Admin", "Safety", "Maintenance", "Security"], "monthly": ["Senior Management Meeting", "Operations", "Commercial", "Finance", "HR & Admin", "Safety", "Maintenance", "Security"]}, "VCTPL": {"daily": ["Cross Functional", "Operations", "Commercial", "Finance", "HR & Admin", "Safety", "Maintenance", "Security", "Shift Change"], "weekly": ["Senior Management Meeting", "Operations", "Commercial", "Finance", "HR & Admin", "Safety", "Maintenance", "Security"], "monthly": ["Senior Management Meeting", "Operations", "Commercial", "Finance", "HR & Admin", "Safety", "Maintenance", "Security"]}, "TUTI": {"daily": ["Cross Functional", "Operations", "Commercial", "Finance", "HR & Admin", "Safety", "Maintenance", "Security", "Shift Change"], "weekly": ["Senior Management Meeting", "Operations", "Commercial", "Finance", "HR & Admin", "Safety", "Maintenance", "Security"], "monthly": ["Senior Management Meeting", "Operations", "Commercial", "Finance", "HR & Admin", "Safety", "Maintenance", "Security"]}, "BEST": {"daily": [], "weekly": [], "monthly": []}};
+
   var DEFAULT_DATA = {
-    ITI: {
-      daily: [
-        {name:"Cross Functional", desc:"Safety, last 24h results and today's priorities", multi:true, day:"", times:["09:30"], status:"ok", link:""},
-        {name:"Operations", desc:"Productivity, vessel & yard plan for the day", multi:false, day:"", times:["10:30"], status:"ok", link:""},
-        {name:"Shift Change", desc:"Handover: pending tasks, equipment and events", multi:false, day:"", times:["08:15","15:45","23:15"], status:"ok", link:""},
-        {name:"Safety", desc:"Incidents, near misses and today's critical risks", multi:false, day:"", times:["10:55"], status:"ok", link:""},
-        {name:"Maintenance", desc:"", multi:false, day:"", times:[], status:"undef", link:""},
-        {name:"Security", desc:"Access control, events and perimeter status", multi:false, day:"", times:["09:00"], status:"ok", link:""}
+    "ITI":{
+      "daily":[
+        {"name":"Cross Functional","desc":"","multi":true,"day":"","times":["09:30"],"status":"ok","link":""},
+        {"name":"Operations","desc":"","multi":false,"day":"","times":["10:30"],"status":"ok","link":""},
+        {"name":"Shift Change","desc":"","multi":false,"day":"","times":["08:15","15:45","23:15"],"status":"pending","link":""},
+        {"name":"Safety","desc":"","multi":false,"day":"","times":["10:55"],"status":"ok","link":""},
+        {"name":"Maintenance","desc":"","multi":false,"day":"","times":["09:00"],"status":"undef","link":""},
+        {"name":"Security","desc":"","multi":false,"day":"","times":["09:00"],"status":"ok","link":""}
       ],
-      weekly: [
-        {name:"Senior Management", desc:"KPIs vs target, priorities, escalations and decisions", multi:true, day:"Mon", times:["16:30"], status:"ok", link:""},
-        {name:"Operations", desc:"Productivity KPIs, deviations and next-week line-up", multi:false, day:"Mon", times:["15:30"], status:"ok", link:""},
-        {name:"Maintenance", desc:"Schedule compliance, backlog and critical assets", multi:false, day:"Mon", times:["16:00"], status:"ok", link:""},
-        {name:"Safety", desc:"Leading indicators, inspections and open actions", multi:false, day:"Mon", times:["17:30","18:30"], status:"ok", link:""},
-        {name:"Commercial", desc:"Volumes vs forecast, customers and service issues", multi:false, day:"", times:[], status:"pending", link:""},
-        {name:"Adm & Finance", desc:"Cash flow, payables, receivables and approvals", multi:false, day:"", times:[], status:"pending", link:""},
-        {name:"Human Resources", desc:"", multi:false, day:"", times:[], status:"undef", link:""},
-        {name:"Control Management", desc:"General services, contracts and suppliers", multi:false, day:"", times:[], status:"pending", link:""}
+      "weekly":[
+        {"name":"Senior Management Meeting","desc":"","multi":true,"day":"Mon","times":["16:30"],"status":"ok","link":""},
+        {"name":"Operations","desc":"","multi":false,"day":"Mon","times":["15:30"],"status":"ok","link":""},
+        {"name":"Maintenance","desc":"","multi":false,"day":"Mon","times":["16:00"],"status":"ok","link":""},
+        {"name":"Safety","desc":"","multi":false,"day":"Mon","times":["17:30","18:30"],"status":"ok","link":""},
+        {"name":"Commercial","desc":"","multi":false,"day":"","times":[],"status":"pending","link":""},
+        {"name":"Adm. & Finance","desc":"","multi":false,"day":"","times":[],"status":"pending","link":""},
+        {"name":"Human Resources","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Control Management","desc":"","multi":false,"day":"","times":[],"status":"pending","link":""}
       ],
-      monthly: [
-        {name:"Terminal Performance", desc:"KPI tree review, results, trends and long-term initiatives", multi:true, day:"Last Fri", times:["12:00"], status:"ok", link:""},
-        {name:"Control Management", desc:"Prior-month results, budget & quarter forecast deltas", multi:false, day:"", times:[], status:"pending", link:""},
-        {name:"Operations", desc:"", multi:false, day:"", times:[], status:"undef", link:""},
-        {name:"Maintenance", desc:"", multi:false, day:"", times:[], status:"undef", link:""},
-        {name:"Safety", desc:"", multi:false, day:"", times:[], status:"undef", link:""},
-        {name:"Security", desc:"", multi:false, day:"", times:[], status:"undef", link:""},
-        {name:"Commercial", desc:"", multi:false, day:"", times:[], status:"undef", link:""},
-        {name:"Adm & Finance", desc:"", multi:false, day:"", times:[], status:"undef", link:""},
-        {name:"Human Resources", desc:"", multi:false, day:"", times:[], status:"undef", link:""}
+      "monthly":[
+        {"name":"Senior Management Meeting","desc":"","multi":true,"day":"Last Fri","times":["12:00"],"status":"ok","link":""},
+        {"name":"Control Management","desc":"","multi":true,"day":"","times":[],"status":"pending","link":""},
+        {"name":"Operations","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Maintenance","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Safety","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Security","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Commercial","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Adm. & Finance","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Human Resources","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""}
       ]
     },
-    ATI:{daily:[],weekly:[],monthly:[]},
-    TMAZ:{daily:[],weekly:[],monthly:[]},
-    TPG:{daily:[],weekly:[],monthly:[]},
-    SPC:{daily:[],weekly:[],monthly:[]},
-    STI:{daily:[],weekly:[],monthly:[]},
-    SVTI:{daily:[],weekly:[],monthly:[]},
-    FIT:{daily:[],weekly:[],monthly:[]},
-    KICT:{daily:[],weekly:[],monthly:[]},
-    VCTPL:{daily:[],weekly:[],monthly:[]},
-    BEST:{daily:[],weekly:[],monthly:[]}
+    "ATI":{
+      "daily":[],
+      "weekly":[],
+      "monthly":[]
+    },
+    "TMAZ":{
+      "daily":[
+        {"name":"Cross Functional","desc":"","multi":true,"day":"","times":["09:00"],"status":"ok","link":""},
+        {"name":"Vessel Service Operations","desc":"","multi":false,"day":"","times":["10:00"],"status":"ok","link":""},
+        {"name":"Operations","desc":"","multi":false,"day":"","times":["09:30"],"status":"ok","link":""},
+        {"name":"Yard Service Operations","desc":"","multi":false,"day":"","times":["10:00"],"status":"ok","link":""},
+        {"name":"Shift Change Vessel","desc":"","multi":false,"day":"","times":["08:15","16:45","00:15"],"status":"ok","link":""},
+        {"name":"SSO","desc":"","multi":false,"day":"","times":["13:45"],"status":"ok","link":""},
+        {"name":"Maintenance","desc":"","multi":false,"day":"","times":["09:30"],"status":"ok","link":""},
+        {"name":"IT","desc":"","multi":false,"day":"","times":["10:00"],"status":"ok","link":""},
+        {"name":"Procurement","desc":"","multi":false,"day":"","times":["08:30"],"status":"ok","link":""},
+        {"name":"Security","desc":"","multi":false,"day":"","times":["09:30"],"status":"ok","link":""},
+        {"name":"Invoicing","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Accounting","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Control Management","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""}
+      ],
+      "weekly":[
+        {"name":"Senior Management Meeting","desc":"","multi":true,"day":"Wed","times":["13:00"],"status":"ok","link":""},
+        {"name":"Operations","desc":"","multi":false,"day":"Tue","times":["12:00"],"status":"ok","link":""},
+        {"name":"Maintenance","desc":"","multi":false,"day":"Tue","times":["11:00"],"status":"ok","link":""},
+        {"name":"Finance","desc":"","multi":false,"day":"Tue","times":["12:30"],"status":"ok","link":""},
+        {"name":"Sustainability and Environment","desc":"","multi":false,"day":"Mon","times":["15:00"],"status":"ok","link":""}
+      ],
+      "monthly":[
+        {"name":"Senior Management Meeting","desc":"","multi":true,"day":"Last Fri","times":["12:00"],"status":"ok","link":""},
+        {"name":"Operations","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Maintenance","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""}
+      ]
+    },
+    "TPG":{
+      "daily":[],
+      "weekly":[],
+      "monthly":[]
+    },
+    "SPC":{
+      "daily":[
+        {"name":"Cross Functional","desc":"","multi":true,"day":"","times":["09:30"],"status":"ok","link":""},
+        {"name":"Operations","desc":"","multi":false,"day":"","times":["10:30"],"status":"ok","link":""},
+        {"name":"Shift Change","desc":"","multi":false,"day":"","times":["08:15","15:45","23:15"],"status":"ok","link":""},
+        {"name":"Safety","desc":"","multi":false,"day":"","times":["13:45"],"status":"ok","link":""},
+        {"name":"Bonded Warehouse","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""}
+      ],
+      "weekly":[
+        {"name":"Senior Management Meeting","desc":"","multi":true,"day":"Mon","times":["17:30"],"status":"ok","link":""},
+        {"name":"Operations","desc":"","multi":false,"day":"Mon","times":["12:00"],"status":"ok","link":""},
+        {"name":"Maintenance","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Safety","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Security","desc":"","multi":false,"day":"","times":["13:45"],"status":"undef","link":""},
+        {"name":"Administration & Management","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Finance","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Commercial","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Bonded Warehouse","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""}
+      ],
+      "monthly":[
+        {"name":"Senior Management Meeting","desc":"","multi":true,"day":"Last Fri","times":["12:00"],"status":"ok","link":""},
+        {"name":"Operations","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Maintenance","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Safety","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Commercial","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""}
+      ]
+    },
+    "STI":{
+      "daily":[
+        {"name":"Cross Functional","desc":"","multi":true,"day":"","times":["09:30"],"status":"ok","link":""},
+        {"name":"Operations","desc":"","multi":false,"day":"","times":["10:30"],"status":"ok","link":""},
+        {"name":"OPS Vessel","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Maintenance","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"HSSE","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Infrastructure","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Adm. & Finance","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Shift Change","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""}
+      ],
+      "weekly":[
+        {"name":"Senior Management Meeting","desc":"","multi":true,"day":"Mon","times":["17:30"],"status":"ok","link":""},
+        {"name":"Operations","desc":"","multi":false,"day":"Mon","times":["12:00"],"status":"ok","link":""},
+        {"name":"Maintenance & CCWW","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"HSSE","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"People","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Finance","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Commercial","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""}
+      ],
+      "monthly":[
+        {"name":"Senior Management Meeting","desc":"","multi":true,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Operations","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Maintenance & CCWW","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"PRYMA","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"People","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Finance","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Commercial","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""}
+      ]
+    },
+    "SVTI":{
+      "daily":[
+        {"name":"Cross Functional","desc":"","multi":true,"day":"","times":["09:30"],"status":"ok","link":""},
+        {"name":"Operations","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Operations: CFS","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Operations: Depot/Yard/Vessel/Gate/Reefer","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Safety","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Maintenance & Civil Works","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Shift Change","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Security","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""}
+      ],
+      "weekly":[
+        {"name":"Senior Management Meeting","desc":"","multi":true,"day":"Mon","times":["17:30"],"status":"ok","link":""},
+        {"name":"Operations","desc":"","multi":false,"day":"Mon","times":["12:00"],"status":"ok","link":""},
+        {"name":"Commercial","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Adm. & Finance","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Human Resources","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Safety","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Maintenance & Civil Works","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Security","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""}
+      ],
+      "monthly":[
+        {"name":"Senior Management Meeting","desc":"","multi":true,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Operations","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Commercial","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Adm. & Finance","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Human Resources","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Safety","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Maintenance & Civil Works","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Security","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""}
+      ]
+    },
+    "FIT":{
+      "daily":[],
+      "weekly":[],
+      "monthly":[]
+    },
+    "KICT":{
+      "daily":[
+        {"name":"Cross Functional","desc":"","multi":true,"day":"","times":["09:30"],"status":"ok","link":""},
+        {"name":"Operations","desc":"","multi":false,"day":"","times":["10:30"],"status":"ok","link":""},
+        {"name":"Shift Change","desc":"","multi":false,"day":"","times":["08:15","15:45","23:15"],"status":"ok","link":""},
+        {"name":"Safety","desc":"","multi":false,"day":"","times":["13:45"],"status":"ok","link":""},
+        {"name":"Maintenance","desc":"","multi":false,"day":"","times":["09:30"],"status":"ok","link":""},
+        {"name":"Security","desc":"","multi":false,"day":"","times":["09:30"],"status":"ok","link":""}
+      ],
+      "weekly":[
+        {"name":"Senior Management Meeting","desc":"","multi":true,"day":"Mon","times":["17:30"],"status":"ok","link":""},
+        {"name":"Operations","desc":"","multi":false,"day":"Mon","times":["12:00"],"status":"ok","link":""},
+        {"name":"Maintenance","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Safety","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Commercial","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Finance","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"HR & Admin","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""}
+      ],
+      "monthly":[
+        {"name":"Senior Management Meeting","desc":"","multi":true,"day":"Last Fri","times":["12:00"],"status":"ok","link":""},
+        {"name":"Operations","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Maintenance","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Safety","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Security","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Commercial","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Finance","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"HR & Admin","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""}
+      ]
+    },
+    "VCTPL":{
+      "daily":[
+        {"name":"Cross Functional","desc":"","multi":true,"day":"","times":["09:30"],"status":"ok","link":""},
+        {"name":"Operations","desc":"","multi":false,"day":"","times":["10:30"],"status":"ok","link":""},
+        {"name":"Shift Change","desc":"","multi":false,"day":"","times":["08:15","15:45","23:15"],"status":"ok","link":""},
+        {"name":"Safety","desc":"","multi":false,"day":"","times":["13:45"],"status":"ok","link":""},
+        {"name":"Maintenance","desc":"","multi":false,"day":"","times":["09:30"],"status":"ok","link":""},
+        {"name":"Security","desc":"","multi":false,"day":"","times":["09:30"],"status":"ok","link":""}
+      ],
+      "weekly":[
+        {"name":"Senior Management Meeting","desc":"","multi":true,"day":"Mon","times":["17:30"],"status":"ok","link":""},
+        {"name":"Operations","desc":"","multi":false,"day":"Mon","times":["12:00"],"status":"ok","link":""},
+        {"name":"Maintenance","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Safety","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Commercial","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Finance","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"HR & Admin","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""}
+      ],
+      "monthly":[
+        {"name":"Senior Management Meeting","desc":"","multi":true,"day":"Last Fri","times":["12:00"],"status":"ok","link":""},
+        {"name":"Operations","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Maintenance","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Safety","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Security","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Commercial","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"Finance","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""},
+        {"name":"HR & Admin","desc":"","multi":false,"day":"","times":[],"status":"undef","link":""}
+      ]
+    },
+    "TUTI":{
+      "daily":[],
+      "weekly":[],
+      "monthly":[]
+    },
+    "BEST":{
+      "daily":[],
+      "weekly":[],
+      "monthly":[]
+    }
   };
 
   var EMBEDDED = (window.self !== window.top);
@@ -380,7 +755,34 @@
   var current = order[0];
   var editMode = false;
   var focusKey = "total";
+  (function(){ var vs = document.getElementById("viewSeg"); var v = null; try{ v = localStorage.getItem("mcm_view"); }catch(e){}
+    Array.prototype.forEach.call(vs.querySelectorAll("button"), function(b){ b.setAttribute("aria-pressed", String(b.dataset.view === (v||"lanes"))); }); })();
 
+  function normalizeData(){
+    Object.keys(DEFAULT_DATA).forEach(function(k){
+      if(!TERMINALS[k]) TERMINALS[k] = {daily:[],weekly:[],monthly:[]};
+    });
+    Object.keys(TERMINALS).forEach(function(k){
+      ["daily","weekly","monthly"].forEach(function(col){
+        TERMINALS[k][col] = (TERMINALS[k][col] || []).map(function(m){
+          var st = String(m.status||"").toLowerCase();
+          m.status = (st==="ok"||st==="pending"||st==="undef") ? st : "undef";
+          m.times = (m.times||[]).filter(Boolean);
+          m.desc = m.desc || ""; m.day = m.day || ""; m.link = m.link || "";
+          return m;
+        });
+      });
+    });
+  }
+  function progressOf(key){
+    var T = TERMINALS[key] || {}, ok = 0, tot = 0;
+    ["daily","weekly","monthly"].forEach(function(c){
+      var L = T[c] || [], o = (OFFICIAL[key] && OFFICIAL[key][c]) || [];
+      ok += L.filter(function(m){ return m.status==="ok"; }).length;
+      tot += Math.max(L.length, o.length);
+    });
+    return {ok:ok, tot:tot, p: tot ? Math.round(100*ok/tot) : 0};
+  }
   function esc(s){
     return (s||"").replace(/[&<>"]/g, function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});
   }
@@ -391,6 +793,7 @@
     var list = [];
     if(colKey==="weekly") list = WD;
     if(colKey==="monthly") ORD.forEach(function(o){ WD.slice(0,5).forEach(function(d){ list.push(o+" "+d); }); });
+    if(val && list.indexOf(val) < 0 && colKey!=="daily") list = list.concat([val]);
     return '<option value="">— day —</option>' + list.map(function(v){
       return '<option value="'+v+'"'+(v===val?" selected":"")+'>'+v+'</option>';
     }).join("");
@@ -456,32 +859,232 @@
   }
 
   function render(){
-    tilesEl.innerHTML = order.map(function(key){
-      var sel = key===current;
-      return '<button type="button" class="tile" role="tab" aria-selected="'+sel+'" data-key="'+key+'">'+key+'<span class="dot"></span></button>';
+    tilesEl.innerHTML = order.map(function(key, n){
+      var sel = key===current, pr = progressOf(key);
+      return '<button type="button" class="tile" role="tab" aria-selected="'+sel+'" data-key="'+key+'" title="'+key+' · '+pr.ok+'/'+pr.tot+' scheduled">'+
+        '<span class="wave" data-p="'+(pr.p ? Math.max(12, pr.p) : 0)+'" style="--n:'+n+'"></span><span class="tn">'+key+'</span><span class="dot"></span></button>';
     }).join("");
+    requestAnimationFrame(function(){
+      Array.prototype.forEach.call(tilesEl.querySelectorAll(".wave"), function(w){ w.style.setProperty("--p", w.dataset.p+"%"); });
+    });
 
     var t = TERMINALS[current];
     var visibleCols = focusKey==="total" ? COLS : COLS.filter(function(c){return c.key===focusKey;});
     boardEl.className = "board" + (focusKey==="total" ? "" : " single");
 
+    document.getElementById("viewSeg").style.display = editMode ? "none" : "";
     boardEl.innerHTML = visibleCols.map(function(col){
       var list = t[col.key] || [];
+      if(!editMode) return laneHtml(col, list);
       var body = list.length
         ? '<div class="cards">'+list.map(function(m,i){return readCard(col.key,i);}).join("")+'</div>'
         : '<div class="cards"><div class="empty">No '+col.title.toLowerCase()+' meetings defined for '+current+' yet.</div></div>';
       return (
-        '<div class="col">'+
+        '<div class="col" data-col="'+col.key+'">'+
           '<div class="col-head"><span class="num">'+(list.length||col.num)+'</span>'+
             '<div><strong>'+col.title+'</strong><span>'+col.sub+'</span></div>'+
             '<button type="button" class="icon-btn col-focus" style="margin-left:auto;width:auto;padding:0 8px;font-size:.68rem" data-focus="'+(focusKey==="total"?col.key:"total")+'">'+(focusKey==="total"?"⤢ Focus":"↩ Total")+'</button>'+
           '</div>'+
           body+
-          (editMode ? '<button type="button" class="add-card" data-col="'+col.key+'">+ Add meeting / area</button>' : '')+
+          (editMode ? '<button type="button" class="add-card" data-col="'+col.key+'">+ Add custom meeting</button>' : '')+
         '</div>'
       );
     }).join("");
+    renderPool();
+    if(!editMode) animateCounts();
   }
+
+  // ---- read-only lanes (3 layouts) ------------------------------------------
+  var viewMode = "lanes";
+  try{ viewMode = localStorage.getItem("mcm_view") || "lanes"; }catch(e){}
+  if(["lanes","board","tiles"].indexOf(viewMode) < 0) viewMode = "lanes";
+  var DAYIDX = {Mon:0,Tue:1,Wed:2,Thu:3,Fri:4,Sat:5,Sun:6};
+  function dayKey(d){
+    if(!d) return 999;
+    var p = d.split(" "), w = DAYIDX[p[p.length-1]], o = p.length>1 ? ORD.indexOf(p[0]) : 0;
+    return (o<0?0:o)*7 + (w===undefined?6:w);
+  }
+  function minutes(t){ var a = (t||"99:99").split(":"); return (+a[0])*60 + (+a[1]||0); }
+  function when(m){ return [m.day, (m.times||[]).join(" · ")].filter(Boolean).join("  "); }
+  function multiB(m){ return m.multi ? '<span class="multi-badge" title="Multidisciplinary">👥</span>' : ""; }
+  function oa(colKey, i){ return 'role="button" tabindex="0" data-col="'+colKey+'" data-idx="'+i+'"'; }
+
+  function laneHtml(col, list){
+    var all = list.map(function(m,i){ return {m:m, i:i}; });
+    var sched = all.filter(function(x){ return x.m.status==="ok"; });
+    var todo  = all.filter(function(x){ return x.m.status!=="ok"; });
+    if(viewMode==="board") sched.sort(function(a,b){
+      return dayKey(a.m.day)-dayKey(b.m.day) || minutes((a.m.times||[])[0])-minutes((b.m.times||[])[0]);
+    });
+    var n = list.length, ok = sched.length, k = 0;
+
+    var schedHtml = sched.map(function(x){
+      var m = x.m, a = oa(col.key, x.i), st = 'style="--i:'+(k++)+'"';
+      if(viewMode==="board"){
+        var tm = (m.times||[]);
+        return '<div class="row2 focus-btn" '+st+' '+a+'><span class="tt'+(tm.length>2?" many":"")+'">'+(tm.length?tm.map(function(v){return '<b>'+esc(v)+'</b>';}).join(""):'<b>—</b>')+'</span>'+
+          '<span class="meta"><strong>'+esc(m.name)+'</strong>'+(m.day?'<em>'+esc(m.day)+'</em>':'')+'</span>'+multiB(m)+'</div>';
+      }
+      if(viewMode==="tiles"){
+        return '<div class="tile3 focus-btn" '+st+' '+a+'><div class="t3top"><strong>'+esc(m.name)+'</strong>'+multiB(m)+'</div>'+
+          '<div class="t3when">'+(m.day?'<span class="d">'+esc(m.day)+'</span>':'')+(m.times||[]).map(function(v){return '<span class="tm">'+esc(v)+'</span>';}).join("")+'</div></div>';
+      }
+      return '<div class="row focus-btn" '+st+' '+a+'><i class="dot"></i><span class="nm">'+esc(m.name)+'</span>'+multiB(m)+'<span class="when">'+esc(when(m)||"—")+'</span></div>';
+    }).join("");
+    if(viewMode==="tiles") schedHtml = '<div class="tiles3">'+schedHtml+'</div>'; else schedHtml = '<div class="sched">'+schedHtml+'</div>';
+    if(!ok) schedHtml = '<div class="empty">'+(n ? 'Nothing scheduled yet.' : 'No '+col.title.toLowerCase()+' meetings defined for '+current+' yet.')+'</div>';
+
+    var todoHtml = "";
+    if(todo.length){
+      if(viewMode==="tiles"){
+        todoHtml = '<div class="tchips"><h5 class="th">To define</h5>'+todo.map(function(x){
+          return '<span class="tchip focus-btn '+(x.m.status==="pending"?"":"undef")+'" style="--i:'+(k++)+'" '+oa(col.key,x.i)+'>'+esc(x.m.name)+'</span>';
+        }).join("")+'</div>';
+      } else {
+        todoHtml = '<div class="todo"><h5>To define</h5>'+todo.map(function(x){
+          var m = x.m, pend = m.status==="pending";
+          var lbl = pend ? ((m.times||[]).length ? (m.times||[]).join(" · ") : "day & time") : "not defined";
+          return '<div class="todo-r focus-btn" style="--i:'+(k++)+'" '+oa(col.key,x.i)+'><i class="ring '+(pend?"pend":"undef")+'"></i><span class="nm">'+esc(m.name)+'</span><span class="lbl '+(pend?"pend":"undef")+'">'+esc(lbl)+'</span></div>';
+        }).join("")+'</div>';
+      }
+    }
+    var pct = n ? Math.round(100*ok/n) : 0;
+    return '<div class="col lane" data-col="'+col.key+'">'+
+      '<div class="lane-top"><div class="ttl"><strong>'+col.title+'</strong><span>'+col.sub+'</span></div>'+
+        '<button type="button" class="icon-btn col-focus" style="width:auto;padding:0 8px;font-size:.68rem" data-focus="'+(focusKey==="total"?col.key:"total")+'">'+(focusKey==="total"?"⤢ Focus":"↩ Total")+'</button>'+
+        '<div class="cnt-wrap"><b><span class="cnt" data-to="'+ok+'">'+ok+'</span>/'+n+'</b><small>scheduled</small></div></div>'+
+      '<div class="bar" aria-hidden="true"><i style="width:'+pct+'%"></i></div>'+
+      '<div class="lane-body">'+schedHtml+todoHtml+'</div></div>';
+  }
+  function animateCounts(){
+    if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    Array.prototype.forEach.call(boardEl.querySelectorAll(".cnt"), function(el){
+      var to = +el.dataset.to, t0 = performance.now(), node = el.firstChild;
+      if(!node || !to) return;
+      node.nodeValue = "0";
+      (function step(now){
+        var p = Math.min(1, (now - t0) / 700);
+        node.nodeValue = String(Math.round(to * (1 - Math.pow(1-p, 3))));
+        if(p < 1) requestAnimationFrame(step);
+      })(t0);
+    });
+  }
+  document.getElementById("viewSeg").addEventListener("click", function(e){
+    var b = e.target.closest("button[data-view]");
+    if(!b) return;
+    viewMode = b.dataset.view;
+    try{ localStorage.setItem("mcm_view", viewMode); }catch(e2){}
+    Array.prototype.forEach.call(this.querySelectorAll("button"), function(x){ x.setAttribute("aria-pressed", String(x===b)); });
+    render();
+  });
+  boardEl.addEventListener("keydown", function(e){
+    if((e.key==="Enter"||e.key===" ") && e.target.classList && e.target.classList.contains("focus-btn") && e.target.getAttribute("role")==="button"){
+      e.preventDefault(); e.target.click();
+    }
+  });
+
+  // ---- areas universe: drag / click to place -------------------------------
+  var poolScope = "terminal", poolQ = "";
+  var ALL_NAMES = {};
+  UNIVERSE.forEach(function(g){ g.n.forEach(function(n){ ALL_NAMES[n] = 1; }); });
+  var MULTI_DEFAULT = {"Cross Functional":1, "Senior Management Meeting":1};
+  var LETTER = {daily:"D", weekly:"W", monthly:"M"};
+  var TITLE = {daily:"Daily", weekly:"Weekly", monthly:"Monthly"};
+  function newCard(name){
+    return {name:name, desc:"", multi:!!MULTI_DEFAULT[name], day:"", times:[], status:"undef", link:""};
+  }
+  function officialOf(col){ var o = OFFICIAL[current]; return (o && o[col]) || []; }
+  function hasOfficial(){ return COLS.some(function(c){ return officialOf(c.key).length; }); }
+  function placedMap(col){
+    var m = {}; (TERMINALS[current][col] || []).forEach(function(x){ m[x.name] = 1; }); return m;
+  }
+  function renderPool(){
+    var pool = document.getElementById("pool");
+    var show = editMode && IS_OWNER;
+    pool.classList.toggle("show", show);
+    if(!show) return;
+    var scope = (poolScope==="terminal" && hasOfficial()) ? "terminal" : "all";
+    Array.prototype.forEach.call(document.querySelectorAll("#poolScope button"), function(b){
+      b.setAttribute("aria-pressed", String(b.dataset.scope===scope));
+    });
+    var placed = {}; COLS.forEach(function(c){ placed[c.key] = placedMap(c.key); });
+    var q = poolQ.trim().toLowerCase();
+    var html = UNIVERSE.map(function(g){
+      var chips = g.n.filter(function(name){
+        if(q && name.toLowerCase().indexOf(q) < 0) return false;
+        if(scope==="all") return true;
+        return COLS.some(function(c){ return officialOf(c.key).indexOf(name)>=0 || placed[c.key][name]; });
+      }).map(function(name){
+        var btns = COLS.map(function(c){
+          var cls = placed[c.key][name] ? "on" : (officialOf(c.key).indexOf(name)>=0 ? "miss" : "");
+          return '<button type="button" class="'+cls+'" data-add="'+c.key+'" data-name="'+esc(name)+'" title="'+(placed[c.key][name]?"Already in ":"Add to ")+TITLE[c.key]+'">'+LETTER[c.key]+'</button>';
+        }).join("");
+        return '<span class="pchip" draggable="true" data-name="'+esc(name)+'"><span>'+esc(name)+'</span><span class="dwm">'+btns+'</span></span>';
+      });
+      return chips.length ? '<div class="pool-grp"><h4>'+esc(g.g)+'</h4><div class="pool-chips">'+chips.join("")+'</div></div>' : "";
+    }).join("");
+    document.getElementById("poolBody").innerHTML = html || '<span class="pool-empty">No areas match.</span>';
+    document.getElementById("poolAll").style.display = hasOfficial() ? "" : "none";
+  }
+  function flashCard(colKey, idx){
+    var el = boardEl.querySelector('.card[data-col="'+colKey+'"][data-idx="'+idx+'"]');
+    if(!el) return;
+    el.classList.add("flash");
+    el.scrollIntoView({block:"nearest"});
+    setTimeout(function(){ el.classList.remove("flash"); }, 950);
+  }
+  function addArea(colKey, name){
+    var L = TERMINALS[current][colKey] = TERMINALS[current][colKey] || [];
+    var ix = -1;
+    L.forEach(function(m,i){ if(m.name===name) ix = i; });
+    if(ix >= 0){ flashCard(colKey, ix); return; }
+    L.push(newCard(name));
+    saveData(); render();
+    flashCard(colKey, L.length-1);
+  }
+
+  var poolEl = document.getElementById("pool");
+  poolEl.addEventListener("click", function(e){
+    var b = e.target.closest("button[data-add]");
+    if(b){ addArea(b.dataset.add, b.dataset.name); return; }
+    var sc = e.target.closest("#poolScope button");
+    if(sc){ poolScope = sc.dataset.scope; renderPool(); }
+  });
+  document.getElementById("poolQ").addEventListener("input", function(){ poolQ = this.value; renderPool(); });
+  document.getElementById("poolAll").addEventListener("click", function(){
+    COLS.forEach(function(c){
+      var L = TERMINALS[current][c.key] = TERMINALS[current][c.key] || [];
+      officialOf(c.key).forEach(function(n){
+        if(!L.some(function(m){ return m.name===n; })) L.push(newCard(n));
+      });
+    });
+    saveData(); render();
+  });
+  poolEl.addEventListener("dragstart", function(e){
+    var ch = e.target.closest(".pchip");
+    if(!ch) return;
+    e.dataTransfer.setData("text/plain", ch.dataset.name);
+    e.dataTransfer.effectAllowed = "copy";
+  });
+  boardEl.addEventListener("dragover", function(e){
+    var c = e.target.closest(".col[data-col]");
+    if(!c || !editMode) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "copy";
+    c.classList.add("drop-over");
+  });
+  boardEl.addEventListener("dragleave", function(e){
+    var c = e.target.closest(".col[data-col]");
+    if(c && !c.contains(e.relatedTarget)) c.classList.remove("drop-over");
+  });
+  boardEl.addEventListener("drop", function(e){
+    var c = e.target.closest(".col[data-col]");
+    if(!c || !editMode) return;
+    e.preventDefault();
+    c.classList.remove("drop-over");
+    var name = e.dataTransfer.getData("text/plain");
+    if(ALL_NAMES[name]) addArea(c.dataset.col, name);
+  });
 
   // ---- interactions ------------------------------------------------------
   tilesEl.addEventListener("click", function(e){
@@ -491,9 +1094,45 @@
     render();
   });
 
+  function stepTerminal(d){
+    var i = order.indexOf(current);
+    current = order[(i + d + order.length) % order.length];
+    render();
+  }
+  document.getElementById("prevT").addEventListener("click", function(){ stepTerminal(-1); });
+  document.getElementById("nextT").addEventListener("click", function(){ stepTerminal(1); });
+  document.addEventListener("keydown", function(e){
+    if(e.key!=="ArrowLeft" && e.key!=="ArrowRight") return;
+    if(/^(input|textarea|select)$/i.test(e.target.tagName) || modalBackdrop.classList.contains("open")) return;
+    stepTerminal(e.key==="ArrowLeft" ? -1 : 1);
+  });
+  function openHelp(){
+    modalBody.classList.add("wide");
+    modalBody.innerHTML =
+      '<button type="button" class="modal-close" id="modalClose2" aria-label="Close">✕</button>'+
+      '<h3>How editing works</h3>'+
+      '<ol class="help">'+
+        '<li>Turn on <b>Edit mode</b>. The <b>Areas universe</b> panel appears.</li>'+
+        '<li><b>Drag</b> an area (grab its name) onto Daily / Weekly / Monthly, or click its <b>D · W · M</b> letters. Filled = already placed · orange ring = in this terminal’s list, not placed yet.</li>'+
+        '<li><b>This terminal / All areas</b> filters the list, the search box finds an area, and <b>+ Add all missing</b> loads the terminal’s whole list at once.</li>'+
+        '<li>In each card set the status (Scheduled / Pending / Undefined), <b>Multi</b>, day, times (<b>+ Add</b>) and folder link. 🗑 deletes it. <b>+ Add custom meeting</b> is for areas outside the universe.</li>'+
+        '<li><b>Publish:</b> Copy JSON → save it as <code>meeting-data.json</code> in the repo (replace the old one) → commit &amp; push → click Discard draft.</li>'+
+      '</ol>'+
+      '<div class="help-h">Legend</div>'+
+      '<p class="help-p">● Scheduled · ○ day/time pending · dashed = not defined · 👥 multidisciplinary meeting</p>'+
+      '<div class="help-h">Ground rules</div>'+
+      '<p class="help-p">1 On time · 2 Come prepared · 3 Send a backup · 4 Owner + date · 5 Escalate</p>'+
+      '<div class="help-h">Keys</div>'+
+      '<p class="help-p">← → switch terminal · Esc closes this window</p>';
+    modalBackdrop.classList.add("open");
+    document.getElementById("modalClose2").addEventListener("click", closeFocus);
+  }
+  document.addEventListener("click", function(e){ if(e.target.closest(".help-open")) openHelp(); });
   editToggle.addEventListener("change", function(){
     editMode = editToggle.checked;
+    document.body.classList.toggle("editing", editMode);
     render();
+    fitSoon();
   });
 
   function setFocus(key){
@@ -536,6 +1175,7 @@
 
   // focus modal
   function openFocus(col, idx){
+    modalBody.classList.remove("wide");
     var m = TERMINALS[current][col][idx];
     var chips = "";
     if(m.day) chips += '<span class="chip day">'+esc(m.day)+'</span>';
@@ -563,7 +1203,7 @@
     var ac = e.target.closest(".add-card");
     if(ac){
       var L = TERMINALS[current][ac.dataset.col] = TERMINALS[current][ac.dataset.col] || [];
-      L.push({name:"New meeting", desc:"", status:"undef", multi:false, day:"", times:[], link:""});
+      L.push(newCard("New meeting"));
       saveData(); render();
       var nm = boardEl.querySelector('.col .card:last-of-type [data-field="name"]');
       var cols = boardEl.querySelectorAll('.col');
@@ -619,7 +1259,8 @@
       if(published) TERMINALS = published;
       var draft = IS_OWNER ? readDraft() : null;
       if(draft) TERMINALS = draft;
-      order = Object.keys(TERMINALS);
+      normalizeData();
+      order = Object.keys(DEFAULT_DATA).concat(Object.keys(TERMINALS).filter(function(k){ return !(k in DEFAULT_DATA); }));
       current = order[0];
       render();
     });
@@ -661,14 +1302,22 @@
   var rootEl = document.documentElement;
   function isFs(){ return !!(document.fullscreenElement || document.webkitFullscreenElement); }
   function fit(){
-    var b = document.body;
-    if(!(EMBEDDED || isFs())){ b.style.zoom = ""; return; }
-    b.style.zoom = 1;
-    var h = rootEl.scrollHeight, w = rootEl.scrollWidth;
-    var maxZ = isFs() ? 1.6 : 1;
-    var z = Math.min(maxZ, window.innerHeight / h, window.innerWidth / Math.max(w, 1) * 1.0);
-    if(isFs()) z = Math.min(maxZ, window.innerHeight / h);
-    b.style.zoom = Math.max(.5, z);
+    var b = document.body, de = rootEl;
+    var fill = EMBEDDED || isFs();
+    b.classList.toggle("fill", fill);
+    if(!fill){ b.style.zoom = ""; de.style.removeProperty("--fh"); return; }
+    var cands = [1.8,1.6,1.4,1.25,1.1,1], best = null, i;
+    de.style.setProperty("--fh", "0px");
+    for(i=0;i<cands.length;i++){
+      b.style.zoom = cands[i];
+      if(de.scrollHeight <= window.innerHeight + 1 && de.scrollWidth <= window.innerWidth + 1){ best = cands[i]; break; }
+    }
+    if(best === null){
+      b.style.zoom = 1;
+      best = Math.max(.5, window.innerHeight / Math.max(de.scrollHeight, 1));
+    }
+    b.style.zoom = best;
+    de.style.setProperty("--fh", (window.innerHeight / best) + "px");
   }
   var fitT;
   function fitSoon(){ clearTimeout(fitT); fitT = setTimeout(fit, 60); }
