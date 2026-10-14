@@ -18,7 +18,7 @@
     --tile:#F2F7FD;
     --tile-hover:#E3EDFA;
     --border:#C5D8EF;
-    --ink:#0B2545;
+    --ink:#050B14;
     --accent:#1F6FD1;
     --accent-dim:rgba(31,111,209,.5);
     --accent-ink:#FFFFFF;
@@ -388,6 +388,43 @@
     .tiles{flex-wrap:wrap;justify-content:center}
     .tile{flex:0 0 calc(16.66% - 6px);max-width:none;height:38px;font-size:.62rem}
   }
+
+  /* ---- light theme: pure dark text, no gray/faded text ---- */
+  :root:not([data-theme="dark"]):not([data-theme="classic"]) .lane-top .ttl span,
+  :root:not([data-theme="dark"]):not([data-theme="classic"]) .lane-top .cnt-wrap small,
+  :root:not([data-theme="dark"]):not([data-theme="classic"]) .row2 .meta em,
+  :root:not([data-theme="dark"]):not([data-theme="classic"]) footer,
+  :root:not([data-theme="dark"]):not([data-theme="classic"]) .pool-head .hint,
+  :root:not([data-theme="dark"]):not([data-theme="classic"]) .pool-grp h4,
+  :root:not([data-theme="dark"]):not([data-theme="classic"]) .pool-empty,
+  :root:not([data-theme="dark"]):not([data-theme="classic"]) .ef-label,
+  :root:not([data-theme="dark"]):not([data-theme="classic"]) .tchip.undef{opacity:1;color:var(--ink)}
+  :root:not([data-theme="dark"]):not([data-theme="classic"]) .todo-r .nm{color:var(--ink)}
+  :root:not([data-theme="dark"]):not([data-theme="classic"]) .lbl.undef{color:var(--accent)}
+  /* ---- bigger board / tiles content (autofit scales the rest) ---- */
+  .row2{min-height:54px;max-height:110px;gap:16px}
+  .row2 .tt{font-size:1.1rem;min-width:76px}
+  .row2 .tt.many{font-size:.85rem}
+  .row2 .meta strong{font-size:1.05rem;line-height:1.15}
+  .row2 .meta em{font-size:.78rem}
+  .tiles3{grid-template-columns:repeat(auto-fit,minmax(130px,1fr));grid-auto-rows:minmax(72px,170px);gap:10px}
+  .tile3{min-height:72px;gap:6px}
+  .tile3{padding:12px 14px}
+  .tile3 .t3top strong{font-size:1.02rem;line-height:1.15}
+  .tile3 .t3when .d{font-size:.76rem}
+  .tile3 .t3when .tm{font-size:.95rem}
+  .tchip{font-size:.8rem;padding:5px 11px}
+  /* ---- bigger info popup ---- */
+  .modal{max-width:clamp(440px,52vw,760px);padding:clamp(22px,2.4vw,34px);border-radius:16px}
+  .modal h3{font-size:clamp(1.25rem,1.9vw,1.8rem);line-height:1.2;padding-right:40px}
+  .modal p{font-size:clamp(.98rem,1.3vw,1.2rem);line-height:1.6;margin-top:14px}
+  .modal .chips{margin-top:18px;gap:8px}
+  .modal .chip{font-size:clamp(.82rem,1.05vw,1rem);padding:6px 12px}
+  .modal .link-line{margin-top:20px;font-size:clamp(.95rem,1.2vw,1.12rem)}
+  .modal-close{width:34px;height:34px;font-size:1rem;top:14px;right:14px}
+  .modal.wide{max-width:clamp(480px,56vw,820px)}
+  .help{font-size:clamp(.9rem,1.15vw,1.08rem)}
+  .help-p{font-size:clamp(.88rem,1.1vw,1.04rem)}
 </style>
 </head>
 <body>
@@ -1306,16 +1343,11 @@
     var fill = EMBEDDED || isFs();
     b.classList.toggle("fill", fill);
     if(!fill){ b.style.zoom = ""; de.style.removeProperty("--fh"); return; }
-    var cands = [1.8,1.6,1.4,1.25,1.1,1], best = null, i;
+    var lo = .5, hi = 2.6, best = .5, k, z;
     de.style.setProperty("--fh", "0px");
-    for(i=0;i<cands.length;i++){
-      b.style.zoom = cands[i];
-      if(de.scrollHeight <= window.innerHeight + 1 && de.scrollWidth <= window.innerWidth + 1){ best = cands[i]; break; }
-    }
-    if(best === null){
-      b.style.zoom = 1;
-      best = Math.max(.5, window.innerHeight / Math.max(de.scrollHeight, 1));
-    }
+    function ok(z){ b.style.zoom = z; return de.scrollHeight <= window.innerHeight + 1 && de.scrollWidth <= window.innerWidth + 1; }
+    if(ok(hi)) best = hi;
+    else { for(k=0;k<9;k++){ z = (lo+hi)/2; if(ok(z)) { best = z; lo = z; } else hi = z; } }
     b.style.zoom = best;
     de.style.setProperty("--fh", (window.innerHeight / best) + "px");
   }
