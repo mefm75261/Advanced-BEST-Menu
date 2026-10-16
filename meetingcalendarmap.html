@@ -425,6 +425,37 @@
   .modal.wide{max-width:clamp(480px,56vw,820px)}
   .help{font-size:clamp(.9rem,1.15vw,1.08rem)}
   .help-p{font-size:clamp(.88rem,1.1vw,1.04rem)}
+
+  /* ===== MÓVIL: compacto, sin scroll horizontal (mismo orden y efectos) ===== */
+  @media (max-width:700px){
+    html,body{max-width:100%;overflow-x:clip}
+    body{padding-inline:8px;padding-block:8px}
+    .app{gap:8px}
+    .mark{width:34px;height:34px;border-radius:9px}.mark svg{width:19px;height:19px}
+    .brand{gap:9px}
+    .brand-text h1{font-size:1.05rem}
+    .brand-text p{font-size:.68rem;margin-top:1px}
+    .topbar{gap:6px}
+    .panel{padding:10px;gap:10px;border-radius:14px}
+    .picker-head h2{font-size:.9rem}.picker-head span{font-size:.66rem}
+    .toolbar{gap:6px}
+    .seg{margin-left:0;padding:2px}
+    .seg button{padding:6px 9px;font-size:.7rem}
+    .modal-backdrop{padding:10px;align-items:flex-end}
+    .modal{padding:16px 14px;max-height:88vh;overflow:auto;max-width:none;border-radius:16px 16px 12px 12px}
+    .modal-close{top:8px;right:8px;width:32px;height:32px}
+    .lane{padding:10px 11px;gap:8px}
+    .lane-top .cnt-wrap b{font-size:1.3rem}
+    .row{min-height:34px;padding:0 6px;gap:8px}
+    .row .nm{font-size:.84rem}.row .when{font-size:.72rem}
+    .board{grid-template-columns:1fr}
+    .board.single .sched{grid-template-columns:1fr}
+    .board.single .cards,.board.single .tiles3{grid-template-columns:1fr}
+  }
+  @media (max-width:380px){
+    .row .nm{font-size:.8rem}.row .when{font-size:.68rem}
+    .seg button{padding:6px 7px;font-size:.66rem}
+  }
 </style>
 </head>
 <body>
