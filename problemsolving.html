@@ -1467,6 +1467,43 @@ a.ps-pill:hover{ transform:translateY(-2px); }
   .welcome-arena{ grid-template-columns:1fr !important; }
   .tb-btn{ font-size:.74rem; padding:6px 7px; }
 }
+
+/* ===== Ishikawa: casilla visible + ventana emergente con el texto completo ===== */
+.fb-chip{ cursor:default; }
+.fb-check{
+  flex:none; width:22px; height:22px; border-radius:7px; padding:0; margin-left:-4px;
+  border:2px solid var(--accent); background:var(--bg-card); color:#fff;
+  display:flex; align-items:center; justify-content:center; font:800 14px/1 var(--font-body);
+  cursor:pointer; transition:background .15s, transform .15s, box-shadow .15s;
+}
+.fb-check:hover{ transform:scale(1.12); box-shadow:0 0 0 3px var(--accent-tint); }
+.fb-check.on{ background:var(--accent); }
+.fb-check.hint{ animation:fbCheckPulse 1.4s ease-in-out infinite; }
+@keyframes fbCheckPulse{ 0%,100%{ box-shadow:0 0 0 0 rgba(232,130,28,.7); border-color:var(--hl); } 50%{ box-shadow:0 0 0 6px rgba(232,130,28,0); border-color:var(--accent); } }
+.fb-chip.selected::before{ display:none; }
+.fb-howto{
+  display:flex; align-items:flex-start; gap:12px; margin:0 0 14px; padding:12px 16px;
+  border:2px solid var(--hl); border-radius:var(--radius-m); background:var(--bg-card);
+  font-size:15px; line-height:1.5; color:var(--text);
+}
+.fb-howto b{ font-weight:800; }
+.fb-howto-box{ flex:none; width:24px; height:24px; border-radius:7px; background:var(--hl); color:#fff; display:flex; align-items:center; justify-content:center; margin-top:1px; }
+.fb-howto-box i{ font:800 15px/1 var(--font-body); font-style:normal; }
+.selection-bar{ flex-wrap:wrap; }
+.fb-sel-cta{ margin-left:auto; animation:fbCtaIn .35s ease both; }
+@keyframes fbCtaIn{ from{ opacity:0; transform:translateY(4px);} to{ opacity:1; transform:none; } }
+.fb-sel-hint{ margin-left:auto; font-weight:800; color:var(--hl); animation:catPulse 1.6s ease-in-out infinite; }
+#fb-pop{
+  position:fixed; z-index:900; max-width:min(340px,calc(100vw - 20px)); padding:11px 14px;
+  background:linear-gradient(155deg,var(--navy),var(--navy-soft)); color:#fff;
+  border-radius:12px; box-shadow:0 12px 32px rgba(14,27,51,.4); font-size:14.5px; line-height:1.5;
+  pointer-events:none; opacity:0; transform:translateY(4px); transition:opacity .15s, transform .15s; word-break:break-word;
+}
+#fb-pop.show{ opacity:1; transform:none; }
+#fb-pop .fbp-text{ font-weight:700; white-space:pre-wrap; }
+#fb-pop .fbp-hint{ display:block; margin-top:6px; padding-top:6px; border-top:1px solid rgba(255,255,255,.2); font-size:12.5px; color:#FFD9B3; }
+@media (max-width:900px){ .bone-slot{ width:auto !important; margin:10px 12px !important; } }
+@media (max-width:700px){ .selection-bar{ position:static !important; } .fb-howto{ font-size:13.5px; padding:10px 12px; } .fb-check{ width:26px; height:26px; } .fb-sel-cta{ width:100%; margin-left:0; } }
 </style>
 </head>
 <body>
@@ -2830,10 +2867,13 @@ function ishikawaFocusCategory(){
 function renderFishboneDiagram(){
   const focusCat = state.guided ? ishikawaFocusCategory() : null;
 
-  function chipHtml(cat, c, idx, atLimit){
+  function chipHtml(cat, c, idx, atLimit, noneSelected){
     const disabled = (!c.selected && atLimit);
+    const hasText = !!(c.text||'').trim();
+    const chkTitle = c.selected ? L('Quitar de las causas a priorizar','Remove from causes to prioritize') : L('Marcar como causa probable → pasa a Priorización','Mark as probable cause → goes to Prioritization');
     return `
-      <div class="fb-chip ${c.selected?'selected':''}" data-action="toggle-cause" data-cat="${cat.key}" data-idx="${idx}" title="${c.selected?'Quitar de causas probables':'Marcar como causa probable'}">
+      <div class="fb-chip ${c.selected?'selected':''}" data-cat="${cat.key}" data-idx="${idx}">
+        <button type="button" class="fb-check ${c.selected?'on':''} ${(!c.selected && hasText && noneSelected)?'hint':''}" role="checkbox" aria-checked="${c.selected?'true':'false'}" data-action="toggle-cause" data-cat="${cat.key}" data-idx="${idx}" aria-label="${esc(chkTitle)}" data-fbtip="${esc(chkTitle)}">${c.selected?'✓':''}</button>
         <input type="text" class="fb-chip-input" data-bind="ishikawa.${cat.key}.${idx}.text" value="${esc(c.text)}" placeholder="Escribe una causa…">
         <button class="fb-chip-remove" data-action="remove-cause" data-cat="${cat.key}" data-idx="${idx}" title="Quitar">&times;</button>
       </div>`;
@@ -2841,6 +2881,7 @@ function renderFishboneDiagram(){
 
   const selectedCount = countSelectedCauses();
   const atLimit = selectedCount >= REF.maxSelectedCauses;
+  const noneSelected = selectedCount===0;
 
   const slots = REF.ishikawaCategories.map((cat,i)=>{
     const dir = i<3 ? 'top':'bottom';
@@ -2848,7 +2889,7 @@ function renderFishboneDiagram(){
     const { tipX, tipY } = FB_GEOM.tip(colIdx, dir);
     const leftPct = (tipX/FB_VIEW.w*100).toFixed(2)+'%';
     const list = state.ishikawa[cat.key];
-    const chips = list.map((c,idx)=>chipHtml(cat,c,idx,atLimit)).join('');
+    const chips = list.map((c,idx)=>chipHtml(cat,c,idx,atLimit,noneSelected)).join('');
     const isFocus = focusCat && focusCat.key===cat.key;
     const posStyle = dir==='top'
       ? `left:${leftPct}; bottom:${(100-(tipY/FB_VIEW.h*100)).toFixed(2)}%;`
@@ -2871,8 +2912,18 @@ function renderFishboneDiagram(){
       <span>${boldFirstSentence(L('Enfócate en '+focusCat.name.toUpperCase()+' por ahora.','Focus on '+trs(focusCat.name).toUpperCase()+' for now.'))} ${esc(focusCat.tip)}</span>
     </div>` : '';
 
+  const howto = `
+    <div class="fb-howto">
+      <span class="fb-howto-box"><i>✓</i></span>
+      <span>${L('<b>Paso clave:</b> marca la casilla <b>☐</b> de cada causa que consideres <b>más probable</b> (hasta '+REF.maxSelectedCauses+'). <b>Solo las marcadas pasan a Priorización.</b> Pasa el cursor o toca una causa para leerla completa.','<b>Key step:</b> tick the <b>☐</b> box on each cause you find <b>most likely</b> (up to '+REF.maxSelectedCauses+'). <b>Only ticked causes go to Prioritization.</b> Hover or tap a cause to read it in full.')}</span>
+    </div>`;
+  const nextSec = SECTIONS[SECTIONS.findIndex(x=>x.key==='ishikawa')+1];
+  const selCta = selectedCount>=1
+    ? `<button type="button" class="btn btn-primary fb-sel-cta" data-action="scroll-to-section" data-target="${nextSec?nextSec.key:'matrix'}">${L('Continuar a','Continue to')} ${esc(nextSec?nextSec.label:'Priorización')} →</button>`
+    : `<span class="fb-sel-hint">${L('☝ Marca al menos 1 causa para continuar','☝ Tick at least 1 cause to continue')}</span>`;
   return `
     ${banner}
+    ${howto}
     <div class="fb-wrap">
       <div class="fb-canvas fb-diagram ${focusCat?'guided-focus':''}">
         ${fishboneBackgroundSvg()}
@@ -2883,6 +2934,7 @@ function renderFishboneDiagram(){
       <span class="selection-count"><b>${selectedCount}</b> / ${REF.maxSelectedCauses} seleccionadas para priorizar</span>
       <div class="selection-bar-track"><div class="selection-bar-fill" style="width:${Math.min(100,selectedCount/REF.maxSelectedCauses*100)}%"></div></div>
       ${atLimit?'<span class="badge badge-warning">Límite alcanzado</span>':''}
+      ${selCta}
     </div>
   `;
 }
@@ -3039,6 +3091,48 @@ ACTIONS['remove-cause'] = (ds)=>{
   if(state.ishikawa[ds.cat].length===0) state.ishikawa[ds.cat].push(freshCause(ds.cat));
   scheduleSave(); renderMain();
 };
+
+/* Ventana emergente con el texto completo de una causa (hover / toque / foco) */
+(function(){
+  let pop=null, hideT=null, curChip=null;
+  function ensure(){ if(!pop){ pop=document.createElement('div'); pop.id='fb-pop'; document.body.appendChild(pop); } return pop; }
+  function chipOf(t){ return t && t.closest ? t.closest('.fb-chip') : null; }
+  function show(chip, tipText){
+    clearTimeout(hideT);
+    const inp = chip.querySelector('.fb-chip-input');
+    const txt = ((inp&&inp.value)||'').trim();
+    const sel = chip.classList.contains('selected');
+    if(!txt && !tipText) return hide();
+    const el=ensure(); curChip=chip;
+    el.innerHTML = (txt?'<span class="fbp-text"></span>':'') + '<span class="fbp-hint"></span>';
+    if(txt) el.querySelector('.fbp-text').textContent = txt;
+    el.querySelector('.fbp-hint').textContent = tipText || (sel
+      ? L('✓ Seleccionada: pasa a Priorización','✓ Selected: goes to Prioritization')
+      : L('☐ Marca la casilla para llevarla a Priorización','☐ Tick the box to send it to Prioritization'));
+    if(!txt) el.querySelector('.fbp-hint').style.cssText='border:0;margin:0;padding:0';
+    el.classList.add('show');
+    const r=chip.getBoundingClientRect(), w=el.offsetWidth, h=el.offsetHeight;
+    let left=Math.min(Math.max(8, r.left), innerWidth-w-8);
+    let top=r.top-h-8; if(top<8) top=r.bottom+8;
+    el.style.left=left+'px'; el.style.top=top+'px';
+  }
+  function hide(){ if(pop) pop.classList.remove('show'); curChip=null; }
+  document.addEventListener('mouseover', e=>{
+    const chk=e.target.closest && e.target.closest('.fb-check');
+    const c=chipOf(e.target); if(!c) return;
+    show(c, chk ? chk.dataset.fbtip : null);
+  });
+  document.addEventListener('mouseout', e=>{ const c=chipOf(e.target); if(c && !c.contains(e.relatedTarget) && document.activeElement!==c.querySelector('.fb-chip-input')) hide(); });
+  document.addEventListener('focusin', e=>{ const c=chipOf(e.target); if(c && e.target.classList.contains('fb-chip-input')) show(c); });
+  document.addEventListener('focusout', e=>{ if(chipOf(e.target)) hide(); });
+  document.addEventListener('input', e=>{ const c=chipOf(e.target); if(c && c===curChip) show(c); });
+  document.addEventListener('touchstart', e=>{
+    const c=chipOf(e.target);
+    if(c && !e.target.closest('.fb-check') && !e.target.closest('.fb-chip-remove')){ show(c); clearTimeout(hideT); hideT=setTimeout(hide,3500); }
+    else if(!c) hide();
+  }, {passive:true});
+  window.addEventListener('scroll', hide, {passive:true});
+})();
 ACTIONS['toggle-cause'] = (ds)=>{
   const idx = parseInt(ds.idx,10);
   const cause = state.ishikawa[ds.cat][idx];
