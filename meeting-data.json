@@ -10,7 +10,8 @@
           "09:30"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/s/OperationalExcellence/IgD1jDPd8UGfSoi7l8cHzAoFAYWmmE6B5HeMcnOXDLrDHVs?email=krebolledo%40iti.cl&e=RBTCYs",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -21,7 +22,8 @@
           "10:30"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/s/OperationalExcellence/IgBGdhfpWVbnSZpZkJ7NuLLgAe-4ZSjkUWJst-xuFIVCrLU?email=krebolledo%40iti.cl&e=RTNLQE",
+        "ppt": ""
       },
       {
         "name": "Shift Change",
@@ -34,7 +36,8 @@
           "23:15"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ITI/Shift%20Change?d=w50e83dd3c5fd41d1aef3dbb88e882abd&csf=1&web=1&e=9UfeSq",
+        "ppt": ""
       },
       {
         "name": "Safety",
@@ -45,7 +48,8 @@
           "10:55"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/s/OperationalExcellence/IgAR9TqhBaJWQJqWrqOvg3l-AbC8dpgzkM9BUGgcwHB2Ntk?email=krebolledo%40iti.cl&e=ErELJt",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
@@ -54,7 +58,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ITI/Maintenance?d=w5065e633cf864cbc9cb41ba25bf2722b&csf=1&web=1&e=gfjgWY",
+        "ppt": ""
       },
       {
         "name": "Security",
@@ -65,7 +70,8 @@
           "09:00"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/s/OperationalExcellence/IgAR9TqhBaJWQJqWrqOvg3l-AbC8dpgzkM9BUGgcwHB2Ntk?email=krebolledo%40iti.cl&e=hFcOcm",
+        "ppt": ""
       }
     ],
     "weekly": [
@@ -78,7 +84,8 @@
           "16:30"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/s/OperationalExcellence/IgA4chdQ6bG2QrK9hBNBjEYhAf9YzXnCNMbmfk5L0Qcwtg8?email=krebolledo%40iti.cl&e=LBtW07",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -89,7 +96,8 @@
           "06:10"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/s/OperationalExcellence/IgBGdhfpWVbnSZpZkJ7NuLLgAe-4ZSjkUWJst-xuFIVCrLU?email=krebolledo%40iti.cl&e=RTNLQE",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
@@ -100,7 +108,8 @@
           "16:00"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ITI/Maintenance?d=w5065e633cf864cbc9cb41ba25bf2722b&csf=1&web=1&e=gfjgWY",
+        "ppt": ""
       },
       {
         "name": "Safety",
@@ -112,7 +121,8 @@
           "18:30"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/s/OperationalExcellence/IgAR9TqhBaJWQJqWrqOvg3l-AbC8dpgzkM9BUGgcwHB2Ntk?email=krebolledo%40iti.cl&e=ErELJt",
+        "ppt": ""
       },
       {
         "name": "Commercial",
@@ -121,7 +131,8 @@
         "day": "",
         "times": [],
         "status": "pending",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ITI/Commercial?d=wc566a204c0da4ce7b3dabf204aa86a09&csf=1&web=1&e=q55neY",
+        "ppt": ""
       },
       {
         "name": "Adm & Finance",
@@ -130,7 +141,8 @@
         "day": "",
         "times": [],
         "status": "pending",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/s/OperationalExcellence/IgBH8gNIPS1oTY0YVqS5ZuA3AeYF2WXgNrUzmLvirCiQSrA?email=krebolledo%40iti.cl&e=UtWndQ",
+        "ppt": ""
       },
       {
         "name": "Human Resources",
@@ -139,7 +151,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ITI/Human%20Resources?d=wcd1ab9274384452d8eaf93f6bcd2b569&csf=1&web=1&e=C70wN7",
+        "ppt": ""
       },
       {
         "name": "Control Management",
@@ -148,7 +161,8 @@
         "day": "",
         "times": [],
         "status": "pending",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ITI/Management?d=w42c9549ed2c94d3fbb96efd90e586703&csf=1&web=1&e=2oMMcW",
+        "ppt": ""
       }
     ],
     "monthly": [
@@ -161,7 +175,8 @@
           "12:00"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/s/OperationalExcellence/IgA4chdQ6bG2QrK9hBNBjEYhAf9YzXnCNMbmfk5L0Qcwtg8?email=krebolledo%40iti.cl&e=LBtW07",
+        "ppt": ""
       },
       {
         "name": "Control Management",
@@ -170,7 +185,8 @@
         "day": "",
         "times": [],
         "status": "pending",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ITI/Management?d=w42c9549ed2c94d3fbb96efd90e586703&csf=1&web=1&e=zUnEGZ",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -179,7 +195,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/s/OperationalExcellence/IgBGdhfpWVbnSZpZkJ7NuLLgAe-4ZSjkUWJst-xuFIVCrLU?email=krebolledo%40iti.cl&e=RTNLQE",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
@@ -188,7 +205,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ITI/Maintenance?d=w5065e633cf864cbc9cb41ba25bf2722b&csf=1&web=1&e=gfjgWY",
+        "ppt": ""
       },
       {
         "name": "Safety",
@@ -197,7 +215,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/s/OperationalExcellence/IgAR9TqhBaJWQJqWrqOvg3l-AbC8dpgzkM9BUGgcwHB2Ntk?email=krebolledo%40iti.cl&e=ErELJt",
+        "ppt": ""
       },
       {
         "name": "Security",
@@ -206,7 +225,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/s/OperationalExcellence/IgAR9TqhBaJWQJqWrqOvg3l-AbC8dpgzkM9BUGgcwHB2Ntk?email=krebolledo%40iti.cl&e=hFcOcm",
+        "ppt": ""
       },
       {
         "name": "Commercial",
@@ -215,7 +235,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ITI/Commercial?d=wc566a204c0da4ce7b3dabf204aa86a09&csf=1&web=1&e=q55neY",
+        "ppt": ""
       },
       {
         "name": "Adm & Finance",
@@ -224,7 +245,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/s/OperationalExcellence/IgBH8gNIPS1oTY0YVqS5ZuA3AeYF2WXgNrUzmLvirCiQSrA?email=krebolledo%40iti.cl&e=UtWndQ",
+        "ppt": ""
       },
       {
         "name": "Human Resources",
@@ -233,7 +255,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ITI/Human%20Resources?d=wcd1ab9274384452d8eaf93f6bcd2b569&csf=1&web=1&e=C70wN7",
+        "ppt": ""
       }
     ]
   },
@@ -248,7 +271,8 @@
           "09:30"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ATI/Cross%20Functional?d=w33241f596e184a7f858c95bdcfe3964e&csf=1&web=1&e=cly9If",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -257,7 +281,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ATI/Operaciones?d=wc040c0e4bdb0434b9172316b50fe2bc4&csf=1&web=1&e=CLgvMO",
+        "ppt": ""
       },
       {
         "name": "SSO and Excellence Division / Environment Division",
@@ -268,7 +293,8 @@
           "16:00"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ATI/Div%20SSO%20y%20Excelencia?d=w4f27b0c5f3f34db7af3c607d55bc4f68&csf=1&web=1&e=GjCmOn",
+        "ppt": ""
       },
       {
         "name": "Equipment Maintenance",
@@ -277,7 +303,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ATI/Mantenci%C3%B3n%20Equipos?d=w0262c2c29ac4494e8d25db59745d2a8c&csf=1&web=1&e=2f2RuT",
+        "ppt": ""
       },
       {
         "name": "RAEC Maintenance",
@@ -286,7 +313,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ATI/Mantenci%C3%B3n%20RAEC?d=wbccb14153dfc46de97a16e2abf0d5dd3&csf=1&web=1&e=w80lsW",
+        "ppt": ""
       }
     ],
     "weekly": [
@@ -299,7 +327,8 @@
           "15:30"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ATI/Comit%C3%A9%20Ejecutivo?d=w9f70f7cb4036437e8fa3dd0e5b829b1a&csf=1&web=1&e=qbEmUy",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -308,7 +337,8 @@
         "day": "Mon",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ATI/Operaciones?d=wc040c0e4bdb0434b9172316b50fe2bc4&csf=1&web=1&e=CLgvMO",
+        "ppt": ""
       },
       {
         "name": "SSO and Excellence Division",
@@ -317,7 +347,8 @@
         "day": "Tue",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ATI/Div%20SSO%20y%20Excelencia?d=w4f27b0c5f3f34db7af3c607d55bc4f68&csf=1&web=1&e=GjCmOn",
+        "ppt": ""
       },
       {
         "name": "Equipment Maintenance",
@@ -326,7 +357,8 @@
         "day": "Mon",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ATI/Mantenci%C3%B3n%20Equipos?d=w0262c2c29ac4494e8d25db59745d2a8c&csf=1&web=1&e=2f2RuT",
+        "ppt": ""
       },
       {
         "name": "Infrastructure Maintenance",
@@ -335,7 +367,8 @@
         "day": "Fri",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ATI/Mantenci%C3%B3n%20Infraestructura?d=w6cca27057a624de2ad0718d9843cc45f&csf=1&web=1&e=EtMsKw",
+        "ppt": ""
       },
       {
         "name": "Human Resources",
@@ -344,7 +377,8 @@
         "day": "Tue",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ATI/Personas?d=w39c5d826fffc414cba6a4b7841abe8c4&csf=1&web=1&e=OwCKfH",
+        "ppt": ""
       },
       {
         "name": "Commercial",
@@ -353,7 +387,8 @@
         "day": "Mon",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ATI/Comercial?d=wcc1fb04c03384d158a3411f31f6a8a10&csf=1&web=1&e=eHnCDD",
+        "ppt": ""
       },
       {
         "name": "Sustainability and Communications",
@@ -362,7 +397,8 @@
         "day": "Tue",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ATI/Sost%20y%20Comunicaciones?d=wc1a5ae6bc7a24d47823c164913eaca18&csf=1&web=1&e=a1gwB0",
+        "ppt": ""
       },
       {
         "name": "Environment Division",
@@ -371,7 +407,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ATI/Div%20Medio%20Ambiente?d=w243f688b77074e50851c71865f3e66a8&csf=1&web=1&e=CddWew",
+        "ppt": ""
       }
     ],
     "monthly": [
@@ -382,7 +419,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ATI/Comit%C3%A9%20Ejecutivo?d=w9f70f7cb4036437e8fa3dd0e5b829b1a&csf=1&web=1&e=qbEmUy",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -391,7 +429,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ATI/Operaciones?d=wc040c0e4bdb0434b9172316b50fe2bc4&csf=1&web=1&e=CLgvMO",
+        "ppt": ""
       },
       {
         "name": "SSO and Excellence Division",
@@ -400,7 +439,8 @@
         "day": "2nd Mon",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ATI/Div%20SSO%20y%20Excelencia?d=w4f27b0c5f3f34db7af3c607d55bc4f68&csf=1&web=1&e=GjCmOn",
+        "ppt": ""
       },
       {
         "name": "Equipment Maintenance",
@@ -409,7 +449,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ATI/Mantenci%C3%B3n%20Equipos?d=w0262c2c29ac4494e8d25db59745d2a8c&csf=1&web=1&e=2f2RuT",
+        "ppt": ""
       },
       {
         "name": "Infrastructure Maintenance",
@@ -418,7 +459,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ATI/Mantenci%C3%B3n%20Infraestructura?d=w6cca27057a624de2ad0718d9843cc45f&csf=1&web=1&e=EtMsKw",
+        "ppt": ""
       },
       {
         "name": "Human Resources",
@@ -427,7 +469,8 @@
         "day": "1st Tue",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ATI/Personas?d=w39c5d826fffc414cba6a4b7841abe8c4&csf=1&web=1&e=OwCKfH",
+        "ppt": ""
       },
       {
         "name": "Commercial",
@@ -438,7 +481,8 @@
           "11:30"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ATI/Comercial?d=wcc1fb04c03384d158a3411f31f6a8a10&csf=1&web=1&e=eHnCDD",
+        "ppt": ""
       },
       {
         "name": "Sustainability and Communications",
@@ -447,7 +491,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ATI/Sost%20y%20Comunicaciones?d=wc1a5ae6bc7a24d47823c164913eaca18&csf=1&web=1&e=a1gwB0",
+        "ppt": ""
       },
       {
         "name": "Environment Division",
@@ -456,7 +501,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/ATI/Div%20Medio%20Ambiente?d=w243f688b77074e50851c71865f3e66a8&csf=1&web=1&e=CddWew",
+        "ppt": ""
       }
     ]
   },
@@ -472,7 +518,8 @@
           "14:00"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TMAZ/X-Functional?d=w575ce3e8eb9e4f5ea96956de36879efd&csf=1&web=1&e=P6zr3y",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -483,7 +530,8 @@
           "12:30"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TMAZ/Operations?d=wf65893fcce0144a9b3eddd13a4c138be&csf=1&web=1&e=U4f8fC",
+        "ppt": ""
       },
       {
         "name": "Vessel Service Operations",
@@ -492,7 +540,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TMAZ/Vessel%20Service%20Operations?d=w5ea59a769aee48dea1ba02c7f9cc81ae&csf=1&web=1&e=ajRmcz",
+        "ppt": ""
       },
       {
         "name": "Yard Service Operations",
@@ -501,7 +550,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TMAZ/Yard%20Service%20Operations?d=wabd02bbf88e248a09ee8695acb77fe05&csf=1&web=1&e=R7h923",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
@@ -512,7 +562,8 @@
           "14:00"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TMAZ/Maintenance?d=we774c9618b3c4491938cbc41e498fe2b&csf=1&web=1&e=Udbvb7",
+        "ppt": ""
       },
       {
         "name": "SSO",
@@ -521,7 +572,8 @@
         "day": "",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TMAZ/SSO?d=w10cbd0fb983b48b48836724b1559a943&csf=1&web=1&e=ytZ7CB",
+        "ppt": ""
       },
       {
         "name": "Shift Change Vessel",
@@ -530,7 +582,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TMAZ/Shift%20Change%20Vessel?d=wfda1ba83555a4d32ac3c9d319038bb0b&csf=1&web=1&e=qc6Z9G",
+        "ppt": ""
       },
       {
         "name": "IT",
@@ -541,7 +594,8 @@
           "13:00"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TMAZ/IT?d=w52e164d7221d4cf8909b7e6244076862&csf=1&web=1&e=LPmJ3P",
+        "ppt": ""
       },
       {
         "name": "Procurement",
@@ -550,7 +604,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TMAZ/Procurement?d=w71e0693cae1c45869ae2efaed926fa47&csf=1&web=1&e=5LbNsi",
+        "ppt": ""
       },
       {
         "name": "Security",
@@ -559,7 +614,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TMAZ/Security?d=w1e434c6b999444629e40d8040026f7cb&csf=1&web=1&e=EWb0N7",
+        "ppt": ""
       },
       {
         "name": "Accounting",
@@ -568,7 +624,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TMAZ/Accounting?d=w7a88e4fa3777470eb0706c86518840e6&csf=1&web=1&e=YtCaHy",
+        "ppt": ""
       },
       {
         "name": "Invoicing",
@@ -577,7 +634,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TMAZ/Invoicing?d=w489b1ebcd4ab4613885b36efb714c314&csf=1&web=1&e=6hfrVR",
+        "ppt": ""
       },
       {
         "name": "Management control",
@@ -586,7 +644,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TMAZ/Management%20control?d=w8ced9c728b114aa98384792e5fdfa8f5&csf=1&web=1&e=iyMceM",
+        "ppt": ""
       }
     ],
     "weekly": [
@@ -597,7 +656,8 @@
         "day": "Mon",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TMAZ/Maintenance?d=we774c9618b3c4491938cbc41e498fe2b&csf=1&web=1&e=Udbvb7",
+        "ppt": ""
       },
       {
         "name": "Senior Management Meeting",
@@ -606,7 +666,8 @@
         "day": "Wed",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TMAZ/Senior%20Management%20Meeting?d=wa286740eb7e74814924a3941d16fa447&csf=1&web=1&e=RgXRtB",
+        "ppt": ""
       },
       {
         "name": "Sustainability and Environment",
@@ -615,7 +676,8 @@
         "day": "Tue",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TMAZ/Sustainability%20and%20Environment?d=w6f2d3554cd80497ca79b5c84a088c99e&csf=1&web=1&e=KkZQAh",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -624,7 +686,8 @@
         "day": "Wed",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TMAZ/Operations?d=wf65893fcce0144a9b3eddd13a4c138be&csf=1&web=1&e=U4f8fC",
+        "ppt": ""
       },
       {
         "name": "Finance",
@@ -633,7 +696,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TMAZ/Finance?d=we2feacbf25764e9ea0427ce832df1ad3&csf=1&web=1&e=BoI7sn",
+        "ppt": ""
       }
     ],
     "monthly": [
@@ -644,7 +708,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TMAZ/Senior%20Management%20Meeting?d=wa286740eb7e74814924a3941d16fa447&csf=1&web=1&e=PhQGCv",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -653,7 +718,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TMAZ/Operations?d=wf65893fcce0144a9b3eddd13a4c138be&csf=1&web=1&e=U4f8fC",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
@@ -662,7 +728,8 @@
         "day": "Last Mon",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TMAZ/Maintenance?d=we774c9618b3c4491938cbc41e498fe2b&csf=1&web=1&e=Udbvb7",
+        "ppt": ""
       }
     ]
   },
@@ -677,7 +744,8 @@
           "09:30"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/X-functional?d=w11cf24d7ee8c4212943a8dc0dfdfd35c&csf=1&web=1&e=1n0cDt",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -685,19 +753,21 @@
         "multi": false,
         "day": "",
         "times": [
-          "11:30"
+          "10:30"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Operations?d=wa3fd611b76c54caf970a396fdf757e65&csf=1&web=1&e=M2Oj96",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
         "desc": "",
         "multi": false,
         "day": "",
-        "times": [],
-        "status": "undef",
-        "link": ""
+        "times": ["10:00"],
+        "status": "ok",
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Maintenance?d=w428b8592b54449e9a52c00a3e550725d&csf=1&web=1&e=96I7IP",
+        "ppt": ""
       },
       {
         "name": "HSE",
@@ -705,10 +775,11 @@
         "multi": false,
         "day": "",
         "times": [
-          "11:30"
+          "09:45"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/HSE?d=wd6a8920b250b4dd8aac9c0591a6d9f8e&csf=1&web=1&e=DlmOfR",
+        "ppt": ""
       },
       {
         "name": "Commercial",
@@ -716,10 +787,11 @@
         "multi": false,
         "day": "",
         "times": [
-          "12:30"
+          "09:45"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Commercial?d=wd04a99dccc8348d1bc16020bfab2fb75&csf=1&web=1&e=GMfml5",
+        "ppt": ""
       },
       {
         "name": "IT",
@@ -727,10 +799,11 @@
         "multi": false,
         "day": "",
         "times": [
-          "11:30"
+          "09:30"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/IT?d=w6489318c451446efa9fd7acd93c9ba1f&csf=1&web=1&e=mWGzL8",
+        "ppt": ""
       },
       {
         "name": "Infrastructure and Construction",
@@ -738,10 +811,11 @@
         "multi": false,
         "day": "",
         "times": [
-          "10:30"
+          "09:30"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Infraestructure?d=w4309e11dac514bdeb1f1b16a85f558a0&csf=1&web=1&e=mzLyms",
+        "ppt": ""
       },
       {
         "name": "Security",
@@ -749,10 +823,11 @@
         "multi": false,
         "day": "",
         "times": [
-          "10:30"
+          "08:40"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Security?d=w2b92006372c14b2793dc3fd2d69a94f5&csf=1&web=1&e=9Ypmgz",
+        "ppt": ""
       },
       {
         "name": "Shift Change Yard/Vessel",
@@ -760,12 +835,13 @@
         "multi": false,
         "day": "",
         "times": [
-          "09:30",
-          "16:30",
-          "23:30"
+          "07:00",
+          "15:00",
+          "23:00"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Operations?d=wa3fd611b76c54caf970a396fdf757e65&csf=1&web=1&e=M2Oj96",
+        "ppt": "https://strenaterminals.sharepoint.com/:p:/s/OperationalExcellence/IQAs_c0TPJ57RpzpgsRIoPzxATC7Al4LNQO4Brt020EJdIg?email=carolina.arevalo%40tpg.com.ec&e=FDPgfo"
       },
       {
         "name": "Inspections TPG 1",
@@ -773,12 +849,13 @@
         "multi": false,
         "day": "",
         "times": [
-          "01:00",
-          "09:00",
-          "15:30"
+          "07:00",
+          "15:00",
+          "23:00"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Operations?d=wa3fd611b76c54caf970a396fdf757e65&csf=1&web=1&e=M2Oj96",
+        "ppt": "https://strenaterminals.sharepoint.com/:p:/s/OperationalExcellence/IQCetcF4e8nhTaedvlfi4JJZAch8BCg2PqXheDB-He9o2I8?email=carolina.arevalo%40tpg.com.ec&e=ub3fQ2"
       },
       {
         "name": "Shift Change TPG 2",
@@ -786,10 +863,12 @@
         "multi": false,
         "day": "",
         "times": [
-          "08:30"
+          "07:00",
+          "19:00"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Operations?d=wa3fd611b76c54caf970a396fdf757e65&csf=1&web=1&e=M2Oj96",
+        "ppt": "https://strenaterminals.sharepoint.com/:p:/s/OperationalExcellence/IQAKnnY4vke1RL8eM6TgwajDAfGCKpEQk1CZ_5MK4FamB_Y?email=carolina.arevalo%40tpg.com.ec&e=Dpdypn"
       },
       {
         "name": "Inspections Area TPG 2",
@@ -797,11 +876,11 @@
         "multi": false,
         "day": "",
         "times": [
-          "13:30",
-          "21:00"
+          "09:30"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Operations?d=wa3fd611b76c54caf970a396fdf757e65&csf=1&web=1&e=M2Oj96",
+        "ppt": "https://strenaterminals.sharepoint.com/:p:/s/OperationalExcellence/IQBvJ8pnd2JfRq2EOltyMaPDAR2TWVOS2MgmEXtBnjxhNrQ?email=carolina.arevalo%40tpg.com.ec&e=dc399J"
       },
       {
         "name": "CFS",
@@ -809,10 +888,11 @@
         "multi": false,
         "day": "",
         "times": [
-          "14:00"
+          "09:30"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Operations?d=wa3fd611b76c54caf970a396fdf757e65&csf=1&web=1&e=M2Oj96",
+        "ppt": "https://strenaterminals.sharepoint.com/:p:/s/OperationalExcellence/IQCPkzGvihOrRpGHvUgG-4EEAS8Y-mqbngDe0rAWbkjRvdU?email=carolina.arevalo%40tpg.com.ec&e=wwQ06A"
       },
       {
         "name": "Reefer Area",
@@ -820,12 +900,13 @@
         "multi": false,
         "day": "",
         "times": [
-          "04:00",
-          "10:00",
-          "18:30"
+          "07:00",
+          "15:00",
+          "23:00"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Operations?d=wa3fd611b76c54caf970a396fdf757e65&csf=1&web=1&e=M2Oj96",
+        "ppt": "https://strenaterminals.sharepoint.com/:p:/s/OperationalExcellence/IQCfX1rY9as3Qb4g6fC7FaYZARO-SbGbZNDZdcWsqIotx3U?email=carolina.arevalo%40tpg.com.ec&e=VyHKMj"
       }
     ],
     "weekly": [
@@ -833,19 +914,21 @@
         "name": "Senior Management Meeting",
         "desc": "",
         "multi": true,
-        "day": "Tue",
-        "times": [],
+        "day": "Wed",
+        "times": ["10:00"],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Senior%20Management%20Meeting?d=wb55709c31a8642fa93e78000568112fd&csf=1&web=1&e=XZtim5",
+        "ppt": ""
       },
       {
         "name": "Operations",
         "desc": "",
         "multi": false,
         "day": "Thu",
-        "times": [],
+        "times": ["11:00"],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Operations?d=wa3fd611b76c54caf970a396fdf757e65&csf=1&web=1&e=BY9Je3",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
@@ -853,79 +936,85 @@
         "multi": false,
         "day": "Mon",
         "times": [
-          "19:30"
+          "11:30"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Maintenance?d=w428b8592b54449e9a52c00a3e550725d&csf=1&web=1&e=96I7IP",
+        "ppt": ""
       },
       {
         "name": "HSE",
         "desc": "",
         "multi": false,
-        "day": "Thu",
+        "day": "",
         "times": [],
-        "status": "ok",
-        "link": ""
+        "status": "undef",
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/HSE?d=wd6a8920b250b4dd8aac9c0591a6d9f8e&csf=1&web=1&e=DlmOfR",
+        "ppt": ""
       },
       {
         "name": "Commercial",
         "desc": "",
         "multi": false,
-        "day": "Mon",
-        "times": [
-          "18:00"
-        ],
-        "status": "ok",
-        "link": ""
+        "day": "",
+        "times": [],
+        "status": "undef",
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Commercial?d=wd04a99dccc8348d1bc16020bfab2fb75&csf=1&web=1&e=GMfml5",
+        "ppt": ""
       },
       {
         "name": "IT",
         "desc": "",
         "multi": false,
-        "day": "Fri",
+        "day": "",
         "times": [],
-        "status": "ok",
-        "link": ""
+        "status": "undef",
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/IT?d=w6489318c451446efa9fd7acd93c9ba1f&csf=1&web=1&e=mWGzL8",
+        "ppt": ""
       },
       {
         "name": "Infrastructure and Construction",
         "desc": "",
         "multi": false,
-        "day": "Tue",
+        "day": "",
         "times": [],
-        "status": "ok",
-        "link": ""
+        "status": "undef",
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Infraestructure?d=w4309e11dac514bdeb1f1b16a85f558a0&csf=1&web=1&e=mzLyms",
+        "ppt": ""
       },
       {
         "name": "Finance",
         "desc": "",
         "multi": false,
-        "day": "",
+        "day": "Mon",
         "times": [
-          "17:00"
+          "15:00"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Admin%20%26%20Finance?d=wd6591725adbc4307849ce5801546951e&csf=1&web=1&e=N54lEk",
+        "ppt": ""
       },
       {
         "name": "Human Resources",
         "desc": "",
         "multi": false,
-        "day": "Tue",
+        "day": "Wed",
         "times": [
-          "13:30"
+          "16:00"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/HR?d=wad7ac4364880453d80b12ad086f0078a&csf=1&web=1&e=2ct6PS",
+        "ppt": ""
       },
       {
         "name": "Security",
         "desc": "",
         "multi": false,
-        "day": "Fri",
-        "times": [],
+        "day": "Thu",
+        "times": ["10:00"],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Security?d=w2b92006372c14b2793dc3fd2d69a94f5&csf=1&web=1&e=Au8LDU",
+        "ppt": ""
       },
       {
         "name": "Projects",
@@ -934,7 +1023,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Projects?d=w7ed7b6e4a5d241c88207066c63210b5c&csf=1&web=1&e=i0jgCJ",
+        "ppt": ""
       }
     ],
     "monthly": [
@@ -942,75 +1032,83 @@
         "name": "Senior Management Meeting",
         "desc": "",
         "multi": true,
-        "day": "",
-        "times": [],
+        "day": "Last Fri",
+        "times": ["12:00"],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Senior%20Management%20Meeting?d=wb55709c31a8642fa93e78000568112fd&csf=1&web=1&e=P4QyEG",
+        "ppt": ""
       },
       {
         "name": "Operations",
         "desc": "",
         "multi": false,
-        "day": "",
-        "times": [],
+        "day": "First Tu",
+        "times": ["15:00"],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Operations?d=wa3fd611b76c54caf970a396fdf757e65&csf=1&web=1&e=2Ux5nR",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
         "desc": "",
         "multi": false,
-        "day": "2nd Tue",
-        "times": [],
+        "day": "First Tue",
+        "times": ["10:00"],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Maintenance?d=w428b8592b54449e9a52c00a3e550725d&csf=1&web=1&e=96I7IP",
+        "ppt": ""
       },
       {
         "name": "HSE",
         "desc": "",
         "multi": false,
-        "day": "1st Mon",
+        "day": "",
         "times": [],
-        "status": "ok",
-        "link": ""
+        "status": "undef",
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/HSE?d=wd6a8920b250b4dd8aac9c0591a6d9f8e&csf=1&web=1&e=DlmOfR",
+        "ppt": ""
       },
       {
         "name": "Commercial",
         "desc": "",
         "multi": false,
-        "day": "3rd Thu",
-        "times": [],
+        "day": "Last Thu",
+        "times": ["10:00"],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Commercial?d=wd04a99dccc8348d1bc16020bfab2fb75&csf=1&web=1&e=GMfml5",
+        "ppt": ""
       },
       {
         "name": "IT",
         "desc": "",
         "multi": false,
-        "day": "Last Wed",
+        "day": "",
         "times": [],
-        "status": "ok",
-        "link": ""
+        "status": "undef",
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/IT?d=w6489318c451446efa9fd7acd93c9ba1f&csf=1&web=1&e=mWGzL8",
+        "ppt": ""
       },
       {
         "name": "Infrastructure and Construction",
         "desc": "",
         "multi": false,
-        "day": "2nd Wed",
+        "day": "",
         "times": [
-          "11:00"
+          ""
         ],
-        "status": "ok",
-        "link": ""
+        "status": "undef",
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Infraestructure?d=w4309e11dac514bdeb1f1b16a85f558a0&csf=1&web=1&e=mzLyms",
+        "ppt": ""
       },
       {
         "name": "Finance",
         "desc": "",
         "multi": false,
         "day": "Last Thu",
-        "times": [],
+        "times": ["15:00"],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Admin%20%26%20Finance?d=wd6591725adbc4307849ce5801546951e&csf=1&web=1&e=zObFjr",
+        "ppt": ""
       },
       {
         "name": "Projects",
@@ -1019,7 +1117,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Projects?d=w7ed7b6e4a5d241c88207066c63210b5c&csf=1&web=1&e=ESZ2X6",
+        "ppt": ""
       },
       {
         "name": "Human Resources",
@@ -1028,16 +1127,18 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/HR?d=wad7ac4364880453d80b12ad086f0078a&csf=1&web=1&e=LB2Uu3",
+        "ppt": ""
       },
       {
         "name": "Security",
         "desc": "",
         "multi": false,
-        "day": "1st Mon",
-        "times": [],
+        "day": "Last Fri",
+        "times": ["10:00"],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Security?d=w2b92006372c14b2793dc3fd2d69a94f5&csf=1&web=1&e=xae769",
+        "ppt": ""
       }
     ]
   },
@@ -1052,7 +1153,8 @@
           "09:30"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SPC/X-Functional?d=w275c6876a2ee4c68b644bcdfc4b570dd&csf=1&web=1&e=BoRGoo",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -1063,7 +1165,8 @@
           "10:00"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SPC/Operations?d=w828be76bc88a4cac8964604ddff1713f&csf=1&web=1&e=mwbddA",
+        "ppt": ""
       },
       {
         "name": "Shift Change",
@@ -1072,7 +1175,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SPC/Shift%20Change?d=w771d3a7c0f3d4b6abcced93c853642c3&csf=1&web=1&e=Q3gjIf",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
@@ -1083,7 +1187,8 @@
           "12:30"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SPC/Maintenance?d=w73a93f0274a2492dae9c9ed2d76820ab&csf=1&web=1&e=hzOCEQ",
+        "ppt": ""
       },
       {
         "name": "Safety",
@@ -1094,7 +1199,8 @@
           "10:30"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SPC/Safety?d=w9a99db70a93849d098c105502a35f017&csf=1&web=1&e=uaE9gu",
+        "ppt": ""
       },
       {
         "name": "Bonded Warehouse",
@@ -1103,7 +1209,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SPC/Bonded%20Warehouse?d=wf6be4764bb3744cd83d44ad646191eba&csf=1&web=1&e=VciZNV",
+        "ppt": ""
       }
     ],
     "weekly": [
@@ -1114,7 +1221,8 @@
         "day": "Mon",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SPC/Senior%20Management%20Meeting?d=w9695d7ab27a94f2f919f30742b8e9f87&csf=1&web=1&e=sOXLub",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -1123,7 +1231,8 @@
         "day": "Mon",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SPC/Operations?d=w828be76bc88a4cac8964604ddff1713f&csf=1&web=1&e=mwbddA",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
@@ -1132,7 +1241,8 @@
         "day": "Wed",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SPC/Maintenance?d=w73a93f0274a2492dae9c9ed2d76820ab&csf=1&web=1&e=hzOCEQ",
+        "ppt": ""
       },
       {
         "name": "Safety",
@@ -1141,7 +1251,8 @@
         "day": "Thu",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SPC/Safety?d=w9a99db70a93849d098c105502a35f017&csf=1&web=1&e=uaE9gu",
+        "ppt": ""
       },
       {
         "name": "Human resources and security",
@@ -1150,7 +1261,8 @@
         "day": "Mon",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SPC/Human%20resources%20and%20security?d=wed50c88ab8ed43d087857c47e755cbd3&csf=1&web=1&e=6fdfDJ",
+        "ppt": ""
       },
       {
         "name": "Administration & management",
@@ -1159,7 +1271,8 @@
         "day": "Thu",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SPC/Administration%20%26%20management?d=w7eb56a2d389c44a7a1149fa530853280&csf=1&web=1&e=NYoEdq",
+        "ppt": ""
       },
       {
         "name": "Finance",
@@ -1168,7 +1281,8 @@
         "day": "Tue",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SPC/Finance?d=web04e1fae6c340d89c0a02163ec07d2b&csf=1&web=1&e=o0xKID",
+        "ppt": ""
       },
       {
         "name": "Commercial",
@@ -1177,7 +1291,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SPC/Commercial?d=w144dad34b39e49c19b445abb5e7bed56&csf=1&web=1&e=LpQEzQ",
+        "ppt": ""
       },
       {
         "name": "Bonded Warehouse",
@@ -1186,7 +1301,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SPC/Bonded%20Warehouse?d=wf6be4764bb3744cd83d44ad646191eba&csf=1&web=1&e=VciZNV",
+        "ppt": ""
       }
     ],
     "monthly": [
@@ -1197,7 +1313,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SPC/Senior%20Management%20Meeting?d=w9695d7ab27a94f2f919f30742b8e9f87&csf=1&web=1&e=sOXLub",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -1206,7 +1323,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SPC/Operations?d=w828be76bc88a4cac8964604ddff1713f&csf=1&web=1&e=mwbddA",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
@@ -1215,7 +1333,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SPC/Maintenance?d=w73a93f0274a2492dae9c9ed2d76820ab&csf=1&web=1&e=hzOCEQ",
+        "ppt": ""
       },
       {
         "name": "Safety",
@@ -1224,7 +1343,8 @@
         "day": "Last Tue",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SPC/Safety?d=w9a99db70a93849d098c105502a35f017&csf=1&web=1&e=uaE9gu",
+        "ppt": ""
       },
       {
         "name": "Human Resources and Security",
@@ -1233,7 +1353,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SPC/Human%20resources%20and%20security?d=wed50c88ab8ed43d087857c47e755cbd3&csf=1&web=1&e=6fdfDJ",
+        "ppt": ""
       },
       {
         "name": "Procurement",
@@ -1242,7 +1363,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SPC/Procurement?d=wddccfbbbc3e149febc53307887db4eef&csf=1&web=1&e=OoM3iL",
+        "ppt": ""
       },
       {
         "name": "Commercial",
@@ -1251,7 +1373,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SPC/Commercial?d=w144dad34b39e49c19b445abb5e7bed56&csf=1&web=1&e=LpQEzQ",
+        "ppt": ""
       },
       {
         "name": "Bonded Warehouse",
@@ -1260,7 +1383,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SPC/Bonded%20Warehouse?d=wf6be4764bb3744cd83d44ad646191eba&csf=1&web=1&e=VciZNV",
+        "ppt": ""
       }
     ]
   },
@@ -1275,7 +1399,8 @@
           "09:30"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/STI/X-Functional?d=w7e269291ceeb44f58519377b9cc827de&csf=1&web=1&e=908qUp",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -1284,7 +1409,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/STI/Operations?d=w1134ed8059d64ed7949cdab63ce29eb5&csf=1&web=1&e=0ImbN7",
+        "ppt": ""
       },
       {
         "name": "OPS Vessel",
@@ -1293,7 +1419,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/STI/OPS%20Vessel?d=w2f2faa4c86474288afa01673f68469fb&csf=1&web=1&e=xygePP",
+        "ppt": ""
       },
       {
         "name": "Terminals",
@@ -1302,7 +1429,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/STI/Terminals?d=w1c795a7ffa9b4116aec2b03c0ff62568&csf=1&web=1&e=78NvPs",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
@@ -1311,7 +1439,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/STI/Maintenance?d=wdda979bc8c1e4478b2df6b11f40bdc28&csf=1&web=1&e=o2lhvj",
+        "ppt": ""
       },
       {
         "name": "HSSE",
@@ -1320,7 +1449,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/STI/HSSE?d=wd1325b7cf39e4331b685c5d3b86ba29c&csf=1&web=1&e=hbu7Xf",
+        "ppt": ""
       },
       {
         "name": "Infrastructure",
@@ -1329,7 +1459,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/STI/Infrastructure?d=wf579b51ba1974c078cd8f1bea646d3b7&csf=1&web=1&e=xYdiqp",
+        "ppt": ""
       },
       {
         "name": "Admin-Finance",
@@ -1338,7 +1469,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/STI/Admin-Finance?d=w8ccd4b533291486ba5512b95a12033dd&csf=1&web=1&e=apdlOs",
+        "ppt": ""
       },
       {
         "name": "Shift Change",
@@ -1347,7 +1479,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/STI/Shift%20Change?d=w6fe321f9042945d8a7615045e0c7b75b&csf=1&web=1&e=pfuazo",
+        "ppt": ""
       }
     ],
     "weekly": [
@@ -1358,7 +1491,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/STI/Senior%20Management%20Meeting?d=w5184b57da250465da75742be91a21a8e&csf=1&web=1&e=iX6a4e",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -1367,7 +1501,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/STI/Operations?d=w1134ed8059d64ed7949cdab63ce29eb5&csf=1&web=1&e=0ImbN7",
+        "ppt": ""
       },
       {
         "name": "Maintenance & CCWW",
@@ -1376,7 +1511,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/STI/Maintenance?d=wdda979bc8c1e4478b2df6b11f40bdc28&csf=1&web=1&e=o2lhvj",
+        "ppt": ""
       },
       {
         "name": "HSSE",
@@ -1385,7 +1521,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/STI/HSSE?d=wd1325b7cf39e4331b685c5d3b86ba29c&csf=1&web=1&e=hbu7Xf",
+        "ppt": ""
       },
       {
         "name": "People",
@@ -1394,7 +1531,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/STI/People?d=w3fdabd150e9740f68a15811bab7673cf&csf=1&web=1&e=hlTkHs",
+        "ppt": ""
       },
       {
         "name": "Finance",
@@ -1403,7 +1541,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/STI/Finance?d=w059f46e00eaf4c818d2ce23491539800&csf=1&web=1&e=iRrJ5n",
+        "ppt": ""
       },
       {
         "name": "Commercial",
@@ -1412,7 +1551,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/STI/Commercial?d=wc75401825e834e9492f0f17a6277cc96&csf=1&web=1&e=VhOXSf",
+        "ppt": ""
       }
     ],
     "monthly": [
@@ -1423,7 +1563,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/STI/Senior%20Management%20Meeting?d=w5184b57da250465da75742be91a21a8e&csf=1&web=1&e=iX6a4e",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -1432,7 +1573,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/STI/Operations?d=w1134ed8059d64ed7949cdab63ce29eb5&csf=1&web=1&e=0ImbN7",
+        "ppt": ""
       },
       {
         "name": "Maintenance & CCWW",
@@ -1441,7 +1583,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/STI/Maintenance?d=wdda979bc8c1e4478b2df6b11f40bdc28&csf=1&web=1&e=o2lhvj",
+        "ppt": ""
       },
       {
         "name": "PRYMA",
@@ -1450,7 +1593,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/STI/PRYMA?d=w4302755829b4480e80cd8b102e637546&csf=1&web=1&e=uHpinG",
+        "ppt": ""
       },
       {
         "name": "People",
@@ -1459,7 +1603,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/STI/People?d=w3fdabd150e9740f68a15811bab7673cf&csf=1&web=1&e=hlTkHs",
+        "ppt": ""
       },
       {
         "name": "Finance",
@@ -1468,7 +1613,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/STI/Finance?d=w059f46e00eaf4c818d2ce23491539800&csf=1&web=1&e=iRrJ5n",
+        "ppt": ""
       },
       {
         "name": "Commercial",
@@ -1477,7 +1623,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/STI/Commercial?d=wc75401825e834e9492f0f17a6277cc96&csf=1&web=1&e=VhOXSf",
+        "ppt": ""
       }
     ]
   },
@@ -1492,7 +1639,8 @@
           "09:45"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/X-Functional?d=w1d79d91c1fa34c2eafe2e6cd9e9b3cac&csf=1&web=1&e=DKozAN",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -1501,7 +1649,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/Operations?d=w6cab3ad89c694c65a0c3228ce1b41e97&csf=1&web=1&e=DkCnwR",
+        "ppt": ""
       },
       {
         "name": "Operations: CFS",
@@ -1510,7 +1659,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/Operations%20CFS?d=we25ae10e7333442eba7ae106db68eb1b&csf=1&web=1&e=40SNZQ",
+        "ppt": ""
       },
       {
         "name": "Operations: Depot/Yard/Vessel/Gate/Reefer",
@@ -1519,7 +1669,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/Operations%20Depot,Yard,Vessel,Gate,Reefer?d=wfe8a7805ed1148869fb7d78d7ae70e06&csf=1&web=1&e=8KhfOf",
+        "ppt": ""
       },
       {
         "name": "Safety",
@@ -1528,7 +1679,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/Safety?d=wdac30ffe90894681ad119616e4de9db2&csf=1&web=1&e=adEdr8",
+        "ppt": ""
       },
       {
         "name": "Maintenance & Civil Works",
@@ -1537,7 +1689,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/Maintenance%20%26%20Civil%20Works?d=weac7f90cef57432fa033f92f0adea3f9&csf=1&web=1&e=SrwaEP",
+        "ppt": ""
       },
       {
         "name": "Shift Change",
@@ -1546,7 +1699,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/Shift%20Change?d=wc5e368aa0130434faa66b5b00bcfcfab&csf=1&web=1&e=eriFAU",
+        "ppt": ""
       },
       {
         "name": "Security",
@@ -1555,7 +1709,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/Security?d=w69db07933de144888b74319b73bb21f4&csf=1&web=1&e=jeCMrp",
+        "ppt": ""
       }
     ],
     "weekly": [
@@ -1566,7 +1721,8 @@
         "day": "Wed",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/Senior%20Management%20Meeting?d=w70bd1b27966947d3aaaf8499127aa8d9&csf=1&web=1&e=1KM9jJ",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -1575,7 +1731,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/Operations?d=w6cab3ad89c694c65a0c3228ce1b41e97&csf=1&web=1&e=DkCnwR",
+        "ppt": ""
       },
       {
         "name": "Commercial",
@@ -1584,7 +1741,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/Commercial?d=w0d3362bbb2d34540b58645f3fc5904e0&csf=1&web=1&e=6jKuwG",
+        "ppt": ""
       },
       {
         "name": "Adm. & Finance",
@@ -1593,7 +1751,8 @@
         "day": "Tue",
         "times": [],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/Adm.%20%26%20Finance?d=w5c08378d4ca34ebbb43c3e5bde5d7f6a&csf=1&web=1&e=fkeVDc",
+        "ppt": ""
       },
       {
         "name": "Human Resources",
@@ -1602,7 +1761,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/Human%20Resources?d=wb893ef9351d242daaec44679902fd08e&csf=1&web=1&e=kgymIw",
+        "ppt": ""
       },
       {
         "name": "Safety",
@@ -1611,7 +1771,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/Safety?d=wdac30ffe90894681ad119616e4de9db2&csf=1&web=1&e=zeU8PV",
+        "ppt": ""
       },
       {
         "name": "Maintenance & Civil Works",
@@ -1620,7 +1781,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/Maintenance%20%26%20Civil%20Works?d=weac7f90cef57432fa033f92f0adea3f9&csf=1&web=1&e=SrwaEP",
+        "ppt": ""
       },
       {
         "name": "Security",
@@ -1629,7 +1791,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/Security?d=w69db07933de144888b74319b73bb21f4&csf=1&web=1&e=jeCMrp",
+        "ppt": ""
       }
     ],
     "monthly": [
@@ -1640,7 +1803,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/Senior%20Management%20Meeting?d=w70bd1b27966947d3aaaf8499127aa8d9&csf=1&web=1&e=1KM9jJ",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -1649,7 +1813,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/Operations?d=w6cab3ad89c694c65a0c3228ce1b41e97&csf=1&web=1&e=DkCnwR",
+        "ppt": ""
       },
       {
         "name": "Commercial",
@@ -1658,7 +1823,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/Commercial?d=w0d3362bbb2d34540b58645f3fc5904e0&csf=1&web=1&e=6jKuwG",
+        "ppt": ""
       },
       {
         "name": "Adm. & Finance",
@@ -1667,7 +1833,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/Adm.%20%26%20Finance?d=w5c08378d4ca34ebbb43c3e5bde5d7f6a&csf=1&web=1&e=fkeVDc",
+        "ppt": ""
       },
       {
         "name": "Human Resources",
@@ -1676,7 +1843,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/Human%20Resources?d=wb893ef9351d242daaec44679902fd08e&csf=1&web=1&e=kgymIw",
+        "ppt": ""
       },
       {
         "name": "Safety",
@@ -1685,7 +1853,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/Safety?d=wdac30ffe90894681ad119616e4de9db2&csf=1&web=1&e=zeU8PV",
+        "ppt": ""
       },
       {
         "name": "Maintenance & Civil Works",
@@ -1694,7 +1863,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/Maintenance%20%26%20Civil%20Works?d=weac7f90cef57432fa033f92f0adea3f9&csf=1&web=1&e=SrwaEP",
+        "ppt": ""
       },
       {
         "name": "Security",
@@ -1703,7 +1873,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/SVTI/Security?d=w69db07933de144888b74319b73bb21f4&csf=1&web=1&e=jeCMrp",
+        "ppt": ""
       }
     ]
   },
@@ -1718,7 +1889,8 @@
           "11:00"
         ],
         "status": "ok",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/FIT/X-Functional?d=w1fc1edcf9e8046ffb363d38a7c9a0af9&csf=1&web=1&e=rPF87F",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -1727,7 +1899,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/FIT/Operations?d=wacaf6287c25143f7bc36895bdcf46381&csf=1&web=1&e=RklbUp",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
@@ -1736,7 +1909,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/FIT/Maintenance?d=w72aef6f9c8514e3386e64dcaa5adbb93&csf=1&web=1&e=XHgf2Q",
+        "ppt": ""
       }
     ],
     "weekly": [
@@ -1747,7 +1921,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/FIT/Senior%20Management%20Meeting?d=w0b71e808a9cb4dff8606047f4598fb72&csf=1&web=1&e=c1EDaF",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -1756,7 +1931,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/FIT/Operations?d=wacaf6287c25143f7bc36895bdcf46381&csf=1&web=1&e=RklbUp",
+        "ppt": ""
       },
       {
         "name": "Finance",
@@ -1765,7 +1941,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/FIT/Finance?d=w7cb3acb482aa4811b66383a03a438872&csf=1&web=1&e=1RH5lP",
+        "ppt": ""
       },
       {
         "name": "Customer Service",
@@ -1774,7 +1951,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/FIT/Customer%20Service?d=w6ae2553378724aabbcfe08e6cb8027b1&csf=1&web=1&e=JDQwsf",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
@@ -1783,7 +1961,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/FIT/Maintenance?d=w72aef6f9c8514e3386e64dcaa5adbb93&csf=1&web=1&e=XHgf2Q",
+        "ppt": ""
       },
       {
         "name": "HSSE",
@@ -1792,7 +1971,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/FIT/HSSE?d=wecddf634373848f28cb4cdfd6bbdf6c8&csf=1&web=1&e=6fQ680",
+        "ppt": ""
       }
     ],
     "monthly": [
@@ -1803,7 +1983,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/FIT/Operations?d=wacaf6287c25143f7bc36895bdcf46381&csf=1&web=1&e=RklbUp",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
@@ -1812,7 +1993,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/FIT/Maintenance?d=w72aef6f9c8514e3386e64dcaa5adbb93&csf=1&web=1&e=XHgf2Q",
+        "ppt": ""
       },
       {
         "name": "HSSE",
@@ -1821,7 +2003,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/FIT/HSSE?d=wecddf634373848f28cb4cdfd6bbdf6c8&csf=1&web=1&e=6fQ680",
+        "ppt": ""
       },
       {
         "name": "Senior Management Meeting",
@@ -1830,7 +2013,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/FIT/Senior%20Management%20Meeting?d=w0b71e808a9cb4dff8606047f4598fb72&csf=1&web=1&e=c1EDaF",
+        "ppt": ""
       },
       {
         "name": "TPM",
@@ -1839,7 +2023,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/FIT/TPM?d=w7ded54792ce847258dff27e4159b2fa8&csf=1&web=1&e=VwTc4d",
+        "ppt": ""
       }
     ]
   },
@@ -1852,7 +2037,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Kandla/X-functional?d=wd2254041391d4555beff7fe674c76071&csf=1&web=1&e=a1TvOy",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -1861,7 +2047,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Kandla/Operations?d=we8e3993657dd4aae9f8554c90bc71b24&csf=1&web=1&e=UmMa6p",
+        "ppt": ""
       },
       {
         "name": "Commercial",
@@ -1870,7 +2057,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Kandla/Commercial?d=w4e90cec8441742f08d7dd25a002b1172&csf=1&web=1&e=0fRn1X",
+        "ppt": ""
       },
       {
         "name": "Finance",
@@ -1879,7 +2067,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Kandla/Finance?d=w9dab4727d42844d6ae46707104741316&csf=1&web=1&e=kSLl6P",
+        "ppt": ""
       },
       {
         "name": "HR & Admin",
@@ -1888,7 +2077,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Kandla/Admin?d=w6abb098802054bc3a1bb63c459e8e88c&csf=1&web=1&e=RBJtXB",
+        "ppt": ""
       },
       {
         "name": "Safety",
@@ -1897,7 +2087,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Kandla/HSSE?d=w58dea5e8fbdc40189c6b12629e2f130f&csf=1&web=1&e=KFOvO6",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
@@ -1906,7 +2097,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Kandla/Maintenance?d=wa704c93b28eb4b3fa5930daa72ecd296&csf=1&web=1&e=E5Kluk",
+        "ppt": ""
       },
       {
         "name": "Security",
@@ -1915,7 +2107,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Kandla/HSSE?d=w58dea5e8fbdc40189c6b12629e2f130f&csf=1&web=1&e=KFOvO6",
+        "ppt": ""
       },
       {
         "name": "Shift Change",
@@ -1924,7 +2117,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Kandla/Shift%20Change?d=w3e1b45cec8464dafb7e983acc6fae192&csf=1&web=1&e=3cLGTf",
+        "ppt": ""
       }
     ],
     "weekly": [
@@ -1935,7 +2129,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -1944,7 +2139,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Kandla/Operations?d=we8e3993657dd4aae9f8554c90bc71b24&csf=1&web=1&e=UmMa6p",
+        "ppt": ""
       },
       {
         "name": "Commercial",
@@ -1953,7 +2149,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Kandla/Commercial?d=w4e90cec8441742f08d7dd25a002b1172&csf=1&web=1&e=0fRn1X",
+        "ppt": ""
       },
       {
         "name": "Finance",
@@ -1962,7 +2159,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Kandla/Finance?d=w9dab4727d42844d6ae46707104741316&csf=1&web=1&e=kSLl6P",
+        "ppt": ""
       },
       {
         "name": "HR & Admin",
@@ -1971,7 +2169,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Kandla/Admin?d=w6abb098802054bc3a1bb63c459e8e88c&csf=1&web=1&e=RBJtXB",
+        "ppt": ""
       },
       {
         "name": "Safety",
@@ -1980,7 +2179,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Kandla/HSSE?d=w58dea5e8fbdc40189c6b12629e2f130f&csf=1&web=1&e=KFOvO6",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
@@ -1989,7 +2189,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Kandla/Maintenance?d=wa704c93b28eb4b3fa5930daa72ecd296&csf=1&web=1&e=E5Kluk",
+        "ppt": ""
       },
       {
         "name": "Security",
@@ -1998,7 +2199,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Kandla/HSSE?d=w58dea5e8fbdc40189c6b12629e2f130f&csf=1&web=1&e=KFOvO6",
+        "ppt": ""
       }
     ],
     "monthly": [
@@ -2009,7 +2211,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -2018,7 +2221,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Kandla/Operations?d=we8e3993657dd4aae9f8554c90bc71b24&csf=1&web=1&e=UmMa6p",
+        "ppt": ""
       },
       {
         "name": "Commercial",
@@ -2027,7 +2231,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Kandla/Commercial?d=w4e90cec8441742f08d7dd25a002b1172&csf=1&web=1&e=0fRn1X",
+        "ppt": ""
       },
       {
         "name": "Finance",
@@ -2036,7 +2241,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Kandla/Finance?d=w9dab4727d42844d6ae46707104741316&csf=1&web=1&e=kSLl6P",
+        "ppt": ""
       },
       {
         "name": "HR & Admin",
@@ -2045,7 +2251,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Kandla/Admin?d=w6abb098802054bc3a1bb63c459e8e88c&csf=1&web=1&e=RBJtXB",
+        "ppt": ""
       },
       {
         "name": "Safety",
@@ -2054,7 +2261,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Kandla/HSSE?d=w58dea5e8fbdc40189c6b12629e2f130f&csf=1&web=1&e=KFOvO6",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
@@ -2063,7 +2271,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Kandla/Maintenance?d=wa704c93b28eb4b3fa5930daa72ecd296&csf=1&web=1&e=E5Kluk",
+        "ppt": ""
       },
       {
         "name": "Security",
@@ -2072,7 +2281,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Kandla/HSSE?d=w58dea5e8fbdc40189c6b12629e2f130f&csf=1&web=1&e=KFOvO6",
+        "ppt": ""
       }
     ]
   },
@@ -2085,7 +2295,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/X-Functional?d=wc968db28db9a435ea4b027cfb534a986&csf=1&web=1&e=ED4eY5",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -2094,7 +2305,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/Operations?d=wd7054fd723aa4726a608e5c0b707ccf8&csf=1&web=1&e=B45rXO",
+        "ppt": ""
       },
       {
         "name": "Commercial",
@@ -2103,7 +2315,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/Commercial?d=w5bdf46d22e71495caa33842c43c179bd&csf=1&web=1&e=1u1RYA",
+        "ppt": ""
       },
       {
         "name": "Finance",
@@ -2112,7 +2325,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/Finance?d=wbec662c9e2c14ebca61523def8c9d994&csf=1&web=1&e=Em8AZZ",
+        "ppt": ""
       },
       {
         "name": "HR & Admin",
@@ -2121,7 +2335,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/HR%20%26%20Admin?d=w45626afc9d88497eb31b04a49a345a1d&csf=1&web=1&e=LSKaTe",
+        "ppt": ""
       },
       {
         "name": "Safety",
@@ -2130,7 +2345,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/Safety?d=wd3184acf078146c4b267dfd8c9ac7cf1&csf=1&web=1&e=2PTPtQ",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
@@ -2139,7 +2355,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/Maintenance?d=w0af576e98ecd4a489b99708d1e858b4c&csf=1&web=1&e=k3rtbR",
+        "ppt": ""
       },
       {
         "name": "Security",
@@ -2148,7 +2365,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/Security?d=wabd898b4ce194f9bb84a4fcf25c2bd3b&csf=1&web=1&e=TeNnVS",
+        "ppt": ""
       },
       {
         "name": "Shift Change",
@@ -2157,7 +2375,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/Shift%20Change?d=w2d748333b757494cafd778f716bb6afb&csf=1&web=1&e=IVljmx",
+        "ppt": ""
       }
     ],
     "weekly": [
@@ -2168,7 +2387,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/Senior%20Management%20Meeting?d=w61a6056cff7b452a9555ff355d1a3522&csf=1&web=1&e=q2opVr",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -2177,7 +2397,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/Operations?d=wd7054fd723aa4726a608e5c0b707ccf8&csf=1&web=1&e=B45rXO",
+        "ppt": ""
       },
       {
         "name": "Commercial",
@@ -2186,7 +2407,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/Commercial?d=w5bdf46d22e71495caa33842c43c179bd&csf=1&web=1&e=1u1RYA",
+        "ppt": ""
       },
       {
         "name": "Finance",
@@ -2195,7 +2417,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/Finance?d=wbec662c9e2c14ebca61523def8c9d994&csf=1&web=1&e=Em8AZZ",
+        "ppt": ""
       },
       {
         "name": "HR & Admin",
@@ -2204,7 +2427,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/HR%20%26%20Admin?d=w45626afc9d88497eb31b04a49a345a1d&csf=1&web=1&e=LSKaTe",
+        "ppt": ""
       },
       {
         "name": "Safety",
@@ -2213,7 +2437,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/Safety?d=wd3184acf078146c4b267dfd8c9ac7cf1&csf=1&web=1&e=2PTPtQ",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
@@ -2222,7 +2447,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/Maintenance?d=w0af576e98ecd4a489b99708d1e858b4c&csf=1&web=1&e=k3rtbR",
+        "ppt": ""
       },
       {
         "name": "Security",
@@ -2231,7 +2457,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/Security?d=wabd898b4ce194f9bb84a4fcf25c2bd3b&csf=1&web=1&e=TeNnVS",
+        "ppt": ""
       }
     ],
     "monthly": [
@@ -2242,7 +2469,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/Senior%20Management%20Meeting?d=w61a6056cff7b452a9555ff355d1a3522&csf=1&web=1&e=q2opVr",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -2251,7 +2479,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/Operations?d=wd7054fd723aa4726a608e5c0b707ccf8&csf=1&web=1&e=B45rXO",
+        "ppt": ""
       },
       {
         "name": "Commercial",
@@ -2260,7 +2489,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/Commercial?d=w5bdf46d22e71495caa33842c43c179bd&csf=1&web=1&e=1u1RYA",
+        "ppt": ""
       },
       {
         "name": "Finance",
@@ -2269,7 +2499,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/Finance?d=wbec662c9e2c14ebca61523def8c9d994&csf=1&web=1&e=Em8AZZ",
+        "ppt": ""
       },
       {
         "name": "HR & Admin",
@@ -2278,7 +2509,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/HR%20%26%20Admin?d=w45626afc9d88497eb31b04a49a345a1d&csf=1&web=1&e=LSKaTe",
+        "ppt": ""
       },
       {
         "name": "Safety",
@@ -2287,7 +2519,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/Safety?d=wd3184acf078146c4b267dfd8c9ac7cf1&csf=1&web=1&e=2PTPtQ",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
@@ -2296,7 +2529,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/Maintenance?d=w0af576e98ecd4a489b99708d1e858b4c&csf=1&web=1&e=k3rtbR",
+        "ppt": ""
       },
       {
         "name": "Security",
@@ -2305,7 +2539,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20-%20India/Vizag/Security?d=wabd898b4ce194f9bb84a4fcf25c2bd3b&csf=1&web=1&e=TeNnVS",
+        "ppt": ""
       }
     ]
   },
@@ -2323,7 +2558,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/X-Functional?d=w3513d413548c4b65bc9939d644e840db&csf=1&web=1&e=3jsjrC",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -2332,7 +2568,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/Operations?d=w3024160a42904954a9a227a36120ece1&csf=1&web=1&e=d3qAGY",
+        "ppt": ""
       },
       {
         "name": "Commercial",
@@ -2341,7 +2578,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/Commercial?d=wa25660db8cb940c487ef14ee0f85c049&csf=1&web=1&e=GRHxlx",
+        "ppt": ""
       },
       {
         "name": "Finance",
@@ -2350,7 +2588,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/Finance?d=we8c205d6e3d1440e89bdeb7f20fb48ed&csf=1&web=1&e=grU5Ic",
+        "ppt": ""
       },
       {
         "name": "HR & Admin",
@@ -2359,7 +2598,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/HR%20%26%20Admin?d=we534080ceb7945d9adf684c1decbbead&csf=1&web=1&e=ghp3IZ",
+        "ppt": ""
       },
       {
         "name": "Safety",
@@ -2368,7 +2608,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/Safety?d=w889ef0da298d4cc8a41f1ac531cadbbe&csf=1&web=1&e=yJCcDc",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
@@ -2377,7 +2618,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/Maintenance?d=wad008212b0b544a5a34fe73dc7ddded1&csf=1&web=1&e=6fTVqU",
+        "ppt": ""
       },
       {
         "name": "Security",
@@ -2386,7 +2628,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/Security?d=w281ae15031024f4b86f6f637858bf8c6&csf=1&web=1&e=h3i6OA",
+        "ppt": ""
       },
       {
         "name": "Shift Change",
@@ -2395,7 +2638,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/Shift%20Change?d=w5f05c1324b7f44df8e8021676fb908c4&csf=1&web=1&e=yrwc2C",
+        "ppt": ""
       }
     ],
     "weekly": [
@@ -2406,7 +2650,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/Senior%20Management%20Meeting?d=w8a2e738d3f0349a8b1b2a92fc86b8c0b&csf=1&web=1&e=BLGs6g",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -2415,7 +2660,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/Operations?d=w3024160a42904954a9a227a36120ece1&csf=1&web=1&e=d3qAGY",
+        "ppt": ""
       },
       {
         "name": "Commercial",
@@ -2424,7 +2670,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/Commercial?d=wa25660db8cb940c487ef14ee0f85c049&csf=1&web=1&e=GRHxlx",
+        "ppt": ""
       },
       {
         "name": "Finance",
@@ -2433,7 +2680,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/Finance?d=we8c205d6e3d1440e89bdeb7f20fb48ed&csf=1&web=1&e=grU5Ic",
+        "ppt": ""
       },
       {
         "name": "HR & Admin",
@@ -2442,7 +2690,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/HR%20%26%20Admin?d=we534080ceb7945d9adf684c1decbbead&csf=1&web=1&e=ghp3IZ",
+        "ppt": ""
       },
       {
         "name": "Safety",
@@ -2451,7 +2700,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/Safety?d=w889ef0da298d4cc8a41f1ac531cadbbe&csf=1&web=1&e=yJCcDc",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
@@ -2460,7 +2710,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/Maintenance?d=wad008212b0b544a5a34fe73dc7ddded1&csf=1&web=1&e=6fTVqU",
+        "ppt": ""
       },
       {
         "name": "Security",
@@ -2469,7 +2720,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/Security?d=w281ae15031024f4b86f6f637858bf8c6&csf=1&web=1&e=h3i6OA",
+        "ppt": ""
       }
     ],
     "monthly": [
@@ -2480,7 +2732,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/Senior%20Management%20Meeting?d=w8a2e738d3f0349a8b1b2a92fc86b8c0b&csf=1&web=1&e=BLGs6g",
+        "ppt": ""
       },
       {
         "name": "Operations",
@@ -2489,7 +2742,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/Operations?d=w3024160a42904954a9a227a36120ece1&csf=1&web=1&e=d3qAGY",
+        "ppt": ""
       },
       {
         "name": "Commercial",
@@ -2498,7 +2752,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/Commercial?d=wa25660db8cb940c487ef14ee0f85c049&csf=1&web=1&e=GRHxlx",
+        "ppt": ""
       },
       {
         "name": "Finance",
@@ -2507,7 +2762,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/Finance?d=we8c205d6e3d1440e89bdeb7f20fb48ed&csf=1&web=1&e=grU5Ic",
+        "ppt": ""
       },
       {
         "name": "HR & Admin",
@@ -2516,7 +2772,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/HR%20%26%20Admin?d=we534080ceb7945d9adf684c1decbbead&csf=1&web=1&e=ghp3IZ",
+        "ppt": ""
       },
       {
         "name": "Safety",
@@ -2525,7 +2782,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/Safety?d=w889ef0da298d4cc8a41f1ac531cadbbe&csf=1&web=1&e=yJCcDc",
+        "ppt": ""
       },
       {
         "name": "Maintenance",
@@ -2534,7 +2792,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/Maintenance?d=wad008212b0b544a5a34fe73dc7ddded1&csf=1&web=1&e=6fTVqU",
+        "ppt": ""
       },
       {
         "name": "Security",
@@ -2543,7 +2802,8 @@
         "day": "",
         "times": [],
         "status": "undef",
-        "link": ""
+        "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Europe/TUTI/Security?d=w281ae15031024f4b86f6f637858bf8c6&csf=1&web=1&e=h3i6OA",
+        "ppt": ""
       }
     ]
   }
