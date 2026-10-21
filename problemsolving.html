@@ -1504,6 +1504,50 @@ a.ps-pill:hover{ transform:translateY(-2px); }
 #fb-pop .fbp-hint{ display:block; margin-top:6px; padding-top:6px; border-top:1px solid rgba(255,255,255,.2); font-size:12.5px; color:#FFD9B3; }
 @media (max-width:900px){ .bone-slot{ width:auto !important; margin:10px 12px !important; } }
 @media (max-width:700px){ .selection-bar{ position:static !important; } .fb-howto{ font-size:13.5px; padding:10px 12px; } .fb-check{ width:26px; height:26px; } .fb-sel-cta{ width:100%; margin-left:0; } }
+
+.sh-ch{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.sh-collapsed .sh-ch{margin:0}
+.il-name{flex:1;min-width:180px}
+.fx{display:grid;grid-template-columns:1.4fr .8fr 1.3fr auto;gap:8px;margin:6px 0}
+.fx input,.fx select{min-width:0;width:100%}
+.fx-h{font-size:.8rem;color:var(--blue,#1d4ed8);margin:8px 0 2px;font-weight:600}
+.il-foot{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:6px}
+.il-per{display:flex;gap:6px;align-items:center;font-size:.85rem}
+.il-add{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:8px 0;font-size:.85rem}
+@media(max-width:640px){.fx{grid-template-columns:1fr 1.5fr auto}.fx-l{grid-column:1/-1}.fx .il-del{padding:6px 10px}.sh-imp-params.grid-3{grid-template-columns:1fr 1fr 1fr;gap:6px}.sh-imp-params .field-label{font-size:.7rem}.il-add .btn{flex:1 1 auto}}
+
+.sh-act{margin-top:18px;padding-top:14px;border-top:2px dashed #bfdbfe}
+.sh-acts{list-style:none;padding:0;margin:8px 0;display:flex;flex-direction:column;gap:4px;font-size:.88rem}
+.sh-acts li{background:#eff6ff;border-radius:8px;padding:6px 10px}
+.sh-ol-l{color:inherit}
+
+.il-note{font-size:.78rem;color:var(--blue,#1d4ed8)}
+
+.sh-acts2{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.sh-actrow{background:#eff6ff;border-radius:10px;padding:8px 10px;display:flex;flex-direction:column;gap:6px}
+.sh-actb{display:flex;gap:6px;flex-wrap:wrap}
+
+#dict-fab{position:fixed;right:16px;bottom:16px;z-index:650;width:54px;height:54px;border-radius:50%;border:0;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 18px rgba(18,49,99,.35)}
+#dict-fab.on{background:#E5484D;animation:dictpulse 1.3s infinite}
+@keyframes dictpulse{0%{box-shadow:0 0 0 0 rgba(229,72,77,.55)}100%{box-shadow:0 0 0 16px rgba(229,72,77,0)}}
+#dict-panel{display:none;position:fixed;right:16px;bottom:80px;z-index:650;width:min(350px,calc(100vw - 32px));background:var(--bg-card);color:var(--text);border:2px solid var(--accent);border-radius:16px;padding:12px;box-shadow:0 12px 34px rgba(6,13,24,.3)}
+#dict-panel.open{display:block}
+.dp-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.dp-x{border:0;background:var(--accent-tint);color:var(--navy);border-radius:8px;padding:2px 9px;cursor:pointer;font-weight:700}
+.dp-btn{display:block;width:100%;text-align:left;border:1.5px solid var(--accent-border);background:var(--accent-tint);color:var(--navy);border-radius:12px;padding:10px 12px;margin-bottom:8px;cursor:pointer;font:inherit}
+.dp-btn small{display:block;font-size:.78rem;margin-top:2px;font-weight:400}
+.dp-note{font-size:.78rem;margin:4px 0 0;color:var(--navy)}
+.dp-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#E5484D;margin-right:4px;animation:dictpulse 1.3s infinite}
+.dp-pos{background:var(--accent);color:#fff;border-radius:999px;padding:1px 8px;font-size:.75rem;margin-left:6px}
+.dp-field{font-weight:700;color:var(--accent);font-size:.9rem;margin-bottom:6px}
+.dp-live{min-height:38px;background:var(--accent-tint);border-radius:10px;padding:8px 10px;font-size:.9rem;margin-bottom:8px;color:var(--navy)}
+.dp-hint{opacity:.7}
+.dp-row{display:flex;gap:6px;flex-wrap:wrap}
+.dp-s{flex:1 1 auto;border:1.5px solid var(--accent-border);background:var(--bg-card);color:var(--navy);border-radius:10px;padding:7px 10px;cursor:pointer;font:inherit;font-weight:600}
+.dp-s.stop{background:#E5484D;color:#fff;border-color:#E5484D}
+.dict-target{outline:3px solid var(--accent)!important;box-shadow:0 0 0 6px var(--accent-tint)!important}
+html[data-theme="dark"] .dp-btn,html[data-theme="dark"] .dp-live,html[data-theme="dark"] .dp-note,html[data-theme="dark"] .dp-s{color:var(--text)}
+@media(max-width:640px){#dict-fab{width:48px;height:48px;bottom:12px;right:12px}#dict-panel{right:12px;bottom:70px}}
 </style>
 </head>
 <body>
@@ -1515,7 +1559,39 @@ a.ps-pill:hover{ transform:translateY(-2px); }
     </div>
   </div>
 </div>
-<style>@keyframes boot-spin{to{transform:rotate(360deg);}}</style>
+<style>@keyframes boot-spin{to{transform:rotate(360deg);}}
+/* ===== Pasar a Shibumi ===== */
+.sh-guide{ background:linear-gradient(155deg,var(--navy),var(--navy-soft)); color:#fff; border-radius:var(--radius-m); padding:14px 18px; box-shadow:0 10px 30px rgba(14,27,51,.22); }
+.sh-guide-t{ font:800 13px var(--font-display); letter-spacing:.08em; text-transform:uppercase; color:var(--hl); margin-bottom:6px; }
+.sh-ol{ margin:6px 0 0 20px; padding:0; line-height:1.55; font-size:15px; }
+.sh-ol li{ margin-bottom:5px; }
+.sh-guide .sh-ol b{ color:#FFD9B3; }
+.sh-tag{ background:rgba(255,255,255,.16); border-radius:6px; padding:1px 7px; font-family:var(--font-mono); font-weight:700; }
+.ps-card .sh-tag{ background:var(--accent-tint); color:var(--text); }
+.grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+@media (max-width:700px){ .grid-3{ grid-template-columns:1fr; } }
+.sh-warn{ margin:12px 0 4px; padding:9px 12px; border:2px solid var(--hl); border-radius:12px; font-size:14.5px; color:var(--text); }
+.sh-ok{ margin:12px 0 4px; font-weight:700; color:var(--success); }
+.sh-auto{ display:flex; align-items:flex-start; gap:9px; margin-top:8px; font-size:14.5px; cursor:pointer; }
+.sh-auto input{ margin-top:3px; width:18px; height:18px; flex:none; }
+
+.sh-imp{ border:1px solid var(--border); border-radius:var(--radius-m); padding:14px; margin:6px 0 16px; background:var(--bg-subtle); }
+.sh-imp-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+.il-seg{ display:inline-flex; gap:2px; padding:3px; border:1px solid var(--border); border-radius:10px; background:var(--bg-card); }
+.il-seg button{ appearance:none; border:0; background:transparent; color:var(--text); font:700 .82rem var(--font-body); padding:6px 12px; border-radius:8px; cursor:pointer; }
+.il-seg button.on{ background:var(--accent); color:var(--accent-ink); }
+.il{ background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:12px; margin-bottom:10px; }
+.il-h{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:8px; }
+.il-h select{ flex:1 1 200px; min-width:0; }
+.il-del{ margin-left:auto; }
+.il-r{ font-size:15px; }
+.il-r b{ color:var(--accent); font-size:17px; }
+.il-r small{ display:block; font-size:12.5px; margin-top:2px; }
+.il-tot{ display:flex; align-items:baseline; flex-wrap:wrap; gap:6px 12px; margin-top:12px; padding:10px 14px; border-radius:12px; background:linear-gradient(155deg,var(--navy),var(--navy-soft)); color:#fff; }
+.il-tot b{ font-size:22px; color:#FFD9B3; }
+.sh-hint{ margin:8px 0 0; font-size:13px; }
+@media (max-width:700px){ .il-seg button{ padding:6px 9px; font-size:.78rem; } }
+</style>
 <div id="coach-tooltip"></div>
 <div id="welcome-root"></div>
 <div id="toast"><span class="toast-dot"></span><span id="toast-msg"></span></div>
@@ -1743,6 +1819,7 @@ function defaultState(){
     countermeasures:{
       actions:[], // una fila por causa raíz; cada una elige su tipo (mitigación/eliminación)
     },
+    shibumi:shDefaults(),
   };
 }
 
@@ -2082,6 +2159,7 @@ function setLang(l){
   document.querySelectorAll('.ps-modal.open,#help-modal.open').forEach(m=>m.classList.remove('open'));
   renderAll();
   if(document.getElementById('welcome-screen')) renderWelcomeScreen(window.__welcomeSaved);
+  if(typeof Dict!=='undefined') Dict.onLang();
 }
 function setTheme(theme){
   state.theme = theme;
@@ -2306,6 +2384,10 @@ function openHelp(){
       <div class="legend-row"><span class="legend-swatch fill"></span><span class="legend-label">${L('Campo para llenar','Field to fill in')}</span></div>
       <div class="help-h">${L('Atajos','Shortcuts')}</div>
       <p class="help-p">${L('← → cambian de etapa · <b>/</b> abre el buscador · Esc cierra esta ventana','← → switch stage · <b>/</b> opens search · Esc closes this window')}</p>
+      <div class="help-h">${L('🎤 Dictado por voz','🎤 Voice dictation')}</div>
+      <p class="help-p">${L('Pulsa el <b>botón del micrófono</b> (abajo a la derecha). <b>Dictar en el campo seleccionado</b>: haz clic en un campo y habla; puedes cambiar de campo sin reactivar el micrófono. <b>Dictar esta sección</b>: te va llevando campo por campo, solo en la sección en que estás.','Press the <b>microphone button</b> (bottom right). <b>Dictate in the selected field</b>: click a field and speak; you can switch fields without restarting the microphone. <b>Dictate this section</b>: it walks you field by field, only in the section you are in.')}</p>
+      <p class="help-p">${L('Comandos (di solo la palabra): «siguiente», «anterior», «borrar», «detener». Puntuación: «coma», «dos puntos», «punto final», «nueva línea». Se dicta en el idioma elegido (Español/English).','Commands (say just the word): “next”, “previous”, “clear”, “stop”. Punctuation: “comma”, “colon”, “full stop”, “new line”. Dictation uses the selected language (Español/English).')}</p>
+      <p class="help-p">${L('El navegador pide permiso del micrófono solo la primera vez (si abres el archivo directo desde el computador puede pedirlo más veces; en un sitio web https lo recuerda). Funciona en Chrome y Edge.','The browser asks for microphone permission only the first time (if you open the file directly from your computer it may ask more often; on an https website it remembers). Works in Chrome and Edge.')}</p>
       <div class="help-h">${L('Buscador','Search')}</div>
       <p class="help-p">${L('Escribe cualquier palabra de lo que ya llenaste y elige el resultado: te lleva directo al campo para editarlo.','Type any word from what you already filled in and pick the result: it takes you straight to the field to edit it.')}</p>
     </div>`;
@@ -3427,6 +3509,402 @@ function totalActions(){
   return state.countermeasures.actions.filter(r=>r.action.trim()).length;
 }
 
+
+/* ============================================================
+   SHIBUMI — script para llenar "Create Initiative" desde la consola
+   (mismo motor que Origen; aquí los datos salen del caso PORT)
+   ============================================================ */
+const SH_URL_DEF = 'https://eu.shibumi.com/shibumi/d4c65c40-88fe-4aba-9621-d8de425d28b9/topDashboard-summary?id=53eee6d9-533c-4696-858f-166dd35c4bb9&context=977a1308-fca7-49c2-aead-aff9d731a765&tab=1186a924-4ff6-4e45-b989-8f3aa2c2698a';
+const SH_DEF = [
+  {k:'titulo',    n:'Name',                         al:'name, nombre, titulo, title', on:true},
+  {k:'parent',    n:'Parent',                       al:'parent, padre', on:true},
+  {k:'situacion', n:'Current Situation',            al:'what is the current situation, current situation, situacion actual', on:true},
+  {k:'cambio',    n:'What Will We Change',          al:'what will we change with this initiative, what will we change, que vamos a cambiar', on:true},
+  {k:'enfoque',   n:'Approach',                     al:'what is the approach, approach, enfoque', on:true},
+  {k:'impacto',   n:'Rough Calculation of Impact',  al:'rough calculation of impact, calculation of impact, calculo de impacto', on:true},
+  {k:'beneficio', n:'Estimated Annual Benefit (kUSD)', al:'estimated annual benefit value kusd, estimated annual benefit, beneficio anual', on:true},
+  {k:'inicio',    n:'Start Date',                   al:'start date, fecha de inicio', on:true},
+  {k:'fin',       n:'Due Date L4',                  al:'due date l4, fecha de termino', on:true},
+  {k:'l5',        n:'Due Date L5',                  al:'due date l5', on:true}
+];
+const shFecha = f=>{ const m=/^(\d{4})-(\d{2})-(\d{2})/.exec(f||''); return m ? m[2]+'/'+m[3]+'/'+m[1] : ''; };
+function shBuildData(){
+  const st = state.statement, sh = state.shibumi || {};
+  const join = (...a)=> a.filter(x=>x && String(x).trim()).join('\n\n');
+  const clean = x=> (x||'').trim();
+  const symptoms = st.symptoms.map(clean).filter(Boolean);
+  const roots = getIdentifiedRootCauses();
+  const acts = state.countermeasures.actions.filter(r=>clean(r.action));
+  const elim = acts.filter(r=>r.type!=='mitigation');
+  const typeTxt = t=> t==='mitigation' ? 'Mitigación' : 'Eliminación';
+  const dates = acts.map(r=>r.date).filter(Boolean).sort();
+  const situacion = join(
+    clean(st.statementText) || join(st.currentSituation && 'Situación actual: '+clean(st.currentSituation), st.desiredSituation && 'Situación deseada: '+clean(st.desiredSituation), st.gap && 'Brecha: '+clean(st.gap)),
+    symptoms.length && 'Síntomas:\n'+symptoms.map(x=>'- '+x).join('\n'),
+    roots.length && 'Causas raíz confirmadas:\n'+roots.map(r=>'- '+r.rootCause).join('\n')
+  );
+  const queNo = symptoms.length ? symptoms.join('; ') : clean(st.statementText);
+  const haraTxt = !acts.length ? '' :
+    (acts.length===1 ? 'Se hará '+clean(acts[0].action)+' ' : 'Se hará:\n'+acts.map(r=>'- '+clean(r.action)).join('\n')+'\n')
+    + 'para que ya no suceda'+(queNo ? (acts.length===1 ? ' ' : ': ')+queNo : '')+'.';
+  const cambio = haraTxt;
+  const enfoque = clean(sh.scope);
+  return {
+    codigo:'PORT', titulo:clean(state.projectName),
+    parent:clean(sh.parent), situacion, cambio, enfoque,
+    impacto:shImpactText(), beneficio:shBenefit(),
+    inicio:shFecha(sh.start), fin:shFecha(sh.l4 || dates[dates.length-1]), l5:shFecha(sh.l5)
+  };
+}
+
+/* ---- calculadora de impacto libre: variables con unidades fundamentales (tiempo, dinero, cantidad) ---- */
+const shClp = n => n>0 ? '$'+Math.round(n).toLocaleString('es-CL') : '—';
+const shN = v => +String(v==null?'':v).replace(',','.') || 0;
+const SH_UNITS = { h:{n:'horas',s:'h'}, min:{n:'minutos',s:'min'}, clp:{n:'$ CLP',s:'CLP'}, usd:{n:'USD',s:'USD'}, un:{n:'cantidad (unidades, movimientos, veces)',s:'un'}, pct:{n:'porcentaje %',s:'%'} };
+function shNewLine(){ return { id:uid(), nombre:'', modo:'calc', f:'', v2:true, factors:[{id:uid(),label:'',v:'',u:'clp'}] }; }
+function shConvLine(l){ /* líneas de versiones anteriores → formato libre, sin supuestos ocultos */
+  if(l.factors && l.v2) return l;
+  if(!l.factors){
+    const n=shNewLine(); n.id=l.id; n.modo=l.modo||'calc'; n.f=l.f||''; n.nombre=({hh:'Horas-hombre liberadas',prod:'Productividad',efi:'Eficiencia',costo:'Costo directo',tarifa:'Tarifas e ingresos'})[l.tipo]||'';
+    const F={hh:[['HH liberadas por día','h'],['Días al año','un'],['Valor de la HH','clp']],prod:[['Unidades extra por día','un'],['Valor por unidad','clp'],['Días al año','un']],efi:[['Reducción','pct'],['Costo anual','clp']],costo:[['Ahorro cada vez','clp'],['Veces al año','un']],tarifa:[['Volumen anual','un'],['Mayor tarifa por unidad','clp']]}[l.tipo];
+    if(F){ const vals={hh:[l.a,state.shibumi.dias||250,state.shibumi.valorHH||25000],prod:[l.a,l.b,state.shibumi.dias||250],efi:[l.a,l.b],costo:[l.a,l.b],tarifa:[l.a,l.b]}[l.tipo]; n.factors=F.map((x,i)=>({id:uid(),label:x[0],v:vals[i]==null?'':vals[i],u:x[1]})); }
+    return n;
+  }
+  /* formato intermedio con "se repite" / valor HH automático → hacerlo explícito */
+  const sh=state.shibumi, us=l.factors.map(f=>f.u);
+  if(us.some(u=>u==='h'||u==='min') && !us.some(u=>u==='clp'||u==='usd')) l.factors.push({id:uid(),label:'Valor de la HH',v:sh.valorHH||25000,u:'clp'});
+  const m={dia:[sh.dias||250,'Días al año'],sem:[52,'Semanas al año'],mes:[12,'Meses al año']}[l.per]; if(m) l.factors.push({id:uid(),label:m[1],v:m[0],u:'un'});
+  delete l.per; l.v2=true; return l;
+}
+function shDefaults(){
+  return { parent:'', scope:'', mode:'calc', impact:'', benefit:'', start:'', l4:'', l5:'', auto:false, url:'', open:false, actStart:'',
+           tc:950, lines:[shNewLine()] };
+}
+function shFVal(f){ const v=shN(f.v), tc=shN(state.shibumi.tc)||950; return f.u==='pct'? v/100 : f.u==='min'? v/60 : f.u==='usd'? v*tc : v; }
+const shIsFinal = l => l.modo==='final';
+function shLineAnual(l){
+  if(shIsFinal(l)) return shN(l.f);
+  const fs=l.factors||[]; if(!fs.length || fs.some(f=>!String(f.v).trim())) return 0;
+  return fs.reduce((a,f)=>a*shFVal(f),1);
+}
+function shLineFormula(l){
+  return (l.factors||[]).map(f=>`${shN(f.v)} ${SH_UNITS[f.u].s}${f.label?' ('+f.label+')':''}`).join(' × ');
+}
+function shLineTxt(l){
+  const nm=(l.nombre||'Impacto').trim();
+  return shIsFinal(l) ? `${nm}: ${shClp(shN(l.f))} al año` : `${nm}: ${shLineFormula(l)} = ${shClp(shLineAnual(l))} al año`;
+}
+function shTotalCLP(){ return (state.shibumi.lines||[]).reduce((a,l)=>a+shLineAnual(l),0); }
+function shBenefitCalc(){ const t=shTotalCLP(), tc=shN(state.shibumi.tc)||950; return t>0 ? Math.round(t/tc/1000*10)/10 : ''; }
+function shImpactText(){
+  const sh = state.shibumi;
+  if(sh.mode!=='calc') return (sh.impact||'').trim();
+  const lines = (sh.lines||[]).filter(l=>shLineAnual(l)>0);
+  if(!lines.length) return '';
+  const tc = shN(sh.tc)||950;
+  return lines.map(shLineTxt).join('\n')+'\nTotal: '+shClp(shTotalCLP())+' al año (≈ '+shBenefitCalc()+' kUSD a $'+tc+'/USD)';
+}
+function shBenefit(){
+  const sh = state.shibumi;
+  return sh.mode==='calc' ? String(shBenefitCalc()) : String(sh.benefit||'').trim().replace(',','.');
+}
+function shFactorHtml(l,f){
+  return `<div class="fx" data-fid="${f.id}">
+    <input type="text" class="fx-l" data-shf="label" data-lid="${l.id}" data-fid="${f.id}" value="${esc(f.label)}" placeholder="${L('Variable (ej: horas ahorradas, movimientos, $ por hora…)','Variable (e.g. man-hours freed)')}">
+    <input type="number" step="any" class="fx-v" data-shf="v" data-lid="${l.id}" data-fid="${f.id}" value="${esc(f.v)}" placeholder="0">
+    <select class="fx-u" data-shf="u" data-lid="${l.id}" data-fid="${f.id}">${Object.entries(SH_UNITS).map(([k,v])=>`<option value="${k}" ${k===f.u?'selected':''}>${esc(v.n)}</option>`).join('')}</select>
+    ${l.factors.length>1?`<button type="button" class="btn btn-sm il-del" data-action="sh-fx-del" data-lid="${l.id}" data-fid="${f.id}" title="${L('Quitar variable','Remove variable')}">✕</button>`:''}
+  </div>`;
+}
+function shLineHtml(l){
+  const fin = shIsFinal(l);
+  return `<div class="il" data-lid="${l.id}">
+    <div class="il-h">
+      <input type="text" class="il-name" data-shl="nombre" data-lid="${l.id}" value="${esc(l.nombre)}" placeholder="${L('Nombre del ahorro (ej: Menos uso de reach stacker)','Saving name (e.g. Less reach stacker use)')}">
+      <span class="il-seg"><button type="button" class="${fin?'':'on'}" data-action="sh-line-mode" data-lid="${l.id}" data-m="calc">${L('Calcular','Calculate')}</button><button type="button" class="${fin?'on':''}" data-action="sh-line-mode" data-lid="${l.id}" data-m="final">${L('Número final','Final number')}</button></span>
+      ${(state.shibumi.lines.length>1) ? `<button type="button" class="btn btn-sm il-del" data-action="sh-line-del" data-lid="${l.id}">${L('Quitar','Remove')}</button>` : ''}
+    </div>
+    ${fin ? `<div class="field-row"><div class="field-main"><label class="field-label">${L('Impacto anual (CLP al año)','Annual impact (CLP per year)')}</label><input type="number" step="any" data-shl="f" data-lid="${l.id}" value="${esc(l.f)}" placeholder="12000000"></div></div>`
+          : `<div class="fx-h">${L('Tú pones las variables (tiempo, dinero, cantidad) y se multiplican entre sí','You set the variables (time, money, quantity) and they are multiplied')}</div>
+             ${l.factors.map(f=>shFactorHtml(l,f)).join('')}
+             <div class="il-foot"><button type="button" class="btn btn-sm" data-action="sh-fx-add" data-lid="${l.id}">${L('+ Variable','+ Variable')}</button><span class="il-note">${L('Para que el resultado sea anual, incluye una variable como “días al año” o “veces al año”.','For an annual result, include a variable like “days per year” or “times per year”.')}</span></div>`}
+    <div class="il-r" data-res="${l.id}">${shLineResHtml(l)}</div>
+  </div>`;
+}
+function shLineResHtml(l){ return `${L('Aporta','Adds')} <b>${shClp(shLineAnual(l))}</b> ${L('al año','per year')}<small>${shIsFinal(l)?L('Valor escrito por ti','Value typed by you'):esc(shLineFormula(l))}</small>`; }
+function shTotalHtml(){ const b=shBenefitCalc(); return `<span>${L('Impacto anual total','Total annual impact')}</span><b>${shClp(shTotalCLP())}</b><span>${b!==''?'≈ '+b+' kUSD ('+L('a','at')+' $'+(shN(state.shibumi.tc)||950)+' '+L('por USD','per USD')+')':''}</span>`; }
+function shRefreshImpact(){
+  (state.shibumi.lines||[]).forEach(l=>{ const e=document.querySelector('[data-res="'+l.id+'"]'); if(e) e.innerHTML=shLineResHtml(l); });
+  const t=document.getElementById('sh-total'); if(t) t.innerHTML=shTotalHtml();
+  const el=document.getElementById('sh-status'); if(el) el.innerHTML=shStatusHtml();
+}
+const shLine = id => state.shibumi.lines.find(x=>x.id===id);
+document.addEventListener('input', e=>{
+  const t=e.target; if(!t.dataset) return;
+  if(t.dataset.shf){ const l=shLine(t.dataset.lid), f=l&&l.factors.find(x=>x.id===t.dataset.fid); if(f){ f[t.dataset.shf]=t.value; scheduleSave(); shRefreshImpact(); } }
+  else if(t.dataset.shl){ const l=shLine(t.dataset.lid); if(l){ l[t.dataset.shl]=t.value; scheduleSave(); shRefreshImpact(); } }
+  else if(t.dataset.shp){ state.shibumi[t.dataset.shp]=t.value; scheduleSave(); shRefreshImpact(); }
+});
+ACTIONS['sh-line-add'] = ()=>{ state.shibumi.lines.push(shNewLine()); scheduleSave(); renderMain(); };
+ACTIONS['sh-line-del'] = (ds)=>{ state.shibumi.lines = state.shibumi.lines.filter(x=>x.id!==ds.lid); if(!state.shibumi.lines.length) state.shibumi.lines=[shNewLine()]; scheduleSave(); renderMain(); };
+ACTIONS['sh-line-mode'] = (ds)=>{ const l=shLine(ds.lid); if(!l) return; if(ds.m==='final' && !l.f) l.f=Math.round(shLineAnual(l))||''; l.modo=ds.m; scheduleSave(); renderMain(); };
+ACTIONS['sh-fx-add'] = (ds)=>{ const l=shLine(ds.lid); if(!l) return; l.factors.push({id:uid(),label:'',v:'',u:'clp'}); scheduleSave(); renderMain(); };
+ACTIONS['sh-fx-del'] = (ds)=>{ const l=shLine(ds.lid); if(!l) return; l.factors=l.factors.filter(f=>f.id!==ds.fid); scheduleSave(); renderMain(); };
+ACTIONS['sh-toggle'] = ()=>{ state.shibumi.open = !state.shibumi.open; scheduleSave(); renderMain(); };
+ACTIONS['sh-imp-mode'] = (ds)=>{ state.shibumi.mode = ds.m; scheduleSave(); renderMain(); };
+
+function shMissing(){
+  const d = shBuildData(), f = [];
+  if(!d.titulo) f.push('Name'); if(!d.situacion) f.push('Current Situation'); if(!d.cambio) f.push('What Will We Change');
+  if(!d.enfoque) f.push('Approach'); if(!d.impacto) f.push('Rough Calculation of Impact'); if(!d.beneficio) f.push('Estimated Annual Benefit');
+  if(!d.inicio) f.push('Start Date'); if(!d.fin) f.push('Due Date L4'); if(!d.l5) f.push('Due Date L5');
+  return f;
+}
+function shRuntime(DATA,MAP,MODO,AUTO){
+  const norm=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[*:]/g,' ').replace(/[^a-z0-9]+/g,' ').trim();
+  const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+  const vis=e=>!!(e.offsetWidth||e.offsetHeight||e.getClientRects().length);
+  const txt=id=>{const e=id&&document.getElementById(id);return e?e.textContent:'';};
+  function etiqueta(el){
+    const p=[];
+    if(el.getAttribute('aria-label'))p.push(el.getAttribute('aria-label'));
+    (el.getAttribute('aria-labelledby')||'').split(/\s+/).forEach(i=>p.push(txt(i)));
+    if(el.labels)[...el.labels].forEach(l=>p.push(l.textContent));
+    if(el.id){const l=document.querySelector('label[for="'+el.id.replace(/"/g,'\\"')+'"]');if(l)p.push(l.textContent);}
+    const fc=el.closest('.MuiFormControl-root,.MuiTextField-root,.MuiAutocomplete-root,[class*="FormControl"]');
+    if(fc){const l=fc.querySelector('label,legend');if(l)p.push(l.textContent);}
+    if(el.placeholder)p.push(el.placeholder);
+    if(el.name)p.push(el.name);
+    return p.map(norm).filter(Boolean);}
+  function esReq(el){const fc=el.closest('.MuiFormControl-root,.MuiTextField-root,.MuiAutocomplete-root,[class*="FormControl"]');let t='';
+    if(fc)fc.querySelectorAll('label,legend').forEach(l=>{t+=l.textContent;});
+    if(el.id){const l=document.querySelector('label[for="'+el.id.replace(/"/g,'\\"')+'"]');if(l)t+=l.textContent;}
+    return /\*/.test(t)||!!el.required||el.getAttribute('aria-required')==='true';}
+  function vacio(c){const el=c.el;if(el.closest('.MuiAutocomplete-root')&&el.closest('.MuiAutocomplete-root').querySelector('.MuiChip-root'))return false;
+    const v=(c.sel?el.textContent:el.value||'').replace(/[\u200b\s-]/g,'');return !v;}
+  function controles(){
+    const dlg=[...document.querySelectorAll('[role=dialog]')].filter(vis).pop();
+    const raiz=dlg||document;
+    const sel='input:not([type=hidden]):not([type=checkbox]):not([type=radio]):not([type=file]):not([type=button]):not([type=submit]),textarea,[role=combobox]:not(input),[aria-haspopup=listbox]:not(input)';
+    const out=[];raiz.querySelectorAll(sel).forEach(el=>{
+      if(!vis(el)||el.disabled||el.readOnly&&!el.closest('.MuiAutocomplete-root'))return;
+      if(el.tagName==='TEXTAREA'&&el.getAttribute('aria-hidden')==='true')return;
+      if(out.some(x=>x.el===el))return;
+      const nat=el.tagName==='INPUT'||el.tagName==='TEXTAREA';
+      const combo=!nat||el.getAttribute('role')==='combobox'||!!el.closest('.MuiAutocomplete-root');
+      out.push({el,combo,sel:!nat,et:etiqueta(el),req:esReq(el)});});
+    return out;}
+  function poner(el,v){
+    const proto=el.tagName==='TEXTAREA'?HTMLTextAreaElement.prototype:HTMLInputElement.prototype;
+    const set=Object.getOwnPropertyDescriptor(proto,'value').set;
+    el.focus();set.call(el,v);
+    el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));}
+  async function opciones(){for(let i=0;i<10;i++){const o=[...document.querySelectorAll('[role=option]')].filter(vis);if(o.length)return o;await sleep(120);}return [];}
+  async function elegir(c,v){
+    const el=c.el,nv=norm(v);
+    if(c.sel){el.dispatchEvent(new MouseEvent('mousedown',{bubbles:true,button:0}));}
+    else{el.focus();el.click();poner(el,v);}
+    const ops=await opciones();
+    let o=ops.find(x=>norm(x.textContent)===nv)||ops.find(x=>norm(x.textContent).includes(nv)||nv.includes(norm(x.textContent)));
+    if(!o){document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));el.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));
+      return 'sin opción "'+v+'" (opciones: '+ops.slice(0,6).map(x=>x.textContent.trim()).join(' | ')+')';}
+    o.click();await sleep(150);return 'ok';}
+  const clicable=e=>e.closest('a,button,[role=button],[role=menuitem],li,[class*="ListItem"],[class*="MenuItem"]')||e;
+  function clic(el){['pointerdown','mousedown','pointerup','mouseup','click'].forEach(t=>el.dispatchEvent(new MouseEvent(t,{bubbles:true,cancelable:true,view:window})));}
+  const hayForm=()=>controles().some(c=>c.et.some(e=>e==='name'||e==='nombre'));
+  async function abrirForm(){
+    if(hayForm())return true;
+    const pool=()=>[...document.querySelectorAll('a,button,li,div,span,p')].filter(vis);
+    const cn=pool().filter(e=>norm(e.textContent)==='create new').sort((a,b)=>a.textContent.length-b.textContent.length)[0];
+    if(cn){clic(clicable(cn));await sleep(600);}
+    const it=pool().filter(e=>{const t=norm(e.textContent);return t==='initiative'||(t.startsWith('initiative ')&&t.length<70);}).sort((a,b)=>a.textContent.length-b.textContent.length)[0];
+    if(!it){console.warn('No pude abrir Create New → Initiative: ábrelo tú y vuelve a pegar.');return false;}
+    clic(clicable(it));
+    for(let k=0;k<40;k++){await sleep(150);if(hayForm()){await sleep(300);return true;}}
+    console.warn('El formulario no se abrió a tiempo.');return false;}
+  async function llenar(d){
+    const ctrl=controles(),usados=new Set(),rep=[];
+    for(const m of MAP){
+      if(!m.on)continue;const v=d[m.k];
+      if(v==null||String(v).trim()===''){rep.push({campo:m.n,estado:'vacío en Origen',valor:''});continue;}
+      const al=m.al.split(',').map(norm).filter(Boolean);
+      let c=ctrl.find(x=>!usados.has(x.el)&&x.et.some(e=>al.includes(e)))||ctrl.find(x=>!usados.has(x.el)&&x.et.some(e=>al.some(a=>a.length>3&&e.includes(a))));
+      if(!c){rep.push({campo:m.n,estado:'NO ENCONTRADO (alias: '+m.al+')',valor:''});continue;}
+      usados.add(c.el);
+      try{let r='ok';if(c.combo||c.sel)r=await elegir(c,String(v));else poner(c.el,String(v));
+        rep.push({campo:m.n,estado:r==='ok'?'✔ lleno':'✖ '+r,control:c.et[0]||'?',valor:String(v).slice(0,40)});}
+      catch(e){rep.push({campo:m.n,estado:'✖ error '+e.message,valor:''});}
+      await sleep(80);}
+    console.table(rep);
+    const mal=rep.filter(r=>!/lleno|vacío/.test(r.estado)).length;
+    if(AUTO){
+      const falt=ctrl.filter(c=>c.req&&vacio(c)).map(c=>c.et[0]||'?');
+      if(mal||falt.length){console.warn('No pulsé Create: '+(falt.length?'faltan obligatorios ('+falt.join(', ')+')':'hay campos sin llenar')+'. Complétalos y pulsa Create tú.');}
+      else{const raiz=[...document.querySelectorAll('[role=dialog]')].filter(vis).pop()||document;
+        const b=[...raiz.querySelectorAll('button')].find(x=>/^(create|crear)$/.test(norm(x.textContent)));
+        if(b){await sleep(400);b.click();console.log('✔ Create pulsado automáticamente.');return true;}else console.warn('No encontré el botón Create: púlsalo tú.');}
+      return false;}
+    console.log(mal?'⚠ '+mal+' campo(s) sin llenar: corrige el alias en Origen (Datos → Shibumi) o complétalos a mano. Revisa y pulsa Create tú mismo.':'✔ Listo. Revisa los datos y pulsa Create tú mismo.');}
+  function leer(){
+    const r=controles().map(c=>({etiqueta:c.et[0]||'(sin etiqueta)',tipo:c.sel?'lista':c.combo?'autocompletar':'texto',todas:c.et.join(' | ')}));
+    console.table(r);console.log('Copia esta tabla y envíasela a quien mantiene Origen para ajustar los alias.');return r;}
+  if(MODO==='leer'){leer();return;}
+  let i=0;
+  const cerrado=async()=>{for(let k=0;k<60;k++){await sleep(200);if(![...document.querySelectorAll('[role=dialog]')].some(vis))return true;}return false;};
+  window.origenLlenar=async n=>{if(typeof n==='number')i=n;
+    while(DATA[i]){const d=DATA[i];console.log('Llenando '+(i+1)+'/'+DATA.length+': '+d.codigo+' — '+d.titulo);
+      if(!(await abrirForm()))return;
+      const creada=await llenar(d);i++;
+      if(AUTO&&creada&&DATA[i]){await cerrado();await sleep(800);continue;}
+      if(DATA[i])console.log('Para la siguiente ejecuta: origenLlenar('+i+')');break;}
+    if(!DATA[i])console.log('Terminé todas las oportunidades.');};
+  window.origenLlenar(0);
+}
+function shScript(modo){
+  const data = [shBuildData()], map = SH_DEF.map(({k,n,al,on})=>({k,n,al,on}));
+  return '/* PORT → Shibumi · '+(data[0].titulo||'caso')+' */\n('+shRuntime.toString()+')('+JSON.stringify(data)+','+JSON.stringify(map)+','+JSON.stringify(modo||'llenar')+','+JSON.stringify(!!state.shibumi.auto && modo!=='leer')+');';
+}
+async function shCopyText(txt){
+  try{ await navigator.clipboard.writeText(txt); return true; }
+  catch(e){ const t=document.createElement('textarea'); t.value=txt; t.style.cssText='position:fixed;opacity:0'; document.body.appendChild(t); t.select(); let ok=false; try{ ok=document.execCommand('copy'); }catch(_){} t.remove(); return ok; }
+}
+function shStepsHtml(){
+  const auto = !!state.shibumi.auto;
+  return `<ol class="sh-ol">
+    <li>${L('Abre <b>Shibumi</b> e inicia sesión. No hace falta abrir nada más: el script pulsa <b>Create New → Initiative</b> por ti.','Open <b>Shibumi</b> and sign in. Nothing else needs to be opened: the script clicks <b>Create New → Initiative</b> for you.')}</li>
+    <li>${L('Presiona <b>F12</b>, abre la pestaña <b>Consola</b> y escribe <span class="sh-tag">allow pasting</span> + Enter (solo la primera vez).','Press <b>F12</b>, open the <b>Console</b> tab and type <span class="sh-tag">allow pasting</span> + Enter (first time only).')}</li>
+    <li>${L('Pega con <b>Ctrl+V</b> y presiona Enter. Los campos se llenan solos.','Paste with <b>Ctrl+V</b> and press Enter. The fields fill in by themselves.')}</li>
+    <li>${auto ? L('Si todo quedó completo, el script pulsa <b>Create</b> por ti; si falta algo, te lo dice en la consola.','If everything is complete, the script clicks <b>Create</b> for you; if something is missing, it tells you in the console.')
+               : L('Revisa los datos, elige el <b>Owner</b> (y el Parent si no lo escribiste aquí) y pulsa <b>Create</b>.','Review the data, choose the <b>Owner</b> (and the Parent if you did not enter it here) and click <b>Create</b>.')}</li>
+  </ol>`;
+}
+function openShibumiHelp(copied){
+  psModal('sh-modal', `<h3>${copied?L('Script copiado. Ahora pégalo en Shibumi','Script copied. Now paste it in Shibumi'):L('Cómo pasar el caso a Shibumi','How to move the case to Shibumi')}</h3>
+    ${shStepsHtml()}
+    <div class="btn-row"><button class="btn btn-primary" data-close>${L('Entendido','Got it')}</button></div>`);
+}
+ACTIONS['sh-copy'] = async ()=>{
+  const falt = shMissing();
+  const ok = await shCopyText(shScript('llenar'));
+  showToast(ok ? L('Script copiado','Script copied') : L('No se pudo copiar: copia manualmente','Could not copy'), !ok);
+  if(falt.length) showToast(L('Faltan datos para Shibumi: ','Missing for Shibumi: ')+falt.join(', '), true);
+  openShibumiHelp(ok);
+};
+ACTIONS['sh-copy-read'] = async ()=>{
+  const ok = await shCopyText(shScript('leer'));
+  showToast(ok ? L('Script de diagnóstico copiado (pégalo en la consola de Shibumi con el formulario abierto)','Diagnostic script copied (paste it in the Shibumi console with the form open)') : L('No se pudo copiar',"Could not copy"), !ok);
+};
+ACTIONS['sh-open'] = ()=>{ window.open((state.shibumi.url||SH_URL_DEF), '_blank', 'noopener'); };
+function shStatusHtml(){
+  const falt = shMissing();
+  return falt.length ? `<p class="sh-warn">⚠ ${L('Shibumi pide además (aún vacío): ','Shibumi also asks for (still empty): ')}<b>${esc(falt.join(', '))}</b>.</p>` : `<p class="sh-ok">✔ ${L('Tiene todo lo que pide Shibumi.','Everything Shibumi asks for is filled in.')}</p>`;
+}
+document.addEventListener('input', e=>{
+  const b = e.target && e.target.dataset && e.target.dataset.bind;
+  if(b && (b.indexOf('shibumi.')===0 || b.indexOf('statement.')===0)){ const el=document.getElementById('sh-status'); if(el) el.innerHTML = shStatusHtml(); }
+});
+ACTIONS['sh-help'] = ()=> openShibumiHelp(false);
+ACTIONS['sh-toggle-auto'] = ()=>{ state.shibumi.auto = !state.shibumi.auto; scheduleSave(); renderMain(); };
+
+
+/* ---- Acciones → Roadmap de Shibumi (copiar y pegar a mano, una por una) ---- */
+function shActsData(){
+  const clean=x=>(x||'').replace(/\s+/g,' ').trim();
+  return state.countermeasures.actions.filter(r=>clean(r.action)).map(r=>({nombre:clean(r.action), fecha:r.date||''}));
+}
+function shUS(iso){ const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(iso||''); return m ? m[2]+'/'+m[3]+'/'+m[1] : ''; }
+function shHoyISO(){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+ACTIONS['sh-copy-txt'] = async (ds)=>{
+  const ok = await shCopyText(ds.t||'');
+  showToast(ok ? L('Copiado: ','Copied: ')+(ds.t||'') : L('No se pudo copiar','Could not copy'), !ok);
+};
+function shActsBlockHtml(){
+  const acts=shActsData(), sh=state.shibumi, ini=sh.actStart||shHoyISO();
+  const btn=(t,lab)=> t ? `<button type="button" class="btn btn-sm" data-action="sh-copy-txt" data-t="${esc(t)}">${esc(lab)}</button>` : '';
+  const rows = acts.length ? acts.map((a,i)=>{ const st=a.fecha&&a.fecha<ini?a.fecha:ini;
+    return `<div class="sh-actrow"><div class="sh-actn"><span class="sh-tag">${i+1}</span> <b>${esc(a.nombre)}</b></div>
+      <div class="sh-actb">${btn(a.nombre,L('Copiar nombre','Copy name'))}${btn(shUS(st),L('Inicio ','Start ')+shUS(st))}${btn(shUS(a.fecha),a.fecha?L('Término ','Due ')+shUS(a.fecha):'')}</div></div>`; }).join('')
+    : `<p class="sh-hint">${L('Aún no hay acciones: defínelas en el Plan de acción.','No actions yet: define them in the Action plan.')}</p>`;
+  return `<div class="sh-act">
+    <div class="sh-guide-t" style="color:var(--blue,#1d4ed8)">${L('Paso 2 · Acciones al Roadmap','Step 2 · Actions to Roadmap')}</div>
+    <ol class="sh-ol sh-ol-l">
+      <li>${L('En Shibumi abre la iniciativa → pestaña <b>Roadmap</b>.','In Shibumi open the initiative → <b>Roadmap</b> tab.')}</li>
+      <li>${L('Pasa el mouse sobre la iniciativa y presiona el <b>+</b>.','Hover over the initiative and press <b>+</b>.')}</li>
+      <li>${L('Con los botones de abajo copia cada dato y pégalo en el formulario: <b>Name</b>, <b>Start Date</b> y <b>Due Date</b>; luego <b>Create</b>.','Use the buttons below to copy each value and paste it in the form: <b>Name</b>, <b>Start Date</b> and <b>Due Date</b>; then <b>Create</b>.')}</li>
+      <li>${L('Repite con la siguiente acción.','Repeat with the next action.')}</li>
+    </ol>
+    <div class="grid-3"><div class="field-row"><div class="field-main"><label class="field-label">${L('Fecha de inicio de las acciones','Actions start date')} <small>${L('(vacío = hoy)','(empty = today)')}</small></label><input type="date" data-bind="shibumi.actStart" value="${esc(sh.actStart||'')}"></div></div></div>
+    <div class="sh-acts2">${rows}</div>
+  </div>`;
+}
+function renderShibumiCard(){
+  const sh = state.shibumi, d = shBuildData(), falt = shMissing();
+  const pre = (k,ph)=> `placeholder="${esc(ph)}"`;
+  const autoL4 = (!sh.l4 && d.fin) ? ' · '+L('sugerida','suggested')+': '+d.fin : '';
+  if(!sh.open) return `
+    <div class="card sh-card sh-collapsed" id="sh-card">
+      <div class="sh-ch"><div><h3 class="card-title" style="margin:0;">${L('Pasar a Shibumi','Move to Shibumi')} <span class="sh-tag">${L('opcional','optional')}</span></h3>
+      <p class="card-subtitle" style="margin:4px 0 0;">${L('Solo si lo necesitas: llena el formulario de Shibumi con este caso.','Only if you need it: fills the Shibumi form with this case.')}</p></div>
+      <div class="btn-row"><button class="btn btn-primary" data-action="sh-toggle">${L('Preparar envío ▾','Set up ▾')}</button><button class="btn" data-action="sh-open">${L('Abrir Shibumi ↗','Open Shibumi ↗')}</button></div></div>
+    </div>`;
+  return `
+    <div class="card sh-card" id="sh-card">
+      <div class="sh-ch"><h3 class="card-title" style="margin:0;">${L('Pasar a Shibumi','Move to Shibumi')}</h3><button class="btn btn-sm" data-action="sh-toggle">${L('Ocultar ▴','Hide ▴')}</button></div>
+      <p class="card-subtitle">${L('Copia un script que llena el formulario <b>Create Initiative</b> de Shibumi con los datos de este caso.','Copy a script that fills the Shibumi <b>Create Initiative</b> form with this case’s data.')}</p>
+
+      <div class="sh-guide">
+        <div class="sh-guide-t">★ ${L('Cómo hacerlo','How to do it')}</div>
+        <ol class="sh-ol">
+          <li>${L('Completa abajo lo que Shibumi pide y no sale del caso (<b>Parent</b>, alcance, impacto y fechas).','Fill in below what Shibumi asks for and does not come from the case (<b>Parent</b>, scope, impact and dates).')}</li>
+          <li>${L('Pulsa <b>Copiar script para Shibumi</b>.','Click <b>Copy script for Shibumi</b>.')}</li>
+          <li>${L('Abre Shibumi, presiona <b>F12</b> → <b>Consola</b> (la primera vez escribe <span class="sh-tag">allow pasting</span> + Enter), pega con <b>Ctrl+V</b> y Enter.','Open Shibumi, press <b>F12</b> → <b>Console</b> (first time type <span class="sh-tag">allow pasting</span> + Enter), paste with <b>Ctrl+V</b> and Enter.')}</li>
+          <li>${L('Revisa, elige el <b>Owner</b> y pulsa <b>Create</b>.','Review, choose the <b>Owner</b> and click <b>Create</b>.')}</li>
+        </ol>
+      </div>
+
+      <div class="field-row" style="margin-top:14px;"><div class="field-main"><label class="field-label">Parent <small>${L('(como aparece en Shibumi)','(as it appears in Shibumi)')}</small></label>
+        <input type="text" data-bind="shibumi.parent" value="${esc(sh.parent)}" placeholder="${L('Ej: ITI Procurement','E.g. ITI Procurement')}"></div></div>
+
+      <div class="field-row"><div class="field-main"><label class="field-label">${L('Alcance (va en “What is the Approach?”)','Scope (goes in “What is the Approach?”)')} <small>${L('(hasta dónde llega la iniciativa: áreas, turnos, equipos, qué queda fuera)','(how far the initiative goes: areas, shifts, equipment, what is left out)')}</small></label>
+        <textarea data-bind="shibumi.scope" rows="3" placeholder="${L('Ej: Aplica a los 3 turnos del patio de T2. No incluye el patio de reefer.','E.g. Applies to the 3 yard shifts at T2. Does not include the reefer yard.')}">${esc(sh.scope||'')}</textarea></div></div>
+
+      <div class="sh-imp">
+        <div class="sh-imp-head">
+          <label class="field-label" style="margin:0;">${L('Cálculo del impacto','Impact calculation')}</label>
+          <span class="il-seg"><button type="button" class="${sh.mode==='calc'?'on':''}" data-action="sh-imp-mode" data-m="calc">${L('Calculadora','Calculator')}</button><button type="button" class="${sh.mode!=='calc'?'on':''}" data-action="sh-imp-mode" data-m="manual">${L('Escribirlo yo','Write it myself')}</button></span>
+        </div>
+        ${sh.mode==='calc' ? `
+          <div class="sh-imp-params grid-3"><div class="field-row"><div class="field-main"><label class="field-label">${L('CLP por USD (para el beneficio en kUSD)','CLP per USD (for the kUSD benefit)')}</label><input type="number" step="any" data-shp="tc" value="${esc(sh.tc)}"></div></div></div>
+          ${sh.lines.map(shLineHtml).join('')}
+          <button type="button" class="btn btn-sm" data-action="sh-line-add">${L('+ Agregar otro ahorro','+ Add another saving')}</button>
+          <div class="il-tot" id="sh-total">${shTotalHtml()}</div>
+          <p class="sh-hint">${L('El texto de “Rough Calculation of Impact” y el beneficio en kUSD se arman solos con esto.','The “Rough Calculation of Impact” text and the kUSD benefit are built automatically from this.')}</p>
+        ` : `
+          <div class="field-row"><div class="field-main"><label class="field-label">${L('Cálculo aproximado del impacto','Rough calculation of impact')}</label>
+            <textarea data-bind="shibumi.impact" data-shpm="1" rows="3" placeholder="${L('Ej: 3 HH/día × 250 días × USD 20/HH = USD 15.000 al año','E.g. 3 man-hours/day × 250 days × USD 20 = USD 15,000/year')}">${esc(sh.impact)}</textarea></div></div>
+          <div class="field-row"><div class="field-main"><label class="field-label">${L('Beneficio anual estimado (kUSD)','Estimated annual benefit (kUSD)')}</label>
+            <input type="text" inputmode="decimal" data-bind="shibumi.benefit" value="${esc(sh.benefit)}" placeholder="${L('Ej: 45','E.g. 45')}"></div></div>
+        `}
+      </div>
+      <div class="grid-3 sh-dates">
+        <div class="field-row"><div class="field-main"><label class="field-label">Start Date</label><input type="date" data-bind="shibumi.start" value="${esc(sh.start)}"></div></div>
+        <div class="field-row"><div class="field-main"><label class="field-label">Due Date L4 <small>${autoL4}</small></label><input type="date" data-bind="shibumi.l4" value="${esc(sh.l4)}"></div></div>
+        <div class="field-row"><div class="field-main"><label class="field-label">Due Date L5 <small>${L('(captura del impacto)','(impact capture)')}</small></label><input type="date" data-bind="shibumi.l5" value="${esc(sh.l5)}"></div></div>
+      </div>
+
+      <div id="sh-status">${shStatusHtml()}</div>
+
+      <label class="sh-auto"><input type="checkbox" ${sh.auto?'checked':''} data-action="sh-toggle-auto"> ${L('Que el script pulse <b>Create</b> por mí cuando todo esté completo','Let the script click <b>Create</b> for me when everything is complete')}</label>
+      <div class="btn-row" style="margin-top:10px;">
+        <button class="btn btn-primary" data-action="sh-copy">${L('Copiar script para Shibumi','Copy script for Shibumi')}</button>
+        <button class="btn" data-action="sh-open">${L('Abrir Shibumi ↗','Open Shibumi ↗')}</button>
+        <button class="btn" data-action="sh-help">${L('Ver instrucciones','Show instructions')}</button>
+        <button class="btn" data-action="sh-copy-read" title="${L('Si algún campo no se llena: lista los campos del formulario para ajustar los nombres','If a field does not fill: lists the form fields so names can be adjusted')}">${L('Script de diagnóstico','Diagnostic script')}</button>
+      </div>
+      ${shActsBlockHtml()}
+    </div>`;
+}
+
 function renderExportSection(){
   const roots = getIdentifiedRootCauses();
   const stats = [
@@ -3481,6 +3959,8 @@ function renderExportSection(){
           </div>
         </div>
       </div>
+
+      ${renderShibumiCard()}
     </section>
   `;
 }
@@ -4182,6 +4662,10 @@ function migrateState(s){
   if(!s.welcomeCardImages || typeof s.welcomeCardImages !== 'object') s.welcomeCardImages = { tl:null, tr:null, bl:null, br:null };
   ['tl','tr','bl','br'].forEach(k=>{ if(s.welcomeCardImages[k]===undefined) s.welcomeCardImages[k]=null; });
   if(typeof s.videoUrl !== 'string') s.videoUrl = '';
+  if(!s.shibumi || typeof s.shibumi !== 'object') s.shibumi = {};
+  s.shibumi = Object.assign(shDefaults(), s.shibumi);
+  if(!Array.isArray(s.shibumi.lines) || !s.shibumi.lines.length) s.shibumi.lines = shDefaults().lines;
+  s.shibumi.lines = s.shibumi.lines.map(shConvLine);
   return s;
 }
 
@@ -4390,6 +4874,138 @@ window.addEventListener('error', function(e){
   if(!state){ showBootError(e.error||e.message); }
 });
 
+
+/* ============================================================
+   DICTADO POR VOZ (Web Speech API) · botón flotante
+   - "Dictar en el campo": escribe en el campo seleccionado y sigue al cambiar de campo (sin reactivar el micrófono).
+   - "Dictar esta sección": recorre campo por campo SOLO la sección actual.
+   - Comandos (frase completa): siguiente · anterior · borrar · detener.
+   ============================================================ */
+var Dict = (()=>{
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  let rec=null, active=false, mode='free', target=null, gi=0, open=false, want=false, interim='', touched=new Set();
+  const fab=document.createElement('button'); fab.id='dict-fab'; fab.type='button'; fab.setAttribute('aria-label','Dictado por voz');
+  fab.innerHTML='<svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/></svg>';
+  const panel=document.createElement('div'); panel.id='dict-panel';
+  document.body.appendChild(fab); document.body.appendChild(panel);
+  const langCode=()=> LANG==='en' ? 'en-US' : 'es-CL';
+  const langName=()=> LANG==='en' ? 'English' : 'Español';
+  const isField=el=>!!el && el.nodeType===1 && !el.closest('#dict-panel') && !el.disabled && !el.readOnly && el.id!=='gsearch' &&
+    (el.tagName==='TEXTAREA' || (el.tagName==='INPUT' && /^(text|)$/i.test(el.getAttribute('type')||'text')));
+  const visible=el=>!!(el.offsetParent || el.getClientRects().length);
+  const fieldsOf=key=>{ const sec=document.getElementById('section-'+key); if(!sec) return []; return [...sec.querySelectorAll('input,textarea')].filter(e=>isField(e)&&visible(e)); };
+  const keyOf=el=> el.dataset&&el.dataset.bind ? '[data-bind="'+el.dataset.bind+'"]' : (el.id?'#'+el.id:'');
+  const refind=()=>{ if(target&&target.isConnected) return target; const k=target&&target._k; if(k){ const e=document.querySelector(k); if(e) { e._k=k; target=e; return e; } } return null; };
+  function labelOf(el){
+    let t=''; const fr=el.closest('.field-row'); const lab=fr&&fr.querySelector('.field-label'); if(lab){ const c=lab.cloneNode(true); c.querySelectorAll('button,small,sup,[class*="tip"],[class*="info"],[data-tip]').forEach(x=>x.remove()); t=c.textContent.replace(/\s+i$/,''); }
+    const td=el.closest('td');
+    if(!t && td){ const tr=td.parentElement, i=[...tr.children].indexOf(td), tb=tr.closest('table'), th=tb&&tb.querySelectorAll('thead th')[i]; const n=tb?[...tb.querySelectorAll('tbody tr')].indexOf(tr)+1:0; if(th) t=th.textContent+(n?' · '+L('fila','row')+' '+n:''); }
+    if(!t) t=el.getAttribute('placeholder')||el.getAttribute('aria-label')||el.title||L('Campo','Field');
+    return t.replace(/\s+/g,' ').trim().slice(0,90);
+  }
+  const norm=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9 ]+/g,' ').replace(/\s+/g,' ').trim();
+  const CMD={ next:/^(siguiente|siguiente campo|proximo|proximo campo|next|next field)$/, prev:/^(anterior|campo anterior|atras|volver|previous|previous field|back|go back)$/,
+              clear:/^(borrar|borrar campo|limpiar|limpiar campo|clear|clear field|delete field|erase)$/, stop:/^(detener|detener dictado|parar|terminar|fin del dictado|stop|stop dictation|done|finish)$/ };
+  function fmt(text, multi){
+    let t=' '+text.trim()+' ';
+    const nl = multi ? '\n' : ' ';
+    const R= LANG==='en'
+      ? [[/\s+question mark\b/gi,'?'],[/\s+full stop\b/gi,'.'],[/\s+semicolon\b/gi,';'],[/\s+colon\b/gi,':'],[/\s+comma\b/gi,','],[/\s+new line\b/gi,nl]]
+      : [[/\s+signo de interrogaci[oó]n\b/gi,'?'],[/\s+punto y coma\b/gi,';'],[/\s+punto final\b/gi,'.'],[/\s+dos puntos\b/gi,':'],[/\s+coma\b/gi,','],[/\s+(nueva l[ií]nea|salto de l[ií]nea)\b/gi,nl]];
+    R.forEach(([a,b])=>{ t=t.replace(a,b); });
+    return t.replace(/\s+([.,;:?])/g,'$1').trim();
+  }
+  const cap=s=>s.replace(/^\s*(\S)/,(m,c)=>m.replace(c,c.toUpperCase()));
+  function setTarget(el,scroll){
+    if(!el) return; el._k=keyOf(el);
+    document.querySelectorAll('.dict-target').forEach(x=>x.classList.remove('dict-target'));
+    target=el; el.classList.add('dict-target');
+    if(scroll){
+      if(matchMedia('(pointer:coarse)').matches){ el.setAttribute('inputmode','none'); touched.add(el); }
+      try{ el.focus({preventScroll:true}); }catch(_){}
+      el.scrollIntoView({block:'center',behavior:'smooth'});
+    }
+  }
+  const secFields=()=>fieldsOf(currentSection);
+  function move(d){
+    const L2=secFields(); if(!L2.length) return;
+    let i=target?L2.indexOf(refind()||target):-1;
+    if(i<0) i=Math.max(0,Math.min(gi,L2.length-1)); else i+=d;
+    if(i>=L2.length){ if(mode==='guided'){ stop(); showToast(L('Sección completa ✔','Section complete ✔')); return; } i=L2.length-1; }
+    if(i<0) i=0;
+    gi=i; setTarget(L2[i],true); render();
+  }
+  function commit(text){
+    const el=refind(); if(!isField(el)){ showToast(L('Selecciona un campo para dictar','Select a field to dictate'),true); return; }
+    const t=fmt(text, el.tagName==='TEXTAREA'); if(!t) return;
+    const cur=el.value||'';
+    let v = cur ? cur.replace(/[ \t]+$/,'')+(/^[.,;:?]/.test(t)||/\n$/.test(cur)?'':' ')+t : t;
+    v = cur ? v : cap(v);
+    v = v.replace(/([.?!]\s+)([a-záéíóúñ])/g,(m,a,b)=>a+b.toUpperCase());
+    el.value=v; el.dispatchEvent(new Event('input',{bubbles:true}));
+    if(el.id==='qa-text'){ ACTIONS['qa-add'](); const again=document.getElementById('qa-text'); if(again){ setTarget(again,false); } }
+    el.classList.add('dict-target');
+  }
+  function handleFinal(raw){
+    const n=norm(raw);
+    if(CMD.stop.test(n)){ stop(); return; }
+    if(CMD.next.test(n)){ move(1); return; }
+    if(CMD.prev.test(n)){ move(-1); return; }
+    if(CMD.clear.test(n)){ const el=refind(); if(isField(el)){ el.value=''; el.dispatchEvent(new Event('input',{bubbles:true})); } return; }
+    commit(raw);
+  }
+  function build(){
+    rec=new SR(); rec.lang=langCode(); rec.continuous=true; rec.interimResults=true; rec.maxAlternatives=1;
+    rec.onresult=e=>{ let fin='',itm=''; for(let i=e.resultIndex;i<e.results.length;i++){ const r=e.results[i]; if(r.isFinal) fin+=r[0].transcript; else itm+=r[0].transcript; } interim=itm; if(fin.trim()) handleFinal(fin); render(); };
+    rec.onerror=e=>{ if(e.error==='not-allowed'||e.error==='service-not-allowed'){ want=false; stop(); showToast(L('El navegador bloqueó el micrófono: permítelo en el candado de la barra de direcciones','The browser blocked the microphone: allow it in the address bar lock icon'),true); } };
+    rec.onend=()=>{ interim=''; if(active&&want){ setTimeout(()=>{ if(!(active&&want)) return; try{ rec.lang=langCode(); rec.start(); }catch(_){} },250); } render(); };
+  }
+  function begin(m){
+    if(!SR){ showToast(L('Tu navegador no admite dictado por voz: usa Chrome o Edge','Your browser does not support voice dictation: use Chrome or Edge'),true); return; }
+    mode=m; active=true; want=true; open=true;
+    if(!rec) build();
+    try{ rec.lang=langCode(); rec.start(); }catch(_){}
+    if(m==='guided'){ const l=secFields(); gi=0; if(l[0]) setTarget(l[0],true); else { showToast(L('No hay campos para dictar en esta sección','No fields to dictate in this section'),true); stop(); return; } }
+    else { const a=document.activeElement; if(isField(a)) setTarget(a,false); else { const l=secFields(); if(l[0]) setTarget(l[0],true); } }
+    render();
+  }
+  function stop(){
+    active=false; want=false; interim='';
+    try{ rec&&rec.stop(); }catch(_){}
+    document.querySelectorAll('.dict-target').forEach(x=>x.classList.remove('dict-target'));
+    touched.forEach(e=>{ try{ e.removeAttribute('inputmode'); }catch(_){} }); touched.clear();
+    render();
+  }
+  function render(){
+    fab.classList.toggle('on',active); fab.title=L('Dictado por voz','Voice dictation');
+    panel.classList.toggle('open',open);
+    if(!open){ panel.innerHTML=''; return; }
+    const el=refind(); const secL=secFields(); const pos=(mode==='guided'&&el)? (secL.indexOf(el)+1)+'/'+secL.length : '';
+    if(!active){
+      panel.innerHTML=`<div class="dp-h"><b>🎤 ${L('Dictado por voz','Voice dictation')}</b><button type="button" class="dp-x" data-dp="close" aria-label="${L('Cerrar','Close')}">✕</button></div>
+        <button type="button" class="dp-btn" data-dp="free"><b>${L('Dictar en el campo seleccionado','Dictate in the selected field')}</b><small>${L('Haz clic en un campo y habla. Cambia de campo cuando quieras sin reactivar el micrófono.','Click a field and speak. Switch fields any time without restarting the microphone.')}</small></button>
+        <button type="button" class="dp-btn" data-dp="guided"><b>${L('Dictar esta sección, campo por campo','Dictate this section, field by field')}</b><small>${L('Te lleva por cada campo de la sección actual, solo de esta sección.','Walks you through each field of the current section only.')}</small></button>
+        <p class="dp-note">${L('Idioma','Language')}: <b>${langName()}</b> · ${L('Di «siguiente», «anterior», «borrar» o «detener». Puntuación: «coma», «dos puntos», «punto final», «nueva línea».','Say “next”, “previous”, “clear” or “stop”. Punctuation: “comma”, “colon”, “full stop”, “new line”.')}</p>`;
+    } else {
+      panel.innerHTML=`<div class="dp-h"><b><span class="dp-dot"></span> ${L('Escuchando…','Listening…')} ${pos?'<span class="dp-pos">'+pos+'</span>':''}</b><button type="button" class="dp-x" data-dp="close" aria-label="${L('Minimizar','Minimize')}">—</button></div>
+        <div class="dp-field">${el?esc(labelOf(el)):L('Haz clic en un campo','Click a field')}</div>
+        <div class="dp-live">${interim?esc(interim):'<span class="dp-hint">'+L('Habla ahora…','Speak now…')+'</span>'}</div>
+        <div class="dp-row"><button type="button" class="dp-s" data-dp="prev">‹ ${L('Anterior','Previous')}</button><button type="button" class="dp-s" data-dp="next">${L('Siguiente','Next')} ›</button><button type="button" class="dp-s" data-dp="clear">${L('Borrar','Clear')}</button><button type="button" class="dp-s stop" data-dp="stop">■ ${L('Detener','Stop')}</button></div>`;
+    }
+  }
+  panel.addEventListener('click',e=>{ const b=e.target.closest('[data-dp]'); if(!b) return; const a=b.dataset.dp;
+    if(a==='close'){ open=false; render(); } else if(a==='free') begin('free'); else if(a==='guided') begin('guided');
+    else if(a==='stop') stop(); else if(a==='next') move(1); else if(a==='prev') move(-1);
+    else if(a==='clear') handleFinal(LANG==='en'?'clear':'borrar'); });
+  panel.addEventListener('mousedown',e=>e.preventDefault());
+  fab.addEventListener('mousedown',e=>e.preventDefault());
+  fab.addEventListener('click',()=>{ open=!open; render(); });
+  document.addEventListener('focusin',e=>{ if(active && isField(e.target)){ setTarget(e.target,false); if(mode==='guided'){ const i=secFields().indexOf(e.target); if(i>=0) gi=i; } render(); } });
+  const welcome=()=>{ const w=!!document.getElementById('welcome-screen'); fab.style.display=w?'none':''; if(w) panel.style.display='none'; else panel.style.display=''; };
+  new MutationObserver(welcome).observe(document.body,{childList:true,subtree:true}); welcome();
+  render();
+  return { onLang(){ if(active&&rec){ try{ rec.stop(); }catch(_){} } render(); }, render };
+})();
 </script>
 </body>
 </html>
