@@ -2386,7 +2386,7 @@ function openHelp(){
       <p class="help-p">${L('← → cambian de etapa · <b>/</b> abre el buscador · Esc cierra esta ventana','← → switch stage · <b>/</b> opens search · Esc closes this window')}</p>
       <div class="help-h">${L('🎤 Dictado por voz','🎤 Voice dictation')}</div>
       <p class="help-p">${L('Pulsa el <b>botón del micrófono</b> (abajo a la derecha). <b>Dictar en el campo seleccionado</b>: haz clic en un campo y habla; puedes cambiar de campo sin reactivar el micrófono. <b>Dictar esta sección</b>: te va llevando campo por campo, solo en la sección en que estás.','Press the <b>microphone button</b> (bottom right). <b>Dictate in the selected field</b>: click a field and speak; you can switch fields without restarting the microphone. <b>Dictate this section</b>: it walks you field by field, only in the section you are in.')}</p>
-      <p class="help-p">${L('Comandos: «siguiente», «anterior», «borrar», «detener» (di «siguiente» al terminar de dictar el campo, solo o al final de la frase). Puntuación: «coma», «dos puntos», «punto final», «nueva línea». Se dicta en el idioma elegido (Español/English).','Commands: “next”, “previous”, “clear”, “stop” (say “next” when you finish a field, alone or at the end of the sentence). Punctuation: “comma”, “colon”, “full stop”, “new line”. Dictation uses the selected language (Español/English).')}</p>
+      <p class="help-p">${L('Comandos: «siguiente», «anterior», «borrar», «detener» (di «siguiente» al terminar de dictar el campo, solo o al final de la frase). En Ishikawa di la categoría («personas», «máquina», «entorno», «material», «proceso», «medición») y luego dicta las causas; «siguiente» cambia a la categoría que sigue. Puntuación: «coma», «dos puntos», «punto final», «nueva línea». Se dicta en el idioma elegido (Español/English).','Commands: “next”, “previous”, “clear”, “stop” (say “next” when you finish a field, alone or at the end of the sentence). In Ishikawa say the category (“people”, “machine”, “environment”, “material”, “process”, “measurement”) and then dictate the causes; “next” moves to the following category. Punctuation: “comma”, “colon”, “full stop”, “new line”. Dictation uses the selected language (Español/English).')}</p>
       <p class="help-p">${L('El navegador pide permiso del micrófono solo la primera vez (si abres el archivo directo desde el computador puede pedirlo más veces; en un sitio web https lo recuerda). Funciona en Chrome y Edge.','The browser asks for microphone permission only the first time (if you open the file directly from your computer it may ask more often; on an https website it remembers). Works in Chrome and Edge.')}</p>
       <div class="help-h">${L('Buscador','Search')}</div>
       <p class="help-p">${L('Escribe cualquier palabra de lo que ya llenaste y elige el resultado: te lleva directo al campo para editarlo.','Type any word from what you already filled in and pick the result: it takes you straight to the field to edit it.')}</p>
@@ -4884,6 +4884,7 @@ window.addEventListener('error', function(e){
 var Dict = (()=>{
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   let rec=null, active=false, mode='free', target=null, gi=0, open=false, want=false, interim='', touched=new Set();
+  let running=false, retries=0, handled=new Set(), pend=null, lastHeard='', lastAct=0, wd=null, lastKey='';
   const fab=document.createElement('button'); fab.id='dict-fab'; fab.type='button'; fab.setAttribute('aria-label','Dictado por voz');
   fab.innerHTML='<svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/></svg>';
   const panel=document.createElement('div'); panel.id='dict-panel';
@@ -4895,8 +4896,17 @@ var Dict = (()=>{
   const visible=el=>!!(el.offsetParent || el.getClientRects().length);
   const fieldsOf=key=>{ const sec=document.getElementById('section-'+key); if(!sec) return []; return [...sec.querySelectorAll('input,textarea')].filter(e=>isField(e)&&visible(e)); };
   const keyOf=el=> el.dataset&&el.dataset.bind ? '[data-bind="'+el.dataset.bind+'"]' : (el.id?'#'+el.id:'');
-  const refind=()=>{ if(target&&target.isConnected) return target; const k=target&&target._k; if(k){ const e=document.querySelector(k); if(e) { e._k=k; target=e; return e; } } return null; };
+  const refind=()=>{
+    if(target&&target.isConnected&&visible(target)) return target;
+    if(!target) return null;
+    const k=target._k; if(k){ const e=document.querySelector(k); if(e&&isField(e)){ e._k=k; e._sec=target._sec; e._idx=target._idx; target=e; return e; } }
+    const l=fieldsOf(target._sec||currentSection); const e=l[target._idx]; if(e){ e._k=target._k; e._sec=target._sec; e._idx=target._idx; target=e; return e; }
+    return null;
+  };
+  function catNow(){ const cats=REF.ishikawaCategories; return cats.find(c=>c.key===((typeof uiState!=='undefined'&&uiState.qaCat)||cats[0].key))||cats[0]; }
+  const catName=c=>L(c.name,trs(c.name));
   function labelOf(el){
+    if(el&&el.id==='qa-text'){ return L('Causa para «','Cause for «')+catName(catNow())+'»'; }
     let t=''; const fr=el.closest('.field-row'); const lab=fr&&fr.querySelector('.field-label'); if(lab){ const c=lab.cloneNode(true); c.querySelectorAll('button,small,sup,[class*="tip"],[class*="info"],[data-tip]').forEach(x=>x.remove()); t=c.textContent.replace(/\s+i$/,''); }
     const td=el.closest('td');
     if(!t && td){ const tr=td.parentElement, i=[...tr.children].indexOf(td), tb=tr.closest('table'), th=tb&&tb.querySelectorAll('thead th')[i]; const n=tb?[...tb.querySelectorAll('tbody tr')].indexOf(tr)+1:0; if(th) t=th.textContent+(n?' · '+L('fila','row')+' '+n:''); }
@@ -4922,7 +4932,7 @@ var Dict = (()=>{
   }
   const cap=s=>s.replace(/^\s*(\S)/,(m,c)=>m.replace(c,c.toUpperCase()));
   function setTarget(el,scroll){
-    if(!el) return; el._k=keyOf(el);
+    if(!el) return; el._k=keyOf(el); el._sec=currentSection; el._idx=fieldsOf(currentSection).indexOf(el);
     document.querySelectorAll('.dict-target').forEach(x=>x.classList.remove('dict-target'));
     target=el; el.classList.add('dict-target');
     if(scroll){
@@ -4938,7 +4948,7 @@ var Dict = (()=>{
     if(i<0) i=Math.max(0,Math.min(gi,L2.length-1)); else i+=d;
     if(i>=L2.length){ if(mode==='guided'){ stop(); showToast(L('Sección completa ✔','Section complete ✔')); return; } i=L2.length-1; }
     if(i<0) i=0;
-    gi=i; setTarget(L2[i],true); render();
+    gi=i; setTarget(L2[i],true); renderLive();
   }
   function commit(text){
     const el=refind(); if(!isField(el)){ showToast(L('Selecciona un campo para dictar','Select a field to dictate'),true); return; }
@@ -4951,37 +4961,114 @@ var Dict = (()=>{
     if(el.id==='qa-text'){ ACTIONS['qa-add'](); const again=document.getElementById('qa-text'); if(again){ setTarget(again,false); } }
     el.classList.add('dict-target');
   }
+  function setCat(key){
+    const cat=REF.ishikawaCategories.find(c=>c.key===key); if(!cat) return;
+    ACTIONS['qa-cat']({cat:key});
+    const i=document.getElementById('qa-text'); if(i) setTarget(i,false);
+    showToast(L('Categoría: ','Category: ')+catName(cat)); renderLive();
+  }
+  function catMove(d){
+    const ks=REF.ishikawaCategories.map(c=>c.key), i=ks.indexOf(catNow().key)+d;
+    if(i<0||i>=ks.length){ move(d); return; }
+    setCat(ks[i]);
+  }
   function runCmd(c){
-    if(c==='stop') stop(); else if(c==='next') move(1); else if(c==='prev') move(-1);
+    if(c&&c.indexOf('cat:')===0){ setCat(c.slice(4)); return; }
+    const tg=refind(), inQa=!!(tg&&tg.id==='qa-text');
+    if(c==='stop') stop(); else if(c==='next'){ inQa?catMove(1):move(1); } else if(c==='prev'){ inQa?catMove(-1):move(-1); }
     else if(c==='clear'){ const el=refind(); if(isField(el)){ el.value=''; el.dispatchEvent(new Event('input',{bubbles:true})); } }
   }
   function handleFinal(raw){
     const n=norm(raw); if(!n) return;
-    for(const c of ['stop','next','prev','clear']) if(CMD[c].test(n)){ runCmd(c); return; }
+    { const c0=cmdOf(n); if(c0){ runCmd(c0); return; } }
     for(const [c,re] of TAIL){ if(re.test(raw)){ const rest=raw.replace(re,'').trim(); if(rest) commit(rest); runCmd(c); return; } }
     commit(raw);
   }
-  function build(){
-    rec=new SR(); rec.lang=langCode(); rec.continuous=true; rec.interimResults=true; rec.maxAlternatives=1;
-    rec.onresult=e=>{ let itm=''; for(let i=e.resultIndex;i<e.results.length;i++){ const r=e.results[i]; if(r.isFinal) handleFinal(r[0].transcript); else itm+=r[0].transcript; } interim=itm; render(); };
-    rec.onerror=e=>{ if(e.error==='not-allowed'||e.error==='service-not-allowed'){ want=false; stop(); showToast(L('El navegador bloqueó el micrófono: permítelo en el candado de la barra de direcciones','The browser blocked the microphone: allow it in the address bar lock icon'),true); } };
-    rec.onend=()=>{ interim=''; if(active&&want){ setTimeout(()=>{ if(!(active&&want)) return; try{ rec.lang=langCode(); rec.start(); }catch(_){} },250); } render(); };
+  const CATALIAS={ people:/^(personas|persona|gente|mano de obra|people|personnel|manpower)$/, machine:/^(maquina|maquinas|equipo|equipos|machine|machines|equipment)$/,
+    environment:/^(entorno|medio ambiente|ambiente|environment)$/, material:/^(material|materiales|materials)$/,
+    process:/^(proceso|procesos|metodo|metodos|process|method)$/, measurement:/^(medicion|mediciones|medida|measurement|measurements)$/ };
+  const qaOn=()=>!!document.getElementById('qa-text');
+  function catKey(n){
+    if(!qaOn()) return null;
+    const pre=/^(categoria|category|ir a|pasar a|go to|cambiar a|change to)\s+/; const hasPre=pre.test(n); const m=n.replace(pre,'');
+    const tg=refind(); if(!hasPre && !(tg&&tg.id==='qa-text')) return null;
+    for(const k in CATALIAS) if(CATALIAS[k].test(m)) return k;
+    return null;
   }
+  const cmdOf=n=>{ for(const c of ['stop','next','prev','clear']) if(CMD[c].test(n)) return c; const k=catKey(n); return k?'cat:'+k:null; };
+  const heard=t=>{ lastHeard=String(t||'').trim(); };
+  function spawn(){
+    if(!SR||!active||!want) return;
+    if(rec){ const o=rec; o.onstart=o.onresult=o.onerror=o.onend=null; try{ o.abort(); }catch(_){} }
+    const me=new SR(); rec=me; handled=new Set(); pend&&clearTimeout(pend.t); pend=null;
+    me.lang=langCode(); me.continuous=true; me.interimResults=true; me.maxAlternatives=1;
+    me.onstart=()=>{ if(me!==rec) return; running=true; retries=0; lastAct=Date.now(); renderLive(); };
+    me.onresult=e=>{
+      if(me!==rec) return; lastAct=Date.now(); let itm='';
+      for(let i=e.resultIndex;i<e.results.length;i++){
+        const r=e.results[i], txt=r[0].transcript, n=norm(txt), c=cmdOf(n);
+        if(handled.has(i)) continue;
+        if(r.isFinal){
+          if(pend&&pend.i===i){ clearTimeout(pend.t); pend=null; }
+          handled.add(i); heard(txt); handleFinal(txt);
+        } else if(c){
+          /* comando exacto aún provisional: se ejecuta si el texto no cambia durante 0,6 s (no espera el resultado final del navegador) */
+          if(!pend||pend.i!==i||pend.c!==c){ if(pend) clearTimeout(pend.t); pend={i,c,t:setTimeout(()=>{ if(pend&&pend.i===i&&!handled.has(i)){ handled.add(i); pend=null; heard(c); runCmd(c); renderLive(); } },600)}; }
+          itm+=txt;
+        } else { if(pend&&pend.i===i){ clearTimeout(pend.t); pend=null; } itm+=txt; }
+      }
+      interim=itm; renderLive();
+    };
+    me.onerror=e=>{
+      if(me!==rec) return; const er=e&&e.error;
+      if(er==='not-allowed'||er==='service-not-allowed'){ stop(); showToast(L('El navegador bloqueó el micrófono: permítelo en el candado de la barra de direcciones','The browser blocked the microphone: allow it in the address bar lock icon'),true); }
+      else if(er==='audio-capture'){ stop(); showToast(L('No se detecta ningún micrófono','No microphone detected'),true); }
+      /* no-speech / aborted / network: onend vuelve a abrir la escucha */
+    };
+    me.onend=()=>{
+      if(me!==rec) return; running=false; interim='';
+      if(active&&want){ const d=Math.min(250+retries*500,4000); retries++; setTimeout(()=>{ if(active&&want&&rec===me) spawn(); },d); }
+      renderLive();
+    };
+    try{ me.start(); }catch(_){ running=false; setTimeout(()=>{ if(active&&want&&rec===me) spawn(); },600); }
+  }
+  /* vigilante: si la escucha se cayó o quedó muda, la reabre sola */
+  function watch(){
+    clearInterval(wd);
+    wd=setInterval(()=>{
+      if(!(active&&want)) return;
+      if(!running){ if(Date.now()-lastAct>3000){ lastAct=Date.now(); spawn(); } }
+      else if(Date.now()-lastAct>45000){ try{ rec.stop(); }catch(_){} }
+    },2000);
+  }
+  document.addEventListener('visibilitychange',()=>{ if(!document.hidden && active&&want&&!running) spawn(); });
   function begin(m){
     if(!SR){ showToast(L('Tu navegador no admite dictado por voz: usa Chrome o Edge','Your browser does not support voice dictation: use Chrome or Edge'),true); return; }
-    mode=m; active=true; want=true; open=true;
-    if(!rec) build();
-    try{ rec.lang=langCode(); rec.start(); }catch(_){}
+    mode=m; active=true; want=true; open=true; lastAct=Date.now(); lastHeard=''; interim='';
     if(m==='guided'){ const l=secFields(); gi=0; if(l[0]) setTarget(l[0],true); else { showToast(L('No hay campos para dictar en esta sección','No fields to dictate in this section'),true); stop(); return; } }
     else { const a=document.activeElement; if(isField(a)) setTarget(a,false); else { const l=secFields(); if(l[0]) setTarget(l[0],true); } }
-    render();
+    spawn(); watch(); render();
   }
   function stop(){
-    active=false; want=false; interim='';
-    try{ rec&&rec.stop(); }catch(_){}
+    active=false; want=false; running=false; interim=''; clearInterval(wd); if(pend){ clearTimeout(pend.t); pend=null; }
+    if(rec){ const o=rec; o.onstart=o.onresult=o.onerror=o.onend=null; try{ o.abort(); }catch(_){} rec=null; }
     document.querySelectorAll('.dict-target').forEach(x=>x.classList.remove('dict-target'));
     touched.forEach(e=>{ try{ e.removeAttribute('inputmode'); }catch(_){} }); touched.clear();
     render();
+  }
+  /* actualiza solo el texto vivo (sin reconstruir los botones, para que los clics no se pierdan) */
+  const catHint=()=>L('Di la categoría (personas, máquina, entorno, material, proceso, medición) o «siguiente» para cambiar de categoría.','Say the category (people, machine, environment, material, process, measurement) or “next” to change category.');
+  function renderLive(){
+    if(!open||!active){ return; }
+    const el=refind(), secL=secFields();
+    const st=panel.querySelector('.dp-status'); if(st) st.textContent=running?L('Escuchando…','Listening…'):L('Reconectando micrófono…','Reconnecting microphone…');
+    const dot=panel.querySelector('.dp-dot'); if(dot) dot.style.opacity=running?'1':'.35';
+    const pos=panel.querySelector('.dp-pos'); if(pos) pos.textContent=(mode==='guided'&&el)?(secL.indexOf(el)+1)+'/'+secL.length:'';
+    const f=panel.querySelector('.dp-field'); if(f) f.textContent=el?labelOf(el):L('Haz clic en un campo','Click a field');
+    const ct=panel.querySelector('.dp-cat'); if(ct) ct.textContent=(el&&el.id==='qa-text')?catHint():'';
+    const lv=panel.querySelector('.dp-live'); if(lv) lv.innerHTML=interim?esc(interim):'<span class="dp-hint">'+L('Habla ahora…','Speak now…')+'</span>';
+    const lh=panel.querySelector('.dp-last'); if(lh) lh.textContent=lastHeard?L('Último: ','Last: ')+lastHeard:'';
+    if(el) el.classList.add('dict-target');
   }
   function render(){
     fab.classList.toggle('on',active); fab.title=L('Dictado por voz','Voice dictation');
@@ -4994,9 +5081,11 @@ var Dict = (()=>{
         <button type="button" class="dp-btn" data-dp="guided"><b>${L('Dictar esta sección, campo por campo','Dictate this section, field by field')}</b><small>${L('Te lleva por cada campo de la sección actual, solo de esta sección.','Walks you through each field of the current section only.')}</small></button>
         <p class="dp-note">${L('Idioma','Language')}: <b>${langName()}</b> · ${L('Di «siguiente», «anterior», «borrar» o «detener». Puntuación: «coma», «dos puntos», «punto final», «nueva línea».','Say “next”, “previous”, “clear” or “stop”. Punctuation: “comma”, “colon”, “full stop”, “new line”.')}</p>`;
     } else {
-      panel.innerHTML=`<div class="dp-h"><b><span class="dp-dot"></span> ${L('Escuchando…','Listening…')} ${pos?'<span class="dp-pos">'+pos+'</span>':''}</b><button type="button" class="dp-x" data-dp="close" aria-label="${L('Minimizar','Minimize')}">—</button></div>
+      panel.innerHTML=`<div class="dp-h"><b><span class="dp-dot"></span> <span class="dp-status">${running?L('Escuchando…','Listening…'):L('Reconectando micrófono…','Reconnecting microphone…')}</span> <span class="dp-pos">${pos}</span></b><button type="button" class="dp-x" data-dp="close" aria-label="${L('Minimizar','Minimize')}">—</button></div>
         <div class="dp-field">${el?esc(labelOf(el)):L('Haz clic en un campo','Click a field')}</div>
+        <div class="dp-cat" style="font-size:.76rem;margin:-2px 0 6px">${el&&el.id==='qa-text'?esc(catHint()):''}</div>
         <div class="dp-live">${interim?esc(interim):'<span class="dp-hint">'+L('Habla ahora…','Speak now…')+'</span>'}</div>
+        <div class="dp-last" style="font-size:.74rem;margin:-4px 0 8px;min-height:14px">${lastHeard?esc(L('Último: ','Last: ')+lastHeard):''}</div>
         <div class="dp-row"><button type="button" class="dp-s" data-dp="prev">‹ ${L('Anterior','Previous')}</button><button type="button" class="dp-s" data-dp="next">${L('Siguiente','Next')} ›</button><button type="button" class="dp-s" data-dp="clear">${L('Borrar','Clear')}</button><button type="button" class="dp-s stop" data-dp="stop">■ ${L('Detener','Stop')}</button></div>`;
     }
   }
@@ -5007,11 +5096,11 @@ var Dict = (()=>{
   panel.addEventListener('mousedown',e=>e.preventDefault());
   fab.addEventListener('mousedown',e=>e.preventDefault());
   fab.addEventListener('click',()=>{ open=!open; render(); });
-  document.addEventListener('focusin',e=>{ if(active && isField(e.target)){ setTarget(e.target,false); if(mode==='guided'){ const i=secFields().indexOf(e.target); if(i>=0) gi=i; } render(); } });
+  document.addEventListener('focusin',e=>{ if(active && isField(e.target)){ setTarget(e.target,false); if(mode==='guided'){ const i=secFields().indexOf(e.target); if(i>=0) gi=i; } renderLive(); } });
   const welcome=()=>{ const w=!!document.getElementById('welcome-screen'); fab.style.display=w?'none':''; if(w) panel.style.display='none'; else panel.style.display=''; };
   new MutationObserver(welcome).observe(document.body,{childList:true,subtree:true}); welcome();
   render();
-  return { onLang(){ if(active&&rec){ try{ rec.stop(); }catch(_){} } render(); }, render };
+  return { onLang(){ if(active&&rec){ try{ rec.stop(); }catch(_){} } render(); }, render, _debug:()=>({active,want,running,retries,target:!!target}) };
 })();
 </script>
 </body>
