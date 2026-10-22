@@ -1034,7 +1034,7 @@
         "multi": true,
         "day": "Last Fri",
         "times": ["12:00"],
-        "status": "undef",
+        "status": "ok",
         "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Senior%20Management%20Meeting?d=wb55709c31a8642fa93e78000568112fd&csf=1&web=1&e=P4QyEG",
         "ppt": ""
       },
@@ -1044,7 +1044,7 @@
         "multi": false,
         "day": "First Tu",
         "times": ["15:00"],
-        "status": "undef",
+        "status": "ok",
         "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Operations?d=wa3fd611b76c54caf970a396fdf757e65&csf=1&web=1&e=2Ux5nR",
         "ppt": ""
       },
