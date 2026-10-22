@@ -976,9 +976,9 @@
         "name": "Infrastructure and Construction",
         "desc": "",
         "multi": false,
-        "day": "",
-        "times": [],
-        "status": "undef",
+        "day": "Mon",
+        "times": ["15:00"],
+        "status": "ok",
         "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Infraestructure?d=w4309e11dac514bdeb1f1b16a85f558a0&csf=1&web=1&e=mzLyms",
         "ppt": ""
       },
@@ -1092,11 +1092,11 @@
         "name": "Infrastructure and Construction",
         "desc": "",
         "multi": false,
-        "day": "",
+        "day": "Last Thu",
         "times": [
-          ""
+          "10:00"
         ],
-        "status": "undef",
+        "status": "ok",
         "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Infraestructure?d=w4309e11dac514bdeb1f1b16a85f558a0&csf=1&web=1&e=mzLyms",
         "ppt": ""
       },
