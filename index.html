@@ -927,6 +927,92 @@ body::after {
   .fab-item-title{ font-size:12px; line-height:1.2; }
   .fab-item-sub{ font-size:10.5px; line-height:1.25; }
 }
+
+/* ══════════════════════════════════════════
+   PESTAÑAS DEL DASHBOARD STANDARD WORK
+══════════════════════════════════════════ */
+.sw-view-bar {
+  display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:8px;
+  padding:10px; flex-shrink:0;
+  background:rgba(6,15,30,0.55); border-bottom:1px solid rgba(232,119,34,0.18);
+}
+.sw-view-tab {
+  position:relative; overflow:hidden; min-width:0; text-align:left; cursor:pointer;
+  display:flex; align-items:center; gap:10px;
+  padding:clamp(7px,1.1vh,11px) 12px; border-radius:10px;
+  font:inherit; color:#c8d6e5;
+  background:rgba(10,26,50,0.85); border:1px solid rgba(255,255,255,0.08);
+  transition:background .2s, border-color .2s, transform .15s, box-shadow .2s;
+}
+.sw-view-tab::after {            /* línea naranja inferior del activo */
+  content:''; position:absolute; left:12px; right:12px; bottom:0; height:3px; border-radius:3px 3px 0 0;
+  background:#e87722; transform:scaleX(0); transition:transform .25s;
+}
+.sw-view-tab:hover { background:rgba(232,119,34,0.08); border-color:rgba(232,119,34,0.35); transform:translateY(-1px); }
+.sw-view-tab:focus-visible { outline:2px solid #f5a855; outline-offset:2px; }
+.sw-view-tab.active {
+  background:linear-gradient(135deg, rgba(232,119,34,0.22) 0%, rgba(10,26,50,0.9) 100%);
+  border-color:rgba(232,119,34,0.6); box-shadow:0 6px 18px rgba(232,119,34,0.12);
+}
+.sw-view-tab.active::after { transform:scaleX(1); }
+.sw-view-ic {
+  width:clamp(30px,3.6vh,38px); height:clamp(30px,3.6vh,38px); flex-shrink:0; border-radius:9px;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(232,119,34,0.12); border:1px solid rgba(232,119,34,0.3);
+  transition:background .2s;
+}
+.sw-view-ic i { font-size:clamp(16px,2vh,20px); color:#e87722; transition:color .2s; }
+.sw-view-tab.active .sw-view-ic { background:#e87722; border-color:#e87722; }
+.sw-view-tab.active .sw-view-ic i { color:#060f1e; }
+.sw-view-txt { display:flex; flex-direction:column; gap:2px; min-width:0; }
+.sw-view-ttl {
+  font-size:clamp(11px,0.95vw,14px); font-weight:700; letter-spacing:0.6px; text-transform:uppercase; color:#ffffff;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.sw-view-sub { font-size:clamp(9px,0.75vw,11px); color:rgba(200,220,240,0.5); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.sw-view-tab.active .sw-view-sub { color:#f5a855; }
+/* el botón de ayuda queda dentro del área del reporte, bajo las pestañas */
+.pg-fit .pbi-help-btn { top:10px; right:10px; }
+@media (max-width:900px) {
+  .sw-view-bar { grid-template-columns:repeat(2, minmax(0,1fr)); }
+}
+@media (max-width:420px) {
+  .sw-view-sub { display:none; }
+  .sw-view-tab { gap:8px; padding:8px; }
+}
+
+/* ══════════════════════════════════════════
+   AJUSTE A UNA SOLA PANTALLA (sin barra de scroll)
+   Solo en escritorio; en tablet y celular las secciones se apilan y se desplazan normal.
+══════════════════════════════════════════ */
+@media (min-width:1101px) {
+  .pg-fit { height:100dvh; min-height:0; padding-bottom:clamp(8px,1.4vh,16px); overflow:auto; }
+  .pg-fit .header { padding-top:clamp(10px,2.2vh,28px); margin-bottom:clamp(8px,1.8vh,24px); }
+  .pg-fit .ttl  { font-size:clamp(20px, min(3vw,5.2vh), 52px); }
+  .pg-fit .sub  { font-size:clamp(11px, min(1.4vw,2.4vh), 24px); }
+  .pg-fit .hdr-line { height:clamp(36px, min(6vw,8vh), 80px); }
+  .pg-fit .logo { width:clamp(40px, min(5vw,8vh), 80px); }
+  .pg-fit .menu-btn { font-size:clamp(14px, min(1.6vw,3vh), 28px); }
+  .pg-fit .mod-hdr { margin-bottom:4px; }
+  .pg-fit .mod-hdr h2 { font-size:clamp(18px, min(2.4vw,4.2vh), 40px); }
+  .pg-fit .mod-ibox { width:clamp(34px, min(4vw,6vh), 56px); height:clamp(34px, min(4vw,6vh), 56px); }
+  .pg-fit .mod-desc { font-size:clamp(12px, min(1.3vw,2.2vh), 22px); margin-bottom:clamp(8px,1.6vh,22px); }
+  .pg-fit .footer { font-size:clamp(10px, min(1vw,1.8vh), 16px); padding-top:clamp(6px,1.2vh,14px); }
+  /* la zona del reporte ocupa todo el alto que sobra */
+  .pg-fit .content { flex:1 1 auto; min-height:0; display:flex; flex-direction:column; }
+  .pg-fit .maint-panel-row { flex:1 1 auto; min-height:0; }
+  .pg-fit .maint-bigbox { min-height:0; }
+  .pg-fit .embed-frame { min-height:0; height:100%; }
+  .pg-fit .pbi-wrap { min-height:0; }
+  /* botones laterales: se reparten el alto disponible */
+  .pg-fit .maint-opt-col { min-height:0; }
+  .pg-fit .maint-opt-btn { flex:1 1 0; min-height:0; justify-content:center; padding:clamp(8px,1.6vh,22px) 18px; gap:clamp(3px,0.6vh,6px); }
+  .pg-fit .maint-opt-btn i { font-size:clamp(16px, min(1.8vw,3vh), 26px); }
+}
+/* pantallas muy bajas (ej. laptop con zoom): mínimo legible para el reporte */
+@media (min-width:1101px) and (max-height:560px) {
+  .pg-fit .maint-bigbox { min-height:340px; }
+}
 </style>
 </head>
 <body>
@@ -1379,7 +1465,7 @@ body::after {
 </div>
 
 <!-- ══════════════════ MACRO VIEW REPORT ══════════════════ -->
-<div id="pg-macro" class="pg hidden">
+<div id="pg-macro" class="pg pg-fit hidden">
   <div class="header">
     <div class="header-left">
       <button class="menu-btn" onclick="goMenu()">◄ BACK</button>
@@ -1424,7 +1510,7 @@ body::after {
 </div>
 
 <!-- ══════════════════ 6S ══════════════════ -->
-<div id="pg-6s" class="pg hidden">
+<div id="pg-6s" class="pg pg-fit hidden">
   <div class="header">
     <div class="header-left">
       <button class="menu-btn" onclick="goMenu()">◄ BACK</button>
@@ -1499,7 +1585,7 @@ body::after {
   <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
 </div>
 <!-- ══════════════════ STANDARD WORK ══════════════════ -->
-<div id="pg-sw" class="pg hidden">
+<div id="pg-sw" class="pg pg-fit hidden">
   <div class="header">
     <div class="header-left">
       <button class="menu-btn" onclick="goMenu()">◄ BACK</button>
@@ -1519,15 +1605,25 @@ body::after {
       <div class="maint-bigbox">
         <!-- DASHBOARD VIEW -->
         <div id="sw-pbi-view" style="flex:1;display:flex;flex-direction:column;min-height:0;">
-          <div style="display:flex;justify-content:flex-end;padding:10px 14px 0;flex-shrink:0;">
-            <div class="pbi-ver-group">
-              <div class="pbi-ver-btn" id="btn-old" onclick="switchPBI('old')">
-                <i class="ti ti-clock"></i> OLD VERSION
-              </div>
-              <div class="pbi-ver-btn active" id="btn-actual" onclick="switchPBI('actual')">
-                <i class="ti ti-chart-line"></i> ACTUAL VERSION
-              </div>
-            </div>
+          <!-- ══ PESTAÑAS DEL DASHBOARD SW ══ -->
+          <div class="sw-view-bar" role="tablist" aria-label="Standard Work views">
+            <button class="sw-view-tab active" id="btn-actual" role="tab" aria-selected="true" onclick="switchPBI('actual')">
+              <span class="sw-view-ic"><i class="ti ti-chart-line"></i></span>
+              <span class="sw-view-txt"><span class="sw-view-ttl">Actual Version</span><span class="sw-view-sub">Current dashboard</span></span>
+            </button>
+            <button class="sw-view-tab" id="btn-old" role="tab" aria-selected="false" onclick="switchPBI('old')">
+              <span class="sw-view-ic"><i class="ti ti-history"></i></span>
+              <span class="sw-view-txt"><span class="sw-view-ttl">Old Version</span><span class="sw-view-sub">Previous format</span></span>
+            </button>
+            <button class="sw-view-tab" id="btn-cal" role="tab" aria-selected="false" onclick="switchPBI('cal')">
+              <span class="sw-view-ic"><i class="ti ti-calendar-event"></i></span>
+              <span class="sw-view-txt"><span class="sw-view-ttl">Meeting Calendar</span><span class="sw-view-sub">Daily · Weekly · Monthly</span></span>
+            </button>
+            <!-- ✏️ NUEVO BOTÓN: cambia el título, la descripción y el ícono -->
+            <button class="sw-view-tab" id="btn-extra" role="tab" aria-selected="false" onclick="switchPBI('extra')">
+              <span class="sw-view-ic"><i class="ti ti-layout-dashboard"></i></span>
+              <span class="sw-view-txt"><span class="sw-view-ttl">Deployment</span><span class="sw-view-sub">Missed Dimensions Missed and Compliance</span></span>
+            </button>
           </div>
           <div class="pbi-wrap">
             <div class="pbi-help-btn" id="pbi-help" title="How to read indicators"
@@ -1541,6 +1637,15 @@ body::after {
               src=""
               data-src="https://app.powerbi.com/view?r=eyJrIjoiMDNlZDVjOGYtYmVjZC00YTE4LWE5OTItNDAxMDVmM2FmOTNhIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"
               allowfullscreen></iframe>
+            <iframe class="embed-frame hidden" id="sw-frame-cal"
+              src=""
+              data-src="https://mefm75261.github.io/Advanced-BEST-Menu/meetingcalendarmap.html"
+              allowfullscreen></iframe>
+            <!-- ✏️ NUEVO BOTÓN: pega aquí tu link en data-src -->
+            <iframe class="embed-frame hidden" id="sw-frame-extra"
+              src=""
+              data-src="https://app.powerbi.com/view?r=eyJrIjoiYzlmOGJjYjAtNDliYS00ZDZmLWEwMDQtMmVhNjg4ZjkxN2QwIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"
+              allowfullscreen></iframe>
           </div>
         </div>
         <!-- FREQUENCY DEPLOYMENT CONTROL VIEW -->
@@ -1553,12 +1658,6 @@ body::after {
           </div>
         </div>
 
-        <!-- MEETING CALENDAR VIEW -->
-        <div id="sw-cal-view" class="hidden" style="flex:1;display:flex;flex-direction:column;min-height:0;">
-          <div class="pbi-wrap">
-            <iframe class="embed-frame" id="sw-frame-cal" src="" data-src="https://mefm75261.github.io/Advanced-BEST-Menu/meetingcalendarmap.html" allowfullscreen></iframe>
-          </div>
-        </div>
 
         <!-- FORMS VIEW -->
         <div class="maint-forms-view hidden" id="sw-forms-view">
@@ -1658,12 +1757,6 @@ body::after {
           <div class="maint-opt-sub">Power BI · Deployment Frequency</div>
         </div>
 
-        <div class="maint-opt-btn" id="sw-opt-cal" onclick="swBigSwitch('cal')">
-          <img class="maint-opt-bg" src="gifs/meetingcalendar.gif" alt="" onerror="this.style.display='none'">
-          <i class="ti ti-calendar-event"></i>
-          <div class="maint-opt-title">Meeting Calendar</div>
-          <div class="maint-opt-sub">Daily · Weekly · Monthly by terminal</div>
-        </div>
 
         <div class="maint-opt-btn" id="sw-opt-forms" onclick="swBigSwitch('forms')">
           <img class="maint-opt-bg" src="gifs/form standard work.gif" alt="" onerror="this.style.display='none'">
@@ -1740,7 +1833,7 @@ body::after {
   <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
 </div>
 <!-- ══════════════════ MATURITY · TERMINALS ══════════════════ -->
-<div id="pg-maturity" class="pg pg-maint-bg hidden">
+<div id="pg-maturity" class="pg pg-maint-bg pg-fit hidden">
   <div class="header">
     <div class="header-left">
       <button class="menu-btn" onclick="showPage('pg-maturity-hub')">◄ BACK</button>
@@ -1806,7 +1899,7 @@ body::after {
   <div class="footer">HANSEATIC GLOBAL TERMINALS · BEST PROGRAM</div>
 </div>
 <!-- ══════════════════ MATURITY · MAINTENANCE ══════════════════ -->
-<div id="pg-maintenance" class="pg pg-maint-bg hidden">
+<div id="pg-maintenance" class="pg pg-maint-bg pg-fit hidden">
   <div class="header">
   <div class="header-left">
     <button class="menu-btn" onclick="showPage('pg-maturity-hub')">◄ BACK</button>
@@ -2137,19 +2230,13 @@ function sixSwitchView(view) {
 function swBigSwitch(view) {
   document.getElementById('sw-pbi-view').classList.toggle('hidden', view !== 'pbi');
   document.getElementById('sw-freq-view').classList.toggle('hidden', view !== 'freq');
-  document.getElementById('sw-cal-view').classList.toggle('hidden', view !== 'cal');
   document.getElementById('sw-forms-view').classList.toggle('hidden', view !== 'forms');
   document.getElementById('sw-opt-pbi').classList.toggle('active', view === 'pbi');
   document.getElementById('sw-opt-freq').classList.toggle('active', view === 'freq');
-  document.getElementById('sw-opt-cal').classList.toggle('active', view === 'cal');
   document.getElementById('sw-opt-forms').classList.toggle('active', view === 'forms');
   if (view === 'freq') {
     const f = document.getElementById('sw-frame-freq');
     if (!f.src || f.src === window.location.href) f.src = f.dataset.src;
-  }
-  if (view === 'cal') {
-    const c = document.getElementById('sw-frame-cal');
-    if (!c.src || c.src === window.location.href) c.src = c.dataset.src;
   }
 }
 
@@ -2443,36 +2530,32 @@ function sixSwitchPBI(ver) {
     }
   }
 }
-/* ══ PBI VERSION SWITCHER (Standard Work) ══ */
+/* ══ PBI VIEW SWITCHER (Standard Work: Actual / Old / Calendar / Extra) ══ */
+const SW_VIEWS = {
+  actual: { frame:'pbi-frame-actual', btn:'btn-actual', guide:'How to Read Your Dashboard — Actual Version' },
+  old:    { frame:'pbi-frame-old',    btn:'btn-old',    guide:'How to Read Your Dashboard — Old Version' },
+  cal:    { frame:'sw-frame-cal',     btn:'btn-cal',    guide:null },
+  extra:  { frame:'sw-frame-extra',   btn:'btn-extra',  guide:null },
+};
 function switchPBI(ver) {
-  const frameActual = document.getElementById('pbi-frame-actual');
-  const frameOld    = document.getElementById('pbi-frame-old');
-  const btnActual   = document.getElementById('btn-actual');
-  const btnOld      = document.getElementById('btn-old');
-  const helpBtn     = document.getElementById('pbi-help');
-  if (ver === 'actual') {
-    frameActual.classList.remove('hidden');
-    frameOld.classList.add('hidden');
-    btnActual.classList.add('active');
-    btnOld.classList.remove('active');
-    helpBtn.setAttribute('onclick', "showGuide('How to Read Your Dashboard — Actual Version')");
-    helpBtn.title = 'How to read indicators — Actual Version';
-  } else {
-    frameOld.classList.remove('hidden');
-    frameActual.classList.add('hidden');
-    btnOld.classList.add('active');
-    btnActual.classList.remove('active');
-    if (!frameOld.src || frameOld.src === window.location.href) {
-      frameOld.src = frameOld.dataset.src;
-    }
-    helpBtn.setAttribute('onclick', "showGuide('How to Read Your Dashboard — Old Version')");
-    helpBtn.title = 'How to read indicators — Old Version';
-  }
+  Object.entries(SW_VIEWS).forEach(([key, v]) => {
+    const on    = key === ver;
+    const frame = document.getElementById(v.frame);
+    const btn   = document.getElementById(v.btn);
+    frame.classList.toggle('hidden', !on);
+    btn.classList.toggle('active', on);
+    btn.setAttribute('aria-selected', on ? 'true' : 'false');
+    if (on && !frame.getAttribute('src')) frame.src = frame.dataset.src;   // carga solo la primera vez
+  });
+  const help  = document.getElementById('pbi-help');
+  const guide = SW_VIEWS[ver].guide;
+  help.style.display = guide ? 'flex' : 'none';   // la guía solo aplica a los dashboards Actual / Old
+  if (guide) { help.onclick = () => showGuide(guide); help.title = guide; }
 }
 /* init SW hero to ITI on page show */
 document.addEventListener('DOMContentLoaded', () => {
   swSelect('iti');
-  if (location.hash === '#calendar') { showPage('pg-sw'); swBigSwitch('cal'); }
+  if (location.hash === '#calendar') { showPage('pg-sw'); swBigSwitch('pbi'); switchPBI('cal'); }
 });
 
 (function(){

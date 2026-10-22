@@ -2386,7 +2386,7 @@ function openHelp(){
       <p class="help-p">${L('← → cambian de etapa · <b>/</b> abre el buscador · Esc cierra esta ventana','← → switch stage · <b>/</b> opens search · Esc closes this window')}</p>
       <div class="help-h">${L('🎤 Dictado por voz','🎤 Voice dictation')}</div>
       <p class="help-p">${L('Pulsa el <b>botón del micrófono</b> (abajo a la derecha). <b>Dictar en el campo seleccionado</b>: haz clic en un campo y habla; puedes cambiar de campo sin reactivar el micrófono. <b>Dictar esta sección</b>: te va llevando campo por campo, solo en la sección en que estás.','Press the <b>microphone button</b> (bottom right). <b>Dictate in the selected field</b>: click a field and speak; you can switch fields without restarting the microphone. <b>Dictate this section</b>: it walks you field by field, only in the section you are in.')}</p>
-      <p class="help-p">${L('Comandos (di solo la palabra): «siguiente», «anterior», «borrar», «detener». Puntuación: «coma», «dos puntos», «punto final», «nueva línea». Se dicta en el idioma elegido (Español/English).','Commands (say just the word): “next”, “previous”, “clear”, “stop”. Punctuation: “comma”, “colon”, “full stop”, “new line”. Dictation uses the selected language (Español/English).')}</p>
+      <p class="help-p">${L('Comandos: «siguiente», «anterior», «borrar», «detener» (di «siguiente» al terminar de dictar el campo, solo o al final de la frase). Puntuación: «coma», «dos puntos», «punto final», «nueva línea». Se dicta en el idioma elegido (Español/English).','Commands: “next”, “previous”, “clear”, “stop” (say “next” when you finish a field, alone or at the end of the sentence). Punctuation: “comma”, “colon”, “full stop”, “new line”. Dictation uses the selected language (Español/English).')}</p>
       <p class="help-p">${L('El navegador pide permiso del micrófono solo la primera vez (si abres el archivo directo desde el computador puede pedirlo más veces; en un sitio web https lo recuerda). Funciona en Chrome y Edge.','The browser asks for microphone permission only the first time (if you open the file directly from your computer it may ask more often; on an https website it remembers). Works in Chrome and Edge.')}</p>
       <div class="help-h">${L('Buscador','Search')}</div>
       <p class="help-p">${L('Escribe cualquier palabra de lo que ya llenaste y elige el resultado: te lleva directo al campo para editarlo.','Type any word from what you already filled in and pick the result: it takes you straight to the field to edit it.')}</p>
@@ -4904,8 +4904,13 @@ var Dict = (()=>{
     return t.replace(/\s+/g,' ').trim().slice(0,90);
   }
   const norm=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9 ]+/g,' ').replace(/\s+/g,' ').trim();
-  const CMD={ next:/^(siguiente|siguiente campo|proximo|proximo campo|next|next field)$/, prev:/^(anterior|campo anterior|atras|volver|previous|previous field|back|go back)$/,
-              clear:/^(borrar|borrar campo|limpiar|limpiar campo|clear|clear field|delete field|erase)$/, stop:/^(detener|detener dictado|parar|terminar|fin del dictado|stop|stop dictation|done|finish)$/ };
+  const CMD={ next:/^(siguiente|siguiente campo|sigue|proximo|proximo campo|pasar al siguiente|pasa al siguiente|avanzar|adelante|next|next field|go next|go to next|continue)$/,
+              prev:/^(anterior|campo anterior|atras|retroceder|volver|previous|previous field|back|go back)$/,
+              clear:/^(borrar|borrar campo|limpiar|limpiar campo|clear|clear field|delete field|erase)$/,
+              stop:/^(detener|detener dictado|parar|terminar|fin del dictado|stop|stop dictation|done|finish)$/ };
+  /* comando al final de la frase: "… descripción del problema siguiente" */
+  const TAIL=[['next',/[\s,.;:!?]*\b(?:siguiente(?: campo)?|next(?: field)?)[\s.,;:!?]*$/i],['stop',/[\s,.;:!?]*\b(?:detener(?: dictado)?|stop(?: dictation)?)[\s.,;:!?]*$/i],
+              ['prev',/[\s,.;:!?]*\b(?:campo anterior|previous field)[\s.,;:!?]*$/i],['clear',/[\s,.;:!?]*\b(?:borrar campo|clear field)[\s.,;:!?]*$/i]];
   function fmt(text, multi){
     let t=' '+text.trim()+' ';
     const nl = multi ? '\n' : ' ';
@@ -4946,17 +4951,19 @@ var Dict = (()=>{
     if(el.id==='qa-text'){ ACTIONS['qa-add'](); const again=document.getElementById('qa-text'); if(again){ setTarget(again,false); } }
     el.classList.add('dict-target');
   }
+  function runCmd(c){
+    if(c==='stop') stop(); else if(c==='next') move(1); else if(c==='prev') move(-1);
+    else if(c==='clear'){ const el=refind(); if(isField(el)){ el.value=''; el.dispatchEvent(new Event('input',{bubbles:true})); } }
+  }
   function handleFinal(raw){
-    const n=norm(raw);
-    if(CMD.stop.test(n)){ stop(); return; }
-    if(CMD.next.test(n)){ move(1); return; }
-    if(CMD.prev.test(n)){ move(-1); return; }
-    if(CMD.clear.test(n)){ const el=refind(); if(isField(el)){ el.value=''; el.dispatchEvent(new Event('input',{bubbles:true})); } return; }
+    const n=norm(raw); if(!n) return;
+    for(const c of ['stop','next','prev','clear']) if(CMD[c].test(n)){ runCmd(c); return; }
+    for(const [c,re] of TAIL){ if(re.test(raw)){ const rest=raw.replace(re,'').trim(); if(rest) commit(rest); runCmd(c); return; } }
     commit(raw);
   }
   function build(){
     rec=new SR(); rec.lang=langCode(); rec.continuous=true; rec.interimResults=true; rec.maxAlternatives=1;
-    rec.onresult=e=>{ let fin='',itm=''; for(let i=e.resultIndex;i<e.results.length;i++){ const r=e.results[i]; if(r.isFinal) fin+=r[0].transcript; else itm+=r[0].transcript; } interim=itm; if(fin.trim()) handleFinal(fin); render(); };
+    rec.onresult=e=>{ let itm=''; for(let i=e.resultIndex;i<e.results.length;i++){ const r=e.results[i]; if(r.isFinal) handleFinal(r[0].transcript); else itm+=r[0].transcript; } interim=itm; render(); };
     rec.onerror=e=>{ if(e.error==='not-allowed'||e.error==='service-not-allowed'){ want=false; stop(); showToast(L('El navegador bloqueó el micrófono: permítelo en el candado de la barra de direcciones','The browser blocked the microphone: allow it in the address bar lock icon'),true); } };
     rec.onend=()=>{ interim=''; if(active&&want){ setTimeout(()=>{ if(!(active&&want)) return; try{ rec.lang=langCode(); rec.start(); }catch(_){} },250); } render(); };
   }
@@ -4996,7 +5003,7 @@ var Dict = (()=>{
   panel.addEventListener('click',e=>{ const b=e.target.closest('[data-dp]'); if(!b) return; const a=b.dataset.dp;
     if(a==='close'){ open=false; render(); } else if(a==='free') begin('free'); else if(a==='guided') begin('guided');
     else if(a==='stop') stop(); else if(a==='next') move(1); else if(a==='prev') move(-1);
-    else if(a==='clear') handleFinal(LANG==='en'?'clear':'borrar'); });
+    else if(a==='clear') runCmd('clear'); });
   panel.addEventListener('mousedown',e=>e.preventDefault());
   fab.addEventListener('mousedown',e=>e.preventDefault());
   fab.addEventListener('click',()=>{ open=!open; render(); });
