@@ -815,7 +815,7 @@
         ],
         "status": "ok",
         "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Infraestructure?d=w4309e11dac514bdeb1f1b16a85f558a0&csf=1&web=1&e=mzLyms",
-        "ppt": ""
+        "ppt": "https://strenaterminals.sharepoint.com/sites/OperationalExcellence/_layouts/15/Doc.aspx?sourcedoc={c910636f-327d-4e33-a18c-5d8f49986827}&amp;action=embedview&amp;wdAr=1.7777777777777777"
       },
       {
         "name": "Security",
@@ -918,7 +918,7 @@
         "times": ["10:00"],
         "status": "ok",
         "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Senior%20Management%20Meeting?d=wb55709c31a8642fa93e78000568112fd&csf=1&web=1&e=XZtim5",
-        "ppt": ""
+        "ppt": "https://strenaterminals.sharepoint.com/sites/OperationalExcellence/_layouts/15/Doc.aspx?sourcedoc={ff3fd7b7-2732-4551-8955-0ba6a7bef426}&amp;action=embedview&amp;wdAr=1.7777777777777777"
       },
       {
         "name": "Operations",
@@ -980,7 +980,7 @@
         "times": ["15:00"],
         "status": "ok",
         "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Infraestructure?d=w4309e11dac514bdeb1f1b16a85f558a0&csf=1&web=1&e=mzLyms",
-        "ppt": ""
+        "ppt": "https://strenaterminals.sharepoint.com/sites/OperationalExcellence/_layouts/15/Doc.aspx?sourcedoc={c910636f-327d-4e33-a18c-5d8f49986827}&amp;action=embedview&amp;wdAr=1.7777777777777777"
       },
       {
         "name": "Finance",
@@ -1036,7 +1036,7 @@
         "times": ["11:00"],
         "status": "ok",
         "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Senior%20Management%20Meeting?d=wb55709c31a8642fa93e78000568112fd&csf=1&web=1&e=P4QyEG",
-        "ppt": ""
+        "ppt": "https://strenaterminals.sharepoint.com/sites/OperationalExcellence/_layouts/15/Doc.aspx?sourcedoc={ff3fd7b7-2732-4551-8955-0ba6a7bef426}&amp;action=embedview&amp;wdAr=1.7777777777777777"
       },
       {
         "name": "Operations",
@@ -1098,7 +1098,7 @@
         ],
         "status": "ok",
         "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/Infraestructure?d=w4309e11dac514bdeb1f1b16a85f558a0&csf=1&web=1&e=mzLyms",
-        "ppt": ""
+        "ppt": "https://strenaterminals.sharepoint.com/sites/OperationalExcellence/_layouts/15/Doc.aspx?sourcedoc={c910636f-327d-4e33-a18c-5d8f49986827}&amp;action=embedview&amp;wdAr=1.7777777777777777"
       },
       {
         "name": "Finance",
@@ -1124,9 +1124,9 @@
         "name": "Human Resources",
         "desc": "",
         "multi": false,
-        "day": "",
-        "times": [],
-        "status": "undef",
+        "day": "Last Fri",
+        "times": ["15:00"],
+        "status": "ok",
         "link": "https://strenaterminals.sharepoint.com/:f:/r/sites/OperationalExcellence/Shared%20Documents/Operations%20Excellence/2.%20Standard%20Work%20%26%20Performance%20Management/0.%20Deployment/Region%20Latam/TPG/HR?d=wad7ac4364880453d80b12ad086f0078a&csf=1&web=1&e=LB2Uu3",
         "ppt": ""
       },
