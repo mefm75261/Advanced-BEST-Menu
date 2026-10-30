@@ -575,6 +575,36 @@ body::after {
 .pbi-ver-btn:hover { background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.2); color:rgba(255,255,255,0.7); }
 .pbi-ver-btn.active { background:rgba(232,119,34,0.13); border-color:rgba(232,119,34,0.45); color:#e87722; }
 .pbi-ver-btn.active i { color:#e87722; }
+/* ── CLASSIC / LIGHT (solo Actual Version y Frequency Deployment Control) ──
+   Píldora compacta solo con íconos, en la esquina; el nombre aparece al pasar el mouse */
+.sw-style-sw {
+  position:absolute; top:6px; left:6px; z-index:10;
+  display:flex; gap:2px; padding:2px; border-radius:99px;
+  background:rgba(6,15,30,0.82); border:1px solid rgba(232,119,34,0.35);
+  box-shadow:0 3px 10px rgba(0,0,0,0.3);
+  opacity:.8; transition:opacity .15s;
+}
+.sw-style-sw:hover, .sw-style-sw:focus-within { opacity:1; }
+.sw-style-btn {
+  position:relative; width:24px; height:24px; padding:0; border-radius:50%; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  border:0; background:transparent; font:inherit; line-height:1;
+  color:rgba(255,255,255,0.6); transition:background .15s, color .15s;
+}
+.sw-style-btn i { font-size:14px; color:inherit; }
+.sw-style-btn .sw-style-txt { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+.sw-style-btn:hover { background:rgba(255,255,255,0.1); color:#fff; }
+.sw-style-btn:focus-visible { outline:2px solid #f5a855; outline-offset:1px; }
+.sw-style-btn.active { background:#e87722; color:#060f1e; }
+/* nombre del estilo al pasar el mouse (CLASSIC / LIGHT) */
+.sw-style-btn::after {
+  content:attr(data-label); position:absolute; left:50%; top:calc(100% + 6px); transform:translateX(-50%);
+  padding:3px 8px; border-radius:6px; white-space:nowrap; pointer-events:none;
+  font-size:10px; font-weight:700; letter-spacing:.8px; color:#fff;
+  background:#060f1e; border:1px solid rgba(232,119,34,0.45);
+  opacity:0; transition:opacity .15s;
+}
+.sw-style-btn:hover::after, .sw-style-btn:focus-visible::after { opacity:1; }
 /* ── PBI ── */
 .pbi-wrap { flex:1; display:flex; flex-direction:column; position:relative; }
 .pbi-help-btn {
@@ -1626,12 +1656,21 @@ body::after {
             </button>
           </div>
           <div class="pbi-wrap">
+            <div class="sw-style-sw" id="sw-style-actual" role="group" aria-label="Report style">
+              <button type="button" class="sw-style-btn active" data-style="classic" data-label="CLASSIC" aria-label="Classic" onclick="swStyle('actual','classic')"><i class="ti ti-moon"></i><span class="sw-style-txt">CLASSIC</span></button>
+              <button type="button" class="sw-style-btn" data-style="light" data-label="LIGHT" aria-label="Light" onclick="swStyle('actual','light')"><i class="ti ti-sun"></i><span class="sw-style-txt">LIGHT</span></button>
+            </div>
             <div class="pbi-help-btn" id="pbi-help" title="How to read indicators"
                  onclick="showGuide('How to Read Your Dashboard — Actual Version')">
               <i class="ti ti-help"></i>
             </div>
             <iframe class="embed-frame" id="pbi-frame-actual"
               src="https://app.powerbi.com/view?r=eyJrIjoiMThjZDEwMDctZTUyNS00ZjhiLWIwZmQtNjVlZWY0ZjdjMWI0IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"
+              allowfullscreen></iframe>
+            <!-- ✏️ LIGHT · Actual Version: pega aquí el link de tu Power BI light en data-src -->
+            <iframe class="embed-frame hidden" id="pbi-frame-actual-light"
+              src=""
+              data-src="https://app.powerbi.com/view?r=eyJrIjoiZjQ3YWM4N2ItOGE1NS00NzUyLTlmNmEtZDk1OWYyZWRlODFmIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"
               allowfullscreen></iframe>
             <iframe class="embed-frame hidden" id="pbi-frame-old"
               src=""
@@ -1651,9 +1690,19 @@ body::after {
         <!-- FREQUENCY DEPLOYMENT CONTROL VIEW -->
         <div id="sw-freq-view" class="hidden" style="flex:1;display:flex;flex-direction:column;min-height:0;">
           <div class="pbi-wrap">
+            <div class="sw-style-sw" id="sw-style-freq" role="group" aria-label="Report style">
+              <button type="button" class="sw-style-btn active" data-style="classic" data-label="CLASSIC" aria-label="Classic" onclick="swStyle('freq','classic')"><i class="ti ti-moon"></i><span class="sw-style-txt">CLASSIC</span></button>
+              <button type="button" class="sw-style-btn" data-style="light" data-label="LIGHT" aria-label="Light" onclick="swStyle('freq','light')"><i class="ti ti-sun"></i><span class="sw-style-txt">LIGHT</span></button>
+            </div>
+            
             <iframe class="embed-frame" id="sw-frame-freq"
               src=""
               data-src="https://app.powerbi.com/view?r=eyJrIjoiZTFkMTUzNzEtMDhlZS00Y2RjLThiODMtYzhhNTAxYzdlYWE3IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"
+              allowfullscreen></iframe>
+            <!-- ✏️ LIGHT · Frequency Deployment Control: pega aquí el link de tu Power BI light en data-src -->
+            <iframe class="embed-frame hidden" id="sw-frame-freq-light"
+              src=""
+              data-src="https://app.powerbi.com/view?r=eyJrIjoiOTBmNDU4ZjktZDkwNi00OWIxLThkNTktZDcwOGVlMTYwOWU4IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"
               allowfullscreen></iframe>
           </div>
         </div>
@@ -2226,6 +2275,35 @@ function sixSwitchView(view) {
   document.getElementById('six-opt-pbi').classList.toggle('active', view === 'pbi');
   document.getElementById('six-opt-mapas').classList.toggle('active', view === 'mapas');
 }
+/* ══ SW — CLASSIC / LIGHT (solo Actual Version y Frequency Deployment Control) ══ */
+const SW_STYLE_FRAMES = {
+  actual: { classic:'pbi-frame-actual', light:'pbi-frame-actual-light' },
+  freq:   { classic:'sw-frame-freq',    light:'sw-frame-freq-light' },
+};
+const SW_STYLE = { actual:'classic', freq:'classic' };
+try { Object.assign(SW_STYLE, JSON.parse(localStorage.getItem('swStyle') || '{}')); } catch (e) {}
+function swStyle(scope, mode) {
+  const fr = SW_STYLE_FRAMES[scope]; if (!fr) return;
+  if (mode !== 'light') mode = 'classic';
+  SW_STYLE[scope] = mode;
+  try { localStorage.setItem('swStyle', JSON.stringify(SW_STYLE)); } catch (e) {}
+  ['classic','light'].forEach(m => {
+    const f = document.getElementById(fr[m]);
+    f.classList.toggle('hidden', m !== mode);
+    if (m === mode && !f.getAttribute('src')) {
+      const url = f.dataset.src || '';
+      if (/^https?:\/\//i.test(url)) f.src = url;   // carga solo la primera vez
+      else f.srcdoc = '<body style="margin:0;height:100vh;display:flex;align-items:center;justify-content:center;font-family:Arial,sans-serif;color:#c8d6e5;background:#0a1a2e;text-align:center">'
+        + '<div><div style="font-size:18px;font-weight:700;color:#e87722;margin-bottom:8px">LIGHT version not linked yet</div>'
+        + '<div style="font-size:13px">Paste the Power BI link in the <b>data-src</b> of <b>' + fr[m] + '</b>.</div></div></body>';
+    }
+  });
+  document.querySelectorAll('#sw-style-' + scope + ' .sw-style-btn').forEach(b => {
+    const on = b.dataset.style === mode;
+    b.classList.toggle('active', on);
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+}
 /* ══ SW — big box view switcher (Dashboard / Forms) ══ */
 function swBigSwitch(view) {
   document.getElementById('sw-pbi-view').classList.toggle('hidden', view !== 'pbi');
@@ -2235,8 +2313,7 @@ function swBigSwitch(view) {
   document.getElementById('sw-opt-freq').classList.toggle('active', view === 'freq');
   document.getElementById('sw-opt-forms').classList.toggle('active', view === 'forms');
   if (view === 'freq') {
-    const f = document.getElementById('sw-frame-freq');
-    if (!f.src || f.src === window.location.href) f.src = f.dataset.src;
+    swStyle('freq', SW_STYLE.freq);
   }
 }
 
@@ -2551,10 +2628,16 @@ function switchPBI(ver) {
   const guide = SW_VIEWS[ver].guide;
   help.style.display = guide ? 'flex' : 'none';   // la guía solo aplica a los dashboards Actual / Old
   if (guide) { help.onclick = () => showGuide(guide); help.title = guide; }
+  // Classic / Light: solo en Actual Version
+  const onActual = ver === 'actual';
+  document.getElementById('sw-style-actual').classList.toggle('hidden', !onActual);
+  if (onActual) swStyle('actual', SW_STYLE.actual);
+  else document.getElementById('pbi-frame-actual-light').classList.add('hidden');
 }
 /* init SW hero to ITI on page show */
 document.addEventListener('DOMContentLoaded', () => {
   swSelect('iti');
+  swStyle('actual', SW_STYLE.actual);
   if (location.hash === '#calendar') { showPage('pg-sw'); swBigSwitch('pbi'); switchPBI('cal'); }
 });
 
