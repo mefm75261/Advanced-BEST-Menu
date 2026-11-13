@@ -4212,6 +4212,12 @@ function renderExportSection(){
             <button class="btn btn-primary" style="margin-top:6px;" data-action="export-a3">⬇ ${L('Descargar A3 (PDF)','Download A3 (PDF)')}</button>
           </div>
           <div class="export-card">
+            <div class="export-card-icon">A3</div>
+            <h4 style="font-size:16px;">${L('A3 en PowerPoint (.pptx)','A3 in PowerPoint (.pptx)')}</h4>
+            <p style="font-size:14px;color:var(--text-faint);line-height:1.5;">${L('Presentación A3 lista para revisar en equipo: portada con indicadores, planteamiento, Ishikawa 6M, priorización, 5 porqués, causas raíz y plan de acción. Usa los datos de la tarjeta A3 (área, equipo y fecha).','A3 deck ready for team review: cover with indicators, statement, 6M Ishikawa, prioritization, 5 whys, root causes and action plan. Uses the A3 card data (area, team and date).')}</p>
+            <button class="btn btn-primary" style="margin-top:6px;" data-action="export-a3-pptx">⬇ ${L('Descargar A3 (PowerPoint)','Download A3 (PowerPoint)')}</button>
+          </div>
+          <div class="export-card">
             <div class="export-card-icon">{ }</div>
             <h4 style="font-size:16px;">Respaldo (.json)</h4>
             <p style="font-size:14px;color:var(--text-faint);line-height:1.5;">Guarda todo el progreso en un archivo. Para retomarlo, usa «Importar proyecto» en el menú de inicio (botón ☰ Menú).</p>
@@ -4793,6 +4799,409 @@ async function exportToPowerPoint(){
   await pptx.writeFile({ fileName: (state.projectName||'problem_solving').replace(/[^a-z0-9]+/gi,'_')+'.pptx' });
 }
 
+
+/* ============================================================
+   14b-2. EXPORTAR A3 EN POWERPOINT (16:9) — mismo formato del
+   deck «Problem Solving A3» (portada, planteamiento, Ishikawa 6M,
+   priorización, 5 porqués, causas raíz y plan de acción).
+   Todo sale de los datos del caso; nada se inventa.
+   ============================================================ */
+async function exportA3ToPowerPoint(){
+  if(typeof PptxGenJS === 'undefined'){
+    showToast(L('No se pudo cargar el motor de PowerPoint (sin conexión a internet). Intenta de nuevo con conexión.','The PowerPoint engine could not be loaded (no internet connection). Try again with a connection.'), true);
+    return;
+  }
+  const NAVY='0A2A5C', BLUE='0B4596', RED='C62F25', INK='1F2733', MUT='4A5A75', GRY='7F8FA8',
+        PALE='EDF1F7', ROW='F3F6FB', LINE='C9D3E3', TRACK='E3E8F0', SOFTB='A9C1E8', CARD='16396F',
+        AMB='B07A12', PINK='FBE3E0', SALMON='F29C94', WHITE='FFFFFF';
+  const pptx = new PptxGenJS();
+  pptx.layout = 'LAYOUT_16x9'; // 10 x 5.625 in
+  pptx.theme = { headFontFace:'Arial', bodyFontFace:'Arial' };
+  const SH = pptx.ShapeType;
+  const cl = t=> String(t==null?'':t).replace(/\s+/g,' ').trim();
+  const clip = (t,n)=>{ t = cl(t); return t.length>n ? t.slice(0,n-1).trimEnd()+'…' : t; };
+  const dec = n=> (n==null||isNaN(n)) ? '—' : (LANG==='en' ? Number(n).toFixed(1) : Number(n).toFixed(1).replace('.',','));
+  const fmtLong = d=>{ const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(d||''); if(!m) return '';
+    const ms = LANG==='en' ? ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'] : ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+    return (+m[3])+'-'+ms[+m[2]-1]+'-'+m[1]; };
+  const fmtShort = d=>{ const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(d||''); return m ? m[3]+'-'+m[2]+'-'+m[1] : cl(d); };
+  /* Tamaño de letra que hace caber el texto en la caja (PowerPoint no recalcula el ajuste al abrir) */
+  const fit = (text, w, h, max, min, bold)=>{
+    text = cl(text); const cw = bold ? 0.52 : 0.48;
+    const linesAt = f=>{ const cpl = Math.max(4, Math.floor(w*72/(f*cw))); let lines=1, cur=0;
+      text.split(' ').forEach(wd=>{ const n=wd.length; if(cur===0) cur=n; else if(cur+1+n<=cpl) cur+=1+n; else { lines++; cur=n; } if(n>cpl) lines+=Math.floor(n/cpl); });
+      return { lines, cpl }; };
+    for(let f=max; f>=min; f-=0.5){ if(linesAt(f).lines*f*1.2/72 <= h) return { size:f, text, cut:false }; }
+    const { cpl } = linesAt(min), maxL = Math.max(1, Math.floor(h*72/(min*1.2)));
+    const out = clip(text, cpl*maxL); return { size:min, text:out, cut: out!==text };
+  };
+  const project = cl(state.projectName) || L('Caso sin nombre','Unnamed case');
+  const a3 = state.a3 || {}, st = state.statement;
+  const CATNAME = k=>{ const c = REF.ishikawaCategories.find(x=>x.key===k); return c ? L(c.name, trs(c.name)) : ''; };
+  const catOfCause = id=>{ const f = findCauseById(id); return f ? f.cat : null; };
+  const footTxt = [cl(a3.area), project, 'Problem Solving A3'].filter(Boolean).join(' · ');
+  let pageNo = 0;
+  function slide(eyebrow, title){
+    const s = pptx.addSlide(); pageNo++;
+    s.background = { color:WHITE };
+    s.addText(eyebrow.toUpperCase(), { x:0.5, y:0.28, w:7.5, h:0.22, fontSize:10, bold:true, color:RED, charSpacing:1, margin:0, valign:'middle' });
+    s.addShape(SH.rect, { x:0.5, y:0.58, w:0.16, h:0.16, fill:{color:BLUE}, line:{color:BLUE, width:1} });
+    const ft = fit(title, 8.72, 0.72, 20, 13, true);
+    s.addText(ft.text, { x:0.78, y:0.5, w:8.72, h:0.72, fontSize:ft.size, bold:true, color:BLUE, valign:'top', margin:0 });
+    s.addShape(SH.line, { x:0.5, y:5.2, w:9, h:0, line:{ color:LINE, width:0.75 } });
+    s.addText(clip(footTxt,110), { x:0.5, y:5.24, w:8, h:0.22, fontSize:9, color:MUT, margin:0, valign:'middle' });
+    s.addText(String(pageNo), { x:9.1, y:5.24, w:0.4, h:0.22, fontSize:9, color:MUT, align:'right', margin:0, valign:'middle' });
+    return s;
+  }
+  function emptyNote(s, msg){
+    s.addText(msg, { x:1.5, y:2.3, w:7, h:1, shape:SH.rect, fill:{color:PALE}, line:{color:BLUE, width:1, dashType:'dash'}, fontSize:13, bold:true, color:BLUE, align:'center', valign:'middle' });
+  }
+  /* ---------- datos ---------- */
+  const symptoms = st.symptoms.map(cl).filter(Boolean);
+  const allCauses = []; REF.ishikawaCategories.forEach(c=> state.ishikawa[c.key].forEach(x=>{ if(cl(x.text)) allCauses.push(x); }));
+  const selected = getSelectedCauses();
+  const rows = state.matrixRows;
+  const passing = rows.filter(r=>r.pass);
+  const groups = state.whyGroups;
+  const roots = getIdentifiedRootCauses();
+  const cmRows = state.countermeasures.actions.filter(r=> cl(r.rootCause) || cl(r.action));
+  const acts = cmRows.filter(r=>cl(r.action));
+  const rowOf = id=> rows.find(r=>r.causeId===id);
+  const resultOf = r=>{
+    if(!r || r.total==null) return { t:L('Sin puntaje','No score'), fill:WHITE, line:LINE, color:GRY };
+    if(r.pass) return { t:L('5 porqués','5 whys')+(r.total<REF.scoreThresholds.review?'*':''), fill:BLUE, line:BLUE, color:WHITE };
+    if(r.total>=REF.scoreThresholds.low) return { t:L('Validar','Validate'), fill:WHITE, line:AMB, color:AMB };
+    return { t:L('Baja','Low'), fill:WHITE, line:GRY, color:GRY };
+  };
+  const barCol = r=> r.total==null ? GRY : r.pass ? BLUE : r.total>=REF.scoreThresholds.low ? AMB : GRY;
+
+  /* ---------- 1. Portada ---------- */
+  {
+    const s = pptx.addSlide(); pageNo++;
+    s.background = { color:NAVY };
+    s.addText(L('PROBLEM SOLVING A3 · METODOLOGÍA PORT','PROBLEM SOLVING A3 · PORT METHODOLOGY'), { x:0.7, y:0.85, w:7, h:0.25, fontSize:11, bold:true, color:SOFTB, charSpacing:2, margin:0 });
+    const tf = fit(project, 8.4, 0.75, 36, 22, true);
+    s.addText(tf.text, { x:0.7, y:1.12, w:8.4, h:0.75, fontSize:tf.size, bold:true, color:WHITE, valign:'middle', margin:0 });
+    s.addShape(SH.rect, { x:0.7, y:1.98, w:0.9, h:0.07, fill:{color:RED}, line:{color:RED, width:0.5} });
+    const sub = [cl(st.process), a3.date ? L('sesión del ','session of ')+fmtLong(a3.date) : ''].filter(Boolean).join(' · ');
+    if(sub){ const sf = fit(sub, 8.4, 0.5, 14, 10, false); s.addText(sf.text, { x:0.7, y:2.2, w:8.4, h:0.5, fontSize:sf.size, color:WHITE, valign:'top', margin:0 }); }
+    const stats = [
+      [allCauses.length, L('causas identificadas','causes identified')], [selected.length, L('causas priorizadas','prioritized causes')],
+      [groups.length, L('analizadas con 5 porqués','analyzed with 5 whys')], [roots.length, L('causas raíz','root causes')],
+      [acts.length, acts.length ? L('contramedidas','countermeasures') : L('contramedidas · siguiente paso','countermeasures · next step')],
+    ];
+    stats.forEach(([n,lab],i)=>{
+      const x = 0.7 + i*1.74, pend = i===4 && !n;
+      s.addShape(SH.rect, { x, y:3.0, w:1.6, h:1.1, fill:{color: pend?NAVY:CARD}, line:{color: pend?SOFTB:CARD, width:1, dashType: pend?'dash':'solid'} });
+      s.addText(String(n), { x:x+0.14, y:3.08, w:1.4, h:0.55, fontSize:28, bold:true, color: pend?SOFTB:WHITE, margin:0, valign:'middle' });
+      s.addText(lab, { x:x+0.14, y:3.62, w:1.36, h:0.4, fontSize:9, color:SOFTB, margin:0, valign:'top' });
+    });
+    s.addShape(SH.line, { x:0.7, y:4.85, w:8.6, h:0, line:{ color:'3D5A8A', width:0.75 } });
+    s.addText(clip(cl(a3.area) || 'Problem Solving · PORT', 70), { x:0.7, y:4.95, w:5.6, h:0.22, fontSize:10, color:WHITE, margin:0, valign:'middle' });
+    const right = [cl(a3.team) || cl(a3.sponsor), fmtLong(a3.date)].filter(Boolean).join(' · ');
+    if(right) s.addText(clip(right,60), { x:5.3, y:4.95, w:4.0, h:0.22, fontSize:10, color:SOFTB, align:'right', margin:0, valign:'middle' });
+  }
+
+  /* ---------- 2. Planteamiento ---------- */
+  {
+    const gapTitle = cl(st.gap) ? L('Brecha a cerrar: ','Gap to close: ')+cl(st.gap) : (cl(st.currentSituation) && cl(st.desiredSituation) ? cl(st.currentSituation)+L(' frente a ',' versus ')+cl(st.desiredSituation) : L('Planteamiento del problema','Problem statement'));
+    const s = slide(L('Problem Solving A3 · 1. Planteamiento del problema','Problem Solving A3 · 1. Problem statement'), gapTitle);
+    const comps = [
+      [L('TENDENCIA','TREND'), st.trend, NAVY, PALE, INK, false], [L('PROCESO','PROCESS'), st.process, NAVY, PALE, INK, false],
+      [L('SITUACIÓN ACTUAL','CURRENT SITUATION'), st.currentSituation, NAVY, PALE, INK, false],
+      [L('SITUACIÓN DESEADA','DESIRED SITUATION'), st.desiredSituation, BLUE, PALE, INK, false],
+      [L('BRECHA','GAP'), st.gap, RED, PINK, RED, true],
+    ];
+    comps.forEach(([lab,val,hc,bc,tc,b],i)=>{
+      const x = 0.5 + i*1.82;
+      s.addText(lab, { x, y:1.3, w:1.72, h:0.28, shape:SH.rect, fill:{color:hc}, fontSize:8.5, bold:true, color:WHITE, align:'center', valign:'middle', charSpacing:1, margin:0 });
+      s.addShape(SH.rect, { x, y:1.58, w:1.72, h:1.08, fill:{color:bc}, line:{color:bc, width:0.5} });
+      const f = fit(val||'—', 1.56, 0.98, 8.5, 6.5, b);
+      s.addText(f.text, { x:x+0.08, y:1.64, w:1.56, h:0.98, fontSize:f.size, bold:b, color:tc, valign:'top', margin:0 });
+    });
+    s.addText(L('PLANTEAMIENTO DEL PROBLEMA','PROBLEM STATEMENT'), { x:0.5, y:2.85, w:5.6, h:0.18, fontSize:8.5, bold:true, color:RED, charSpacing:1, margin:0 });
+    s.addShape(SH.rect, { x:0.5, y:3.08, w:0.06, h:1.62, fill:{color:BLUE}, line:{color:BLUE, width:0.5} });
+    const stm = cl(st.statementText) || L('Sin definir todavía.','Not defined yet.');
+    const sf = fit(stm, 5.4, 1.62, 11, 7.5, false);
+    s.addText(sf.text, { x:0.7, y:3.08, w:5.4, h:1.62, fontSize:sf.size, color:INK, italic:!cl(st.statementText), valign:'top', margin:0 });
+    const nEv = (st.evidence||[]).filter(e=>e&&e.dataUrl).length;
+    if(nEv) s.addText(L(`Evidencia fotográfica: ${nEv} imagen(es) en la lámina siguiente.`,`Photo evidence: ${nEv} image(s) on the next slide.`), { x:0.7, y:4.78, w:5.4, h:0.2, fontSize:8, italic:true, color:MUT, margin:0 });
+    s.addText(L('SÍNTOMAS','SYMPTOMS'), { x:6.35, y:2.85, w:3.15, h:0.18, fontSize:8.5, bold:true, color:RED, charSpacing:1, margin:0 });
+    const sym = symptoms.length ? symptoms : [L('Sin síntomas registrados','No symptoms recorded')];
+    const show = sym.slice(0,5), extra = sym.length - show.length;
+    const avail = 4.95 - 3.08 - (extra?0.22:0), h = Math.min(0.38, (avail - (show.length-1)*0.06)/show.length);
+    show.forEach((t,i)=>{
+      const y = 3.08 + i*(h+0.06);
+      s.addShape(SH.rect, { x:6.35, y, w:3.15, h, fill:{color:WHITE}, line:{color:LINE, width:0.75} });
+      const f = fit(t, 2.95, h-0.04, 9, 6.5, true);
+      s.addText(f.text, { x:6.45, y, w:2.95, h, fontSize:f.size, bold:true, color: symptoms.length?INK:GRY, valign:'middle', margin:0 });
+    });
+    if(extra>0) s.addText(L(`+ ${extra} síntoma(s) más: ${clip(sym.slice(5).join(' · '),110)}`,`+ ${extra} more symptom(s): ${clip(sym.slice(5).join(' · '),110)}`), { x:6.35, y:4.75, w:3.15, h:0.22, fontSize:7, color:MUT, margin:0, valign:'middle' });
+  }
+
+  /* ---------- 2b. Evidencia (solo si hay imágenes) ---------- */
+  const ev = (st.evidence||[]).filter(e=>e && e.dataUrl).slice(0,6);
+  if(ev.length){
+    const s = slide(L('Problem Solving A3 · 1. Planteamiento del problema','Problem Solving A3 · 1. Problem statement'), L('Evidencia fotográfica del problema','Photo evidence of the problem'));
+    const cols = ev.length<=2 ? ev.length : 3, rN = Math.ceil(ev.length/cols), g = 0.15;
+    const w = (9-(cols-1)*g)/cols, h = (3.7-(rN-1)*g)/rN;
+    ev.forEach((e,i)=>{
+      const x = 0.5 + (i%cols)*(w+g), y = 1.35 + Math.floor(i/cols)*(h+g);
+      s.addShape(SH.rect, { x, y, w, h, fill:{color:PALE}, line:{color:LINE, width:0.75} });
+      try{ s.addImage({ data:e.dataUrl, x:x+0.05, y:y+0.05, w:w-0.1, h:h-0.1, sizing:{ type:'contain', w:w-0.1, h:h-0.1 } }); }catch(_){}
+    });
+  }
+
+  /* ---------- 3. Ishikawa 6M ---------- */
+  let ishCut = false;
+  {
+    const cnt = REF.ishikawaCategories.map(c=>({ c, n: state.ishikawa[c.key].filter(x=>cl(x.text)).length })).sort((a,b)=>b.n-a.n);
+    const topTwo = cnt.filter(x=>x.n>0).slice(0,2);
+    let title = L(`El equipo identificó ${allCauses.length} causas y seleccionó ${selected.length} para priorizar`,`The team identified ${allCauses.length} causes and selected ${selected.length} to prioritize`);
+    if(topTwo.length===2 && allCauses.length) title += L(`; ${topTwo[0].n+topTwo[1].n} de las ${allCauses.length} están en ${CATNAME(topTwo[0].c.key).toLowerCase()} y ${CATNAME(topTwo[1].c.key).toLowerCase()}`,`; ${topTwo[0].n+topTwo[1].n} of the ${allCauses.length} are in ${CATNAME(topTwo[0].c.key).toLowerCase()} and ${CATNAME(topTwo[1].c.key).toLowerCase()}`);
+    if(!allCauses.length) title = L('Aún no hay causas en el diagrama causa-efecto','There are no causes in the cause-effect diagram yet');
+    const s = slide(L('Problem Solving A3 · 2. Diagrama causa-efecto (6M)','Problem Solving A3 · 2. Cause-effect diagram (6M)'), title);
+    const spineY = 3.18, colX = [0.5, 2.98, 5.46];
+    s.addShape(SH.line, { x:0.5, y:spineY, w:7.45, h:0, line:{ color:INK, width:2, endArrowType:'triangle' } });
+    s.addShape(SH.rect, { x:7.98, y:2.56, w:1.52, h:1.24, fill:{color:NAVY}, line:{color:NAVY, width:0.5} });
+    const eff = clip(cl(st.gap) || project, 150);
+    const ef = fit(eff, 1.36, 0.95, 9, 5.5, true);
+    s.addText([{ text:L('EFECTO','EFFECT'), options:{ fontSize:8, bold:true, color:SOFTB, breakLine:true, charSpacing:1 } }, { text:ef.text, options:{ fontSize:ef.size, bold:true, color:WHITE } }],
+      { x:8.06, y:2.56, w:1.36, h:1.24, valign:'middle', margin:0 });
+    REF.ishikawaCategories.forEach((cat,i)=>{
+      const top = i<3, x0 = colX[i%3];
+      const list = state.ishikawa[cat.key].filter(c=>cl(c.text));
+      const labY = top ? 1.28 : 4.84;
+      s.addShape(SH.rect, { x:x0, y:labY, w:2.4, h:0.24, fill:{color:PALE}, line:{color:PALE, width:0.5} });
+      s.addText(CATNAME(cat.key).toUpperCase()+' · '+list.length, { x:x0+0.08, y:labY, w:2.3, h:0.24, fontSize:8.5, bold:true, color:BLUE, charSpacing:1, margin:0, valign:'middle' });
+      if(top) s.addShape(SH.line, { x:x0+0.12, y:1.52, w:0.2, h:spineY-1.52, line:{ color:GRY, width:1 } });
+      else    s.addShape(SH.line, { x:x0+0.12, y:spineY, w:0.2, h:4.84-spineY, flipH:true, line:{ color:GRY, width:1 } });
+      if(!list.length){ s.addText('—', { x:x0+0.36, y: top?1.6:3.32, w:2, h:0.2, fontSize:8, color:GRY, margin:0 }); return; }
+      const areaY = top ? 1.6 : 3.32, areaH = top ? (spineY-0.08)-1.6 : (4.84-0.08)-3.32;
+      const n = list.length, sub = n>7 ? 2 : 1, perCol = Math.ceil(n/sub);
+      const gap = 0.03, cw = sub===1 ? 2.0 : 0.98;
+      /* alto de cada causa según el largo de su texto (las largas reciben 2 líneas) */
+      for(let ci=0; ci<sub; ci++){
+        const part = list.slice(ci*perCol, ci*perCol+perCol); if(!part.length) continue;
+        const need = part.map(c=> fit(c.text, cw-0.1, 0.2, 7.5, 7.5, !!c.selected).cut ? 2 : 1);
+        const base = Math.min(0.2, (areaH - (part.length-1)*gap) / need.reduce((a,b)=>a+b,0));
+        let y = areaY;
+        part.forEach((c,k)=>{
+          const h = Math.max(0.12, base*need[k] + (need[k]>1 ? 0.04 : 0)), sel = !!c.selected;
+          const x = x0+0.36 + ci*(cw+0.04);
+          s.addShape(SH.rect, { x, y, w:cw, h, fill:{color: sel?BLUE:WHITE}, line:{color: sel?BLUE:LINE, width:0.5} });
+          const f = fit(c.text, cw-0.1, h, 7.5, 5.5, sel); if(f.cut) ishCut = true;
+          s.addText(f.text, { x:x+0.05, y, w:cw-0.08, h, fontSize:f.size, bold:sel, color: sel?WHITE:INK, valign:'middle', margin:0 });
+          y += h + gap;
+        });
+      }
+    });
+    s.addShape(SH.rect, { x:7.98, y:4.2, w:0.2, h:0.13, fill:{color:BLUE}, line:{color:BLUE, width:0.5} });
+    s.addText(L(`Seleccionada (${selected.length})`,`Selected (${selected.length})`), { x:8.24, y:4.16, w:1.3, h:0.2, fontSize:7.5, color:MUT, margin:0, valign:'middle' });
+    s.addShape(SH.rect, { x:7.98, y:4.44, w:0.2, h:0.13, fill:{color:WHITE}, line:{color:LINE, width:0.75} });
+    s.addText(L(`Identificada (${allCauses.length-selected.length})`,`Identified (${allCauses.length-selected.length})`), { x:8.24, y:4.4, w:1.3, h:0.2, fontSize:7.5, color:MUT, margin:0, valign:'middle' });
+  }
+  /* si alguna causa no cupo completa: listado completo */
+  if(ishCut){
+    const entries = []; REF.ishikawaCategories.forEach(cat=> state.ishikawa[cat.key].forEach(c=>{ if(cl(c.text)) entries.push({ cat, c }); }));
+    const per = 22, pagesN = Math.ceil(entries.length/per);
+    for(let p=0;p<pagesN;p++){
+      const s = slide(L('Problem Solving A3 · 2. Diagrama causa-efecto (6M)','Problem Solving A3 · 2. Cause-effect diagram (6M)'), L('Listado completo de causas identificadas','Full list of identified causes')+(pagesN>1?` (${p+1}/${pagesN})`:''));
+      const chunk = entries.slice(p*per, p*per+per);
+      [chunk.slice(0,11), chunk.slice(11)].forEach((part,ci)=>{
+        part.forEach(({cat,c},k)=>{
+          const x = 0.5 + ci*4.6, y = 1.3 + k*0.34;
+          s.addText(CATNAME(cat.key).toUpperCase(), { x, y, w:1.05, h:0.28, shape:SH.rect, fill:{color:PALE}, fontSize:7, bold:true, color:BLUE, margin:2, valign:'middle' });
+          const f = fit(c.text, 3.25, 0.28, 8.5, 6, !!c.selected);
+          s.addText(f.text, { x:x+1.12, y, w:3.3, h:0.28, shape:SH.rect, fill:{color: c.selected?BLUE:WHITE}, line:{color: c.selected?BLUE:LINE, width:0.5}, fontSize:f.size, bold:!!c.selected, color: c.selected?WHITE:INK, margin:3, valign:'middle' });
+        });
+      });
+    }
+  }
+
+  /* ---------- 4. Priorización ---------- */
+  {
+    const per = 10, pages = Math.max(1, Math.ceil(rows.length/per));
+    const title = rows.length ? L(`Con la matriz de impacto, frecuencia, control y evidencia, ${passing.length} de las ${rows.length} causas pasaron a 5 porqués`,`With the impact, frequency, control and evidence matrix, ${passing.length} of the ${rows.length} causes moved on to 5 whys`) : L('Aún no hay causas priorizadas','There are no prioritized causes yet');
+    for(let pg=0; pg<pages; pg++){
+      const s = slide(L('Problem Solving A3 · 3. Priorización de causas','Problem Solving A3 · 3. Cause prioritization')+(pages>1?` (${pg+1}/${pages})`:''), title);
+      const chunk = rows.slice(pg*per, pg*per+per);
+      if(!chunk.length){ emptyNote(s, L('Marca causas en el Ishikawa y califícalas en la matriz.','Tick causes in the Ishikawa and rate them in the matrix.')); continue; }
+      const hd = [['#',0.5,0.25],[L('Causa','Cause'),0.75,2.75],['I',3.5,0.32],['F',3.82,0.32],['C',4.14,0.32],['E',4.46,0.32],[L('Puntaje','Score'),4.82,1.25],[L('Resultado','Result'),6.1,0.85]];
+      hd.forEach(([t,x,w],k)=> s.addText(t, { x, y:1.3, w, h:0.22, fontSize:8, bold:true, color:MUT, align: k>1&&k<6?'center':'left', margin:0, valign:'middle' }));
+      s.addShape(SH.line, { x:0.5, y:1.53, w:6.45, h:0, line:{ color:LINE, width:0.75 } });
+      chunk.forEach((r,i)=>{
+        const y = 1.56 + i*0.33, idx = pg*per+i+1, res = resultOf(r);
+        s.addShape(SH.rect, { x:0.5, y, w:6.45, h:0.29, fill:{color: i%2===0?ROW:WHITE}, line:{color: i%2===0?ROW:WHITE, width:0.5} });
+        s.addText(String(idx), { x:0.5, y:y+0.01, w:0.25, h:0.27, fontSize:8.5, color:MUT, align:'center', margin:0, valign:'middle' });
+        const f = fit(r.causeText, 2.72, 0.27, 8.5, 6, r.pass);
+        s.addText(f.text, { x:0.75, y:y+0.01, w:2.72, h:0.27, fontSize:f.size, bold:r.pass, color:INK, margin:0, valign:'middle' });
+        [r.influence,r.frequency,r.control,r.evidence].forEach((v,k)=>{
+          s.addText(v==null?'–':String(v), { x:3.54+k*0.32, y:y+0.04, w:0.24, h:0.21, shape:SH.rect, fill:{color:PALE}, fontSize:8.5, bold:true, color:INK, align:'center', valign:'middle', margin:0 });
+        });
+        s.addShape(SH.rect, { x:4.84, y:y+0.1, w:0.82, h:0.1, fill:{color:TRACK}, line:{color:TRACK, width:0.5} });
+        if(r.total!=null) s.addShape(SH.rect, { x:4.84, y:y+0.1, w:Math.max(0.04, 0.82*r.total/3), h:0.1, fill:{color:barCol(r)}, line:{color:barCol(r), width:0.5} });
+        s.addText(r.total==null?'—':dec(r.total), { x:5.7, y:y+0.01, w:0.38, h:0.27, fontSize:9, bold:true, color: r.pass?BLUE:barCol(r), margin:0, valign:'middle' });
+        s.addText(res.t, { x:6.12, y:y+0.05, w:0.8, h:0.2, shape:SH.rect, fill:{color:res.fill}, line:{color:res.line, width:0.75}, fontSize:7.5, bold:true, color:res.color, align:'center', valign:'middle', margin:0 });
+      });
+      const manual = rows.filter(r=>r.pass && r.total!=null && r.total<REF.scoreThresholds.review);
+      if(manual.length) s.addText(L(`* Pasó a 5 porqués por decisión del equipo (puntaje bajo 2,5): ${clip(manual.map(r=>r.causeText).join(' · '),150)}`,`* Moved on to 5 whys by team decision (score below 2.5): ${clip(manual.map(r=>r.causeText).join(' · '),150)}`),
+        { x:0.5, y:4.9, w:6.45, h:0.28, fontSize:7, italic:true, color:MUT, margin:0, valign:'top' });
+      /* panel de criterios */
+      s.addShape(SH.rect, { x:7.1, y:1.3, w:2.4, h:3.62, fill:{color:PALE}, line:{color:PALE, width:0.5} });
+      s.addText(L('CRITERIOS · ESCALA 1 A 3','CRITERIA · SCALE 1 TO 3'), { x:7.2, y:1.36, w:2.2, h:0.18, fontSize:8, bold:true, color:RED, charSpacing:1, margin:0 });
+      REF.matrixCriteria.forEach((c,k)=>{
+        const lv = [1,2,3].map(v=> v+' '+cl(L(c.levels[v], (c.levels_en||{})[v]||c.levels[v])).replace(/\.$/,'').toLowerCase()).join(' · ');
+        s.addText([{ text:L(c.label,c.label_en||c.label)+' · '+Math.round(c.weight*100)+'%', options:{ bold:true, color:BLUE, fontSize:8.5, breakLine:true } }, { text:lv, options:{ color:INK, fontSize:6.5 } }],
+          { x:7.2, y:1.6+k*0.6, w:2.2, h:0.56, valign:'top', margin:0 });
+      });
+      s.addShape(SH.line, { x:7.2, y:4.04, w:2.2, h:0, line:{ color:LINE, width:0.75 } });
+      s.addText([{ text:L('Puntaje = 0,4 I + 0,3 F + 0,2 C + 0,1 E','Score = 0.4 I + 0.3 F + 0.2 C + 0.1 E'), options:{ bold:true, color:INK, fontSize:8, breakLine:true } },
+                 { text:L('≥ 2,5 pasa a 5 porqués · 2,0 a 2,4 validar · < 2,0 baja prioridad','≥ 2.5 moves on to 5 whys · 2.0 to 2.4 validate · < 2.0 low priority'), options:{ color:MUT, fontSize:7 } }],
+        { x:7.2, y:4.09, w:2.2, h:0.78, valign:'top', margin:0 });
+    }
+  }
+
+  /* ---------- 5. Cinco porqués (bloques por causa, se reparten en láminas) ---------- */
+  {
+    const eyebrow = L('Problem Solving A3 · 4. Cinco porqués','Problem Solving A3 · 4. Five whys');
+    if(!groups.length){
+      const s = slide(eyebrow, L('Aún no hay causas en el análisis de 5 porqués','There are no causes in the 5 whys analysis yet'));
+      emptyNote(s, L('En la matriz, marca «Pasa» en las causas que quieres analizar.','In the matrix, tick «Pass» on the causes you want to analyze.'));
+    }
+    const blocks = groups.map((g,gi)=>{
+      const keys = ['A','B','C'].filter(k=> g.paths[k] && (g.paths[k].levels.some(l=>cl(l.text)) || cl(g.paths[k].rootCause)));
+      const paths = keys.length ? keys : ['A'];
+      return { g, gi, paths, h: 0.28 + 0.1 + paths.length*0.66 };
+    });
+    const pages = []; let cur = [], used = 0; const AV = 5.1 - 1.27;
+    blocks.forEach(b=>{ if(cur.length && used + 0.18 + b.h > AV){ pages.push(cur); cur=[]; used=0; } used += (cur.length?0.18:0) + b.h; cur.push(b); });
+    if(cur.length) pages.push(cur);
+    pages.forEach(pg=>{
+      const nRoots = pg.reduce((a,b)=> a + b.paths.filter(k=> b.g.paths[k] && b.g.paths[k].closed && cl(b.g.paths[k].rootCause)).length, 0);
+      const names = pg.map(b=>clip(b.g.causeText,45));
+      const title = L(`${names.join(' · ')}: ${nRoots} causa${nRoots===1?'':'s'} raíz identificada${nRoots===1?'':'s'}`,`${names.join(' · ')}: ${nRoots} root cause${nRoots===1?'':'s'} identified`);
+      const s = slide(eyebrow, title);
+      let y = 1.27;
+      pg.forEach(b=>{
+        const g = b.g, r = rowOf(g.causeId);
+        s.addShape(SH.rect, { x:0.5, y, w:9, h:0.28, fill:{color:NAVY}, line:{color:NAVY, width:0.5} });
+        const hf = fit(g.causeText, 5.6, 0.26, 8.5, 6.5, true);
+        s.addText([{ text:L('CAUSA ','CAUSE ')+(b.gi+1)+'   ', options:{ color:SOFTB, bold:true, fontSize:8.5, charSpacing:1 } }, { text:hf.text, options:{ color:WHITE, bold:true, fontSize:hf.size } }],
+          { x:0.62, y, w:6.6, h:0.28, margin:0, valign:'middle' });
+        const manual = r && r.total!=null && r.total<REF.scoreThresholds.review;
+        s.addText(r && r.total!=null ? L('Puntaje ','Score ')+dec(r.total)+(manual?'*':'') : '', { x:6.6, y, w:2.8, h:0.28, fontSize:8.5, bold:true, color:SOFTB, align:'right', margin:0, valign:'middle' });
+        let py = y + 0.38;
+        b.paths.forEach(pk=>{
+          const p = g.paths[pk] || { levels:[], rootCause:'', closed:false };
+          const lv = p.levels.filter(l=>cl(l.text));
+          const cy = py + 0.3;
+          s.addText(pk, { x:0.52, y:cy-0.13, w:0.26, h:0.26, shape:SH.ellipse, fill:{color:BLUE}, fontSize:9, bold:true, color:WHITE, align:'center', valign:'middle', margin:0 });
+          const n = lv.length, conn = 0.2, x0 = 0.88, spanEnd = 6.73;
+          const bw = n ? Math.min(1.75, (spanEnd - x0 - n*conn)/n) : 0;
+          lv.forEach((l,i)=>{
+            const x = x0 + i*(bw+conn);
+            s.addShape(SH.rect, { x, y:py, w:bw, h:0.6, fill:{color:PALE}, line:{color:PALE, width:0.5} });
+            const f = fit(l.text, bw-0.12, 0.42, 6.5, 5, false);
+            s.addText([{ text:L('¿POR QUÉ? ','WHY? ')+(i+1), options:{ bold:true, color:BLUE, fontSize:6.5, breakLine:true } }, { text:f.text, options:{ color:INK, fontSize:f.size } }],
+              { x:x+0.06, y:py+0.03, w:bw-0.12, h:0.54, valign:'top', margin:0 });
+            s.addShape(SH.line, { x:x+bw, y:cy, w:conn, h:0, line:{ color:GRY, width:0.75 } });
+          });
+          const lineFrom = n ? x0 + n*(bw+conn) : 0.8;
+          if(6.95 - lineFrom > 0.02) s.addShape(SH.line, { x:lineFrom, y:cy, w:6.95-lineFrom, h:0, line:{ color:GRY, width:0.75, dashType: n?'solid':'dash', endArrowType:'triangle' } });
+          const closed = p.closed && cl(p.rootCause);
+          const rootTxt = cl(p.rootCause) || (lv.length ? cl(lv[lv.length-1].text) : '');
+          s.addShape(SH.rect, { x:6.95, y:py, w:2.55, h:0.6, fill:{color: closed?BLUE:WHITE}, line:{color: closed?BLUE:RED, width:1, dashType: closed?'solid':'dash'} });
+          const rf = fit(rootTxt || '—', 2.39, 0.4, 7.5, 5.5, true);
+          s.addText([{ text: closed ? L('CAUSA RAÍZ','ROOT CAUSE') : L('CAUSA RAÍZ · POR CONFIRMAR','ROOT CAUSE · TO CONFIRM'), options:{ bold:true, color: closed?SOFTB:RED, fontSize:6.5, breakLine:true, charSpacing:1 } },
+                     { text:rf.text, options:{ bold:true, color: closed?WHITE:BLUE, fontSize:rf.size } }],
+            { x:7.03, y:py+0.04, w:2.39, h:0.52, valign:'top', margin:0 });
+          py += 0.66;
+        });
+        y += b.h + 0.18;
+      });
+    });
+  }
+
+  /* ---------- 6. Causas raíz identificadas ---------- */
+  {
+    const per = 9, pages = Math.max(1, Math.ceil(roots.length/per));
+    const ctrlOf = id=>{ const r = rowOf(id); const c = r ? r.control : null;
+      if(c===3) return { t:L('Directo','Direct'), col:BLUE }; if(c===2) return { t:L('Influencia','Influence'), col:AMB };
+      if(c===1) return { t:L('Escalamiento','Escalation'), col:RED }; return { t:'—', col:GRY }; };
+    const nDir = roots.filter(x=>{ const r=rowOf(x.sourceId.split(':')[0]); return r && r.control===3; }).length;
+    const nEsc = roots.filter(x=>{ const r=rowOf(x.sourceId.split(':')[0]); return r && r.control===1; }).length;
+    const title = roots.length ? L(`${roots.length} causa${roots.length===1?'':'s'} raíz: ${nDir} se pueden atacar directamente${nEsc?` y ${nEsc} requiere${nEsc===1?'':'n'} escalamiento`:''}`,`${roots.length} root cause${roots.length===1?'':'s'}: ${nDir} can be addressed directly${nEsc?` and ${nEsc} need${nEsc===1?'s':''} escalation`:''}`) : L('Aún no hay causas raíz confirmadas','There are no confirmed root causes yet');
+    for(let pg=0; pg<pages; pg++){
+      const s = slide(L('Problem Solving A3 · 4. Causas raíz identificadas','Problem Solving A3 · 4. Identified root causes')+(pages>1?` (${pg+1}/${pages})`:''), title);
+      const chunk = roots.slice(pg*per, pg*per+per);
+      if(!chunk.length){ emptyNote(s, L('Cierra al menos una ruta en 5 Porqués con «Es la causa raíz».','Close at least one 5 Whys path with «It is the root cause».')); continue; }
+      s.addShape(SH.rect, { x:0.5, y:1.3, w:9, h:0.3, fill:{color:NAVY}, line:{color:NAVY, width:0.5} });
+      [['#',0.56,0.22],[L('Causa raíz','Root cause'),0.88,4.1],[L('Viene de (causa · ruta)','Comes from (cause · path)'),5.08,1.5],[L('Categoría','Category'),6.68,1.5],[L('Control','Control'),8.28,1.18]]
+        .forEach(([t,x,w])=> s.addText(t, { x, y:1.3, w, h:0.3, fontSize:8.5, bold:true, color:WHITE, margin:0, valign:'middle', align: t==='Control'?'center':'left' }));
+      chunk.forEach((r,i)=>{
+        const y = 1.6 + i*0.37, n = pg*per+i+1, cid = r.sourceId.split(':')[0], gi = groups.findIndex(g=>g.causeId===cid), ct = ctrlOf(cid);
+        s.addText(String(n), { x:0.55, y:y+0.07, w:0.23, h:0.23, shape:SH.ellipse, fill:{color:BLUE}, fontSize:8.5, bold:true, color:WHITE, align:'center', valign:'middle', margin:0 });
+        const f = fit(r.rootCause, 4.1, 0.35, 9, 6.5, true);
+        s.addText(f.text, { x:0.88, y, w:4.1, h:0.37, fontSize:f.size, bold:true, color:INK, margin:0, valign:'middle' });
+        const from = fit((gi>=0?(gi+1)+r.pathKey:r.pathKey)+' · '+r.causeText, 1.5, 0.35, 8.5, 6, false);
+        s.addText(from.text, { x:5.08, y, w:1.5, h:0.37, fontSize:from.size, color:MUT, margin:0, valign:'middle' });
+        s.addText(CATNAME(catOfCause(cid)) || '—', { x:6.68, y, w:1.5, h:0.37, fontSize:8.5, color:INK, margin:0, valign:'middle' });
+        s.addText(ct.t, { x:8.3, y:y+0.08, w:1.12, h:0.21, shape:SH.rect, fill:{color:WHITE}, line:{color:ct.col, width:0.75}, fontSize:7.5, bold:true, color:ct.col, align:'center', valign:'middle', margin:0 });
+        s.addShape(SH.line, { x:0.5, y:y+0.37, w:9, h:0, line:{ color:LINE, width:0.75 } });
+      });
+      s.addText(L('Control según la matriz (criterio C): 3 = lo cambiamos directo · 2 = podemos influir · 1 = requiere escalamiento.','Control from the matrix (criterion C): 3 = we change it directly · 2 = we can influence · 1 = needs escalation.'),
+        { x:0.5, y:4.95, w:9, h:0.2, fontSize:7, italic:true, color:MUT, margin:0 });
+    }
+  }
+
+  /* ---------- 7. Contramedidas y plan de acción ---------- */
+  {
+    const list = cmRows.length ? cmRows : roots.map(r=>({ rootCause:r.rootCause, action:'', responsible:'', date:'', type:'' }));
+    const nMit = acts.filter(a=>a.type==='mitigation').length, nEli = acts.length - nMit;
+    const title = !acts.length ? L('Siguiente paso: proponer una contramedida por causa raíz, con responsable y fecha','Next step: propose a countermeasure per root cause, with owner and date')
+      : L(`${acts.length} contramedida${acts.length===1?'':'s'} definida${acts.length===1?'':'s'}: ${nEli} de eliminación y ${nMit} de mitigación`,`${acts.length} countermeasure${acts.length===1?'':'s'} defined: ${nEli} elimination and ${nMit} mitigation`);
+    const goal = cl(st.desiredSituation);
+    const per = 10, pages = Math.max(1, Math.ceil(list.length/per));
+    for(let pg=0; pg<pages; pg++){
+      const s = slide(L('Problem Solving A3 · 5. Contramedidas y plan de acción','Problem Solving A3 · 5. Countermeasures and action plan')+(pages>1?` (${pg+1}/${pages})`:''), title);
+      const chunk = list.slice(pg*per, pg*per+per);
+      if(!chunk.length){ emptyNote(s, L('Aún no hay causas raíz ni acciones definidas.','There are no root causes or actions defined yet.')); continue; }
+      s.addShape(SH.rect, { x:0.5, y:1.3, w:9, h:0.3, fill:{color:NAVY}, line:{color:NAVY, width:0.5} });
+      const C = [['#',0.56,0.22],[L('Causa raíz','Root cause'),0.88,2.45],[L('Contramedida','Countermeasure'),3.43,2.85],[L('Tipo','Type'),6.38,0.85],[L('Responsable','Owner'),7.28,1.3],[L('Fecha','Date'),8.63,0.83]];
+      C.forEach(([t,x,w])=> s.addText(t, { x, y:1.3, w, h:0.3, fontSize:8.5, bold:true, color:WHITE, margin:0, valign:'middle' }));
+      chunk.forEach((a,i)=>{
+        const rh = Math.min(0.38, (goal ? 2.98 : 3.5)/chunk.length), y = 1.6 + i*rh, n = pg*per+i+1;
+        s.addText(String(n), { x:0.5, y, w:0.32, h:rh, fontSize:8.5, bold:true, color:BLUE, align:'center', margin:0, valign:'middle' });
+        const rf = fit(a.rootCause||'—', 2.45, rh-0.02, 8.5, 6, true);
+        s.addText(rf.text, { x:0.88, y, w:2.45, h:rh, fontSize:rf.size, bold:true, color:INK, margin:0, valign:'middle' });
+        const cell = (txt, x, w, bold, color)=>{
+          if(cl(txt)){ const f = fit(txt, w-0.04, rh-0.02, 8.5, 6, bold); s.addText(f.text, { x, y, w, h:rh, fontSize:f.size, bold, color:color||INK, margin:0, valign:'middle' }); }
+          else s.addShape(SH.rect, { x:x-0.01, y:y+(rh-0.21)/2, w, h:0.21, fill:{color:WHITE}, line:{color:LINE, width:0.75} });
+        };
+        cell(a.action, 3.43, 2.85, false);
+        if(cl(a.action)){
+          const mit = a.type==='mitigation', col = mit?AMB:BLUE;
+          s.addText(mit?L('Mitigación','Mitigation'):L('Eliminación','Elimination'), { x:6.38, y:y+(rh-0.2)/2, w:0.82, h:0.2, shape:SH.rect, fill:{color:WHITE}, line:{color:col, width:0.75}, fontSize:7, bold:true, color:col, align:'center', valign:'middle', margin:0 });
+        } else cell('', 6.38, 0.82);
+        cell(a.responsible, 7.28, 1.3, false);
+        cell(a.date ? fmtShort(a.date) : '', 8.63, 0.83, false);
+        s.addShape(SH.line, { x:0.5, y:y+rh, w:9, h:0, line:{ color:LINE, width:0.75 } });
+      });
+      if(goal){
+        s.addShape(SH.rect, { x:0.5, y:4.62, w:9, h:0.45, fill:{color:PALE}, line:{color:PALE, width:0.5} });
+        const gf = fit(goal + (cl(st.gap)?' · '+L('Brecha: ','Gap: ')+cl(st.gap):''), 7.6, 0.4, 8.5, 6.5, false);
+        s.addText([{ text:L('Meta del A3  ','A3 goal  '), options:{ bold:true, color:BLUE, fontSize:8.5 } }, { text:gf.text, options:{ color:INK, fontSize:gf.size } }],
+          { x:0.62, y:4.62, w:8.8, h:0.45, margin:0, valign:'middle' });
+      }
+    }
+  }
+  await pptx.writeFile({ fileName: (state.projectName||'problem_solving').replace(/[^a-z0-9]+/gi,'_')+'_A3.pptx' });
+}
+ACTIONS['export-a3-pptx'] = async ()=>{
+  try{ showToast(L('Generando A3 en PowerPoint…','Generating A3 PowerPoint…')); await exportA3ToPowerPoint(); showToast(L('A3 en PowerPoint descargado','A3 PowerPoint downloaded')); }
+  catch(e){ console.error(e); showToast(L('Ocurrió un error al generar el A3 en PowerPoint','An error occurred while generating the A3 PowerPoint'), true); }
+};
 
 /* ============================================================
    14c. A3 ONE PAGE (PDF) — una sola hoja A3 horizontal
