@@ -216,6 +216,19 @@
   .add-card:hover{background:var(--tile-hover)}
   .del-card{color:var(--ink)}
   #themeSeg{margin:0}
+  .navrow{flex-wrap:wrap;row-gap:8px}
+  .navrow .tiles{flex:1 1 420px}
+  .ctrls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-left:auto}
+  .ctrls .seg{margin-left:0}
+  .ctl-btn{appearance:none;display:inline-flex;align-items:center;justify-content:center;height:34px;box-sizing:border-box;border:1px solid var(--border);background:var(--tile);color:var(--ink);font:700 .72rem 'IBM Plex Sans',sans-serif;letter-spacing:.03em;padding:0 11px;border-radius:9px;cursor:pointer;text-decoration:none;white-space:nowrap}
+  .ctl-btn:hover,.ctl-btn[aria-expanded="true"]{background:var(--tile-hover);border-color:var(--accent)}
+  .ctl-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .ctrls .seg button{height:26px}
+  .theme-dd{position:relative}
+  .theme-dd .ctl-btn{width:36px;padding:0;color:var(--accent)}
+  .theme-menu{position:absolute;right:0;top:calc(100% + 6px);z-index:50;flex-direction:column;min-width:110px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+  .theme-menu[hidden]{display:none}
+  .theme-menu button{text-align:left}
   .dot-leg.pending{border-color:var(--warn)}
   .dot-leg.undef{border-color:var(--warn-dim)}
   .card.pending{border-color:var(--warn)}
@@ -496,11 +509,6 @@
       </div>
     </div>
     <div class="topbar-right">
-      <div class="seg" id="themeSeg" role="group" aria-label="Theme">
-        <button type="button" data-theme="light" aria-pressed="false">Light</button>
-        <button type="button" data-theme="dark" aria-pressed="false">Dark</button>
-        <button type="button" data-theme="classic" aria-pressed="false">Classic</button>
-      </div>
       <button type="button" id="fsBtn" title="Full screen">⛶ Full screen</button>
     </div>
   </div>
@@ -510,6 +518,30 @@
       <button type="button" class="nav-arrow" id="prevT" aria-label="Previous terminal" title="Previous (←)">‹</button>
       <div class="tiles" role="tablist" aria-label="Terminal" id="tiles"></div>
       <button type="button" class="nav-arrow" id="nextT" aria-label="Next terminal" title="Next (→)">›</button>
+      <div class="ctrls">
+      <div class="theme-dd" id="themeDD">
+        <button type="button" id="themeBtn" class="ctl-btn" aria-haspopup="true" aria-expanded="false" title="Theme" aria-label="Theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.8 1.8-1.7 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-.9.8-1.7 1.7-1.7H16a5 5 0 0 0 5-5c0-3.9-4.5-7.2-9-7.2z"/><circle cx="7.5" cy="11" r="1" fill="currentColor"/><circle cx="10.5" cy="7" r="1" fill="currentColor"/><circle cx="15.5" cy="7.5" r="1" fill="currentColor"/></svg>
+        </button>
+        <div class="seg theme-menu" id="themeSeg" role="menu" aria-label="Theme" hidden>
+          <button type="button" role="menuitem" data-theme="light" aria-pressed="false">Light</button>
+          <button type="button" role="menuitem" data-theme="dark" aria-pressed="false">Dark</button>
+          <button type="button" role="menuitem" data-theme="classic" aria-pressed="false">Classic</button>
+        </div>
+      </div>
+        <div class="seg" id="viewSeg" role="group" aria-label="Layout">
+        <button type="button" data-view="lanes" aria-pressed="true" title="Lanes">Lanes</button>
+        <button type="button" data-view="board" aria-pressed="false" title="Schedule board">Board</button>
+        <button type="button" data-view="tiles" aria-pressed="false" title="Tiles">Tiles</button>
+        </div>
+        <div class="seg" id="focusSeg">
+        <button type="button" data-focus="total" aria-pressed="true">Total</button>
+        <button type="button" data-focus="daily" aria-pressed="false">Daily</button>
+        <button type="button" data-focus="weekly" aria-pressed="false">Weekly</button>
+        <button type="button" data-focus="monthly" aria-pressed="false">Monthly</button>
+        </div>
+        <a id="dataOrigin" class="ctl-btn" href="https://strenaterminals.sharepoint.com/:p:/r/sites/OperationalExcellence/_layouts/15/Doc.aspx?sourcedoc=%7BB3FA6927-C89E-40F1-AB3C-B123050F86D3%7D&amp;file=Meeting_Calendar.pptx&amp;action=edit&amp;mobileredirect=true" target="_blank" rel="noopener noreferrer" title="Open the source Meeting_Calendar.pptx">DATA ORIGIN</a>
+      </div>
     </div>
 
     <div class="toolbar">
@@ -522,17 +554,6 @@
         <button type="button" class="icon-btn" id="copyJson" style="width:auto;padding:0 9px;font-size:.68rem">Copy JSON</button>
         <button type="button" class="icon-btn" id="resetDraft" style="width:auto;padding:0 9px;font-size:.68rem">Discard draft</button>
         <button type="button" class="icon-btn help-open" style="width:auto;padding:0 9px;font-size:.68rem" title="How editing works">? Help</button>
-      </div>
-      <div class="seg" id="viewSeg" role="group" aria-label="Layout">
-        <button type="button" data-view="lanes" aria-pressed="true" title="Lanes">Lanes</button>
-        <button type="button" data-view="board" aria-pressed="false" title="Schedule board">Board</button>
-        <button type="button" data-view="tiles" aria-pressed="false" title="Tiles">Tiles</button>
-      </div>
-      <div class="seg" id="focusSeg">
-        <button type="button" data-focus="total" aria-pressed="true">Total</button>
-        <button type="button" data-focus="daily" aria-pressed="false">Daily</button>
-        <button type="button" data-focus="weekly" aria-pressed="false">Weekly</button>
-        <button type="button" data-focus="monthly" aria-pressed="false">Monthly</button>
       </div>
     </div>
 
@@ -1207,11 +1228,17 @@
   try{ savedTheme = localStorage.getItem(THEME_KEY) || "light"; }catch(e){}
   if(["light","dark","classic"].indexOf(savedTheme) < 0) savedTheme = "light";
   applyTheme(savedTheme);
+  var themeBtn = document.getElementById("themeBtn");
+  function setMenu(o){ themeSeg.hidden = !o; themeBtn.setAttribute("aria-expanded", String(o)); }
+  themeBtn.addEventListener("click", function(e){ e.stopPropagation(); setMenu(themeSeg.hidden); });
+  document.addEventListener("click", function(e){ if(!themeSeg.hidden && !e.target.closest("#themeDD")) setMenu(false); });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape" && !themeSeg.hidden){ setMenu(false); themeBtn.focus(); } });
   themeSeg.addEventListener("click", function(e){
     var b = e.target.closest("button");
     if(!b) return;
     applyTheme(b.dataset.theme);
     try{ localStorage.setItem(THEME_KEY, b.dataset.theme); }catch(e2){}
+    setMenu(false);
   });
 
   // ---- autofit (embedded / full screen) + full screen button -------------
