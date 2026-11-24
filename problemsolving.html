@@ -1632,6 +1632,23 @@ table.matrix .mx-cat{ display:block; font-size:.72rem; font-weight:800; letter-s
 .ps-card.wide{ width:min(980px,100%); }
 @media (max-width:820px){ .crit-grid{ grid-template-columns:1fr 1fr; } }
 @media (max-width:520px){ .crit-grid{ grid-template-columns:1fr; } }
+/* Plan de acción: varias acciones por causa raíz */
+table.cm-table td.cm-num{ font-family:var(--font-mono); font-weight:800; color:var(--accent); vertical-align:top; padding-top:16px; }
+table.cm-table td.cm-root{ vertical-align:top; min-width:200px; }
+table.cm-table .cm-root-txt{ font-weight:700; }
+table.cm-table tr.cm-grp.cm-sub td{ border-top:1px dashed var(--border); }
+table.cm-table tr.cm-grp:not(:last-child) td{ border-bottom-color:transparent; }
+table.cm-table tr.cm-grp td.cm-root, table.cm-table tr.cm-grp td.cm-num{ border-bottom:1px solid var(--border); border-right:3px solid var(--accent-border); }
+table.cm-table tr.cm-first td{ border-top:1.5px solid var(--border-strong); }
+table.cm-table tr.cm-odd td{ background:color-mix(in srgb, var(--bg-subtle) 55%, transparent); }
+.cm-add-sub{ display:block; margin-top:8px; appearance:none; border:1px dashed var(--accent); background:transparent; color:var(--accent); font:700 .82rem var(--font-body); padding:5px 10px; border-radius:999px; cursor:pointer; text-align:left; }
+.cm-add-sub:hover{ background:var(--accent-tint); }
+.cm-count{ margin-top:6px; font-size:.78rem; font-weight:800; color:var(--text); opacity:.8; }
+.cm-act{ display:flex; align-items:center; gap:6px; } .cm-act input{ flex:1; min-width:0; }
+table.cm-table td.cm-act-td{ min-width:260px; width:30%; }
+table.cm-table select{ min-width:145px; }
+.cm-sub-n{ flex:none; font:800 .78rem var(--font-body); color:var(--accent-ink); background:var(--accent); border-radius:7px; padding:3px 6px; }
+.cm-tip{ font-size:.95rem; margin:-6px 0 10px; }
 /* A3 */
 .a3-meta{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px 10px; margin-top:4px; }
 .a3-meta input{ padding:9px 11px; font-size:.95rem; }
@@ -2035,20 +2052,30 @@ function getIdentifiedRootCauses(){
   return out;
 }
 
-// 5 Whys -> Countermeasures: una fila por causa raíz confirmada, en cada tabla.
+// 5 Whys -> Countermeasures: al menos una fila por causa raíz confirmada; cada causa raíz
+// puede tener VARIAS acciones (filas con el mismo sourceId). Las filas manuales pueden
+// agruparse igual (groupId = id de la fila principal) para no reescribir la causa raíz.
+function cmGroupKey(r){ return r.sourceId ? 's:'+r.sourceId : 'm:'+(r.groupId||r.id); }
 function syncCountermeasuresFromWhys(){
   const roots = getIdentifiedRootCauses();
-  const prevBySource = {};
-  state.countermeasures.actions.forEach(row=>{ if(row.sourceId) prevBySource[row.sourceId]=row; });
-
-  const synced = roots.map(r=>{
-    const prev = prevBySource[r.sourceId];
-    if(prev){ prev.rootCause = r.rootCause; return prev; }
-    return freshCountermeasureRow(r.rootCause, r.sourceId);
+  const old = state.countermeasures.actions;
+  const bySrc = {};
+  old.forEach(row=>{ if(row.sourceId) (bySrc[row.sourceId] = bySrc[row.sourceId] || []).push(row); });
+  const synced = [];
+  roots.forEach(rt=>{
+    const list = bySrc[rt.sourceId];
+    if(list && list.length) list.forEach(row=>{ row.rootCause = rt.rootCause; synced.push(row); });
+    else synced.push(freshCountermeasureRow(rt.rootCause, rt.sourceId));
   });
-  // conserva filas manuales que el usuario haya agregado sin causa raíz asociada
-  const manualExtras = state.countermeasures.actions.filter(row=>!row.sourceId);
-  state.countermeasures.actions = synced.concat(manualExtras);
+  // filas manuales (sin causa raíz de 5 Porqués): cada principal seguida de sus acciones extra
+  const manual = old.filter(row=>!row.sourceId);
+  const ids = new Set(manual.map(r=>r.id));
+  manual.forEach(r=>{ if(r.groupId && !ids.has(r.groupId)) delete r.groupId; });
+  manual.filter(r=>!r.groupId).forEach(p=>{
+    synced.push(p);
+    manual.filter(r=>r.groupId===p.id).forEach(x=>{ x.rootCause = p.rootCause; synced.push(x); });
+  });
+  state.countermeasures.actions = synced;
 }
 
 // Corre toda la cadena de sincronización en orden.
@@ -3689,40 +3716,75 @@ SECTION_RENDERERS.whys = renderWhysSection;
 /* ============================================================
    15. SECCIÓN 5 — PLAN DE ACCIÓN (CONTRAMEDIDAS)
    ============================================================ */
+/* Para exportar: grupos (causa raíz → sus acciones con texto), en el orden del plan */
+function cmExportGroups(includeEmpty){
+  const out = [], byKey = {};
+  state.countermeasures.actions.forEach(r=>{
+    const has = !!(r.action||'').trim();
+    if(!includeEmpty && !has) return;
+    if(includeEmpty && !has && !(r.rootCause||'').trim()) return;
+    const k = cmGroupKey(r);
+    if(!byKey[k]){ byKey[k] = { key:k, rootCause:r.rootCause||'', rows:[] }; out.push(byKey[k]); }
+    byKey[k].rows.push(r);
+  });
+  out.forEach((g,i)=> g.n = i+1);
+  return out;
+}
+function cmGroups(){
+  const rows = state.countermeasures.actions, groups = [], byKey = {};
+  rows.forEach((r,idx)=>{
+    const k = cmGroupKey(r);
+    if(!byKey[k]){ byKey[k] = { key:k, rows:[] }; groups.push(byKey[k]); }
+    byKey[k].rows.push({ r, idx });
+  });
+  return groups;
+}
 function renderCmTable(){
   const rows = state.countermeasures.actions;
-  const body = rows.map((r,idx)=>`
-    <tr>
-      <td style="font-family:var(--font-mono);color:var(--text-faint);">${idx+1}</td>
-      <td class="rootcause-cell">
-        ${r.sourceId?esc(r.rootCause):`<input type="text" data-bind="countermeasures.actions.${idx}.rootCause" value="${esc(r.rootCause)}" placeholder="Causa raíz">`}
-        ${r.sourceId?'<div class="pill" style="margin-top:6px;display:inline-block;">auto</div>':''}
-      </td>
-      <td>
-        <select data-bind="countermeasures.actions.${idx}.type">
-          <option value="mitigation" ${r.type==='mitigation'?'selected':''}>Mitigación</option>
-          <option value="elimination" ${r.type==='elimination'?'selected':''}>Eliminación</option>
-        </select>
-      </td>
-      <td><input type="text" data-bind="countermeasures.actions.${idx}.action" value="${esc(r.action)}" placeholder="Acción a realizar"></td>
-      <td><input type="text" data-bind="countermeasures.actions.${idx}.responsible" value="${esc(r.responsible)}" placeholder="Responsable"></td>
-      <td><input type="date" data-bind="countermeasures.actions.${idx}.date" value="${esc(r.date)}"></td>
-      <td>${r.sourceId?'':`<button class="dyn-remove" data-action="remove-cm-row" data-idx="${idx}">&times;</button>`}</td>
-    </tr>
-  `).join('');
+  const groups = cmGroups();
+  const body = groups.map((g,gi)=>{
+    const n = g.rows.length, first = g.rows[0].r, auto = !!first.sourceId;
+    return g.rows.map(({r,idx},k)=>{
+      const lead = k===0;
+      const canDel = !auto ? true : k>0;
+      const rootCell = lead ? `
+        <td class="cm-num" rowspan="${n}">${gi+1}</td>
+        <td class="rootcause-cell cm-root" rowspan="${n}">
+          ${auto ? `<div class="cm-root-txt">${esc(r.rootCause)}</div><div class="pill" style="margin-top:6px;display:inline-block;">auto</div>`
+                 : `<input type="text" data-bind="countermeasures.actions.${idx}.rootCause" data-cm-root="${r.id}" value="${esc(r.rootCause)}" placeholder="Causa raíz">`}
+          <button type="button" class="cm-add-sub" data-action="add-cm-sub" data-idx="${idx}" title="${esc(L('Agrega otra acción que ataca esta misma causa raíz','Add another action for this same root cause'))}">+ ${L('Otra acción para esta causa','Another action for this cause')}</button>
+          ${n>1?`<div class="cm-count">${n} ${L('acciones','actions')}</div>`:''}
+        </td>` : '';
+      return `
+      <tr class="${n>1?'cm-grp':''} ${lead?'cm-first':'cm-sub'} ${gi%2?'cm-odd':''}">
+        ${rootCell}
+        <td>
+          <select data-bind="countermeasures.actions.${idx}.type">
+            <option value="mitigation" ${r.type==='mitigation'?'selected':''}>Mitigación</option>
+            <option value="elimination" ${r.type==='elimination'?'selected':''}>Eliminación</option>
+          </select>
+        </td>
+        <td class="cm-act-td"><div class="cm-act">${n>1?`<span class="cm-sub-n">${gi+1}.${k+1}</span>`:''}<input type="text" data-bind="countermeasures.actions.${idx}.action" value="${esc(r.action)}" placeholder="Acción a realizar"></div></td>
+        <td><input type="text" data-bind="countermeasures.actions.${idx}.responsible" value="${esc(r.responsible)}" placeholder="Responsable"></td>
+        <td><input type="date" data-bind="countermeasures.actions.${idx}.date" value="${esc(r.date)}"></td>
+        <td>${canDel?`<button class="dyn-remove" data-action="remove-cm-row" data-idx="${idx}" title="${esc(L('Quitar esta acción','Remove this action'))}">&times;</button>`:''}</td>
+      </tr>`;
+    }).join('');
+  }).join('');
 
   return `
     <div class="card">
       <h3 class="card-title">Acciones</h3>
       <p class="card-subtitle">Por cada causa raíz, define la acción y elige si es de <b>mitigación</b> (contiene el problema mientras se implementa la solución) o de <b>eliminación</b> (ataca la causa raíz de forma permanente). La mayoría de los casos usan un solo tipo — elige el que corresponda en cada fila.</p>
       ${rows.length? `
+      <p class="cm-tip">${L('¿Más de una acción para la misma causa raíz? Usa <b>+ Otra acción para esta causa</b> debajo de la causa raíz: no tienes que volver a escribirla.','More than one action for the same root cause? Use <b>+ Another action for this cause</b> under the root cause: no need to type it again.')}</p>
       <div class="matrix-table-wrap">
         <table class="cm-table">
           <thead><tr><th>#</th><th>Causa raíz</th><th>Tipo</th><th>Acción</th><th>Responsable</th><th>Fecha</th><th></th></tr></thead>
           <tbody>${body}</tbody>
         </table>
       </div>` : `<div class="empty-state" style="padding:20px 10px;"><p>Aún no hay causas raíz confirmadas en la sección de 5 Porqués.</p></div>`}
-      <button class="add-cause-btn" style="margin-top:14px;" data-action="add-cm-row">+ Agregar acción adicional</button>
+      <button class="add-cause-btn" style="margin-top:14px;" data-action="add-cm-row">+ ${L('Agregar otra causa raíz con su acción','Add another root cause with its action')}</button>
     </div>
   `;
 }
@@ -3741,10 +3803,34 @@ function renderCountermeasuresSection(){
 }
 
 ACTIONS['add-cm-row'] = ()=>{ state.countermeasures.actions.push(freshCountermeasureRow('',null)); renderMain(); };
+/* Agrega otra acción a la MISMA causa raíz (queda justo debajo, sin reescribir la causa) */
+ACTIONS['add-cm-sub'] = (ds)=>{
+  const acts = state.countermeasures.actions, base = acts[parseInt(ds.idx,10)];
+  if(!base) return;
+  const key = cmGroupKey(base);
+  let last = -1; acts.forEach((r,i)=>{ if(cmGroupKey(r)===key) last = i; });
+  const row = freshCountermeasureRow(base.rootCause, base.sourceId, base.type);
+  if(!base.sourceId) row.groupId = base.groupId || base.id;
+  acts.splice(last+1, 0, row);
+  scheduleSave(); renderMain();
+  setTimeout(()=>{ const el=document.querySelector('[data-bind="countermeasures.actions.'+(last+1)+'.action"]'); if(el){ el.scrollIntoView({block:'center',behavior:'smooth'}); try{ el.focus({preventScroll:true}); }catch(_){} } }, 60);
+};
 ACTIONS['remove-cm-row'] = (ds)=>{
-  state.countermeasures.actions.splice(parseInt(ds.idx,10),1);
+  const acts = state.countermeasures.actions, idx = parseInt(ds.idx,10), r = acts[idx];
+  if(!r) return;
+  // si se borra la fila principal de un grupo manual, la siguiente acción del grupo pasa a ser la principal
+  if(!r.sourceId && !r.groupId){
+    const kids = acts.filter(x=>x.groupId===r.id);
+    if(kids.length){ const np = kids[0]; delete np.groupId; kids.slice(1).forEach(x=>x.groupId = np.id); }
+  }
+  acts.splice(idx,1);
   scheduleSave(); renderMain();
 };
+/* La causa raíz escrita a mano se copia a todas las acciones de su grupo */
+document.addEventListener('input', e=>{
+  const id = e.target && e.target.dataset && e.target.dataset.cmRoot; if(!id) return;
+  state.countermeasures.actions.forEach(x=>{ if(x.groupId===id) x.rootCause = e.target.value; });
+});
 SECTION_RENDERERS.countermeasures = renderCountermeasuresSection;
 
 /* ============================================================
@@ -4765,6 +4851,51 @@ async function exportToPowerPoint(){
     }
   }
 
+  /* ---------- 7a. Plan de acción agrupado por causa raíz (una causa raíz → varias acciones) ---------- */
+  const cmG = cmExportGroups(false);
+  const cmNum = new Map(); cmG.forEach(g=> g.rows.forEach((r,k)=> cmNum.set(r, { n:g.n, k:k+1, of:g.rows.length })));
+  if(cmG.length){
+    const PER = 9, pagesG = []; let cur = [], used = 0;
+    cmG.forEach(g=>{
+      let rest = g.rows.slice(), cont = false;
+      while(rest.length){
+        if(used >= PER){ pagesG.push(cur); cur = []; used = 0; }
+        const take = rest.splice(0, PER-used);
+        cur.push({ g, rows:take, cont }); used += take.length; cont = true;
+      }
+    });
+    if(cur.length) pagesG.push(cur);
+    pagesG.forEach((pgItems, pi)=>{
+      const s = baseSlide('5', 'Plan de acción', L('Acciones por causa raíz','Actions by root cause') + (pagesG.length>1 ? ` (${pi+1}/${pagesG.length})` : ''));
+      const top = 1.62, nRows = pgItems.reduce((a,it)=>a+it.rows.length,0), rh = Math.min(0.56, 5.2/Math.max(nRows,1));
+      [[L('CAUSA RAÍZ','ROOT CAUSE'),0.6,3.9],[L('ACCIÓN','ACTION'),4.62,4.3],[L('TIPO','TYPE'),9.0,1.15],[L('RESPONSABLE','OWNER'),10.2,1.45],[L('FECHA','DATE'),11.7,1.05]]
+        .forEach(([t,x,w])=> s.addText(t, { x, y:top-0.32, w, h:0.28, fontSize:10, bold:true, color:ORANGE, charSpacing:1.5, margin:0 }));
+      let y = top;
+      pgItems.forEach((it, gi)=>{
+        const h = it.rows.length*rh;
+        s.addShape(SH.roundRect, { x:0.6, y:y+0.02, w:12.13, h:h-0.06, rectRadius:0.08, fill:{color: gi%2?WHITE:SOFT}, line:{color:LINE, width:0.75} });
+        s.addShape(SH.rect, { x:0.6, y:y+0.08, w:0.07, h:h-0.18, fill:{color:ORANGE}, line:{type:'none'} });
+        s.addText(String(it.g.n), { x:0.75, y:y+Math.min(0.12,(h-0.34)/2), w:0.34, h:0.34, shape:SH.ellipse, fill:{color:ORANGE}, fontSize:11, bold:true, color:WHITE, align:'center', valign:'middle', margin:0 });
+        const rtxt = (it.g.rootCause||'—') + (it.cont ? L(' (cont.)',' (cont.)') : '');
+        const rf = fitFont(rtxt, 3.3, h-0.1, 12, 7.5, true);
+        s.addText(rf.text, { x:1.15, y:y+0.03, w:3.35, h:h-0.08, fontSize:rf.size, bold:true, color:INK, valign: it.rows.length>1?'top':'middle', margin:[3,2,2,2] });
+        if(it.g.rows.length>1 && !it.cont) s.addText(L(`${it.g.rows.length} acciones`,`${it.g.rows.length} actions`), { x:1.15, y:y+h-0.3, w:2, h:0.24, fontSize:9, bold:true, color:BLUE, margin:0, valign:'middle' });
+        it.rows.forEach((a,k)=>{
+          const ry = y + k*rh, mit = a.type==='mitigation', col = mit?AMBER:GREEN;
+          if(k>0) s.addShape(SH.line, { x:4.6, y:ry, w:8.05, h:0, line:{ color:LINE, width:0.75, dashType:'dash' } });
+          const nn = cmNum.get(a), lab = nn.of>1 ? `${nn.n}.${nn.k}  ` : '';
+          const af = fitFont(lab+a.action, 4.25, rh-0.06, 12, 7, false);
+          s.addText(af.text, { x:4.62, y:ry, w:4.3, h:rh, fontSize:af.size, color:INK, valign:'middle', margin:[0,2,0,2] });
+          s.addText(mit?L('Mitigación','Mitigation'):L('Eliminación','Elimination'), { x:9.0, y:ry+(rh-0.26)/2, w:1.1, h:0.26, shape:SH.roundRect, rectRadius:0.13, fill:{color:col}, fontSize:9, bold:true, color:WHITE, align:'center', valign:'middle', margin:0 });
+          const of = fitFont(a.responsible||'—', 1.45, rh-0.06, 11, 7, true);
+          s.addText(of.text, { x:10.2, y:ry, w:1.45, h:rh, fontSize:of.size, bold:true, color:NAVY, valign:'middle', margin:0 });
+          s.addText(fmtDate(a.date), { x:11.7, y:ry, w:1.05, h:rh, fontSize:10.5, bold:true, color:NAVY, valign:'middle', margin:0 });
+        });
+        y += h;
+      });
+    });
+  }
+
   /* ---------- 7. Plan de acción ---------- */
   {
     const mit = actions.filter(a=>a.type==='mitigation'), eli = actions.filter(a=>a.type!=='mitigation');
@@ -4787,7 +4918,8 @@ async function exportToPowerPoint(){
           const y = 2.38 + i*(hh+0.1), h = hh;
           s.addShape(SH.roundRect, { x, y, w, h, rectRadius:0.1, fill:{color:SOFT}, line:{color:LINE, width:1} });
           s.addShape(SH.rect, { x, y:y+0.1, w:0.08, h:h-0.2, fill:{color:col}, line:{type:'none'} });
-          s.addText([{ text:L('CAUSA RAÍZ: ','ROOT CAUSE: ')+clip(a.rootCause||'—',70), options:{ bold:true, fontSize:hh>1.2?11:9.5, color:BLUE, breakLine:true } },
+          const nn = cmNum.get(a), tagN = nn ? L('CAUSA RAÍZ ','ROOT CAUSE ')+nn.n+(nn.of>1?L(' · acción ',' · action ')+nn.k+'/'+nn.of:'')+': ' : L('CAUSA RAÍZ: ','ROOT CAUSE: ');
+          s.addText([{ text:tagN+clip(a.rootCause||'—',70), options:{ bold:true, fontSize:hh>1.2?11:9.5, color:BLUE, breakLine:true } },
                      { text:clip(a.action,130), options:{ bold:true, fontSize:fs(a.action,hh>1.2?[[60,16],[999,13]]:[[60,13],[999,11]]), color:INK, breakLine:true } },
                      { text:L('Responsable: ','Owner: ')+(a.responsible||'—')+'   ·   '+L('Fecha: ','Date: ')+fmtDate(a.date), options:{ fontSize:hh>1.2?12:10, bold:true, color:NAVY } }],
             { x:x+0.2, y, w:w-0.3, h, valign:'middle', fit:'shrink', paraSpaceAfter:2 });
@@ -5155,26 +5287,49 @@ async function exportA3ToPowerPoint(){
     }
   }
 
-  /* ---------- 7. Contramedidas y plan de acción ---------- */
+  /* ---------- 7. Contramedidas y plan de acción (cada causa raíz una vez, con todas sus acciones) ---------- */
   {
-    const list = cmRows.length ? cmRows : roots.map(r=>({ rootCause:r.rootCause, action:'', responsible:'', date:'', type:'' }));
+    const list = cmRows.length ? cmRows : roots.map(r=>({ rootCause:r.rootCause, action:'', responsible:'', date:'', type:'', sourceId:r.sourceId }));
     const nMit = acts.filter(a=>a.type==='mitigation').length, nEli = acts.length - nMit;
+    const nRootsAct = new Set(acts.map(cmGroupKey)).size;
     const title = !acts.length ? L('Siguiente paso: proponer una contramedida por causa raíz, con responsable y fecha','Next step: propose a countermeasure per root cause, with owner and date')
-      : L(`${acts.length} contramedida${acts.length===1?'':'s'} definida${acts.length===1?'':'s'}: ${nEli} de eliminación y ${nMit} de mitigación`,`${acts.length} countermeasure${acts.length===1?'':'s'} defined: ${nEli} elimination and ${nMit} mitigation`);
+      : L(`${acts.length} contramedida${acts.length===1?'':'s'} para ${nRootsAct} causa${nRootsAct===1?'':'s'} raíz: ${nEli} de eliminación y ${nMit} de mitigación`,`${acts.length} countermeasure${acts.length===1?'':'s'} for ${nRootsAct} root cause${nRootsAct===1?'':'s'}: ${nEli} elimination and ${nMit} mitigation`);
     const goal = cl(st.desiredSituation);
-    const per = 10, pages = Math.max(1, Math.ceil(list.length/per));
+    // grupos en orden + número de causa raíz
+    const keyOf = a=> a.sourceId || a.groupId || a.id ? cmGroupKey(a) : 'x:'+a.rootCause;
+    const gNum = new Map(); let gc = 0; list.forEach(a=>{ const k = keyOf(a); if(!gNum.has(k)) gNum.set(k, ++gc); });
+    const gSize = {}; list.forEach(a=>{ const k = keyOf(a); gSize[k] = (gSize[k]||0)+1; });
+    // páginas de hasta 10 filas sin cortar una causa raíz (salvo que tenga más de 10 acciones)
+    const per = 10, pagesL = []; let cur = [];
+    const groupsL = []; list.forEach(a=>{ const k = keyOf(a); const g = groupsL.length && groupsL[groupsL.length-1].k===k ? groupsL[groupsL.length-1] : (groupsL.push({ k, rows:[] }), groupsL[groupsL.length-1]); g.rows.push(a); });
+    groupsL.forEach(g=>{
+      if(cur.length && cur.length + g.rows.length > per){ pagesL.push(cur); cur = []; }
+      g.rows.forEach(a=>{ if(cur.length>=per){ pagesL.push(cur); cur = []; } cur.push(a); });
+    });
+    if(cur.length) pagesL.push(cur);
+    if(!pagesL.length) pagesL.push([]);
+    const pages = pagesL.length;
     for(let pg=0; pg<pages; pg++){
       const s = slide(L('Problem Solving A3 · 5. Contramedidas y plan de acción','Problem Solving A3 · 5. Countermeasures and action plan')+(pages>1?` (${pg+1}/${pages})`:''), title);
-      const chunk = list.slice(pg*per, pg*per+per);
+      const chunk = pagesL[pg];
       if(!chunk.length){ emptyNote(s, L('Aún no hay causas raíz ni acciones definidas.','There are no root causes or actions defined yet.')); continue; }
       s.addShape(SH.rect, { x:0.5, y:1.3, w:9, h:0.3, fill:{color:NAVY}, line:{color:NAVY, width:0.5} });
       const C = [['#',0.56,0.22],[L('Causa raíz','Root cause'),0.88,2.45],[L('Contramedida','Countermeasure'),3.43,2.85],[L('Tipo','Type'),6.38,0.85],[L('Responsable','Owner'),7.28,1.3],[L('Fecha','Date'),8.63,0.83]];
       C.forEach(([t,x,w])=> s.addText(t, { x, y:1.3, w, h:0.3, fontSize:8.5, bold:true, color:WHITE, margin:0, valign:'middle' }));
+      const rh = Math.min(0.38, (goal ? 2.98 : 3.5)/chunk.length);
       chunk.forEach((a,i)=>{
-        const rh = Math.min(0.38, (goal ? 2.98 : 3.5)/chunk.length), y = 1.6 + i*rh, n = pg*per+i+1;
-        s.addText(String(n), { x:0.5, y, w:0.32, h:rh, fontSize:8.5, bold:true, color:BLUE, align:'center', margin:0, valign:'middle' });
-        const rf = fit(a.rootCause||'—', 2.45, rh-0.02, 8.5, 6, true);
-        s.addText(rf.text, { x:0.88, y, w:2.45, h:rh, fontSize:rf.size, bold:true, color:INK, margin:0, valign:'middle' });
+        const y = 1.6 + i*rh, k = keyOf(a);
+        const lead = i===0 || keyOf(chunk[i-1])!==k;
+        const last = i===chunk.length-1 || keyOf(chunk[i+1])!==k;
+        if(lead){
+          let span = 1; while(i+span<chunk.length && keyOf(chunk[i+span])===k) span++;
+          const hh = span*rh, cont = pg>0 && i===0 && pagesL[pg-1].length && keyOf(pagesL[pg-1][pagesL[pg-1].length-1])===k;
+          if(span>1) s.addShape(SH.rect, { x:0.5, y:y+0.02, w:2.88, h:hh-0.04, fill:{color:ROW}, line:{color:ROW, width:0.5} });
+          s.addText(String(gNum.get(k)), { x:0.5, y, w:0.32, h:Math.min(hh,0.38), fontSize:8.5, bold:true, color:BLUE, align:'center', margin:0, valign:'middle' });
+          const rf = fit((a.rootCause||'—')+(cont?L(' (cont.)',' (cont.)'):''), 2.42, hh-0.04, 8.5, 6, true);
+          s.addText(rf.text, { x:0.88, y, w:2.45, h:hh, fontSize:rf.size, bold:true, color:INK, margin:0, valign: span>1?'top':'middle' });
+          if(span>1 && !cont && gSize[k]>1) s.addText(L(`${gSize[k]} acciones`,`${gSize[k]} actions`), { x:0.88, y:y+hh-0.2, w:1.6, h:0.18, fontSize:6.5, bold:true, color:BLUE, margin:0, valign:'middle' });
+        }
         const cell = (txt, x, w, bold, color)=>{
           if(cl(txt)){ const f = fit(txt, w-0.04, rh-0.02, 8.5, 6, bold); s.addText(f.text, { x, y, w, h:rh, fontSize:f.size, bold, color:color||INK, margin:0, valign:'middle' }); }
           else s.addShape(SH.rect, { x:x-0.01, y:y+(rh-0.21)/2, w, h:0.21, fill:{color:WHITE}, line:{color:LINE, width:0.75} });
@@ -5186,7 +5341,9 @@ async function exportA3ToPowerPoint(){
         } else cell('', 6.38, 0.82);
         cell(a.responsible, 7.28, 1.3, false);
         cell(a.date ? fmtShort(a.date) : '', 8.63, 0.83, false);
-        s.addShape(SH.line, { x:0.5, y:y+rh, w:9, h:0, line:{ color:LINE, width:0.75 } });
+        // línea completa al cerrar la causa raíz; punteada solo bajo las acciones dentro del mismo grupo
+        if(last) s.addShape(SH.line, { x:0.5, y:y+rh, w:9, h:0, line:{ color:LINE, width:0.75 } });
+        else s.addShape(SH.line, { x:3.43, y:y+rh, w:6.07, h:0, line:{ color:LINE, width:0.5, dashType:'dash' } });
       });
       if(goal){
         s.addShape(SH.rect, { x:0.5, y:4.62, w:9, h:0.45, fill:{color:PALE}, line:{color:PALE, width:0.5} });
@@ -5220,7 +5377,7 @@ function a3Html(){
   const fmtD = d=>{ const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(d||''); return m ? `${m[3]}/${m[2]}/${m[1]}` : (d||'—'); };
   const catHex = { people:'#7C4FD9', machine:'#2166D6', environment:'#178A53', material:'#B9800A', process:'#D1553D', measurement:'#0E7C86' };
   const band = t=> t==null ? '#5A6473' : t>=REF.scoreThresholds.review ? '#1E8E5A' : t>=REF.scoreThresholds.low ? '#B9800A' : '#C8102E';
-  const sec = (title, sub, body, cls)=> `<section class="sec ${cls||''}"><h2>${e(title)}${sub?` <small>${e(sub)}</small>`:''}</h2><div class="sb">${body}</div></section>`;
+  const sec = (title, sub, body, cls)=> `<section class="sec ${cls||''}" data-k="${cls||''}"><h2>${e(title)}${sub?` <small>${e(sub)}</small>`:''}</h2><div class="sb">${body}</div></section>`;
   const none = `<p class="none">${e(L('Sin información','No information'))}</p>`;
   // 1 · Situación
   const situ = `<div class="two">
@@ -5269,8 +5426,9 @@ function a3Html(){
       return `<div class="wg"><div class="wh">${gi+1}. ${e(g.causeText)}</div>${body}</div>`;
     }).join('')}</div>` : none;
   // 6 · Plan de acción
-  const plan = acts.length ? `<table class="tb"><thead><tr><th>#</th><th>${e(L('¿Qué?','What?'))}</th><th>${e(L('¿Cómo? / causa raíz que ataca','How? / root cause addressed'))}</th><th>${e(L('¿Quién?','Who?'))}</th><th>${e(L('¿Cuándo?','When?'))}</th></tr></thead><tbody>
-      ${acts.map((a,i)=>`<tr><td>${i+1}</td><td class="tx"><b>${e(a.action)}</b></td><td class="tx"><span class="tag ${a.type==='mitigation'?'mit':'eli'}">${e(a.type==='mitigation'?L('Mitigación','Mitigation'):L('Eliminación','Elimination'))}</span> ${e(a.rootCause||'—')}</td><td>${e(a.responsible||'—')}</td><td class="nw">${e(fmtD(a.date))}</td></tr>`).join('')}
+  const planG = cmExportGroups(false);
+  const plan = planG.length ? `<table class="tb plan"><thead><tr><th>#</th><th>${e(L('Causa raíz','Root cause'))}</th><th>${e(L('¿Qué? (contramedida)','What? (countermeasure)'))}</th><th>${e(L('¿Quién?','Who?'))}</th><th>${e(L('¿Cuándo?','When?'))}</th></tr></thead><tbody>
+      ${planG.map(g=> g.rows.map((a,k)=>`<tr class="${k===0?'g0':'gs'} ${g.n%2?'':'ev2'}">${k===0?`<td rowspan="${g.rows.length}" class="gn">${g.n}</td><td rowspan="${g.rows.length}" class="tx rc2"><b>${e(g.rootCause||'—')}</b>${g.rows.length>1?`<span class="na">${g.rows.length} ${e(L('acciones','actions'))}</span>`:''}</td>`:''}<td class="tx">${g.rows.length>1?`<span class="sn">${g.n}.${k+1}</span> `:''}<span class="tag ${a.type==='mitigation'?'mit':'eli'}">${e(a.type==='mitigation'?L('Mitigación','Mitigation'):L('Eliminación','Elimination'))}</span> ${e(a.action)}</td><td>${e(a.responsible||'—')}</td><td class="nw">${e(fmtD(a.date))}</td></tr>`).join('')).join('')}
     </tbody></table>` : none;
   const meta = [[L('Patrocinador','Sponsor'),a3.sponsor],[L('Área','Area'),a3.area],[L('Fecha','Date'),fmtD(a3.date)||''],[L('Equipo','Team'),a3.team]];
   const css = `
@@ -5286,7 +5444,13 @@ function a3Html(){
     .meta{ display:grid; grid-template-columns:repeat(4,auto); gap:1.2mm 3mm; align-content:center; font-size:8pt; }
     .meta div{ background:#DEEAF6; border-radius:1.5mm; padding:1mm 2.5mm; white-space:nowrap; } .meta b{ color:#1F4E79; }
     .body{ flex:1; min-height:0; position:relative; overflow:hidden; }
-    .fit{ display:grid; grid-template-columns:1fr 1.25fr 1.15fr; gap:4mm; transform-origin:0 0; }
+    .fit{ display:flex; flex-direction:column; gap:3.5mm; transform-origin:0 0; }
+    .row{ display:grid; gap:4mm; }
+    .fit.measure .col{ align-self:start; }
+    .col > .sec:last-child{ flex:1 0 auto; }
+    .fit.measure .col > .sec:last-child{ flex:none; }
+    .whys.c2, .whys.c3{ display:block; column-gap:2mm; column-fill:balance; } .whys.c2{ column-count:2; } .whys.c3{ column-count:3; }
+    .whys.c2 .wg, .whys.c3 .wg{ display:inline-block; width:100%; margin-bottom:2mm; break-inside:avoid; vertical-align:top; }
     .col{ display:flex; flex-direction:column; gap:3.5mm; min-width:0; }
     .sec{ border:0.3mm solid #C9D7EA; border-radius:2.5mm; overflow:hidden; break-inside:avoid; }
     .sec h2{ margin:0; background:#2E75B6; color:#fff; font-size:10.5pt; letter-spacing:.06em; padding:1.6mm 3mm; }
@@ -5318,6 +5482,9 @@ function a3Html(){
     .tb th{ background:#1F4E79; color:#fff; padding:1mm 1.2mm; text-align:left; font-size:7.2pt; }
     .tb td{ border-bottom:0.25mm solid #DEEAF6; padding:0.9mm 1.2mm; vertical-align:top; } .tb tr:nth-child(even) td{ background:#F4F7FB; }
     .mx td:not(.tx){ text-align:center; } .mx th:not(:nth-child(2)){ text-align:center; } .nw{ white-space:nowrap; }
+    .plan td{ vertical-align:middle; } .plan tr.g0 td{ border-top:0.45mm solid #9DB5D6; } .plan tr.gs td{ border-top:0.25mm dashed #C9D7EA; }
+      .plan td.gn{ font-weight:800; color:#2E75B6; text-align:center; } .plan td.rc2{ background:#F4F7FB !important; border-right:0.6mm solid #2E75B6; }
+      .plan tr:nth-child(even) td{ background:transparent; } .plan .na{ display:block; font-size:6.5pt; font-weight:800; color:#2E75B6; margin-top:.6mm; } .plan .sn{ font-weight:800; color:#2E75B6; font-size:6.8pt; }
     .tag{ display:inline-block; font-size:6.5pt; font-weight:800; border-radius:1mm; padding:0 1.2mm; color:#fff; } .tag.mit{ background:#B9800A; } .tag.eli{ background:#1E8E5A; }
     .whys{ display:grid; grid-template-columns:1fr; gap:2mm; }
     .wg{ border:0.3mm solid #C9D7EA; border-radius:1.8mm; overflow:hidden; break-inside:avoid; }
@@ -5337,33 +5504,73 @@ function a3Html(){
       <div class="meta">${meta.map(([k,v])=>`<div><b>${e(k)}:</b> ${e(v||'—')}</div>`).join('')}</div>
     </div>
     <div class="body"><div class="fit" id="fit">
-      <div class="col">
-        ${sec(L('1 · SITUACIÓN','1 · SITUATION'), L('actual vs. esperada','current vs. expected'), situ)}
-        ${sec(L('2 · DIAGRAMA DE ÁRBOL','2 · TREE DIAGRAM'), L('Síntomas · Problema · Causas potenciales','Symptoms · Problem · Potential causes'), tree)}
-      </div>
-      <div class="col">
-        ${sec(L('3 · ISHIKAWA','3 · ISHIKAWA'), L('Diagrama causa–efecto (6M)','Cause–effect diagram (6M)'), fish)}
-        ${sec(L('4 · MATRIZ DE PRIORIZACIÓN','4 · PRIORITIZATION MATRIX'), '', mx)}
-      </div>
-      <div class="col">
-        ${sec(L('5 · 5 PORQUÉS','5 · 5 WHYS'), L('causa raíz y solución','root cause and solution'), whys)}
-        ${sec(L('6 · PLAN DE ACCIÓN','6 · ACTION PLAN'), L('Contramedidas — ¿Qué? ¿Cómo? ¿Quién? ¿Cuándo?','Countermeasures — What? How? Who? When?'), plan)}
-      </div>
+      ${sec(L('1 · SITUACIÓN','1 · SITUATION'), L('actual vs. esperada','current vs. expected'), situ, 's1')}
+      ${sec(L('2 · DIAGRAMA DE ÁRBOL','2 · TREE DIAGRAM'), L('Síntomas · Problema · Causas potenciales','Symptoms · Problem · Potential causes'), tree, 's2')}
+      ${sec(L('3 · ISHIKAWA','3 · ISHIKAWA'), L('Diagrama causa–efecto (6M)','Cause–effect diagram (6M)'), fish, 's3')}
+      ${sec(L('4 · MATRIZ DE PRIORIZACIÓN','4 · PRIORITIZATION MATRIX'), '', mx, 's4')}
+      ${sec(L('5 · 5 PORQUÉS','5 · 5 WHYS'), L('causa raíz y solución','root cause and solution'), whys, 's5')}
+      ${sec(L('6 · PLAN DE ACCIÓN','6 · ACTION PLAN'), L('Contramedidas — ¿Qué? ¿Cómo? ¿Quién? ¿Cuándo?','Countermeasures — What? How? Who? When?'), plan, 's6')}
     </div></div>
     <div class="ft"><span>HANSEATIC GLOBAL TERMINALS · BEST PROGRAM · PORT</span><span>${e(new Date().toLocaleDateString(L('es-CL','en-US'),{year:'numeric',month:'long',day:'numeric'}))}</span></div>
   </div></body></html>`;
 }
 /* Escala el contenido para que siempre quepa en una sola hoja */
+/* Distribución automática del A3: prueba varias disposiciones de las 6 secciones y elige la que
+   permite la letra más grande; entre las parecidas, la más pareja (menos espacio vacío por columna).
+   Las columnas terminan alineadas abajo (la última caja de cada columna se estira). */
+const A3_LAYOUTS = [
+  [ { c:[1,1.25,1.15], s:[['s1','s2'],['s3','s4'],['s5','s6']] } ],
+  [ { c:[1,1.2,1.25],  s:[['s1','s2','s4'],['s3','s5'],['s6']] } ],
+  [ { c:[1,1.2,1.25],  s:[['s1','s2','s4'],['s3','s6'],['s5']] } ],
+  [ { c:[1,1.2,1.3],   s:[['s1','s2'],['s3','s4'],['s5']] }, { c:[1], s:[['s6']] } ],
+  [ { c:[1,1.2,1.3],   s:[['s1','s2'],['s3','s4'],['s6']] }, { c:[1], s:[['s5']], w:3 } ],
+  [ { c:[1,1,1.25],    s:[['s1'],['s2'],['s3']] }, { c:[0.9,1.4,1.3], s:[['s4'],['s5'],['s6']] } ],
+  [ { c:[1,1,1.25],    s:[['s1'],['s2'],['s3']] }, { c:[1,1.35], s:[['s4','s6'],['s5']], w:2 } ],
+  [ { c:[1,1,1.25],    s:[['s1'],['s2'],['s3','s4']] }, { c:[1.3,1], s:[['s5'],['s6']], w:2 } ],
+  [ { c:[1,1.2,1],     s:[['s1','s2'],['s3'],['s4']] }, { c:[1.3,1], s:[['s5'],['s6']], w:2 } ],
+];
+function a3Arrange(doc, fit, layout){
+  const pool = {}; fit.querySelectorAll('.sec[data-k]').forEach(el=> pool[el.dataset.k] = el);
+  const frag = doc.createDocumentFragment();
+  let whysCols = 1;
+  layout.forEach(r=>{
+    const row = doc.createElement('div'); row.className = 'row';
+    row.style.gridTemplateColumns = r.c.map(x=>`minmax(0,${x}fr)`).join(' ');
+    r.s.forEach(list=>{ const col = doc.createElement('div'); col.className = 'col'; list.forEach(k=>{ if(pool[k]) col.appendChild(pool[k]); }); row.appendChild(col); });
+    if(r.w && r.s.some(l=>l.includes('s5'))) whysCols = r.w;
+    frag.appendChild(row);
+  });
+  fit.innerHTML = ''; fit.appendChild(frag);
+  const w = fit.querySelector('.whys'); if(w){ w.classList.remove('c2','c3'); if(whysCols>1) w.classList.add('c'+whysCols); }
+}
 function a3Fit(doc){
   const body = doc.querySelector('.body'), fit = doc.getElementById('fit');
   if(!body || !fit) return 1;
   const H = body.clientHeight, W = body.clientWidth;
   const fits = z=>{ fit.style.width = (W / z) + 'px'; fit.style.transform = `scale(${z})`; return fit.scrollHeight * z <= H; };
-  // búsqueda binaria: el mayor tamaño que cabe en una hoja (se agranda si sobra espacio, se achica si no cabe)
-  let lo = 0.3, hi = 1.35;
-  if(fits(hi)) return hi;
-  for(let i=0;i<18;i++){ const m=(lo+hi)/2; if(fits(m)) lo=m; else hi=m; }
-  fits(lo); return lo;
+  const bestZ = ()=>{ let lo = 0.3, hi = 1.35; if(fits(hi)) return hi; for(let i=0;i<16;i++){ const m=(lo+hi)/2; if(fits(m)) lo=m; else hi=m; } return lo; };
+  // espacio vacío relativo: cuánto le falta a cada columna para llegar al alto de su fila
+  const slack = ()=>{
+    let empty = 0, total = 0;
+    fit.querySelectorAll('.row').forEach(row=>{
+      const cols = [...row.children], hs = cols.map(c=>c.getBoundingClientRect().height), mx = Math.max(...hs);
+      const rw = row.getBoundingClientRect().width || 1;
+      cols.forEach((c,i)=>{ const cw = c.getBoundingClientRect().width; empty += (mx - hs[i]) * cw; total += mx * cw; });
+    });
+    return total ? empty/total : 0;
+  };
+  fit.classList.add('measure');
+  const res = A3_LAYOUTS.map((lay, i)=>{ a3Arrange(doc, fit, lay); const z = bestZ(); fits(z); return { i, z, sl: slack() }; });
+  const top = Math.max(...res.map(r=>r.z));
+  // la letra manda; entre opciones con letra casi igual (≥ 92% de la mejor) gana la más pareja
+  const pick = res.filter(r=> r.z >= top*0.92).sort((a,b)=> (a.sl - b.sl) || (b.z - a.z))[0];
+  a3Arrange(doc, fit, A3_LAYOUTS[pick.i]);
+  fit.classList.remove('measure');
+  const z = bestZ(); fits(z);
+  // estira las filas para usar todo el alto de la hoja
+  const extra = H/z - fit.scrollHeight, rows = [...fit.querySelectorAll('.row')];
+  if(extra > 2 && rows.length){ rows.forEach(r=> r.style.minHeight = (r.getBoundingClientRect().height/z + extra/rows.length) + 'px'); }
+  return z;
 }
 async function exportA3Pdf(){
   const ifr = document.createElement('iframe');
